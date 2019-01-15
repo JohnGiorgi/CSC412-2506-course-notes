@@ -1,0 +1,48 @@
+# Project information
+site_name: 'CSC412/2506 Winter 2019: Probabilistic Learning and Reasoning'
+site_author: 'John Giorgi'
+site_url: 'https://johngiorgi.github.io/CSC412-2506-course-notes/. '
+
+# Repository
+repo_name: 'JohnGiorgi/CSC412-2506-course-notes'
+repo_url: 'https://github.com/JohnGiorgi/CSC412-2506-course-notes'
+
+# Configuration
+theme:
+  name: 'material'
+  language: 'en'
+  palette:
+    primary: 'Indigo'
+    accent: 'Indigo'
+
+# Customization
+extra:
+  social:
+    - type: 'github'
+      link: 'https://github.com/JohnGiorgi'
+
+extra_css:
+  - 'stylesheets/extra.css'
+
+extra_javascript:
+  # Add MathJax support
+  - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
+
+# Navigation
+nav:
+    - About: index.md
+    - Lectures:
+      - Week 1: lectures/week_1.md
+    - Tutorials:
+      - Week 1: tutorials/week_1.md
+
+
+markdown_extensions:
+    - admonition
+    - pymdownx.arithmatex
+    - pymdownx.details
+    - pymdownx.superfences
+    - pymdownx.emoji:
+        emoji_generator: !!python/name:pymdownx.emoji.to_svg
+    - toc:
+        permalink: true
