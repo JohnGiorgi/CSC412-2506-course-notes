@@ -1,0 +1,958 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="https://johngiorgi.github.io/CSC412-2506-course-notes/. /lectures/week_2/">
+      
+      
+        <meta name="author" content="John Giorgi">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
+    
+    
+      
+        <title>Week 2 - CSC412/2506 Winter 2019: Probabilistic Learning and Reasoning</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.572ca0f0.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.22915126.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#3f51b5">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.8c900955.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../styles/extra.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#week-2-introduction-to-probabilistic-models" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://johngiorgi.github.io/CSC412-2506-course-notes/. " title="CSC412/2506 Winter 2019: Probabilistic Learning and Reasoning" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                CSC412/2506 Winter 2019: Probabilistic Learning and Reasoning
+              </span>
+              <span class="md-header-nav__topic">
+                Week 2
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/JohnGiorgi/CSC412-2506-course-notes/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      JohnGiorgi/CSC412-2506-course-notes
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://johngiorgi.github.io/CSC412-2506-course-notes/. " title="CSC412/2506 Winter 2019: Probabilistic Learning and Reasoning" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    CSC412/2506 Winter 2019: Probabilistic Learning and Reasoning
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/JohnGiorgi/CSC412-2506-course-notes/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      JohnGiorgi/CSC412-2506-course-notes
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Lectures
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Lectures
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../week_1/" title="Week 1" class="md-nav__link">
+      Week 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Week 2
+      </label>
+    
+    <a href="./" title="Week 2" class="md-nav__link md-nav__link--active">
+      Week 2
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#assigned-reading" title="Assigned Reading" class="md-nav__link">
+    Assigned Reading
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview" title="Overview" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview-of-probabilistic-models" title="Overview of probabilistic models" class="md-nav__link">
+    Overview of probabilistic models
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operations-on-probabilistic-models" title="Operations on Probabilistic Models" class="md-nav__link">
+    Operations on Probabilistic Models
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#goals-of-a-probabilistic-model" title="Goals of a Probabilistic Model" class="md-nav__link">
+    Goals of a Probabilistic Model
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#multiple-observations-complete-iid-data" title="Multiple observations, Complete IID data" class="md-nav__link">
+    Multiple observations, Complete IID data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#learning-parameters-for-a-distribution" title="Learning Parameters for a Distribution" class="md-nav__link">
+    Learning Parameters for a Distribution
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-did-we-do-this" title="Why did we do this?" class="md-nav__link">
+    Why did we do this?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#joint-dimensionality" title="Joint Dimensionality" class="md-nav__link">
+    Joint Dimensionality
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#likelihood-function" title="Likelihood function" class="md-nav__link">
+    Likelihood function
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#maximum-likelihood-estimation" title="Maximum likelihood estimation" class="md-nav__link">
+    Maximum likelihood estimation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sufficient-statistics" title="Sufficient statistics" class="md-nav__link">
+    Sufficient statistics
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sufficient-statistics-example-bernoulli-trials" title="Sufficient statistics example: Bernoulli Trials" class="md-nav__link">
+    Sufficient statistics example: Bernoulli Trials
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Tutorials
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/week_1/" title="Week 1" class="md-nav__link">
+      Week 1
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#assigned-reading" title="Assigned Reading" class="md-nav__link">
+    Assigned Reading
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview" title="Overview" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview-of-probabilistic-models" title="Overview of probabilistic models" class="md-nav__link">
+    Overview of probabilistic models
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operations-on-probabilistic-models" title="Operations on Probabilistic Models" class="md-nav__link">
+    Operations on Probabilistic Models
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#goals-of-a-probabilistic-model" title="Goals of a Probabilistic Model" class="md-nav__link">
+    Goals of a Probabilistic Model
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#multiple-observations-complete-iid-data" title="Multiple observations, Complete IID data" class="md-nav__link">
+    Multiple observations, Complete IID data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#learning-parameters-for-a-distribution" title="Learning Parameters for a Distribution" class="md-nav__link">
+    Learning Parameters for a Distribution
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-did-we-do-this" title="Why did we do this?" class="md-nav__link">
+    Why did we do this?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#joint-dimensionality" title="Joint Dimensionality" class="md-nav__link">
+    Joint Dimensionality
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#likelihood-function" title="Likelihood function" class="md-nav__link">
+    Likelihood function
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#maximum-likelihood-estimation" title="Maximum likelihood estimation" class="md-nav__link">
+    Maximum likelihood estimation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sufficient-statistics" title="Sufficient statistics" class="md-nav__link">
+    Sufficient statistics
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sufficient-statistics-example-bernoulli-trials" title="Sufficient statistics example: Bernoulli Trials" class="md-nav__link">
+    Sufficient statistics example: Bernoulli Trials
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/JohnGiorgi/CSC412-2506-course-notes/edit/master/docs/lectures/week_2.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="week-2-introduction-to-probabilistic-models">Week 2: Introduction to Probabilistic Models<a class="headerlink" href="#week-2-introduction-to-probabilistic-models" title="Permanent link">&para;</a></h1>
+<h3 id="assigned-reading">Assigned Reading<a class="headerlink" href="#assigned-reading" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Murphy: Chapters 3, 4, 7-9 (excluding * sections)</li>
+<li><a href="http://www.inference.phy.cam.ac.uk/mackay/itprnn/ps/47.59.pdf">Chapter 3 of David Mackay's textbook</a></li>
+</ul>
+<h3 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Overview of probabilistic models</li>
+<li>Sufficient statistics</li>
+<li>Likelihood</li>
+<li>Maximum likelihood estimation (MLE)</li>
+<li>Classification</li>
+</ul>
+<h2 id="overview-of-probabilistic-models">Overview of probabilistic models<a class="headerlink" href="#overview-of-probabilistic-models" title="Permanent link">&para;</a></h2>
+<p>In general, we have variables that can be <em>observed</em> or <em>unobserved</em> (<a href="https://en.wikipedia.org/wiki/Latent_variable">latent variables</a> are always unobserved!). The job of a probabilistic model is to relate the variables (observed or unobserved). More specifically, a probabilistic learns a joint probability distribution over variables, e.g. <span><span class="MathJax_Preview">p(x_1, x_2, ..., x_N)</span><script type="math/tex">p(x_1, x_2, ..., x_N)</script></span>. Because the distributions are parameterized, learning is essentially joint <a href="https://en.wikipedia.org/wiki/Density_estimation">density estimation</a>.</p>
+<p>In a <a href="https://en.wikipedia.org/wiki/Generative_model">generative model</a>, we assume our data is generated by some distribution &amp; then try to <em>learn that distribution</em>. The joint distribution (or joint density function) is the central object we use to define our model. From this perspective, we can think about the basic tasks we care about in machine learning (ML) as operations on joint distributions. One such task is <a href="https://en.wikipedia.org/wiki/Statistical_classification">classification</a></p>
+<ul>
+<li><strong>Model</strong>: <span><span class="MathJax_Preview">p(X, C)</span><script type="math/tex">p(X, C)</script></span></li>
+<li><strong>Task</strong>: <span><span class="MathJax_Preview">p(C=c | x) = \frac{p(c, x)}{p(x)}</span><script type="math/tex">p(C=c | x) = \frac{p(c, x)}{p(x)}</script></span></li>
+</ul>
+<p>where <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> are our inputs, <span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span> our classes and <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span> is the probability of our data (sometimes called the <em>evidence</em>). <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span> can be re-written as the marginal probability</p>
+<div>
+<div class="MathJax_Preview">p(C=c | x) = \frac{p(x, c)}{\sum_i p(x, c_i)}</div>
+<script type="math/tex; mode=display">p(C=c | x) = \frac{p(x, c)}{\sum_i p(x, c_i)}</script>
+</div>
+<p>What happens if <span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span> is never observed? Then we call this <a href="https://en.wikipedia.org/wiki/Cluster_analysis">clustering</a>. Clustering allows us to compute <span><span class="MathJax_Preview">p(C=c|x)</span><script type="math/tex">p(C=c|x)</script></span> ("the probability that the input belongs to some cluster") even if <span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span> is unobserved.</p>
+<p>If our inputs and classes are continuous, we call this <a href="https://en.wikipedia.org/wiki/Regression_analysis">regression</a></p>
+<div>
+<div class="MathJax_Preview">p(y | x) = \frac{p(x, y)}{p(x)} = \frac{p(x, y)}{\int p(x,y)dy}</div>
+<script type="math/tex; mode=display">p(y | x) = \frac{p(x, y)}{p(x)} = \frac{p(x, y)}{\int p(x,y)dy}</script>
+</div>
+<p>In general,</p>
+<ul>
+<li>if a variable is <em>always</em> observed, we may not want to model its density (regression / classification)</li>
+<li>if a variable is <em>never</em> observed (always unobserved) then we call it a <em>hidden</em> or <a href="https://en.wikipedia.org/wiki/Latent_variable"><em>latent</em></a> variable and we may want to model its density (clustering, density estimation)</li>
+</ul>
+<p>In fact, we can mostly classify (no pun intended) the problems we care about into four types:</p>
+<ul>
+<li><strong>Regression</strong>: <span><span class="MathJax_Preview">p(y | x) = \frac{p(y, x)}{p(x)} = \frac{p(y, x)}{\int p(x)}</span><script type="math/tex">p(y | x) = \frac{p(y, x)}{p(x)} = \frac{p(y, x)}{\int p(x)}</script></span></li>
+<li><strong>Classification</strong>: <span><span class="MathJax_Preview">p(c | x) = \frac{p(c, x)}{p(x)} = \frac{p(c, x)}{\sum_c p(c, x)}</span><script type="math/tex">p(c | x) = \frac{p(c, x)}{p(x)} = \frac{p(c, x)}{\sum_c p(c, x)}</script></span></li>
+<li><strong>Clustering</strong>: <span><span class="MathJax_Preview">p(c | x) = \frac{p(c, x)}{p(x)} ; c \text{ is unobserved}</span><script type="math/tex">p(c | x) = \frac{p(c, x)}{p(x)} ; c \text{ is unobserved}</script></span></li>
+<li><strong>Density Estimation</strong>: <span><span class="MathJax_Preview">p(y | x) = \frac{p(y, x)}{p(x)} ; y \text{ is unobserved}</span><script type="math/tex">p(y | x) = \frac{p(y, x)}{p(x)} ; y \text{ is unobserved}</script></span></li>
+</ul>
+<h3 id="operations-on-probabilistic-models">Operations on Probabilistic Models<a class="headerlink" href="#operations-on-probabilistic-models" title="Permanent link">&para;</a></h3>
+<p>The fundamental operations we will perform on a probabilistic modal are:</p>
+<ul>
+<li><strong>Generate Data</strong>: For this you need to know how to sample from local models (directed) or how to do Gibbs or other sampling (undirected).</li>
+<li><strong>Compute probabilities</strong>: When all nodes are either observed or marginalized the result is a single number which is the probability of the configuration.</li>
+<li><strong>Inference</strong>: Compute expectations of some things given others which are observed or marginalized.</li>
+<li><strong>Learning</strong>: Set the parameters of the joint distribution given some (partially) observed data to maximize the probability of seeing the data.</li>
+</ul>
+<h3 id="goals-of-a-probabilistic-model">Goals of a Probabilistic Model<a class="headerlink" href="#goals-of-a-probabilistic-model" title="Permanent link">&para;</a></h3>
+<p>We want to build prediction systems automatically based on data, and as little as possible on expert information. In this course, we’ll use probability to combine evidence from data and make predictions. We’ll use graphical models as a visual shorthand language to express and reason about families of model assumptions, structures, dependencies and information flow, without specifying exact distributional forms or parameters. In this case learning means <em>setting parameters of distributions given a model structure</em>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>"Structure learning" is also possible but we won’t consider it now.</p>
+</div>
+<p>More specifically, we want two things of our probabilistic model:</p>
+<ol>
+<li><strong>Compact representation</strong>: we don't want parameters to scale poorly with dimensionality of the data.</li>
+<li><strong>Efficient computation</strong>: we need to be able to compute the marginal and conditional probability from the join distribution efficiently.</li>
+</ol>
+<h4 id="multiple-observations-complete-iid-data">Multiple observations, Complete IID data<a class="headerlink" href="#multiple-observations-complete-iid-data" title="Permanent link">&para;</a></h4>
+<p>A single observation of the data, <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> is rarely useful on its own. Generally we have data including many observations, which creates a set of random variables: <span><span class="MathJax_Preview">\mathcal D = \{x^{(1)}, ..., x^{(M)}\}</span><script type="math/tex">\mathcal D = \{x^{(1)}, ..., x^{(M)}\}</script></span></p>
+<p>To achieve our above-listed goals, we will make assumptions. Often, we assume the following:</p>
+<p><strong>1. Observations are <a href="https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables">independently and identically distributed</a> (i.i.d) according to the joint distribution of the model.</strong></p>
+<ul>
+<li>This reduces the computation of the conditional probability to the product of the individual probabilities of observations</li>
+<li>We don't always assume full independence. Sometimes, we assume only some level of independence between variables (e.g. <em>var 3</em> depends on <em>var 1</em> but not on <em>var 2</em>).</li>
+</ul>
+<p><strong>2. We observe all random variables in the domain on each observation (i.e. complete data, or fully observed model).</strong></p>
+<ul>
+<li>We typically shade the nodes in a probabilistic graphical model to indicate they are observed. (Later we will work with unshaded nodes corresponding to missing data or latent variables.)</li>
+</ul>
+<h3 id="learning-parameters-for-a-distribution">Learning Parameters for a Distribution<a class="headerlink" href="#learning-parameters-for-a-distribution" title="Permanent link">&para;</a></h3>
+<p>Lets take an example with <a href="https://en.wikipedia.org/wiki/Random_variable#Discrete_random_variable">discrete random variables</a>.</p>
+<p>\[ T: \text{Temperature} ; t = \text{"hot" or "cold"} \]
+\[ W: \text{Weather} ; w = \text{"sunny" or "raining"} \]</p>
+<p>We know that</p>
+<p>\[ P(T=h) = 0.40 \]
+\[ P(T=c) = 0.60 \]</p>
+<p>\[ P(W=s) = 0.70 \]
+\[ P(W=r) = 0.30 \]</p>
+<p>and that these states define a valid probability distribution, so</p>
+<div>
+<div class="MathJax_Preview">P(X) \ge 0 ; \sum_x P(x) = 1</div>
+<script type="math/tex; mode=display">P(X) \ge 0 ; \sum_x P(x) = 1</script>
+</div>
+<p>We could create a parameterized, probabilistic model, <span><span class="MathJax_Preview">P(T, W)</span><script type="math/tex">P(T, W)</script></span> over the states</p>
+<p>\[P(T | \theta_T) ; \theta_T = \begin{bmatrix} 0.4 \\ 0.6 \end{bmatrix}\]
+\[P(W | \theta_W) ; \theta_W = \begin{bmatrix} 0.7 \\ 0.3 \end{bmatrix}\]</p>
+<p>Notice that <span><span class="MathJax_Preview">\theta_T</span><script type="math/tex">\theta_T</script></span> and <span><span class="MathJax_Preview">\theta_W</span><script type="math/tex">\theta_W</script></span> <em>are</em> the probability distributions of our random variables. Our parameters <em>define the probability of the data explicitly and store it in a vector</em>.</p>
+<p>We can represent the joint distribution <span><span class="MathJax_Preview">P(T, W)</span><script type="math/tex">P(T, W)</script></span>, <em>our model</em> as:</p>
+<table>
+<thead>
+<tr>
+<th>T</th>
+<th>W</th>
+<th>P</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>h</td>
+<td>s</td>
+<td>0.28</td>
+</tr>
+<tr>
+<td>c</td>
+<td>r</td>
+<td>0.18</td>
+</tr>
+<tr>
+<td>h</td>
+<td>r</td>
+<td>0.12</td>
+</tr>
+<tr>
+<td>c</td>
+<td>s</td>
+<td>0.42</td>
+</tr>
+</tbody>
+</table>
+<p>from the joint distribution (which is again, essentially our model) we can compute the marginals</p>
+<p>\[P(T=h) = \sum_w P(T=h, W=w)\]
+\[ = 0.40\]
+\[P(T=c) = \sum_w P(T=c, W=w)\]
+\[ = 0.60\]
+\[P(W=s) = \sum_t P(W=s, T=t)\]
+\[ = 0.70\]
+\[P(W=r) = \sum_t P(W=r, T=t)\]
+\[ = 0.30\]</p>
+<p>and then we could ask questions about conditional probabilities, like</p>
+<div>
+<div class="MathJax_Preview">P(W = s | T = c) = \frac{P(s,c)}{P(T=c)} = \frac{0.4}{0.6} = 0.66</div>
+<script type="math/tex; mode=display">P(W = s | T = c) = \frac{P(s,c)}{P(T=c)} = \frac{0.4}{0.6} = 0.66</script>
+</div>
+<h4 id="why-did-we-do-this">Why did we do this?<a class="headerlink" href="#why-did-we-do-this" title="Permanent link">&para;</a></h4>
+<p>The whole point of the above example was to show that from a probabilistic model, which itself is just a joint distribution represented as a matrix (or tensor), we can compute both the marginal and conditional probabilities. This will allow us to compute probabilities, generate data and perform inference.</p>
+<h4 id="joint-dimensionality">Joint Dimensionality<a class="headerlink" href="#joint-dimensionality" title="Permanent link">&para;</a></h4>
+<p>Lets take our previous example and expand on it. Firstly, it is helpful to think of the joint distribution grid with <span><span class="MathJax_Preview">k^n</span><script type="math/tex">k^n</script></span> squares, where <span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span> is our number of variables and <span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span> our states.</p>
+<p>For our running example, this means our joint distribution is parameterized by a 4 dimensional vector, containing the probabilities of seeing any pair of states. We could of course, add more random variables to our model. Imagine we add <span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>, for whether or not we <em>bike into work</em> and <span><span class="MathJax_Preview">H</span><script type="math/tex">H</script></span>, for <em>overall health</em>, each with two states. The dimensionality of our parameters then becomes <span><span class="MathJax_Preview">k^n = 2^4</span><script type="math/tex">k^n = 2^4</script></span>.</p>
+<p>It is important to note that our joint distribution will be computed based on the assumptions we make about independence between variables. For example, we could assume that while <span><span class="MathJax_Preview">T</span><script type="math/tex">T</script></span> and <span><span class="MathJax_Preview">W</span><script type="math/tex">W</script></span> are independent from one another, <span><span class="MathJax_Preview">H</span><script type="math/tex">H</script></span> is dependent on both <span><span class="MathJax_Preview">T</span><script type="math/tex">T</script></span> and <span><span class="MathJax_Preview">W</span><script type="math/tex">W</script></span> as well as <span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>. From the chain rule, we get</p>
+<div>
+<div class="MathJax_Preview">P(T, H, B, W) = P(T)P(W)P(H|T, W)P(H|B)</div>
+<script type="math/tex; mode=display">P(T, H, B, W) = P(T)P(W)P(H|T, W)P(H|B)</script>
+</div>
+<h2 id="likelihood-function">Likelihood function<a class="headerlink" href="#likelihood-function" title="Permanent link">&para;</a></h2>
+<p>So far, we have focused on the (log) probability function <span><span class="MathJax_Preview">p(x|\theta)</span><script type="math/tex">p(x|\theta)</script></span> which assigns a probability (density) to any joint configuration of variables <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> given fixed parameters <span><span class="MathJax_Preview">\theta</span><script type="math/tex">\theta</script></span>. But our goal is to learn <span><span class="MathJax_Preview">theta</span><script type="math/tex">theta</script></span>, which we <em>do not start with</em> and which is <em>not fixed</em>.</p>
+<p>This is the opposite of how we want to think. Really, we have some fixed data and we want to find parameters <span><span class="MathJax_Preview">\theta</span><script type="math/tex">\theta</script></span> which maximize the likelihood of that data.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We are asking "given <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>, how do I choose <span><span class="MathJax_Preview">\theta</span><script type="math/tex">\theta</script></span>".</p>
+</div>
+<p>To do this, we define some function</p>
+<div>
+<div class="MathJax_Preview">\ell(\theta ; x) = \log p(x|\theta)</div>
+<script type="math/tex; mode=display">\ell(\theta ; x) = \log p(x|\theta)</script>
+</div>
+<p>which we call the log <a href="https://en.wikipedia.org/wiki/Likelihood_function">likelihood function</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The likelihood function is essentially a notational trick in order to make it easy to talk about our data as a function of our parameters.</p>
+</div>
+<p>The process of <em>learning</em> is choosing <span><span class="MathJax_Preview">\theta</span><script type="math/tex">\theta</script></span> to maximize some cost of loss function, <span><span class="MathJax_Preview">L(\theta)</span><script type="math/tex">L(\theta)</script></span> which includes <span><span class="MathJax_Preview">\ell (\theta)</span><script type="math/tex">\ell (\theta)</script></span>. This can be done in a couple of ways, including:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Maximum_likelihood_estimation"><strong>Maximum likelihood estimation</strong></a>: <span><span class="MathJax_Preview">L(\theta) = \ell (\theta; \mathcal D)</span><script type="math/tex">L(\theta) = \ell (\theta; \mathcal D)</script></span></li>
+<li><a href="https://en.wikipedia.org/wiki/Maximum_a_posteriori_estimation"><strong>Maximum a posteriori</strong></a>: <span><span class="MathJax_Preview">L(\theta) = \ell (\theta; \mathcal D) + r(\theta)</span><script type="math/tex">L(\theta) = \ell (\theta; \mathcal D) + r(\theta)</script></span></li>
+</ul>
+<h3 id="maximum-likelihood-estimation">Maximum likelihood estimation<a class="headerlink" href="#maximum-likelihood-estimation" title="Permanent link">&para;</a></h3>
+<p>The basic idea behind maximum likelihood estimation (MLE) is to pick values for our parameters which were most likely to have generated the data we saw</p>
+<div>
+<div class="MathJax_Preview">\theta_{ML}^* = \underset{\theta}{\operatorname{argmax}} \ell(\theta ; D)</div>
+<script type="math/tex; mode=display">\theta_{ML}^* = \underset{\theta}{\operatorname{argmax}} \ell(\theta ; D)</script>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>MLE is commonly used in statistics, and often leads to "intuitive", "appealing" or "natural" estimators.</p>
+</div>
+<p>For IID data</p>
+<p>\[p(\mathcal D | \theta) = \prod_m p(x^{(m)} | \theta)\]
+\[\ell (\theta ;  D | \theta) = \sum_m log p(x^{(m)} | \theta)\]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The IDD assumption turns the log likelihood into a sum, making the derivative easy to compute.</p>
+</div>
+<h2 id="sufficient-statistics">Sufficient statistics<a class="headerlink" href="#sufficient-statistics" title="Permanent link">&para;</a></h2>
+<p>A <a href="https://en.wikipedia.org/wiki/Statistic">statistic</a> is a (possibly vector valued) deterministic function of a (set of) random variable(s). A <a href="https://en.wikipedia.org/wiki/Sufficient_statistic">sufficient statistic</a> is a statistic that conveys exactly the same information about the data generating process that created that data as the entire data itself. In other words, once we know the sufficient statistic, <span><span class="MathJax_Preview">T(x)</span><script type="math/tex">T(x)</script></span>, then our inferences are the same as would be obtained from our entire data. More formally, we say that <span><span class="MathJax_Preview">T(X)</span><script type="math/tex">T(X)</script></span> is a sufficient statistic for <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> if</p>
+<div>
+<div class="MathJax_Preview">T(x^{(1)}) = T(x^{(2)}) \Rightarrow L(\theta ; x^{(1)}) = L(\theta; x^{(2)}) \forall \theta</div>
+<script type="math/tex; mode=display">T(x^{(1)}) = T(x^{(2)}) \Rightarrow L(\theta ; x^{(1)}) = L(\theta; x^{(2)}) \forall \theta</script>
+</div>
+<p>Put another way</p>
+<div>
+<div class="MathJax_Preview">P(\theta | T(X)) = P(\theta | X)</div>
+<script type="math/tex; mode=display">P(\theta | T(X)) = P(\theta | X)</script>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Why is the useful? Well, if we have a particular large data sample, a lot of the data may be redundant. If we knew the sufficient statistic for that sample, we could use it in place of the full data sample.</p>
+</div>
+<p>Equivalently (by the Neyman factorization theorem) we can write</p>
+<div>
+<div class="MathJax_Preview">P(\theta | T(X)) = h(x, T(x))g(T(x), \theta)</div>
+<script type="math/tex; mode=display">P(\theta | T(X)) = h(x, T(x))g(T(x), \theta)</script>
+</div>
+<p>An example is the <a href="https://en.wikipedia.org/wiki/Exponential_family">exponential family</a></p>
+<div>
+<div class="MathJax_Preview">p(x | \eta) = h(x)\exp\{\eta^TT(x)-A(\eta)\}</div>
+<script type="math/tex; mode=display">p(x | \eta) = h(x)\exp\{\eta^TT(x)-A(\eta)\}</script>
+</div>
+<h3 id="sufficient-statistics-example-bernoulli-trials">Sufficient statistics example: Bernoulli Trials<a class="headerlink" href="#sufficient-statistics-example-bernoulli-trials" title="Permanent link">&para;</a></h3>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../week_1/" title="Week 1" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Week 1
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../tutorials/week_1/" title="Week 1" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Week 1
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/JohnGiorgi" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.b41f3d20.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>
