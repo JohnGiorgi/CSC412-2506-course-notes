@@ -22,7 +22,7 @@ extra:
       link: 'https://github.com/JohnGiorgi'
 
 extra_css:
-  - 'stylesheets/extra.css'
+  - 'styles/extra.css'
 
 extra_javascript:
   # Add MathJax support
@@ -33,6 +33,7 @@ nav:
     - About: index.md
     - Lectures:
       - Week 1: lectures/week_1.md
+      - Week 2: lectures/week_2.md
     - Tutorials:
       - Week 1: tutorials/week_1.md
 
