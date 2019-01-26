@@ -440,6 +440,40 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#summary-of-probabilistic-models" title="Summary of Probabilistic Models" class="md-nav__link">
+    Summary of Probabilistic Models
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix" title="Appendix" class="md-nav__link">
+    Appendix
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#useful-resources" title="Useful Resources" class="md-nav__link">
+    Useful Resources
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#glossary-of-terms" title="Glossary of Terms" class="md-nav__link">
+    Glossary of Terms
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
       
       
       
@@ -624,6 +658,40 @@
           <li class="md-nav__item">
   <a href="#sufficient-statistics-example-bernoulli-trials" title="Sufficient statistics example: Bernoulli Trials" class="md-nav__link">
     Sufficient statistics example: Bernoulli Trials
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-of-probabilistic-models" title="Summary of Probabilistic Models" class="md-nav__link">
+    Summary of Probabilistic Models
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix" title="Appendix" class="md-nav__link">
+    Appendix
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#useful-resources" title="Useful Resources" class="md-nav__link">
+    Useful Resources
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#glossary-of-terms" title="Glossary of Terms" class="md-nav__link">
+    Glossary of Terms
   </a>
   
 </li>
@@ -866,6 +934,61 @@
 <script type="math/tex; mode=display">p(x | \eta) = h(x)\exp\{\eta^TT(x)-A(\eta)\}</script>
 </div>
 <h3 id="sufficient-statistics-example-bernoulli-trials">Sufficient statistics example: Bernoulli Trials<a class="headerlink" href="#sufficient-statistics-example-bernoulli-trials" title="Permanent link">&para;</a></h3>
+<p>Let us take the example of flipping a fair coin. This process that generates our data is can be modeled as a <a href="https://en.wikipedia.org/wiki/Bernoulli_distribution">Bernoulli distribution</a></p>
+<div>
+<div class="MathJax_Preview">X \backsim \text{Ber}(\theta)</div>
+<script type="math/tex; mode=display">X \backsim \text{Ber}(\theta)</script>
+</div>
+<p>where <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> is a random variable and <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span> represents the result of the ith coin flip</p>
+<p>\[x_i = 0 \text{ , if tails}\]
+\[x_i = 1 \text{ , if heads}\]</p>
+<p>the likelihood (assuming independence between flips of the coin) is</p>
+<p>\[L = \prod_{i=1}^N \theta^{x_i}(1-\theta)^{1-x_i}\]
+\[= \theta^{\sum_{i=1}^N x_i}(1-\theta)^{N-\sum_{i=1}^N x_i}\]
+\[= T(x)(1-\theta)^{N-T(X)}\]</p>
+<p>So we notice here that our likelihood depends on <span><span class="MathJax_Preview">\sum_{i=1}^N x_i</span><script type="math/tex">\sum_{i=1}^N x_i</script></span>. In other words, our data only enters the likelihood in this particular form. This tells us that if we know this summary statistic, which we will call <span><span class="MathJax_Preview">T(x) = \sum_{i=1}^N x_i</span><script type="math/tex">T(x) = \sum_{i=1}^N x_i</script></span> then essentially we know everything that is useful from our sample to do inference.</p>
+<p>To perform inference with <span><span class="MathJax_Preview">T(x)</span><script type="math/tex">T(x)</script></span>, we define the log likelihood</p>
+<p>\[\ell(\theta ; X) = \log p(X | \theta)\]
+\[ = T(X) \log \theta - (N - T(X)) \log(1-\theta) \]</p>
+<p>then we take the derivative and set it to 0 to find the maximum</p>
+<div>
+<div class="MathJax_Preview">\frac{\partial \ell}{\partial \theta} = 0 = \frac{T(X)}{N}</div>
+<script type="math/tex; mode=display">\frac{\partial \ell}{\partial \theta} = 0 = \frac{T(X)}{N}</script>
+</div>
+<p>This is our maximum likelihood estimation of the parameters <span><span class="MathJax_Preview">\theta</span><script type="math/tex">\theta</script></span>, <span><span class="MathJax_Preview">\theta^{\star}_{ML}</span><script type="math/tex">\theta^{\star}_{ML}</script></span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See <a href="http://www.cs.toronto.edu/~jessebett/CSC412/content/week2/lec2.pdf">Lecture 2 slides</a> 10-13 for more examples.</p>
+</div>
+<h2 id="summary-of-probabilistic-models">Summary of Probabilistic Models<a class="headerlink" href="#summary-of-probabilistic-models" title="Permanent link">&para;</a></h2>
+<p>In general, <em>learning</em> the parameters of a probabilistic model depends on whether our variables are observed or partially observed, continuous or discrete</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Continuous</th>
+<th>Discrete</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fully observed variables</td>
+<td>Bespoke estimates from calculus</td>
+<td>Normalized counts</td>
+</tr>
+<tr>
+<td>Partially observed variables</td>
+<td>Variational inference, recognition networks, <a href="https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo">MCMC</a></td>
+<td>Message passing, variable elimination, <a href="https://en.wikipedia.org/wiki/Tree_decomposition">junction tree</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="appendix">Appendix<a class="headerlink" href="#appendix" title="Permanent link">&para;</a></h2>
+<h3 id="useful-resources">Useful Resources<a class="headerlink" href="#useful-resources" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Helpful <a href="https://youtu.be/5j4E2FRR384">video</a> on sufficient statistics.</li>
+</ul>
+<h3 id="glossary-of-terms">Glossary of Terms<a class="headerlink" href="#glossary-of-terms" title="Permanent link">&para;</a></h3>
                 
                   
                 
