@@ -182,7 +182,7 @@ For IID data
 \\[\ell (\theta ;  D | \theta) = \sum_m log p(x^{(m)} | \theta)\\]
 
 !!! note
-    The IDD assumption turns the log likelihood into a sum, making the derivative easy to compute.
+    The IID assumption turns the log likelihood into a sum, making the derivative easy to compute.
 
 ## Sufficient statistics
 
