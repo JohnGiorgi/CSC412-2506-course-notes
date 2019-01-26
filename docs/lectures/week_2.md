@@ -206,3 +206,52 @@ An example is the [exponential family](https://en.wikipedia.org/wiki/Exponential
 \[p(x | \eta) = h(x)\exp\{\eta^TT(x)-A(\eta)\}\]
 
 ### Sufficient statistics example: Bernoulli Trials
+
+Let us take the example of flipping a fair coin. This process that generates our data is can be modeled as a [Bernoulli distribution](https://en.wikipedia.org/wiki/Bernoulli_distribution)
+
+\[X \backsim \text{Ber}(\theta)\]
+
+where \(X\) is a random variable and \(x_i\) represents the result of the ith coin flip
+
+\\[x_i = 0 \text{ , if tails}\\]
+\\[x_i = 1 \text{ , if heads}\\]
+
+the likelihood (assuming independence between flips of the coin) is
+
+\\[L = \prod_{i=1}^N \theta^{x_i}(1-\theta)^{1-x_i}\\]
+\\[= \theta^{\sum_{i=1}^N x_i}(1-\theta)^{N-\sum_{i=1}^N x_i}\\]
+\\[= T(x)(1-\theta)^{N-T(X)}\\]
+
+So we notice here that our likelihood depends on \(\sum_{i=1}^N x_i\). In other words, our data only enters the likelihood in this particular form. This tells us that if we know this summary statistic, which we will call \(T(x) = \sum_{i=1}^N x_i\) then essentially we know everything that is useful from our sample to do inference.
+
+To perform inference with \(T(x)\), we define the log likelihood
+
+\\[\ell(\theta ; X) = \log p(X | \theta)\\]
+\\[ = T(X) \log \theta - (N - T(X)) \log(1-\theta) \\]
+
+then we take the derivative and set it to 0 to find the maximum
+
+\[\frac{\partial \ell}{\partial \theta} = 0 = \frac{T(X)}{N}\]
+
+This is our maximum likelihood estimation of the parameters \(\theta\), \(\theta^{\star}_{ML}\).
+
+!!! note
+    See [Lecture 2 slides](http://www.cs.toronto.edu/~jessebett/CSC412/content/week2/lec2.pdf) 10-13 for more examples.
+
+## Summary of Probabilistic Models
+
+In general, _learning_ the parameters of a probabilistic model depends on whether our variables are observed or partially observed, continuous or discrete
+
+|                              | Continuous                                        | Discrete                                             |
+| ---------------------------- | ------------------------------------------------- | ---------------------------------------------------- |
+| Fully observed variables     | Bespoke estimates from calculus                   | Normalized counts                                    |
+| Partially observed variables | Variational inference, recognition networks, [MCMC](https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo) | Message passing, variable elimination, [junction tree](https://en.wikipedia.org/wiki/Tree_decomposition) |
+
+
+## Appendix
+
+### Useful Resources
+
+- Helpful [video](https://youtu.be/5j4E2FRR384) on sufficient statistics.
+
+### Glossary of Terms

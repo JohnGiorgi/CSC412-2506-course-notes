@@ -334,6 +334,6 @@ This idea can be extended to supervised or unsupervised learning
 - [Blog + tutorial](http://www.quuxlabs.com/blog/2010/09/matrix-factorization-a-simple-tutorial-and-implementation-in-python/) on matrix factorization for movie recommendation.
 - [Glow](https://blog.openai.com/glow/) an interactive OpenAI blog on Generative Models.
 - It appears that a few of these slides were taken straight from [this](https://www.youtube.com/watch?v=btr1poCYIzw) video.
-- https://en.wikipedia.org/wiki/Notation_in_probability_and_statistics
+- [Summary of notation in probability and statistics](https://en.wikipedia.org/wiki/Notation_in_probability_and_statistics).
 
 ### Glossary of Terms
