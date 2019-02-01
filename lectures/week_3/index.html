@@ -366,6 +366,73 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#directed-acyclic-graphical-models-dagm" title="Directed acyclic graphical models (DAGM)" class="md-nav__link">
+    Directed acyclic graphical models (DAGM)
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#independence-assumptions-on-dagms" title="Independence assumptions on DAGMs" class="md-nav__link">
+    Independence assumptions on DAGMs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-separation" title="D-Separation" class="md-nav__link">
+    D-Separation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dfs-algorithm-for-checking-independence" title="DFS Algorithm for checking independence" class="md-nav__link">
+    DFS Algorithm for checking independence
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bayes-balls-algorithm" title="Bayes-Balls Algorithm" class="md-nav__link">
+    Bayes-Balls Algorithm
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#canonical-micrographs" title="Canonical Micrographs" class="md-nav__link">
+    Canonical Micrographs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" title="Examples" class="md-nav__link">
+    Examples
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#appendix" title="Appendix" class="md-nav__link">
     Appendix
   </a>
@@ -499,6 +566,73 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#directed-acyclic-graphical-models-dagm" title="Directed acyclic graphical models (DAGM)" class="md-nav__link">
+    Directed acyclic graphical models (DAGM)
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#independence-assumptions-on-dagms" title="Independence assumptions on DAGMs" class="md-nav__link">
+    Independence assumptions on DAGMs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-separation" title="D-Separation" class="md-nav__link">
+    D-Separation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dfs-algorithm-for-checking-independence" title="DFS Algorithm for checking independence" class="md-nav__link">
+    DFS Algorithm for checking independence
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bayes-balls-algorithm" title="Bayes-Balls Algorithm" class="md-nav__link">
+    Bayes-Balls Algorithm
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#canonical-micrographs" title="Canonical Micrographs" class="md-nav__link">
+    Canonical Micrographs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" title="Examples" class="md-nav__link">
+    Examples
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#appendix" title="Appendix" class="md-nav__link">
     Appendix
   </a>
@@ -599,13 +733,186 @@
 <h3 id="conditional-independence">Conditional Independence<a class="headerlink" href="#conditional-independence" title="Permanent link">&para;</a></h3>
 <p>Let <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> be the set of nodes in our graph (the random variables of our model), then</p>
 <p>\[(X_A \perp X_B | X_C)\]
-\[\Leftrightarrow p(X_A, X_B | X_C) = p(X_A | X_C)p(X_B | X_C)\] \[\Leftrightarrow p(X_A | X_B, X_C) = p(X_A | X_C) \; (\star)\]</p>
+\[\Leftrightarrow p(X_A, X_B | X_C) = p(X_A | X_C)p(X_B | X_C) \; (\star)\]
+\[\Leftrightarrow p(X_A | X_B, X_C) = p(X_A | X_C) \; (\star\star)\]</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><span><span class="MathJax_Preview">\star</span><script type="math/tex">\star</script></span> is especially important, and we use this several times throughout the lecture.</p>
+<p><span><span class="MathJax_Preview">\star\star</span><script type="math/tex">\star\star</script></span> is especially important, and we use this several times throughout the lecture.</p>
 </div>
+<h2 id="directed-acyclic-graphical-models-dagm">Directed acyclic graphical models (DAGM)<a class="headerlink" href="#directed-acyclic-graphical-models-dagm" title="Permanent link">&para;</a></h2>
+<p>A <a href="https://en.wikipedia.org/wiki/Graphical_model#Bayesian_network">directed acyclic graphical model</a> over <span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span> random variables looks like</p>
+<div>
+<div class="MathJax_Preview">p(x_{1, ..., N}) = \prod_ip(x_i | x_{\pi_i})</div>
+<script type="math/tex; mode=display">p(x_{1, ..., N}) = \prod_ip(x_i | x_{\pi_i})</script>
+</div>
+<p>where <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span> is a random variable (node in the graphical model) and <span><span class="MathJax_Preview">x_{\pi_i}</span><script type="math/tex">x_{\pi_i}</script></span> are the parents of this node. In other words, the joint distribution of a DAGM factors into a product of conditional distributions, where each random variable (or node) is conditionally dependent on its parent node(s), which could be empty.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The Wikipedia entry on <a href="https://en.wikipedia.org/wiki/Graphical_model">Graphical models</a> is helpful, particularly the section on <a href="https://en.wikipedia.org/wiki/Graphical_model#Bayesian_network">Bayesian networks</a>.</p>
+</div>
+<p>Notice the difference between a DAGM and the chain rule for probability we introduced early: we are only conditioning on <em>parent nodes</em> not <em>every node</em>. Furthermore, this distribution is exponential in the number of nodes in the parent set, <em>not all of</em> <span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span>.</p>
+<h3 id="independence-assumptions-on-dagms">Independence assumptions on DAGMs<a class="headerlink" href="#independence-assumptions-on-dagms" title="Permanent link">&para;</a></h3>
+<p>Lets look again at the graphical model <span><span class="MathJax_Preview">p(x_{1, ..., 6})</span><script type="math/tex">p(x_{1, ..., 6})</script></span> we introduced above.</p>
+<p>First, lets sort the DAGM topologically. The conditional independence of our random variables becomes</p>
+<div>
+<div class="MathJax_Preview">x_i \bot x_{\widetilde{\pi_i}} | x_{\pi_i}</div>
+<script type="math/tex; mode=display">x_i \bot x_{\widetilde{\pi_i}} | x_{\pi_i}</script>
+</div>
+<p>so random variables <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span> and <span><span class="MathJax_Preview">x_{\widetilde{\pi_i}}</span><script type="math/tex">x_{\widetilde{\pi_i}}</script></span> are conditional independent of each other but conditional dependent on their parent nodes <span><span class="MathJax_Preview">x_{\pi_i}</span><script type="math/tex">x_{\pi_i}</script></span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To <a href="https://en.wikipedia.org/wiki/Topological_sorting">topological sort</a> or order a DAGM means to sort all parents before their children.</p>
+</div>
+<p>Lastly, lets place some assumptions on the conditional dependence of our random variables. Say our model looks like</p>
+<p><img alt="" src="../../img/lecture_3_3.png" /></p>
+<p>What have the assumptions done to our joint distribution represented by our model?</p>
+<div>
+<div class="MathJax_Preview">p(x_{1, ..., 6}) = p(x_1)p(x_2 | x_1)p(x_3 | x_1)p(x_4 | x_2)p(x_5 | x_3)p(x_6 | x_2, x_5)</div>
+<script type="math/tex; mode=display">p(x_{1, ..., 6}) = p(x_1)p(x_2 | x_1)p(x_3 | x_1)p(x_4 | x_2)p(x_5 | x_3)p(x_6 | x_2, x_5)</script>
+</div>
+<p>Cleary our assumptions on conditional independence have vastly simplified the model. Suppose each is <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span> is a binary random variable. Our assumptions on conditional independence also reduce the dimensionality of our model</p>
+<p><img alt="" src="../../img/lecture_3_4.png" /></p>
+<h3 id="d-separation">D-Separation<a class="headerlink" href="#d-separation" title="Permanent link">&para;</a></h3>
+<p><strong>D-separation</strong>, or <strong>directed-separation</strong> is a notion of connectedness in DAGMs in which two (sets of) variables <em>may or may not be connected</em> conditioned on a third (set of) variable(s); where D-connection implies conditional <em>dependence</em> and d-separation implies conditional <em>independence</em>.</p>
+<p>In particular, we say that</p>
+<div>
+<div class="MathJax_Preview">x_A \bot x_B | x_C</div>
+<script type="math/tex; mode=display">x_A \bot x_B | x_C</script>
+</div>
+<p>if every variable in <span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span> is d-separated from every variable in <span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span> conditioned on all the variables in <span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span>. We will look at two methods for checking if an independence is true: A depth-first search algorithm and <a href="https://metacademy.org/graphs/concepts/bayes_ball#focus=bayes_ball&amp;mode=learn">Bayes Balls</a>.</p>
+<h4 id="dfs-algorithm-for-checking-independence">DFS Algorithm for checking independence<a class="headerlink" href="#dfs-algorithm-for-checking-independence" title="Permanent link">&para;</a></h4>
+<p>To check if an independence is true, we can cycle through each node in <span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>, do a depth-first search to reach every node in <span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>, and examine the path between them. If all of the paths are d-separated, then we can assert</p>
+<div>
+<div class="MathJax_Preview">x_A \bot x_B | x_C</div>
+<script type="math/tex; mode=display">x_A \bot x_B | x_C</script>
+</div>
+<p>Thus, it will be sufficient to consider triples of nodes.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is not totally clear to me <em>why</em> it is sufficient to consider triples of nodes. This is simply stated "as is" on the lecture slides.</p>
+</div>
+<p>Lets go through some of the most common triples.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>It was suggested in class that these types of examples make for really good midterm questions!</p>
+</div>
+<p><strong>1. Chain</strong></p>
+<p><img alt="" src="../../img/lecture_3_5.png" /></p>
+<p><em>Question</em>: When we condition on <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>, are <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> and <span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span> independent?</p>
+<p><em>Answer</em>:</p>
+<p>From the graph, we get</p>
+<div>
+<div class="MathJax_Preview">P(x, y, z) = P(x)P(y|x)P(z|y)</div>
+<script type="math/tex; mode=display">P(x, y, z) = P(x)P(y|x)P(z|y)</script>
+</div>
+<p>which implies</p>
+<div>
+<div class="MathJax_Preview">\begin{align}
+P(z | x, y) &amp;= \frac{P(x, y, z)}{P(x, y)} \\
+&amp;= \frac{P(x)P(y|x)P(z|y)}{P(x)P(y|x)} \\
+&amp;= P(z | y) \\
+\end{align}</div>
+<script type="math/tex; mode=display">\begin{align}
+P(z | x, y) &= \frac{P(x, y, z)}{P(x, y)} \\
+&= \frac{P(x)P(y|x)P(z|y)}{P(x)P(y|x)} \\
+&= P(z | y) \\
+\end{align}</script>
+</div>
+<p><span><span class="MathJax_Preview">\therefore</span><script type="math/tex">\therefore</script></span> <span><span class="MathJax_Preview">P(z | x, y) = P(z | y)</span><script type="math/tex">P(z | x, y) = P(z | y)</script></span> and so by <span><span class="MathJax_Preview">\star\star</span><script type="math/tex">\star\star</script></span>, <span><span class="MathJax_Preview">x \bot z | y</span><script type="math/tex">x \bot z | y</script></span>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>It is helpful to think about <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> as the past, <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span> as the present and <span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span> as the future when working with chains such as this one.</p>
+</div>
+<p><strong>2. Common Cause</strong></p>
+<p><img alt="" src="../../img/lecture_3_6.png" /></p>
+<p>Where we think of <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span> as the "common cause" of the two independent effects <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> and <span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span>.</p>
+<p><em>Question</em>: When we condition on <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>, are <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> and <span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span> independent?</p>
+<p><em>Answer</em>:</p>
+<p>From the graph, we get</p>
+<div>
+<div class="MathJax_Preview">P(x, y, z) = P(y)P(x|y)P(z|y)</div>
+<script type="math/tex; mode=display">P(x, y, z) = P(y)P(x|y)P(z|y)</script>
+</div>
+<p>which implies</p>
+<div>
+<div class="MathJax_Preview">\begin{align}
+P(x, z | y) &amp;= \frac{P(x, y, z)}{P(y)} \\
+&amp;= \frac{P(y)P(x|y)P(z|y)}{P(y)} \\
+&amp;= P(x|y)P(z|y) \\
+\end{align}</div>
+<script type="math/tex; mode=display">\begin{align}
+P(x, z | y) &= \frac{P(x, y, z)}{P(y)} \\
+&= \frac{P(y)P(x|y)P(z|y)}{P(y)} \\
+&= P(x|y)P(z|y) \\
+\end{align}</script>
+</div>
+<p><span><span class="MathJax_Preview">\therefore</span><script type="math/tex">\therefore</script></span> <span><span class="MathJax_Preview">P(x, z| y) = P(x|y)P(z|y)</span><script type="math/tex">P(x, z| y) = P(x|y)P(z|y)</script></span> and so by <span><span class="MathJax_Preview">\star</span><script type="math/tex">\star</script></span>, <span><span class="MathJax_Preview">x \bot z | y</span><script type="math/tex">x \bot z | y</script></span>.</p>
+<p><strong>3. Explaining Away</strong></p>
+<p><img alt="" src="../../img/lecture_3_7.png" /></p>
+<p><em>Question</em>: When we condition on <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>, are <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> and <span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span> independent?</p>
+<p><em>Answer</em>:</p>
+<p>From the graph, we get</p>
+<div>
+<div class="MathJax_Preview">P(x, y, z) = P(x)P(z)P(y|x, z)</div>
+<script type="math/tex; mode=display">P(x, y, z) = P(x)P(z)P(y|x, z)</script>
+</div>
+<p>which implies</p>
+<div>
+<div class="MathJax_Preview">\begin{align}
+P(z | x, y) &amp;= \frac{P(x)P(z)P(y | x,  z)}{P(x)P(y|x)} \\
+&amp;= \frac{P(z)P(y | x,  z)}{P(y|x)}  \\
+&amp;\not = P(z|y) \\
+\end{align}</div>
+<script type="math/tex; mode=display">\begin{align}
+P(z | x, y) &= \frac{P(x)P(z)P(y | x,  z)}{P(x)P(y|x)} \\
+&= \frac{P(z)P(y | x,  z)}{P(y|x)}  \\
+&\not = P(z|y) \\
+\end{align}</script>
+</div>
+<p><span><span class="MathJax_Preview">\therefore</span><script type="math/tex">\therefore</script></span> <span><span class="MathJax_Preview">P(z | x, y) \not = P(z|y)</span><script type="math/tex">P(z | x, y) \not = P(z|y)</script></span> and so by <span><span class="MathJax_Preview">\star\star</span><script type="math/tex">\star\star</script></span>, <span><span class="MathJax_Preview">x \not \bot z | y</span><script type="math/tex">x \not \bot z | y</script></span>.</p>
+<p>In fact, <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> and <span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span> are <em>marginally independent</em>, but given <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span> they are <em>conditionally independent</em>. This important effect is called explaining away (<a href="https://en.wikipedia.org/wiki/Berkson%27s_paradox">Berkson’s paradox</a>).</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Imaging flipping two coins independently, represented by events <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> and <span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span>. Furthermore, let <span><span class="MathJax_Preview">y=1</span><script type="math/tex">y=1</script></span> if the coins come up the same and <span><span class="MathJax_Preview">y=0</span><script type="math/tex">y=0</script></span> if they come up differently. Clearly, <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> and <span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span> are independent, but if I tell you <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>, they become coupled!</p>
+</div>
+<h4 id="bayes-balls-algorithm">Bayes-Balls Algorithm<a class="headerlink" href="#bayes-balls-algorithm" title="Permanent link">&para;</a></h4>
+<p>An alternative algorithm for determining conditional independence is the <a href="https://metacademy.org/graphs/concepts/bayes_ball#focus=bayes_ball&amp;mode=learn">Bayes Balls</a> algorithm. To check if <span><span class="MathJax_Preview">x_A \bot x_B | x_C</span><script type="math/tex">x_A \bot x_B | x_C</script></span> we need to check if every variable in <span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span> is d-seperated from every variable in <span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span> conditioned on all variables in <span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span>. In other words, given that all the nodes in <span><span class="MathJax_Preview">x_C</span><script type="math/tex">x_C</script></span> are "clamped", when we "wiggle" nodes <span><span class="MathJax_Preview">x_A</span><script type="math/tex">x_A</script></span> can we change any of the nodes in <span><span class="MathJax_Preview">x_B</span><script type="math/tex">x_B</script></span>?</p>
+<p>In general, the algorithm works as follows: We shade all nodes <span><span class="MathJax_Preview">x_C</span><script type="math/tex">x_C</script></span>, place "balls" at each node in <span><span class="MathJax_Preview">x_A</span><script type="math/tex">x_A</script></span> (or <span><span class="MathJax_Preview">x_B</span><script type="math/tex">x_B</script></span>), let them "bounce" around according to some rules, and then ask if any of the balls reach any of the nodes in <span><span class="MathJax_Preview">x_B</span><script type="math/tex">x_B</script></span> (or <span><span class="MathJax_Preview">x_A</span><script type="math/tex">x_A</script></span>).</p>
+<p><em>The rules are as follows</em>:</p>
+<p><img alt="" src="../../img/lecture_3_8.png" /></p>
+<p>including the <em>boundary rules</em>:</p>
+<p><img alt="" src="../../img/lecture_3_9.png" /></p>
+<p>where <strong>arrows</strong> indicate paths the balls <em>can</em> travel, and <strong>arrows with bars</strong> indicate paths the balls <em>cannot</em> travel.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Notice balls can travel opposite to edge directions!</p>
+</div>
+<p>Here’s a trick for the explaining away case: If <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span> <em>or any of its descendants</em> is <strong>shaded</strong>, the ball passes through.</p>
+<p><img alt="" src="../../img/lecture_3_10.png" /></p>
+<h5 id="canonical-micrographs">Canonical Micrographs<a class="headerlink" href="#canonical-micrographs" title="Permanent link">&para;</a></h5>
+<p>For reference, here are some canonical micrographs and the Bayes Balls algorithmic rules that apply to them</p>
+<p><img alt="" src="../../img/lecture_3_11.png" /></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>See <a href="https://www.youtube.com/watch?v=jgt0G2PkWl0">this video</a> for an easy way to remember all the rules.</p>
+</div>
+<h5 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h5>
+<p><em>Question</em>: In the following graph, is <span><span class="MathJax_Preview">x_1 \bot x_6 | \{x_2, x_3\}</span><script type="math/tex">x_1 \bot x_6 | \{x_2, x_3\}</script></span>?</p>
+<p><img alt="" src="../../img/lecture_3_12.png" /></p>
+<p><em>Answer</em>:</p>
+<p>Yes, by the Bayes Balls algorithm.</p>
+<p><img alt="" src="../../img/lecture_3_13.png" /></p>
+<p><em>Question</em>: In the following graph, is <span><span class="MathJax_Preview">x_2 \bot x_3 | \{x_1, x_6\}</span><script type="math/tex">x_2 \bot x_3 | \{x_1, x_6\}</script></span>?</p>
+<p><img alt="" src="../../img/lecture_3_14.png" /></p>
+<p><em>Answer</em>:</p>
+<p>No, by the Bayes Balls algorithm.</p>
+<p><img alt="" src="../../img/lecture_3_15.png" /></p>
 <h2 id="appendix">Appendix<a class="headerlink" href="#appendix" title="Permanent link">&para;</a></h2>
 <h3 id="useful-resources">Useful Resources<a class="headerlink" href="#useful-resources" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://metacademy.org/graphs/concepts/bayes_ball#focus=bayes_ball&amp;mode=learn">Metacademy lesson on Bayes Balls</a>. In fact, that link will bring you to a short course on a couple important concepts for this corse, including conditional probability, conditional independence, Bayesian networks and d-separation.</li>
+<li><a href="https://www.youtube.com/watch?v=jgt0G2PkWl0">A video</a> on how to memorize the Bayes Balls rules (this is linked in the above course).</li>
+</ul>
 <h3 id="glossary-of-terms">Glossary of Terms<a class="headerlink" href="#glossary-of-terms" title="Permanent link">&para;</a></h3>
                 
                   
