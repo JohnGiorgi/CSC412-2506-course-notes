@@ -262,8 +262,24 @@ _Answer_:
 
   ![](../img/lecture_3_15.png)
 
+### Plates
 
+Because Bayesian methods treat parameters as random variables, we would like to include them in the graphical model. One way to do this is to repeat all the iid observations explicitly and show the parameter only once. A better way is to use __plates__, in which repreaed quantities that are iid are put in a box
 
+![](../img/lecture_3_16.png)
+
+Plates are like “macros” that allow you to draw a very complicated graphical model with a simpler notation.
+_The rules of plates are simple_: repeat every structure in a box a number of times given by the integer in the corner of the box (e.g. \(N\)), updating the plate index variable (e.g. \(n\)) as you go. Duplicate every arrow going into the plate and every arrow leaving the plate by connecting the arrows to each copy of the structure.
+
+![](../img/lecture_3_17.png)
+
+#### Nested Plates
+
+Plates can be nested, in which case their arrows get duplicated also, according to the rule: draw an arrow from every copy of the source node to every copy of the destination node.
+
+![](../img/lecture_3_18.png)
+
+Plates can also cross (intersect), in which case the nodes at the intersection have multiple indices and get duplicated a number of times equal to the product of the duplication numbers on all the plates containing them.
 
 ## Appendix
 
