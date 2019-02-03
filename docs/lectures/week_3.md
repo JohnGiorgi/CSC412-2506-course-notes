@@ -281,6 +281,56 @@ Plates can be nested, in which case their arrows get duplicated also, according 
 
 Plates can also cross (intersect), in which case the nodes at the intersection have multiple indices and get duplicated a number of times equal to the product of the duplication numbers on all the plates containing them.
 
+### Example of a DAGM: Markov Chain
+
+[Markov chains](https://en.wikipedia.org/wiki/Markov_chain) are a stochastic model describing a sequence of possible events in which the probability of each event depends only on the state attained in the previous event.
+
+![](../img/lecture_3_19.png)
+
+In other words, it is a model that satisfies the [Markov property](https://en.wikipedia.org/wiki/Markov_property), i.e., conditional on the present state of the system, its future and past states are independent.
+
+![](../img/lecture_3_20.png)
+
+!!! warning
+    I don't really understand the difference between the two models given on the slides (and shown above). Are they both Markov chains? Jesse went over this only very briefly in lecture.
+
+### Unobserved Variables
+
+Certain variables in our models may be unobserved (\(Q\) in the example given below), either some of the time or always, at training time or at test time.
+
+![](../img/lecture_3_21.png)
+
+!!! note
+    Graphically, we will use shading to indicate observation
+
+#### Partially Unobserved (Missing) Variables
+
+If variables are _occasionally unobserved_ then they are _missing data_, e.g., undefined inputs, missing class labels, erroneous target values. In this case, we can still model the joint distribution, but we define a new cost function in which we sum out or marginalize the missing values at training or test time
+
+\\[\ell(\theta ; \mathcal D) = \sum_{\text{complete}} \log p(x^c, y^c | \theta) + \sum_{\text{missing}} \log p(x^m | \theta)\\]
+\\[= \sum_{\text{complete}} \log p(x^c, y^c | \theta) + \sum_{\text{missing}} \log \sum_y p(x^m, y | \theta)\\]
+
+!!! note
+    Recall that \(p(x) = \sum_q p(x, q)\).
+
+#### Latent
+
+What to do when a variable \(z\) is _always_ unobserved? Depends on where it appears in our model. If we never condition on it when computing the probability of the variables we do observe, then we can just forget about it and integrate it out.
+
+E.g., given \(y\), \(x\) fit the model \(p(z, y|x) = p(z|y)p(y|x, w)p(w)\). In other words if it is a leaf node.
+
+However, if \(z\) is conditioned on, we need to model it.
+
+E.g. given \(y\), \(x\) fit the model \(p(y|x) = \sum_z p(y|x, z)p(z)\).
+
+![](../img/lecture_3_22.png)
+
+##### Where do latent variables come from?
+
+Latent variables may appear naturally, from the structure of the problem (because something wasn’t measured, because of faulty sensors, occlusion, privacy, etc.). But we also may want to _intentionally_ introduce latent variables to model complex dependencies between variables without looking at the dependencies between them directly. This can actually simplify the model (e.g., mixtures).
+
+![](../img/lecture_3_23.png)
+
 ## Appendix
 
 ### Useful Resources
