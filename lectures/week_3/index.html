@@ -427,6 +427,73 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#plates" title="Plates" class="md-nav__link">
+    Plates
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nested-plates" title="Nested Plates" class="md-nav__link">
+    Nested Plates
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-of-a-dagm-markov-chain" title="Example of a DAGM: Markov Chain" class="md-nav__link">
+    Example of a DAGM: Markov Chain
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unobserved-variables" title="Unobserved Variables" class="md-nav__link">
+    Unobserved Variables
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#partially-unobserved-missing-variables" title="Partially Unobserved (Missing) Variables" class="md-nav__link">
+    Partially Unobserved (Missing) Variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latent" title="Latent" class="md-nav__link">
+    Latent
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#where-do-latent-variables-come-from" title="Where do latent variables come from?" class="md-nav__link">
+    Where do latent variables come from?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -613,6 +680,73 @@
           <li class="md-nav__item">
   <a href="#examples" title="Examples" class="md-nav__link">
     Examples
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plates" title="Plates" class="md-nav__link">
+    Plates
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nested-plates" title="Nested Plates" class="md-nav__link">
+    Nested Plates
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-of-a-dagm-markov-chain" title="Example of a DAGM: Markov Chain" class="md-nav__link">
+    Example of a DAGM: Markov Chain
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unobserved-variables" title="Unobserved Variables" class="md-nav__link">
+    Unobserved Variables
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#partially-unobserved-missing-variables" title="Partially Unobserved (Missing) Variables" class="md-nav__link">
+    Partially Unobserved (Missing) Variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latent" title="Latent" class="md-nav__link">
+    Latent
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#where-do-latent-variables-come-from" title="Where do latent variables come from?" class="md-nav__link">
+    Where do latent variables come from?
   </a>
   
 </li>
@@ -907,6 +1041,49 @@ P(z | x, y) &= \frac{P(x)P(z)P(y | x,  z)}{P(x)P(y|x)} \\
 <p><em>Answer</em>:</p>
 <p>No, by the Bayes Balls algorithm.</p>
 <p><img alt="" src="../../img/lecture_3_15.png" /></p>
+<h3 id="plates">Plates<a class="headerlink" href="#plates" title="Permanent link">&para;</a></h3>
+<p>Because Bayesian methods treat parameters as random variables, we would like to include them in the graphical model. One way to do this is to repeat all the iid observations explicitly and show the parameter only once. A better way is to use <strong>plates</strong>, in which repreaed quantities that are iid are put in a box</p>
+<p><img alt="" src="../../img/lecture_3_16.png" /></p>
+<p>Plates are like “macros” that allow you to draw a very complicated graphical model with a simpler notation.
+<em>The rules of plates are simple</em>: repeat every structure in a box a number of times given by the integer in the corner of the box (e.g. <span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span>), updating the plate index variable (e.g. <span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>) as you go. Duplicate every arrow going into the plate and every arrow leaving the plate by connecting the arrows to each copy of the structure.</p>
+<p><img alt="" src="../../img/lecture_3_17.png" /></p>
+<h4 id="nested-plates">Nested Plates<a class="headerlink" href="#nested-plates" title="Permanent link">&para;</a></h4>
+<p>Plates can be nested, in which case their arrows get duplicated also, according to the rule: draw an arrow from every copy of the source node to every copy of the destination node.</p>
+<p><img alt="" src="../../img/lecture_3_18.png" /></p>
+<p>Plates can also cross (intersect), in which case the nodes at the intersection have multiple indices and get duplicated a number of times equal to the product of the duplication numbers on all the plates containing them.</p>
+<h3 id="example-of-a-dagm-markov-chain">Example of a DAGM: Markov Chain<a class="headerlink" href="#example-of-a-dagm-markov-chain" title="Permanent link">&para;</a></h3>
+<p><a href="https://en.wikipedia.org/wiki/Markov_chain">Markov chains</a> are a stochastic model describing a sequence of possible events in which the probability of each event depends only on the state attained in the previous event.</p>
+<p><img alt="" src="../../img/lecture_3_19.png" /></p>
+<p>In other words, it is a model that satisfies the <a href="https://en.wikipedia.org/wiki/Markov_property">Markov property</a>, i.e., conditional on the present state of the system, its future and past states are independent.</p>
+<p><img alt="" src="../../img/lecture_3_20.png" /></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>I don't really understand the difference between the two models given on the slides (and shown above). Are they both Markov chains? Jesse went over this only very briefly in lecture.</p>
+</div>
+<h3 id="unobserved-variables">Unobserved Variables<a class="headerlink" href="#unobserved-variables" title="Permanent link">&para;</a></h3>
+<p>Certain variables in our models may be unobserved (<span><span class="MathJax_Preview">Q</span><script type="math/tex">Q</script></span> in the example given below), either some of the time or always, at training time or at test time.</p>
+<p><img alt="" src="../../img/lecture_3_21.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Graphically, we will use shading to indicate observation</p>
+</div>
+<h4 id="partially-unobserved-missing-variables">Partially Unobserved (Missing) Variables<a class="headerlink" href="#partially-unobserved-missing-variables" title="Permanent link">&para;</a></h4>
+<p>If variables are <em>occasionally unobserved</em> then they are <em>missing data</em>, e.g., undefined inputs, missing class labels, erroneous target values. In this case, we can still model the joint distribution, but we define a new cost function in which we sum out or marginalize the missing values at training or test time</p>
+<p>\[\ell(\theta ; \mathcal D) = \sum_{\text{complete}} \log p(x^c, y^c | \theta) + \sum_{\text{missing}} \log p(x^m | \theta)\]
+\[= \sum_{\text{complete}} \log p(x^c, y^c | \theta) + \sum_{\text{missing}} \log \sum_y p(x^m, y | \theta)\]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Recall that <span><span class="MathJax_Preview">p(x) = \sum_q p(x, q)</span><script type="math/tex">p(x) = \sum_q p(x, q)</script></span>.</p>
+</div>
+<h4 id="latent">Latent<a class="headerlink" href="#latent" title="Permanent link">&para;</a></h4>
+<p>What to do when a variable <span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span> is <em>always</em> unobserved? Depends on where it appears in our model. If we never condition on it when computing the probability of the variables we do observe, then we can just forget about it and integrate it out.</p>
+<p>E.g., given <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>, <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> fit the model <span><span class="MathJax_Preview">p(z, y|x) = p(z|y)p(y|x, w)p(w)</span><script type="math/tex">p(z, y|x) = p(z|y)p(y|x, w)p(w)</script></span>. In other words if it is a leaf node.</p>
+<p>However, if <span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span> is conditioned on, we need to model it.</p>
+<p>E.g. given <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>, <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> fit the model <span><span class="MathJax_Preview">p(y|x) = \sum_z p(y|x, z)p(z)</span><script type="math/tex">p(y|x) = \sum_z p(y|x, z)p(z)</script></span>.</p>
+<p><img alt="" src="../../img/lecture_3_22.png" /></p>
+<h5 id="where-do-latent-variables-come-from">Where do latent variables come from?<a class="headerlink" href="#where-do-latent-variables-come-from" title="Permanent link">&para;</a></h5>
+<p>Latent variables may appear naturally, from the structure of the problem (because something wasn’t measured, because of faulty sensors, occlusion, privacy, etc.). But we also may want to <em>intentionally</em> introduce latent variables to model complex dependencies between variables without looking at the dependencies between them directly. This can actually simplify the model (e.g., mixtures).</p>
+<p><img alt="" src="../../img/lecture_3_23.png" /></p>
 <h2 id="appendix">Appendix<a class="headerlink" href="#appendix" title="Permanent link">&para;</a></h2>
 <h3 id="useful-resources">Useful Resources<a class="headerlink" href="#useful-resources" title="Permanent link">&para;</a></h3>
 <ul>
