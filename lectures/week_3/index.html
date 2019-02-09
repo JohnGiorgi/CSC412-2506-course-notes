@@ -378,6 +378,19 @@
     Independence assumptions on DAGMs
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#missing-edges" title="Missing Edges" class="md-nav__link">
+    Missing Edges
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -486,6 +499,60 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mixture-models" title="Mixture models" class="md-nav__link">
+    Mixture models
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mixture-densities" title="Mixture densities" class="md-nav__link">
+    Mixture densities
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-gaussian-mixture-models" title="Example: Gaussian Mixture Models" class="md-nav__link">
+    Example: Gaussian Mixture Models
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-mixtures-of-experts" title="Example: Mixtures of Experts" class="md-nav__link">
+    Example: Mixtures of Experts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-mixtures-of-linear-regression-experts" title="Example: Mixtures of Linear Regression Experts" class="md-nav__link">
+    Example: Mixtures of Linear Regression Experts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gradient-learning-with-mixtures" title="Gradient learning with mixtures" class="md-nav__link">
+    Gradient learning with mixtures
+  </a>
   
 </li>
         
@@ -578,6 +645,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../sample_midterm_answers/" title="Sample Midterm (Answers)" class="md-nav__link">
+      Sample Midterm (Answers)
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -644,6 +723,19 @@
   <a href="#independence-assumptions-on-dagms" title="Independence assumptions on DAGMs" class="md-nav__link">
     Independence assumptions on DAGMs
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#missing-edges" title="Missing Edges" class="md-nav__link">
+    Missing Edges
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -761,6 +853,60 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#mixture-models" title="Mixture models" class="md-nav__link">
+    Mixture models
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mixture-densities" title="Mixture densities" class="md-nav__link">
+    Mixture densities
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-gaussian-mixture-models" title="Example: Gaussian Mixture Models" class="md-nav__link">
+    Example: Gaussian Mixture Models
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-mixtures-of-experts" title="Example: Mixtures of Experts" class="md-nav__link">
+    Example: Mixtures of Experts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-mixtures-of-linear-regression-experts" title="Example: Mixtures of Linear Regression Experts" class="md-nav__link">
+    Example: Mixtures of Linear Regression Experts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gradient-learning-with-mixtures" title="Gradient learning with mixtures" class="md-nav__link">
+    Gradient learning with mixtures
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -830,8 +976,8 @@
 <h2 id="graphical-model-notation">Graphical model notation<a class="headerlink" href="#graphical-model-notation" title="Permanent link">&para;</a></h2>
 <p>The joint distribution of <span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span> random variables can be computed by the <a href="https://en.wikipedia.org/wiki/Chain_rule_%28probability%29">chain rule</a></p>
 <div>
-<div class="MathJax_Preview">p(x_{1, ..., N}) = p(x_1)p(x_2|x_1)p(x_3 | x_2, x_1)) \ldots </div>
-<script type="math/tex; mode=display">p(x_{1, ..., N}) = p(x_1)p(x_2|x_1)p(x_3 | x_2, x_1)) \ldots </script>
+<div class="MathJax_Preview">p(x_{1, ..., N}) = p(x_1)p(x_2|x_1)p(x_3 | x_2, x_1) \ldots </div>
+<script type="math/tex; mode=display">p(x_{1, ..., N}) = p(x_1)p(x_2|x_1)p(x_3 | x_2, x_1) \ldots </script>
 </div>
 <p>this is true for <em>any joint distribution over any random variables</em>.</p>
 <p>More formally, in probability the chain rule for two random variables is</p>
@@ -862,29 +1008,46 @@
 </ul>
 <p>For example, the graphical model <span><span class="MathJax_Preview">p(x_{1, ..., 6})</span><script type="math/tex">p(x_{1, ..., 6})</script></span> is represented as</p>
 <p><img alt="" src="../../img/lecture_3_2.png" /></p>
-<p>This is what the model looks like with <em>no assumptions</em> on the conditional dependence between variables (said otherwise, we assume full conditional dependence of the joint distribution as per the chain rule). This model will <em>scale poorly</em> (exponential with the number of parameters).</p>
-<p>We can simplify the model by building in our assumptions about the conditional probabilites.</p>
+<p>This is what the model looks like with <em>no assumptions</em> on the conditional dependence between variables (said otherwise, we assume full conditional dependence of the joint distribution as per the chain rule). This model will <em>scale poorly</em> (exponential with the number of parameters, or <span><span class="MathJax_Preview">k^n</span><script type="math/tex">k^n</script></span> where <span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span> are states and <span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span> are random variables, or nodes.).</p>
+<p>We can simplify the model by building in our assumptions about the conditional probabilities. More explicitly, a <a href="#directed-acyclic-graphical-models-dagm">directed graphical model</a> implies a restricted factorization of the joint distribution.</p>
 <h3 id="conditional-independence">Conditional Independence<a class="headerlink" href="#conditional-independence" title="Permanent link">&para;</a></h3>
-<p>Let <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> be the set of nodes in our graph (the random variables of our model), then</p>
-<p>\[(X_A \perp X_B | X_C)\]
-\[\Leftrightarrow p(X_A, X_B | X_C) = p(X_A | X_C)p(X_B | X_C) \; (\star)\]
-\[\Leftrightarrow p(X_A | X_B, X_C) = p(X_A | X_C) \; (\star\star)\]</p>
+<p>Let <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> be the set of nodes in our graph (the random variables of our model), then two (sets of) variables <span><span class="MathJax_Preview">X_A</span><script type="math/tex">X_A</script></span>, <span><span class="MathJax_Preview">X_B</span><script type="math/tex">X_B</script></span> are conditionally independent given a third variable <span><span class="MathJax_Preview">X_C</span><script type="math/tex">X_C</script></span></p>
+<p>\[(X_A \perp X_B | X_C)\]</p>
+<p>if</p>
+<div>
+<div class="MathJax_Preview">
+\Leftrightarrow p(X_A, X_B | X_C) = p(X_A | X_C)p(X_B | X_C) \; (\star)
+</div>
+<script type="math/tex; mode=display">
+\Leftrightarrow p(X_A, X_B | X_C) = p(X_A | X_C)p(X_B | X_C) \; (\star)
+</script>
+</div>
+<div>
+<div class="MathJax_Preview">
+\Leftrightarrow p(X_A | X_B, X_C) = p(X_A | X_C) \; (\star\star)
+</div>
+<script type="math/tex; mode=display">
+\Leftrightarrow p(X_A | X_B, X_C) = p(X_A | X_C) \; (\star\star)
+</script>
+</div>
+<p>for all <span><span class="MathJax_Preview">X_c</span><script type="math/tex">X_c</script></span>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><span><span class="MathJax_Preview">\star\star</span><script type="math/tex">\star\star</script></span> is especially important, and we use this several times throughout the lecture.</p>
 </div>
+<p>Only a subset of all distributions respect any given (nontrivial) conditional independence statement. The subset of distributions that respect all the CI assumptions we make is the family of distributions consistent with our assumptions. Probabilistic graphical models are a powerful, elegant and simple way to specify such a family.</p>
 <h2 id="directed-acyclic-graphical-models-dagm">Directed acyclic graphical models (DAGM)<a class="headerlink" href="#directed-acyclic-graphical-models-dagm" title="Permanent link">&para;</a></h2>
 <p>A <a href="https://en.wikipedia.org/wiki/Graphical_model#Bayesian_network">directed acyclic graphical model</a> over <span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span> random variables looks like</p>
 <div>
-<div class="MathJax_Preview">p(x_{1, ..., N}) = \prod_ip(x_i | x_{\pi_i})</div>
-<script type="math/tex; mode=display">p(x_{1, ..., N}) = \prod_ip(x_i | x_{\pi_i})</script>
+<div class="MathJax_Preview">p(x_{1, ..., N}) = \prod_i^Np(x_i | x_{\pi_i})</div>
+<script type="math/tex; mode=display">p(x_{1, ..., N}) = \prod_i^Np(x_i | x_{\pi_i})</script>
 </div>
-<p>where <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span> is a random variable (node in the graphical model) and <span><span class="MathJax_Preview">x_{\pi_i}</span><script type="math/tex">x_{\pi_i}</script></span> are the parents of this node. In other words, the joint distribution of a DAGM factors into a product of conditional distributions, where each random variable (or node) is conditionally dependent on its parent node(s), which could be empty.</p>
+<p>where <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span> is a random variable (node in the graphical model) and <span><span class="MathJax_Preview">x_{\pi_i}</span><script type="math/tex">x_{\pi_i}</script></span> are the parents of this node. In other words, the joint distribution of a DAGM factors into a product of <em>local conditional distributions</em>, where each random variable (or node) is conditionally dependent on its parent node(s), which could be empty.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>The Wikipedia entry on <a href="https://en.wikipedia.org/wiki/Graphical_model">Graphical models</a> is helpful, particularly the section on <a href="https://en.wikipedia.org/wiki/Graphical_model#Bayesian_network">Bayesian networks</a>.</p>
 </div>
-<p>Notice the difference between a DAGM and the chain rule for probability we introduced early: we are only conditioning on <em>parent nodes</em> not <em>every node</em>. Furthermore, this distribution is exponential in the number of nodes in the parent set, <em>not all of</em> <span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span>.</p>
+<p>Notice the difference between a DAGM and the chain rule for probability we introduced early: we are conditioning on <em>parent nodes</em> as opposed to <em>every node</em>. Therefore, the model that represents this distribution is exponential in the <a href="https://en.wikipedia.org/wiki/Fan-in">fan-in</a> of each node (the number of nodes in the parent set), instead of in <span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span>.</p>
 <h3 id="independence-assumptions-on-dagms">Independence assumptions on DAGMs<a class="headerlink" href="#independence-assumptions-on-dagms" title="Permanent link">&para;</a></h3>
 <p>Lets look again at the graphical model <span><span class="MathJax_Preview">p(x_{1, ..., 6})</span><script type="math/tex">p(x_{1, ..., 6})</script></span> we introduced above.</p>
 <p>First, lets sort the DAGM topologically. The conditional independence of our random variables becomes</p>
@@ -892,7 +1055,7 @@
 <div class="MathJax_Preview">x_i \bot x_{\widetilde{\pi_i}} | x_{\pi_i}</div>
 <script type="math/tex; mode=display">x_i \bot x_{\widetilde{\pi_i}} | x_{\pi_i}</script>
 </div>
-<p>so random variables <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span> and <span><span class="MathJax_Preview">x_{\widetilde{\pi_i}}</span><script type="math/tex">x_{\widetilde{\pi_i}}</script></span> are conditional independent of each other but conditional dependent on their parent nodes <span><span class="MathJax_Preview">x_{\pi_i}</span><script type="math/tex">x_{\pi_i}</script></span>.</p>
+<p>so random variables <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span> and <span><span class="MathJax_Preview">x_{\widetilde{\pi_i}}</span><script type="math/tex">x_{\widetilde{\pi_i}}</script></span> are conditionally independent of each other but conditionally dependent on their parent nodes <span><span class="MathJax_Preview">x_{\pi_i}</span><script type="math/tex">x_{\pi_i}</script></span>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>To <a href="https://en.wikipedia.org/wiki/Topological_sorting">topological sort</a> or order a DAGM means to sort all parents before their children.</p>
@@ -904,8 +1067,16 @@
 <div class="MathJax_Preview">p(x_{1, ..., 6}) = p(x_1)p(x_2 | x_1)p(x_3 | x_1)p(x_4 | x_2)p(x_5 | x_3)p(x_6 | x_2, x_5)</div>
 <script type="math/tex; mode=display">p(x_{1, ..., 6}) = p(x_1)p(x_2 | x_1)p(x_3 | x_1)p(x_4 | x_2)p(x_5 | x_3)p(x_6 | x_2, x_5)</script>
 </div>
-<p>Cleary our assumptions on conditional independence have vastly simplified the model. Suppose each is <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span> is a binary random variable. Our assumptions on conditional independence also reduce the dimensionality of our model</p>
+<p>Cleary our assumptions on conditional independence have vastly simplified the model.</p>
+<p>Now Suppose each is <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span> is a binary random variable. Our assumptions on conditional independence also reduce the dimensionality of our model</p>
 <p><img alt="" src="../../img/lecture_3_4.png" /></p>
+<h4 id="missing-edges">Missing Edges<a class="headerlink" href="#missing-edges" title="Permanent link">&para;</a></h4>
+<p>Missing edges <em>imply conditional independence</em>. Recall that from the chain rule, we can get (for any joint distribution)</p>
+<div>
+<div class="MathJax_Preview">p(\cap^N_{i=1}) = \prod_{k=1}^N p(x_k | \cap^{k-1}_{j=1} x_j)</div>
+<script type="math/tex; mode=display">p(\cap^N_{i=1}) = \prod_{k=1}^N p(x_k | \cap^{k-1}_{j=1} x_j)</script>
+</div>
+<p>If our joint distribution is represented by a DAGM, however, then some of the conditioned variables can be dropped. This is equivalent to enforcing conditional independence. </p>
 <h3 id="d-separation">D-Separation<a class="headerlink" href="#d-separation" title="Permanent link">&para;</a></h3>
 <p><strong>D-separation</strong>, or <strong>directed-separation</strong> is a notion of connectedness in DAGMs in which two (sets of) variables <em>may or may not be connected</em> conditioned on a third (set of) variable(s); where D-connection implies conditional <em>dependence</em> and d-separation implies conditional <em>independence</em>.</p>
 <p>In particular, we say that</p>
@@ -1084,6 +1255,105 @@ P(z | x, y) &= \frac{P(x)P(z)P(y | x,  z)}{P(x)P(y|x)} \\
 <h5 id="where-do-latent-variables-come-from">Where do latent variables come from?<a class="headerlink" href="#where-do-latent-variables-come-from" title="Permanent link">&para;</a></h5>
 <p>Latent variables may appear naturally, from the structure of the problem (because something wasn’t measured, because of faulty sensors, occlusion, privacy, etc.). But we also may want to <em>intentionally</em> introduce latent variables to model complex dependencies between variables without looking at the dependencies between them directly. This can actually simplify the model (e.g., mixtures).</p>
 <p><img alt="" src="../../img/lecture_3_23.png" /></p>
+<h3 id="mixture-models">Mixture models<a class="headerlink" href="#mixture-models" title="Permanent link">&para;</a></h3>
+<p>Think about the following two sets of data, and notice how there is some underlying structure <em>not dependent on x</em>.</p>
+<p><img alt="" src="../../img/lecture_3_24.png" /></p>
+<p>The most basic latent variable model might introduce a single discrete node, <span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span>, in order to better model the data. This allows different submodels (experts) to contribute to the (conditional) density model in different parts of the space (known as a <a href="https://en.wikipedia.org/wiki/Mixture_of_experts">mixture of experts</a>).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The basic idea is to divide &amp; conquer: use simple parts to build complex models (e.g., multimodal densities, or piecewise-linear regressions).</p>
+</div>
+<h4 id="mixture-densities">Mixture densities<a class="headerlink" href="#mixture-densities" title="Permanent link">&para;</a></h4>
+<p>What if the class is <em>unobserved</em>? Then we sum it out</p>
+<div>
+<div class="MathJax_Preview">
+p(x | \theta) = \sum_{k=1}^Kp(z=k | \theta_z)p(x|z=k, \theta_k) \\
+= \sum_{k=1}^K\alpha_k p_k(x|\theta_k)
+</div>
+<script type="math/tex; mode=display">
+p(x | \theta) = \sum_{k=1}^Kp(z=k | \theta_z)p(x|z=k, \theta_k) \\
+= \sum_{k=1}^K\alpha_k p_k(x|\theta_k)
+</script>
+</div>
+<p>where the <strong>mixing proportions</strong>, <span><span class="MathJax_Preview">\alpha_k</span><script type="math/tex">\alpha_k</script></span> sum to 1, i.e. <span><span class="MathJax_Preview">\sum_k\alpha_k = 1</span><script type="math/tex">\sum_k\alpha_k = 1</script></span>. We can use Bayes' rule to compute the posterior probability of the mixture component given some data:</p>
+<div>
+<div class="MathJax_Preview">
+p(z=k | x, \theta_z) = \frac{\alpha_k p_k(x|\theta_k)}{\sum_j\alpha_j p_j(x|\theta_j)}
+</div>
+<script type="math/tex; mode=display">
+p(z=k | x, \theta_z) = \frac{\alpha_k p_k(x|\theta_k)}{\sum_j\alpha_j p_j(x|\theta_j)}
+</script>
+</div>
+<p>these quantities are called <strong>responsibilities</strong>.</p>
+<h6 id="example-gaussian-mixture-models">Example: Gaussian Mixture Models<a class="headerlink" href="#example-gaussian-mixture-models" title="Permanent link">&para;</a></h6>
+<p>Consider a mixture of <span><span class="MathJax_Preview">K</span><script type="math/tex">K</script></span> Gaussian componentns</p>
+<div>
+<div class="MathJax_Preview">
+p(x | \theta) = \sum_k \alpha_k \mathcal N(x | \mu_k, \Sigma_k) \\
+p(z = k | x, \theta) = \frac{\alpha_k \mathcal N(x | \mu_k, \Sigma_k)}{\sum_j \alpha_j \mathcal N(x | \mu_j, \Sigma_j)} \\
+\ell(\theta ; \mathcal D) = \sum_n \log \sum_k \alpha_k \mathcal N(x^{(n)} | \mu_k, \Sigma_k) \\
+</div>
+<script type="math/tex; mode=display">
+p(x | \theta) = \sum_k \alpha_k \mathcal N(x | \mu_k, \Sigma_k) \\
+p(z = k | x, \theta) = \frac{\alpha_k \mathcal N(x | \mu_k, \Sigma_k)}{\sum_j \alpha_j \mathcal N(x | \mu_j, \Sigma_j)} \\
+\ell(\theta ; \mathcal D) = \sum_n \log \sum_k \alpha_k \mathcal N(x^{(n)} | \mu_k, \Sigma_k) \\
+</script>
+</div>
+<p><img alt="" src="../../img/lecture_3_25.png" /></p>
+<ul>
+<li>Density model: <span><span class="MathJax_Preview">p(x | \theta)</span><script type="math/tex">p(x | \theta)</script></span> is a familiarity signal.</li>
+<li>Clustering: <span><span class="MathJax_Preview">p(z | x, \theta)</span><script type="math/tex">p(z | x, \theta)</script></span> is the assignment rule, <span><span class="MathJax_Preview">- \ell(\theta)</span><script type="math/tex">- \ell(\theta)</script></span> is the cost.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>I didn't really understand this example.</p>
+</div>
+<h6 id="example-mixtures-of-experts">Example: Mixtures of Experts<a class="headerlink" href="#example-mixtures-of-experts" title="Permanent link">&para;</a></h6>
+<p><a href="https://en.wikipedia.org/wiki/Mixture_of_experts">Mixtures of experts</a>, also known as conditional mixtures are exactly like a class-conditional model, but the class is unobserved and so we sum it out:</p>
+<div>
+<div class="MathJax_Preview">
+p(y | x, \theta) = \sum_{k=1}^Kp(z=k|x, \theta_z)p(y|z=k, x, \theta_K) \\
+= \sum_k \alpha_k (x | \theta_z)p_k(y | x, \theta_k) \\
+</div>
+<script type="math/tex; mode=display">
+p(y | x, \theta) = \sum_{k=1}^Kp(z=k|x, \theta_z)p(y|z=k, x, \theta_K) \\
+= \sum_k \alpha_k (x | \theta_z)p_k(y | x, \theta_k) \\
+</script>
+</div>
+<p>where <span><span class="MathJax_Preview">\sum_k \alpha_k (x) = 1 \; \forall x</span><script type="math/tex">\sum_k \alpha_k (x) = 1 \; \forall x</script></span>. This is a harder problem than the previous example, as we must learn <span><span class="MathJax_Preview">\alpha(x)</span><script type="math/tex">\alpha(x)</script></span>, often called the <strong>gating function</strong> (unless we chose <span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span> to be independent of <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>). However, we can still use Bayes' rule to compute the posterior probability of the mixture components given some data:</p>
+<div>
+<div class="MathJax_Preview">
+p(z = k | x, y, \theta) = \frac{\alpha_k(x) p_k(y| x, \theta_k)}{\sum_j\alpha_j(x) p_j(y|x_j, \theta_j)}
+</div>
+<script type="math/tex; mode=display">
+p(z = k | x, y, \theta) = \frac{\alpha_k(x) p_k(y| x, \theta_k)}{\sum_j\alpha_j(x) p_j(y|x_j, \theta_j)}
+</script>
+</div>
+<h6 id="example-mixtures-of-linear-regression-experts">Example: Mixtures of Linear Regression Experts<a class="headerlink" href="#example-mixtures-of-linear-regression-experts" title="Permanent link">&para;</a></h6>
+<p>In this model, each expert generates data according to a linear function of the input plus additive Gaussian noise</p>
+<div>
+<div class="MathJax_Preview">
+p(y | x, \theta) = \sum_k \alpha_k \mathcal N(y | \beta_k^Tx, \sigma_k^2)
+</div>
+<script type="math/tex; mode=display">
+p(y | x, \theta) = \sum_k \alpha_k \mathcal N(y | \beta_k^Tx, \sigma_k^2)
+</script>
+</div>
+<p>where the gating function can be a softmax classifier</p>
+<div>
+<div class="MathJax_Preview">
+\alpha_k(x) = p(z=k | x) = \frac{e^{\eta_k^Tx}}{\sum_je^{\eta_k^Tx}}
+</div>
+<script type="math/tex; mode=display">
+\alpha_k(x) = p(z=k | x) = \frac{e^{\eta_k^Tx}}{\sum_je^{\eta_k^Tx}}
+</script>
+</div>
+<p>Remember: we are <em>not</em> modeling the density of the inputs <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>.</p>
+<h4 id="gradient-learning-with-mixtures">Gradient learning with mixtures<a class="headerlink" href="#gradient-learning-with-mixtures" title="Permanent link">&para;</a></h4>
+<div class="admonition erro">
+<p class="admonition-title">Erro</p>
+<p>Left off at Gradient learning with Mixtures</p>
+</div>
 <h2 id="appendix">Appendix<a class="headerlink" href="#appendix" title="Permanent link">&para;</a></h2>
 <h3 id="useful-resources">Useful Resources<a class="headerlink" href="#useful-resources" title="Permanent link">&para;</a></h3>
 <ul>
