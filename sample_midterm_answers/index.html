@@ -451,7 +451,16 @@
 <p>Consider the following directed graphical model:</p>
 <p><img alt="" src="../img/sample_midterm_1.png" /></p>
 <p>(a) List all variables that are independent of <span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span> given evidence on <span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span></p>
-<p>TODO</p>
+<p><img alt="" src="../img/sample_midterm_2.png" /></p>
+<p>By Bayes' Balls</p>
+<div>
+<div class="MathJax_Preview">
+I \bot A | B
+</div>
+<script type="math/tex; mode=display">
+I \bot A | B
+</script>
+</div>
 <p>(b) Write down the factorized normalized joint distribution that this graphical model represents.</p>
 <div>
 <div class="MathJax_Preview">
@@ -464,7 +473,7 @@ p(A, ..., I) = p(A | B, C)P(B | D)P(C | E, F)P(D | G)P(E | G)P(F | H)P(G)P(H)P(I
 <p>(c) If each node is a single discrete random variable in <span><span class="MathJax_Preview">{1, ..., K}</span><script type="math/tex">{1, ..., K}</script></span> how many distinct joint states can the model take? That is, how many different configurations can the variables in this model be set?</p>
 <p>For each node (random variable) there is <span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span> states. We therefore have <span><span class="MathJax_Preview">k^n</span><script type="math/tex">k^n</script></span> possible configurations per node (<span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span>) where <span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span> is the number of states and <span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span> the number of parent nodes (<span><span class="MathJax_Preview">x_{\pi_i}</span><script type="math/tex">x_{\pi_i}</script></span>)</p>
 <p>Graphically:</p>
-<p><img alt="" src="../img/sample_midterm_2.png" /></p>
+<p><img alt="" src="../img/sample_midterm_3.png" /></p>
 <p>Together, there are <span><span class="MathJax_Preview">k^{3 + 2 + 3 + 2 + 2 + 2 + 1 + 1 + 3} = k^{19}</span><script type="math/tex">k^{3 + 2 + 3 + 2 + 2 + 2 + 1 + 1 + 3} = k^{19}</script></span> possible different configurations of the variables in this model.</p>
                 
                   

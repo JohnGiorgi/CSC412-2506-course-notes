@@ -1076,7 +1076,7 @@
 <div class="MathJax_Preview">p(\cap^N_{i=1}) = \prod_{k=1}^N p(x_k | \cap^{k-1}_{j=1} x_j)</div>
 <script type="math/tex; mode=display">p(\cap^N_{i=1}) = \prod_{k=1}^N p(x_k | \cap^{k-1}_{j=1} x_j)</script>
 </div>
-<p>If our joint distribution is represented by a DAGM, however, then some of the conditioned variables can be dropped. This is equivalent to enforcing conditional independence. </p>
+<p>If our joint distribution is represented by a DAGM, however, then some of the conditioned variables can be dropped. This is equivalent to enforcing conditional independence.</p>
 <h3 id="d-separation">D-Separation<a class="headerlink" href="#d-separation" title="Permanent link">&para;</a></h3>
 <p><strong>D-separation</strong>, or <strong>directed-separation</strong> is a notion of connectedness in DAGMs in which two (sets of) variables <em>may or may not be connected</em> conditioned on a third (set of) variable(s); where D-connection implies conditional <em>dependence</em> and d-separation implies conditional <em>independence</em>.</p>
 <p>In particular, we say that</p>
@@ -1213,7 +1213,7 @@ P(z | x, y) &= \frac{P(x)P(z)P(y | x,  z)}{P(x)P(y|x)} \\
 <p>No, by the Bayes Balls algorithm.</p>
 <p><img alt="" src="../../img/lecture_3_15.png" /></p>
 <h3 id="plates">Plates<a class="headerlink" href="#plates" title="Permanent link">&para;</a></h3>
-<p>Because Bayesian methods treat parameters as random variables, we would like to include them in the graphical model. One way to do this is to repeat all the iid observations explicitly and show the parameter only once. A better way is to use <strong>plates</strong>, in which repreaed quantities that are iid are put in a box</p>
+<p>Because Bayesian methods treat parameters as random variables, we would like to include them in the graphical model. One way to do this is to repeat all the iid observations explicitly and show the parameter only once. A better way is to use <strong>plates</strong>, in which repeated quantities that are iid are put in a box</p>
 <p><img alt="" src="../../img/lecture_3_16.png" /></p>
 <p>Plates are like “macros” that allow you to draw a very complicated graphical model with a simpler notation.
 <em>The rules of plates are simple</em>: repeat every structure in a box a number of times given by the integer in the corner of the box (e.g. <span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span>), updating the plate index variable (e.g. <span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>) as you go. Duplicate every arrow going into the plate and every arrow leaving the plate by connecting the arrows to each copy of the structure.</p>
@@ -1350,8 +1350,8 @@ p(y | x, \theta) = \sum_k \alpha_k \mathcal N(y | \beta_k^Tx, \sigma_k^2)
 </div>
 <p>Remember: we are <em>not</em> modeling the density of the inputs <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>.</p>
 <h4 id="gradient-learning-with-mixtures">Gradient learning with mixtures<a class="headerlink" href="#gradient-learning-with-mixtures" title="Permanent link">&para;</a></h4>
-<div class="admonition erro">
-<p class="admonition-title">Erro</p>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
 <p>Left off at Gradient learning with Mixtures</p>
 </div>
 <h2 id="appendix">Appendix<a class="headerlink" href="#appendix" title="Permanent link">&para;</a></h2>
