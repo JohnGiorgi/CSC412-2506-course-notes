@@ -18,7 +18,7 @@
 
 The joint distribution of \(N\) random variables can be computed by the [chain rule](https://en.wikipedia.org/wiki/Chain_rule_%28probability%29)
 
-\[p(x_{1, ..., N}) = p(x_1)p(x_2|x_1)p(x_3 | x_2, x_1)) \ldots \]
+\[p(x_{1, ..., N}) = p(x_1)p(x_2|x_1)p(x_3 | x_2, x_1) \ldots \]
 
 this is true for _any joint distribution over any random variables_.
 
@@ -50,35 +50,45 @@ For example, the graphical model \(p(x_{1, ..., 6})\) is represented as
 
 ![](../img/lecture_3_2.png)
 
-This is what the model looks like with _no assumptions_ on the conditional dependence between variables (said otherwise, we assume full conditional dependence of the joint distribution as per the chain rule). This model will _scale poorly_ (exponential with the number of parameters).
+This is what the model looks like with _no assumptions_ on the conditional dependence between variables (said otherwise, we assume full conditional dependence of the joint distribution as per the chain rule). This model will _scale poorly_ (exponential with the number of parameters, or \(k^n\) where \(k\) are states and \(n\) are random variables, or nodes.).
 
-We can simplify the model by building in our assumptions about the conditional probabilites.
+We can simplify the model by building in our assumptions about the conditional probabilities. More explicitly, a [directed graphical model](#directed-acyclic-graphical-models-dagm) implies a restricted factorization of the joint distribution.
 
 ### Conditional Independence
 
-Let \(X\) be the set of nodes in our graph (the random variables of our model), then
+Let \(X\) be the set of nodes in our graph (the random variables of our model), then two (sets of) variables \(X_A\), \(X_B\) are conditionally independent given a third variable \(X_C\)
 
 \\[(X_A \perp X_B | X_C)\\]
-\\[\Leftrightarrow p(X_A, X_B | X_C) = p(X_A | X_C)p(X_B | X_C) \; (\star)\\]
-\\[\Leftrightarrow p(X_A | X_B, X_C) = p(X_A | X_C) \; (\star\star)\\]
 
+if
 
+\[
+\Leftrightarrow p(X_A, X_B | X_C) = p(X_A | X_C)p(X_B | X_C) \; (\star)
+\]
+
+\[
+\Leftrightarrow p(X_A | X_B, X_C) = p(X_A | X_C) \; (\star\star)
+\]
+
+for all \(X_c\).
 
 !!! note
     \(\star\star\) is especially important, and we use this several times throughout the lecture.
+
+Only a subset of all distributions respect any given (nontrivial) conditional independence statement. The subset of distributions that respect all the CI assumptions we make is the family of distributions consistent with our assumptions. Probabilistic graphical models are a powerful, elegant and simple way to specify such a family.
 
 ## Directed acyclic graphical models (DAGM)
 
 A [directed acyclic graphical model](https://en.wikipedia.org/wiki/Graphical_model#Bayesian_network) over \(N\) random variables looks like
 
-\[p(x_{1, ..., N}) = \prod_ip(x_i | x_{\pi_i})\]
+\[p(x_{1, ..., N}) = \prod_i^Np(x_i | x_{\pi_i})\]
 
-where \(x_i\) is a random variable (node in the graphical model) and \(x_{\pi_i}\) are the parents of this node. In other words, the joint distribution of a DAGM factors into a product of conditional distributions, where each random variable (or node) is conditionally dependent on its parent node(s), which could be empty.
+where \(x_i\) is a random variable (node in the graphical model) and \(x_{\pi_i}\) are the parents of this node. In other words, the joint distribution of a DAGM factors into a product of _local conditional distributions_, where each random variable (or node) is conditionally dependent on its parent node(s), which could be empty.
 
 !!! tip
     The Wikipedia entry on [Graphical models](https://en.wikipedia.org/wiki/Graphical_model) is helpful, particularly the section on [Bayesian networks](https://en.wikipedia.org/wiki/Graphical_model#Bayesian_network).
 
-Notice the difference between a DAGM and the chain rule for probability we introduced early: we are only conditioning on _parent nodes_ not _every node_. Furthermore, this distribution is exponential in the number of nodes in the parent set, _not all of_ \(N\).
+Notice the difference between a DAGM and the chain rule for probability we introduced early: we are conditioning on _parent nodes_ as opposed to _every node_. Therefore, the model that represents this distribution is exponential in the [fan-in](https://en.wikipedia.org/wiki/Fan-in) of each node (the number of nodes in the parent set), instead of in \(N\).
 
 ### Independence assumptions on DAGMs
 
@@ -88,7 +98,7 @@ First, lets sort the DAGM topologically. The conditional independence of our ran
 
 \[x_i \bot x_{\widetilde{\pi_i}} | x_{\pi_i}\]
 
-so random variables \(x_i\) and \(x_{\widetilde{\pi_i}}\) are conditional independent of each other but conditional dependent on their parent nodes \(x_{\pi_i}\).
+so random variables \(x_i\) and \(x_{\widetilde{\pi_i}}\) are conditionally independent of each other but conditionally dependent on their parent nodes \(x_{\pi_i}\).
 
 !!! note
     To [topological sort](https://en.wikipedia.org/wiki/Topological_sorting) or order a DAGM means to sort all parents before their children.
@@ -101,9 +111,19 @@ What have the assumptions done to our joint distribution represented by our mode
 
 \[p(x_{1, ..., 6}) = p(x_1)p(x_2 | x_1)p(x_3 | x_1)p(x_4 | x_2)p(x_5 | x_3)p(x_6 | x_2, x_5)\]
 
-Cleary our assumptions on conditional independence have vastly simplified the model. Suppose each is \(x_i\) is a binary random variable. Our assumptions on conditional independence also reduce the dimensionality of our model
+Cleary our assumptions on conditional independence have vastly simplified the model.
+
+Now Suppose each is \(x_i\) is a binary random variable. Our assumptions on conditional independence also reduce the dimensionality of our model
 
 ![](../img/lecture_3_4.png)
+
+#### Missing Edges
+
+Missing edges _imply conditional independence_. Recall that from the chain rule, we can get (for any joint distribution)
+
+\[p(\cap^N_{i=1}) = \prod_{k=1}^N p(x_k | \cap^{k-1}_{j=1} x_j)\]
+
+If our joint distribution is represented by a DAGM, however, then some of the conditioned variables can be dropped. This is equivalent to enforcing conditional independence.
 
 ### D-Separation
 
@@ -264,7 +284,7 @@ _Answer_:
 
 ### Plates
 
-Because Bayesian methods treat parameters as random variables, we would like to include them in the graphical model. One way to do this is to repeat all the iid observations explicitly and show the parameter only once. A better way is to use __plates__, in which repreaed quantities that are iid are put in a box
+Because Bayesian methods treat parameters as random variables, we would like to include them in the graphical model. One way to do this is to repeat all the iid observations explicitly and show the parameter only once. A better way is to use __plates__, in which repeated quantities that are iid are put in a box
 
 ![](../img/lecture_3_16.png)
 
@@ -292,7 +312,7 @@ In other words, it is a model that satisfies the [Markov property](https://en.wi
 ![](../img/lecture_3_20.png)
 
 !!! warning
-    I don't really understand the difference between the two models given on the slides (and shown above). Are they both Markov chains? Jesse went over this only very briefly in lecture.
+    I don't really understand the difference between the two models given on the slides (and shown above). Are they both Markov chains? In the second model, the probability of an event depends not just on the previous node but on the previous node of the previous node. Jesse went over this only very briefly in lecture.
 
 ### Unobserved Variables
 
@@ -330,6 +350,88 @@ E.g. given \(y\), \(x\) fit the model \(p(y|x) = \sum_z p(y|x, z)p(z)\).
 Latent variables may appear naturally, from the structure of the problem (because something wasn’t measured, because of faulty sensors, occlusion, privacy, etc.). But we also may want to _intentionally_ introduce latent variables to model complex dependencies between variables without looking at the dependencies between them directly. This can actually simplify the model (e.g., mixtures).
 
 ![](../img/lecture_3_23.png)
+
+### Mixture models
+
+Think about the following two sets of data, and notice how there is some underlying structure _not dependent on x_.
+
+![](../img/lecture_3_24.png)
+
+The most basic latent variable model might introduce a single discrete node, \(z\), in order to better model the data. This allows different submodels (experts) to contribute to the (conditional) density model in different parts of the space (known as a [mixture of experts](https://en.wikipedia.org/wiki/Mixture_of_experts)).
+
+!!! note
+    The basic idea is to divide & conquer: use simple parts to build complex models (e.g., multimodal densities, or piecewise-linear regressions).
+
+#### Mixture densities
+
+What if the class is _unobserved_? Then we sum it out
+
+\[
+p(x | \theta) = \sum_{k=1}^Kp(z=k | \theta_z)p(x|z=k, \theta_k) \\
+= \sum_{k=1}^K\alpha_k p_k(x|\theta_k)
+\]
+
+where the __mixing proportions__, \(\alpha_k\) sum to 1, i.e. \(\sum_k\alpha_k = 1\). We can use Bayes' rule to compute the posterior probability of the mixture component given some data:
+
+\[
+p(z=k | x, \theta_z) = \frac{\alpha_k p_k(x|\theta_k)}{\sum_j\alpha_j p_j(x|\theta_j)}
+\]
+
+these quantities are called __responsibilities__.
+
+###### Example: Gaussian Mixture Models
+
+Consider a mixture of \(K\) Gaussian componentns
+
+\[
+p(x | \theta) = \sum_k \alpha_k \mathcal N(x | \mu_k, \Sigma_k) \\
+p(z = k | x, \theta) = \frac{\alpha_k \mathcal N(x | \mu_k, \Sigma_k)}{\sum_j \alpha_j \mathcal N(x | \mu_j, \Sigma_j)} \\
+\ell(\theta ; \mathcal D) = \sum_n \log \sum_k \alpha_k \mathcal N(x^{(n)} | \mu_k, \Sigma_k) \\
+\]
+
+![](../img/lecture_3_25.png)
+
+- Density model: \(p(x | \theta)\) is a familiarity signal.
+- Clustering: \(p(z | x, \theta)\) is the assignment rule, \(- \ell(\theta)\) is the cost.
+
+!!! warning
+    I didn't really understand this example.
+
+###### Example: Mixtures of Experts
+
+[Mixtures of experts](https://en.wikipedia.org/wiki/Mixture_of_experts), also known as conditional mixtures are exactly like a class-conditional model, but the class is unobserved and so we sum it out:
+
+\[
+p(y | x, \theta) = \sum_{k=1}^Kp(z=k|x, \theta_z)p(y|z=k, x, \theta_K) \\
+= \sum_k \alpha_k (x | \theta_z)p_k(y | x, \theta_k) \\
+\]
+
+where \(\sum_k \alpha_k (x) = 1 \; \forall x\). This is a harder problem than the previous example, as we must learn \(\alpha(x)\), often called the __gating function__ (unless we chose \(z\) to be independent of \(x\)). However, we can still use Bayes' rule to compute the posterior probability of the mixture components given some data:
+
+\[
+p(z = k | x, y, \theta) = \frac{\alpha_k(x) p_k(y| x, \theta_k)}{\sum_j\alpha_j(x) p_j(y|x_j, \theta_j)}
+\]
+
+###### Example: Mixtures of Linear Regression Experts
+
+In this model, each expert generates data according to a linear function of the input plus additive Gaussian noise
+
+\[
+p(y | x, \theta) = \sum_k \alpha_k \mathcal N(y | \beta_k^Tx, \sigma_k^2)
+\]
+
+where the gating function can be a softmax classifier
+
+\[
+\alpha_k(x) = p(z=k | x) = \frac{e^{\eta_k^Tx}}{\sum_je^{\eta_k^Tx}}
+\]
+
+Remember: we are _not_ modeling the density of the inputs \(x\).
+
+#### Gradient learning with mixtures
+
+!!! error
+    Left off at Gradient learning with Mixtures
 
 ## Appendix
 
