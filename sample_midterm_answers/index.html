@@ -395,6 +395,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#question-1" title="Question 1" class="md-nav__link">
+    Question 1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#question-2" title="Question 2" class="md-nav__link">
     Question 2
   </a>
@@ -433,6 +440,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#question-1" title="Question 1" class="md-nav__link">
+    Question 1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#question-2" title="Question 2" class="md-nav__link">
     Question 2
   </a>
@@ -459,6 +473,82 @@
                 
                 
                 <h1 id="sample-midterm-answers">Sample Midterm (Answers)<a class="headerlink" href="#sample-midterm-answers" title="Permanent link">&para;</a></h1>
+<p><em>Things to know for the midterm</em></p>
+<ul>
+<li>Bayes' rule, sum and product rules of probability, expectations</li>
+<li>Conditioning, normalization, marginalization</li>
+<li>Exponential family distributions, maximum likelihood</li>
+<li>Logistic regression, Naive Bayes</li>
+<li>Converting graphical models to pdfs and back</li>
+<li>Determining conditional independence</li>
+<li>DAGs vs UGMs vs factor graphs</li>
+<li>Computational complexity of inference</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Take this with a grain of salt. Appears to be a list given in the previous version of the course (we did not discuss logistic regression in lecture, for example).</p>
+</div>
+<h2 id="question-1">Question 1<a class="headerlink" href="#question-1" title="Permanent link">&para;</a></h2>
+<p>Recall that the definition of an exponential family model is:</p>
+<div>
+<div class="MathJax_Preview">
+f(x | \eta) = h(x)g(\eta)\exp(\eta^TT(x))
+</div>
+<script type="math/tex; mode=display">
+f(x | \eta) = h(x)g(\eta)\exp(\eta^TT(x))
+</script>
+</div>
+<p>where</p>
+<ul>
+<li><span><span class="MathJax_Preview">\eta</span><script type="math/tex">\eta</script></span> are the parameters</li>
+<li><span><span class="MathJax_Preview">T(x)</span><script type="math/tex">T(x)</script></span> are the sufficient statistics</li>
+<li><span><span class="MathJax_Preview">h(x)</span><script type="math/tex">h(x)</script></span> is the base measure</li>
+<li><span><span class="MathJax_Preview">g(\eta)</span><script type="math/tex">g(\eta)</script></span> is the normalizing constant</li>
+</ul>
+<p>Consider the univariate Gaussian, with mean <span><span class="MathJax_Preview">\mu</span><script type="math/tex">\mu</script></span> and precision <span><span class="MathJax_Preview">\lambda = \frac{1}{\sigma^2}</span><script type="math/tex">\lambda = \frac{1}{\sigma^2}</script></span></p>
+<div>
+<div class="MathJax_Preview">
+p(D | \mu \lambda) = \prod^N_{i=1}(\frac{\lambda}{2\pi})^{\frac{1}{2}}\exp(-\frac{\lambda}{2}(x_i - \mu)^2)
+</div>
+<script type="math/tex; mode=display">
+p(D | \mu \lambda) = \prod^N_{i=1}(\frac{\lambda}{2\pi})^{\frac{1}{2}}\exp(-\frac{\lambda}{2}(x_i - \mu)^2)
+</script>
+</div>
+<p>What are <span><span class="MathJax_Preview">\eta</span><script type="math/tex">\eta</script></span> and <span><span class="MathJax_Preview">T(x)</span><script type="math/tex">T(x)</script></span> for this distribution when represented in exponential family form?</p>
+<p>Start by expanding the terms in the exponent</p>
+<div>
+<div class="MathJax_Preview">
+= \prod^N_{i=1}(\frac{\lambda}{2\pi})^{\frac{1}{2}}\exp(-\frac{\lambda}{2}x_i^2 + \lambda u x_i - \frac{\lambda}{2}\mu^2) \\
+</div>
+<script type="math/tex; mode=display">
+= \prod^N_{i=1}(\frac{\lambda}{2\pi})^{\frac{1}{2}}\exp(-\frac{\lambda}{2}x_i^2 + \lambda u x_i - \frac{\lambda}{2}\mu^2) \\
+</script>
+</div>
+<p>from here, we can rearrange the exponent into <span><span class="MathJax_Preview">\eta^TT(x)</span><script type="math/tex">\eta^TT(x)</script></span></p>
+<div>
+<div class="MathJax_Preview">
+= \prod^N_{i=1}(\frac{\lambda}{2\pi})^{\frac{1}{2}}\exp( - \frac{\lambda}{2}\mu^2)\exp(\begin{bmatrix}\lambda u &amp; -\frac{\lambda}{2}\end{bmatrix} \begin{bmatrix}x_i \\ x_i^2\end{bmatrix}) \\
+</div>
+<script type="math/tex; mode=display">
+= \prod^N_{i=1}(\frac{\lambda}{2\pi})^{\frac{1}{2}}\exp( - \frac{\lambda}{2}\mu^2)\exp(\begin{bmatrix}\lambda u & -\frac{\lambda}{2}\end{bmatrix} \begin{bmatrix}x_i \\ x_i^2\end{bmatrix}) \\
+</script>
+</div>
+<p>finally, let <span><span class="MathJax_Preview">\eta_1 = \lambda u</span><script type="math/tex">\eta_1 = \lambda u</script></span> and <span><span class="MathJax_Preview">\eta_2 = -\frac{\lambda}{2}</span><script type="math/tex">\eta_2 = -\frac{\lambda}{2}</script></span>, then rewrite the above equations in terms of <span><span class="MathJax_Preview">\eta</span><script type="math/tex">\eta</script></span></p>
+<div>
+<div class="MathJax_Preview">
+= \prod^N_{i=1}(2\pi)^{-\frac{1}{2}} (-2\eta_2)^{-\frac{1}{2}}  \exp(\frac{\eta_1^2}{4\eta_2})\exp(\begin{bmatrix}\lambda u &amp; -\frac{\lambda}{2}\end{bmatrix} \begin{bmatrix}x_i \\ x_i^2\end{bmatrix})
+</div>
+<script type="math/tex; mode=display">
+= \prod^N_{i=1}(2\pi)^{-\frac{1}{2}} (-2\eta_2)^{-\frac{1}{2}}  \exp(\frac{\eta_1^2}{4\eta_2})\exp(\begin{bmatrix}\lambda u & -\frac{\lambda}{2}\end{bmatrix} \begin{bmatrix}x_i \\ x_i^2\end{bmatrix})
+</script>
+</div>
+<p>where</p>
+<ul>
+<li><span><span class="MathJax_Preview">\eta^T = \begin{bmatrix}\lambda u &amp; -\frac{\lambda}{2}u^2\end{bmatrix}</span><script type="math/tex">\eta^T = \begin{bmatrix}\lambda u & -\frac{\lambda}{2}u^2\end{bmatrix}</script></span></li>
+<li><span><span class="MathJax_Preview">T(x) = \begin{bmatrix}x_i \\ x_i^2\end{bmatrix}</span><script type="math/tex">T(x) = \begin{bmatrix}x_i \\ x_i^2\end{bmatrix}</script></span></li>
+<li><span><span class="MathJax_Preview">h(x) = (2\pi)^{-\frac{1}{2}}</span><script type="math/tex">h(x) = (2\pi)^{-\frac{1}{2}}</script></span></li>
+<li><span><span class="MathJax_Preview">g(\eta) = (-2\eta_2)^{-\frac{1}{2}}  \exp(\frac{\eta_1^2}{4\eta_2})</span><script type="math/tex">g(\eta) = (-2\eta_2)^{-\frac{1}{2}}  \exp(\frac{\eta_1^2}{4\eta_2})</script></span></li>
+</ul>
 <h2 id="question-2">Question 2<a class="headerlink" href="#question-2" title="Permanent link">&para;</a></h2>
 <p>Consider the following directed graphical model:</p>
 <p><img alt="" src="../img/sample_midterm_1.png" /></p>
