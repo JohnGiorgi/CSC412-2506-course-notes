@@ -438,6 +438,19 @@
     Parameterization of an UGM
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#factor-product" title="Factor product" class="md-nav__link">
+    Factor product
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -624,6 +637,19 @@
     Parameterization of an UGM
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#factor-product" title="Factor product" class="md-nav__link">
+    Factor product
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -804,8 +830,46 @@ Z(\theta)= \sum_x \prod_{c \in \mathcal C} \psi_c(x_c|\theta_c)
 Z(\theta)= \sum_x \prod_{c \in \mathcal C} \psi_c(x_c|\theta_c)
 </script>
 </div>
-<p>The factored structure of the distribution makes it possible to more efficiently do the sums/integrals needed to compute it.</p>
-<p>Left off on slide 19.</p>
+<p>The factored structure of the distribution makes it possible to more efficiently do the sums/integrals needed to compute it. Lets see how to factorize the undirected graph of our running example:</p>
+<p><img alt="" src="../../img/lecture_4_4.png" /></p>
+<div>
+<div class="MathJax_Preview">
+p(x) \propto \psi_{1, 2, 3}(x_1, x_2, x_3) \psi_{2, 3, 5}(x_2, x_3, x_5) \psi_{2, 4, 5}(x_2, x_4, x_5) \psi_{3, 5, 6}(x_3, x_5, x_6) \psi_{4, 5, 6, 7}(x_4, x_5, x_6, x_7)
+</div>
+<script type="math/tex; mode=display">
+p(x) \propto \psi_{1, 2, 3}(x_1, x_2, x_3) \psi_{2, 3, 5}(x_2, x_3, x_5) \psi_{2, 4, 5}(x_2, x_4, x_5) \psi_{3, 5, 6}(x_3, x_5, x_6) \psi_{4, 5, 6, 7}(x_4, x_5, x_6, x_7)
+</script>
+</div>
+<p>If the variables are discrete, we can represent the potential or energy functions as tables of (non-negative) numbers</p>
+<div>
+<div class="MathJax_Preview">
+p(A, B, C, D) = \frac{1}{Z} \psi_{a, b}(A, B) \psi_{b, c}(B, C) \psi_{c, d}(C, D) \psi_{a, d}(A, D)
+</div>
+<script type="math/tex; mode=display">
+p(A, B, C, D) = \frac{1}{Z} \psi_{a, b}(A, B) \psi_{b, c}(B, C) \psi_{c, d}(C, D) \psi_{a, d}(A, D)
+</script>
+</div>
+<p><img alt="" src="../../img/lecture_4_8.png" /></p>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p>Why the switch from <span><span class="MathJax_Preview">\psi</span><script type="math/tex">\psi</script></span> to <span><span class="MathJax_Preview">\phi</span><script type="math/tex">\phi</script></span> here?</p>
+</div>
+<p>It is important to note that these potential are <em>not</em> probabilities, but represent compatibilities between the different assignments.</p>
+<h4 id="factor-product">Factor product<a class="headerlink" href="#factor-product" title="Permanent link">&para;</a></h4>
+<p>Given 3 disjoint sets of variables <span><span class="MathJax_Preview">X, Y, Z</span><script type="math/tex">X, Y, Z</script></span> and factors <span><span class="MathJax_Preview">\psi_1(X, Y)</span><script type="math/tex">\psi_1(X, Y)</script></span>, <span><span class="MathJax_Preview">\psi_2(Y, Z)</span><script type="math/tex">\psi_2(Y, Z)</script></span> the <strong>factor product</strong> is defined as:</p>
+<div>
+<div class="MathJax_Preview">
+\psi_{X, Y, Z}(X, Y, Z) = \psi_{X, Y}(X, Y)\phi_{Y, Z}(Y, Z)
+</div>
+<script type="math/tex; mode=display">
+\psi_{X, Y, Z}(X, Y, Z) = \psi_{X, Y}(X, Y)\phi_{Y, Z}(Y, Z)
+</script>
+</div>
+<p><img alt="" src="../../img/lecture_4_9.png" /></p>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p>Again, is the the switch from <span><span class="MathJax_Preview">\psi</span><script type="math/tex">\psi</script></span> to <span><span class="MathJax_Preview">\phi</span><script type="math/tex">\phi</script></span> a typo? Deliberate?</p>
+</div>
                 
                   
                 
