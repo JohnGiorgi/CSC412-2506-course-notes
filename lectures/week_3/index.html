@@ -483,8 +483,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#latent" title="Latent" class="md-nav__link">
-    Latent
+  <a href="#latent-variables" title="Latent variables" class="md-nav__link">
+    Latent variables
   </a>
   
     <nav class="md-nav">
@@ -561,6 +561,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#hidden-markov-models-hmms" title="Hidden Markov Models (HMMs)" class="md-nav__link">
+    Hidden Markov Models (HMMs)
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -612,6 +619,18 @@
   <li class="md-nav__item">
     <a href="../week_4/" title="Week 4" class="md-nav__link">
       Week 4
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../week_5/" title="Week 5" class="md-nav__link">
+      Week 5
     </a>
   </li>
 
@@ -841,8 +860,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#latent" title="Latent" class="md-nav__link">
-    Latent
+  <a href="#latent-variables" title="Latent variables" class="md-nav__link">
+    Latent variables
   </a>
   
     <nav class="md-nav">
@@ -916,6 +935,13 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hidden-markov-models-hmms" title="Hidden Markov Models (HMMs)" class="md-nav__link">
+    Hidden Markov Models (HMMs)
+  </a>
   
 </li>
         
@@ -1258,7 +1284,7 @@ P(z | x, y) &= \frac{P(x)P(z)P(y | x,  z)}{P(x)P(y|x)} \\
 <p class="admonition-title">Note</p>
 <p>Recall that <span><span class="MathJax_Preview">p(x) = \sum_q p(x, q)</span><script type="math/tex">p(x) = \sum_q p(x, q)</script></span>.</p>
 </div>
-<h4 id="latent">Latent<a class="headerlink" href="#latent" title="Permanent link">&para;</a></h4>
+<h4 id="latent-variables">Latent variables<a class="headerlink" href="#latent-variables" title="Permanent link">&para;</a></h4>
 <p>What to do when a variable <span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span> is <em>always</em> unobserved? Depends on where it appears in our model. If we never condition on it when computing the probability of the variables we do observe, then we can just forget about it and integrate it out.</p>
 <p>E.g., given <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>, <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> fit the model <span><span class="MathJax_Preview">p(z, y|x) = p(z|y)p(y|x, w)p(w)</span><script type="math/tex">p(z, y|x) = p(z|y)p(y|x, w)p(w)</script></span>. In other words if it is a leaf node.</p>
 <p>However, if <span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span> is conditioned on, we need to model it.</p>
@@ -1362,9 +1388,44 @@ p(y | x, \theta) = \sum_k \alpha_k \mathcal N(y | \beta_k^Tx, \sigma_k^2)
 </div>
 <p>Remember: we are <em>not</em> modeling the density of the inputs <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>.</p>
 <h4 id="gradient-learning-with-mixtures">Gradient learning with mixtures<a class="headerlink" href="#gradient-learning-with-mixtures" title="Permanent link">&para;</a></h4>
-<div class="admonition error">
-<p class="admonition-title">Error</p>
-<p>Left off at Gradient learning with Mixtures</p>
+<p>We can learn mixture densities using gradient descent on the likelihood as usual.</p>
+<div>
+<div class="MathJax_Preview">
+\ell(\theta) = \log p(x | \theta) = \sum_k \alpha_kp_k(x_k | \theta_k) \\
+\Rightarrow \frac{\partial \ell}{\partial \theta} = \frac{1}{p(x | \theta)} \sum_k \alpha_k \frac{\partial p_k(x | \theta)}{\partial \theta} \\
+= \sum_k \alpha_k \frac{1}{p(x | \theta)}p_k(x | \theta_k)\frac{\partial \log p_k (x | \theta_k)}{\partial \theta} \\
+= \sum_k \alpha_k \frac{p_k(x | \theta_k)}{p(x | \theta)} \frac{\partial \ell_k}{\partial \theta_k} \\
+= \sum_k \alpha_k r_k \frac{\partial \ell_k}{\partial \theta_k}
+</div>
+<script type="math/tex; mode=display">
+\ell(\theta) = \log p(x | \theta) = \sum_k \alpha_kp_k(x_k | \theta_k) \\
+\Rightarrow \frac{\partial \ell}{\partial \theta} = \frac{1}{p(x | \theta)} \sum_k \alpha_k \frac{\partial p_k(x | \theta)}{\partial \theta} \\
+= \sum_k \alpha_k \frac{1}{p(x | \theta)}p_k(x | \theta_k)\frac{\partial \log p_k (x | \theta_k)}{\partial \theta} \\
+= \sum_k \alpha_k \frac{p_k(x | \theta_k)}{p(x | \theta)} \frac{\partial \ell_k}{\partial \theta_k} \\
+= \sum_k \alpha_k r_k \frac{\partial \ell_k}{\partial \theta_k}
+</script>
+</div>
+<p>In other words, the gradient is the responsibility weighted sum of the individual log likelihood gradients</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>We used two tricks here to derive the gradient, <span><span class="MathJax_Preview">\frac{\partial \log f(\theta)}{\partial \theta} = \frac{1}{f(\theta)} \cdot \frac{\partial f(\theta)}{\partial \theta}</span><script type="math/tex">\frac{\partial \log f(\theta)}{\partial \theta} = \frac{1}{f(\theta)} \cdot \frac{\partial f(\theta)}{\partial \theta}</script></span> and <span><span class="MathJax_Preview"> \frac{\partial f(\theta)}{\partial \theta} = f(\theta) \cdot \frac{\partial \log f(\theta)}{\partial \theta} </span><script type="math/tex"> \frac{\partial f(\theta)}{\partial \theta} = f(\theta) \cdot \frac{\partial \log f(\theta)}{\partial \theta} </script></span></p>
+</div>
+<h3 id="hidden-markov-models-hmms">Hidden Markov Models (HMMs)<a class="headerlink" href="#hidden-markov-models-hmms" title="Permanent link">&para;</a></h3>
+<p><a href="https://en.wikipedia.org/wiki/Hidden_Markov_model"><strong>Hidden Markov Model (HMM)</strong></a> is a statistical Markov model in which the system being modeled is assumed to be a <a href="https://en.wikipedia.org/wiki/Markov_process">Markov process</a> with unobserved (i.e. hidden) states. It is a very popular type of latent variable model</p>
+<p><img alt="" src="../../img/lecture_3_26.png" /></p>
+<p>where</p>
+<ul>
+<li><span><span class="MathJax_Preview">Z_t</span><script type="math/tex">Z_t</script></span> are <em>hidden states</em> taking on one of <span><span class="MathJax_Preview">K</span><script type="math/tex">K</script></span> discrete values</li>
+<li><span><span class="MathJax_Preview">X_t</span><script type="math/tex">X_t</script></span> are <em>observed variables</em> taking on values in any space</li>
+</ul>
+<p>the joint probability represented by the graph factorizes according to</p>
+<div>
+<div class="MathJax_Preview">
+p(X_{1:T}, Z_{1:T}) = p(Z_{1:T})p(X_{1:T} | Z_{1:T}) = p(Z_1) \prod_{t=2}^T p(Z_t | Z_{t-1}) \prod_{t=1}^T p(X_t | Z_t)
+</div>
+<script type="math/tex; mode=display">
+p(X_{1:T}, Z_{1:T}) = p(Z_{1:T})p(X_{1:T} | Z_{1:T}) = p(Z_1) \prod_{t=2}^T p(Z_t | Z_{t-1}) \prod_{t=1}^T p(X_t | Z_t)
+</script>
 </div>
 <h2 id="appendix">Appendix<a class="headerlink" href="#appendix" title="Permanent link">&para;</a></h2>
 <h3 id="useful-resources">Useful Resources<a class="headerlink" href="#useful-resources" title="Permanent link">&para;</a></h3>

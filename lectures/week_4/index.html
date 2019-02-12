@@ -351,13 +351,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#overview" title="Overview" class="md-nav__link">
-    Overview
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#directed-graphical-models-a-review" title="Directed Graphical Models (a Review)" class="md-nav__link">
     Directed Graphical Models (a Review)
   </a>
@@ -442,6 +435,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#representing-potentials" title="Representing potentials" class="md-nav__link">
+    Representing potentials
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#factor-product" title="Factor product" class="md-nav__link">
     Factor product
   </a>
@@ -466,6 +466,18 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../week_5/" title="Week 5" class="md-nav__link">
+      Week 5
+    </a>
   </li>
 
         
@@ -550,13 +562,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#overview" title="Overview" class="md-nav__link">
-    Overview
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#directed-graphical-models-a-review" title="Directed Graphical Models (a Review)" class="md-nav__link">
     Directed Graphical Models (a Review)
   </a>
@@ -641,6 +646,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#representing-potentials" title="Representing potentials" class="md-nav__link">
+    Representing potentials
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#factor-product" title="Factor product" class="md-nav__link">
     Factor product
   </a>
@@ -681,14 +693,10 @@
 <ul>
 <li>Murphy: Chapters 19-19.5</li>
 </ul>
-<h3 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Will fill out when I get my notebook back.</li>
-</ul>
 <h2 id="directed-graphical-models-a-review">Directed Graphical Models (a Review)<a class="headerlink" href="#directed-graphical-models-a-review" title="Permanent link">&para;</a></h2>
-<p>So far, we have seen <a href="../week_3/">directed acyclic graph models (DAGMs)</a>. These models represent large joint distributions using <em>local</em> relationships specified by the graph, where each random variable is a node and the edges specify the conditional dependence between random variables (and therefore missing edges imply conditional independence). Graphically, these models looked like</p>
+<p>So far, we have seen <a href="../week_3/">directed acyclic graphical models (DAGMs)</a>. These models represent large joint distributions using <em>local</em> relationships specified by the graph, where each random variable is a node and the edges specify the conditional dependence between random variables (and therefore missing edges imply conditional independence). Graphically, these models looked like</p>
 <p><img alt="" src="../../img/lecture_4_1.png" /></p>
-<p>The graph factorized according to the local conditional probabilities</p>
+<p>The graph factorizes according to the local conditional probabilities</p>
 <div>
 <div class="MathJax_Preview">
 p(x_{1, ..., N}) = \prod_i^Np(x_i | x_{\pi_i})
@@ -713,6 +721,10 @@ p(x_{1, ..., N}) = \prod_i^Np(x_i | x_{\pi_i})
 </div>
 <p>For discrete variables, <em>each node</em> stores a <a href="https://en.wikipedia.org/wiki/Conditional_probability_table">conditional probability table</a> (CPT) of size <span><span class="MathJax_Preview">k^n</span><script type="math/tex">k^n</script></span>, where <span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span> is the number of discrete states and <span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span> the number of conditionally dependent nodes.</p>
 <p><img alt="" src="../../img/lecture_3_4.png" /></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>The variables in the above model can take on <span><span class="MathJax_Preview">2^1 + 4(2^2) + 2^3 = 26</span><script type="math/tex">2^1 + 4(2^2) + 2^3 = 26</script></span> possible configurations.</p>
+</div>
 <h3 id="are-dagms-always-useful">Are DAGMs always useful?<a class="headerlink" href="#are-dagms-always-useful" title="Permanent link">&para;</a></h3>
 <p>For some problems, it is not always clear how to choose the direction for the edges in our DAGMs. Take the example of modeling dependencies in an image</p>
 <p><img alt="" src="../../img/lecture_4_2.png" /></p>
@@ -733,9 +745,10 @@ mb(8) = \{3, 7\} \cup \{9, 13\} \cup \{12, 4\}
 <h2 id="undirected-graphical-models">Undirected Graphical Models<a class="headerlink" href="#undirected-graphical-models" title="Permanent link">&para;</a></h2>
 <p>Undirected graphical models (UDGMs), also called <a href="https://en.wikipedia.org/wiki/Markov_random_field">Markov random fields</a> (MRFs) or Markov networks, is a set of random variables described by an undirected graph. As in DAGMs, the <em>nodes</em> in the graph represent <em>random variables</em>. However, in contrast to DAGMs, edges represent <em>probabilistic interactions</em> between neighboring variables (as opposed to conditional dependence).</p>
 <h3 id="dependencies-in-ugms">Dependencies in UGMs<a class="headerlink" href="#dependencies-in-ugms" title="Permanent link">&para;</a></h3>
-<p>In DGMs, we used conditional probabilities to represent the distribution of nodes given their parents. In UGMs, we use a more <em>symmetric</em> parameterization that captures the affinities between related variables:</p>
-<p><em>def</em>. <strong>Global Markov Property</strong>: <span><span class="MathJax_Preview">X_A \bot X_B | X_C</span><script type="math/tex">X_A \bot X_B | X_C</script></span> iff C separates A from B (i.e. there is no path in the graph between A and B that doesn't go through C).</p>
-<p><em>def</em>. <strong>Markov Blanket (local property)</strong>: The set of nodes that renders a node <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> conditionally independent of all the other nodes in the graph</p>
+<p>In DGMs, we used conditional probabilities to represent the distribution of nodes given their parents. In UGMs, we use a more <em>symmetric</em> parameterization that captures the affinities between related variables.</p>
+<p>The following three properties are used to determine if nodes are conditionally independent:</p>
+<p><em>def</em>. <strong>Global Markov Property</strong> (G): <span><span class="MathJax_Preview">X_A \bot X_B | X_C</span><script type="math/tex">X_A \bot X_B | X_C</script></span> iff C separates A from B (i.e. there is no path in the graph between A and B that doesn't go through C).</p>
+<p><em>def</em>. <strong>Local Markov Property (Markov Blanket)</strong> (L): The set of nodes that renders a node <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> conditionally independent of all the other nodes in the graph</p>
 <div>
 <div class="MathJax_Preview">
 t \bot \mathcal V \setminus cl(t) | mb(t)
@@ -744,7 +757,12 @@ t \bot \mathcal V \setminus cl(t) | mb(t)
 t \bot \mathcal V \setminus cl(t) | mb(t)
 </script>
 </div>
-<p><em>def</em>. <strong>Pairwise (Markov) Property</strong>: The set of nodes that renders a node <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> conditionally independent of all the other nodes in the graph</p>
+<p>where <span><span class="MathJax_Preview">cl(t) = mb(t) \cup t</span><script type="math/tex">cl(t) = mb(t) \cup t</script></span> is the closure of node <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>. It is the set of neighbors</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>In the UGM below, <span><span class="MathJax_Preview">mb(5) = \{2, 3, 4, 6, 7\}</span><script type="math/tex">mb(5) = \{2, 3, 4, 6, 7\}</script></span>.</p>
+</div>
+<p><em>def</em>. <strong>Pairwise (Markov) Property</strong> (P):</p>
 <div>
 <div class="MathJax_Preview">
 s \bot t | \mathcal V \setminus \{s, t\} \Leftrightarrow G_{st} = 0
@@ -752,14 +770,18 @@ s \bot t | \mathcal V \setminus \{s, t\} \Leftrightarrow G_{st} = 0
 <script type="math/tex; mode=display">
 s \bot t | \mathcal V \setminus \{s, t\} \Leftrightarrow G_{st} = 0
 </script>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><span><span class="MathJax_Preview">G_{st}</span><script type="math/tex">G_{st}</script></span> is a function that counts the number of edges between nodes <span><span class="MathJax_Preview">s, t</span><script type="math/tex">s, t</script></span></p>
 </div>
 <p>where</p>
 <div>
 <div class="MathJax_Preview">
-G \Rightarrow L \Rightarrow P \Rightarrow P \quad p(x) &gt; 0
+G \Rightarrow L \Rightarrow P \Rightarrow G \quad p(x) &gt; 0
 </div>
 <script type="math/tex; mode=display">
-G \Rightarrow L \Rightarrow P \Rightarrow P \quad p(x) > 0
+G \Rightarrow L \Rightarrow P \Rightarrow G \quad p(x) > 0
 </script>
 </div>
 <h4 id="simple-example">Simple example<a class="headerlink" href="#simple-example" title="Permanent link">&para;</a></h4>
@@ -795,7 +817,7 @@ G \Rightarrow L \Rightarrow P \Rightarrow P \quad p(x) > 0
 <p>For example, in the following graph a <em>maximal clique</em> is show in blue, while the <em>maximum clique</em> is shown in green.</p>
 <p><img alt="" src="../../img/lecture_4_7.png" /></p>
 <h3 id="parameterization-of-an-ugm">Parameterization of an UGM<a class="headerlink" href="#parameterization-of-an-ugm" title="Permanent link">&para;</a></h3>
-<p>Let <span><span class="MathJax_Preview">x = (x_1, ..., x_m)</span><script type="math/tex">x = (x_1, ..., x_m)</script></span> be the set of all random variables in our graph. Unlike in DGMs, there is no topological ordering associated with an undirected graph, and so we <em>cannot</em> use the chain rule to represent <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span>. Therefore, instead of associating conditional probabilities to each node, we associate <strong>potential functions</strong> or <strong>factors</strong> with each <em>maximal clique</em> in the graph.</p>
+<p>Let <span><span class="MathJax_Preview">x = (x_1, ..., x_m)</span><script type="math/tex">x = (x_1, ..., x_m)</script></span> be the set of all random variables in our graph. Unlike in DGMs, there is no topological ordering associated with an undirected graph, and so we <em>cannot</em> use the chain rule to represent <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span>. Therefore, instead of associating conditional probabilities with each node, we associate <strong>potential functions</strong> or <strong>factors</strong> with each <em>maximal clique</em> in the graph.</p>
 <p>For a given clique <span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span>, we define the potential function or factor</p>
 <div>
 <div class="MathJax_Preview">
@@ -806,7 +828,15 @@ G \Rightarrow L \Rightarrow P \Rightarrow P \quad p(x) > 0
 </script>
 </div>
 <p>to be any non-negative function, where <span><span class="MathJax_Preview">x_c</span><script type="math/tex">x_c</script></span> is some subset of variables in <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>.</p>
-<p>The joint distribution is the <em>proportional</em> to the <em>product of clique potentials</em>.</p>
+<p>The joint distribution is the <em>proportional</em> to the <em>product of clique potentials</em></p>
+<div>
+<div class="MathJax_Preview">
+p(X) \propto \prod_{c \in \mathcal C}\psi_c(x_c | \theta_c)
+</div>
+<script type="math/tex; mode=display">
+p(X) \propto \prod_{c \in \mathcal C}\psi_c(x_c | \theta_c)
+</script>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Any positive distribution whose conditional independencies are represented with an UGM can be represented this way.</p>
@@ -821,7 +851,7 @@ p(x | \theta) = \frac{1}{Z(\theta)}\prod_{c \in \mathcal C}\psi_c(x_c | \theta)
 p(x | \theta) = \frac{1}{Z(\theta)}\prod_{c \in \mathcal C}\psi_c(x_c | \theta)
 </script>
 </div>
-<p>where <span><span class="MathJax_Preview">\mathcal C</span><script type="math/tex">\mathcal C</script></span> is the set of all (maximal) clique of <span><span class="MathJax_Preview">G</span><script type="math/tex">G</script></span>, and <span><span class="MathJax_Preview">Z(\theta)</span><script type="math/tex">Z(\theta)</script></span> the <strong>partition function</strong>, defined as</p>
+<p>where <span><span class="MathJax_Preview">\mathcal C</span><script type="math/tex">\mathcal C</script></span> is the set of all (maximal) cliques of <span><span class="MathJax_Preview">G</span><script type="math/tex">G</script></span>, and <span><span class="MathJax_Preview">Z(\theta)</span><script type="math/tex">Z(\theta)</script></span> the <strong>partition function</strong>, defined as</p>
 <div>
 <div class="MathJax_Preview">
 Z(\theta)= \sum_x \prod_{c \in \mathcal C} \psi_c(x_c|\theta_c)
@@ -840,7 +870,9 @@ p(x) \propto \psi_{1, 2, 3}(x_1, x_2, x_3) \psi_{2, 3, 5}(x_2, x_3, x_5) \psi_{2
 p(x) \propto \psi_{1, 2, 3}(x_1, x_2, x_3) \psi_{2, 3, 5}(x_2, x_3, x_5) \psi_{2, 4, 5}(x_2, x_4, x_5) \psi_{3, 5, 6}(x_3, x_5, x_6) \psi_{4, 5, 6, 7}(x_4, x_5, x_6, x_7)
 </script>
 </div>
-<p>If the variables are discrete, we can represent the potential or energy functions as tables of (non-negative) numbers</p>
+<h4 id="representing-potentials">Representing potentials<a class="headerlink" href="#representing-potentials" title="Permanent link">&para;</a></h4>
+<p>Recall how we parameterized DAGMs of discrete random variables by using conditional probability tables to represent the possible configurations of each node. In this case, the parameters were a valid probability distribution (i.e. the probabilities of the possible configurations summed to 1).</p>
+<p>In UGMs, we do something similar. If the variables are discrete, we can represent the <em>potential</em> (or energy) functions as tables of (non-negative) numbers</p>
 <div>
 <div class="MathJax_Preview">
 p(A, B, C, D) = \frac{1}{Z} \psi_{a, b}(A, B) \psi_{b, c}(B, C) \psi_{c, d}(C, D) \psi_{a, d}(A, D)
@@ -849,12 +881,13 @@ p(A, B, C, D) = \frac{1}{Z} \psi_{a, b}(A, B) \psi_{b, c}(B, C) \psi_{c, d}(C, D
 p(A, B, C, D) = \frac{1}{Z} \psi_{a, b}(A, B) \psi_{b, c}(B, C) \psi_{c, d}(C, D) \psi_{a, d}(A, D)
 </script>
 </div>
+<p>where</p>
 <p><img alt="" src="../../img/lecture_4_8.png" /></p>
 <div class="admonition error">
 <p class="admonition-title">Error</p>
 <p>Why the switch from <span><span class="MathJax_Preview">\psi</span><script type="math/tex">\psi</script></span> to <span><span class="MathJax_Preview">\phi</span><script type="math/tex">\phi</script></span> here?</p>
 </div>
-<p>It is important to note that these potential are <em>not</em> probabilities, but represent compatibilities between the different assignments.</p>
+<p>It is important to note that these potentials are <em>not</em> probabilities, but instead encode <em>relative affinities</em> between the different assignments. For example, in the above table, <span><span class="MathJax_Preview">a^0, b^0</span><script type="math/tex">a^0, b^0</script></span> is taken to be 30X more likely than <span><span class="MathJax_Preview">a^1, a^0</span><script type="math/tex">a^1, a^0</script></span>.</p>
 <h4 id="factor-product">Factor product<a class="headerlink" href="#factor-product" title="Permanent link">&para;</a></h4>
 <p>Given 3 disjoint sets of variables <span><span class="MathJax_Preview">X, Y, Z</span><script type="math/tex">X, Y, Z</script></span> and factors <span><span class="MathJax_Preview">\psi_1(X, Y)</span><script type="math/tex">\psi_1(X, Y)</script></span>, <span><span class="MathJax_Preview">\psi_2(Y, Z)</span><script type="math/tex">\psi_2(Y, Z)</script></span> the <strong>factor product</strong> is defined as:</p>
 <div>
@@ -869,6 +902,32 @@ p(A, B, C, D) = \frac{1}{Z} \psi_{a, b}(A, B) \psi_{b, c}(B, C) \psi_{c, d}(C, D
 <div class="admonition error">
 <p class="admonition-title">Error</p>
 <p>Again, is the the switch from <span><span class="MathJax_Preview">\psi</span><script type="math/tex">\psi</script></span> to <span><span class="MathJax_Preview">\phi</span><script type="math/tex">\phi</script></span> a typo? Deliberate?</p>
+</div>
+<p>From the factor product, we can make queries about the <em>marginal probabilities</em>, e.g.</p>
+<div>
+<div class="MathJax_Preview">
+p(a_0, b_0, c_0, d_0) \propto (30)(100)(1)(100) = 300000
+</div>
+<script type="math/tex; mode=display">
+p(a_0, b_0, c_0, d_0) \propto (30)(100)(1)(100) = 300000
+</script>
+</div>
+<p>enumerating all marginal probabilities in a table for our running example, we get</p>
+<p><img alt="" src="../../img/lecture_4_10.png" /></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To get the normalized marginal probability, divide by the partition function <span><span class="MathJax_Preview">Z(\theta) \sum_y \prod_{c \in \mathcal C} \psi_c(y_c | \theta)</span><script type="math/tex">Z(\theta) \sum_y \prod_{c \in \mathcal C} \psi_c(y_c | \theta)</script></span></p>
+</div>
+<p>we can also make queires about the <em>conditional probability</em>. Conditioning on a assignment <span><span class="MathJax_Preview">u</span><script type="math/tex">u</script></span> to a subset of variables <span><span class="MathJax_Preview">U</span><script type="math/tex">U</script></span> can be done by</p>
+<ol>
+<li>Eliminating all entries that are inconsistent with the assignment</li>
+<li>Re-normalizing the remaining entries so that they sum to 1</li>
+</ol>
+<p>For example, conditioning on <span><span class="MathJax_Preview">c_1</span><script type="math/tex">c_1</script></span></p>
+<p><img alt="" src="../../img/lecture_4_11.png" /></p>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p>I skipped some material for lecture 4 that was presented at the beginning of lecture 5. He said this would not be tested, so I will return to it after the midterm.</p>
 </div>
                 
                   
@@ -905,13 +964,13 @@ p(A, B, C, D) = \frac{1}{Z} \psi_{a, b}(A, B) \psi_{b, c}(B, C) \psi_{c, d}(C, D
           </a>
         
         
-          <a href="../../tutorials/week_1/" title="Week 1" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../week_5/" title="Week 5" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Week 1
+                Week 5
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

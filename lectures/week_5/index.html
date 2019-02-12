@@ -1,0 +1,915 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="https://johngiorgi.github.io/CSC412-2506-course-notes/. /lectures/week_5/">
+      
+      
+        <meta name="author" content="John Giorgi">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
+    
+    
+      
+        <title>Week 5 - CSC412/2506 Winter 2019: Probabilistic Learning and Reasoning</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.572ca0f0.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.22915126.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#3f51b5">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.8c900955.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../styles/extra.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#week-5-exact-inference" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://johngiorgi.github.io/CSC412-2506-course-notes/. " title="CSC412/2506 Winter 2019: Probabilistic Learning and Reasoning" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                CSC412/2506 Winter 2019: Probabilistic Learning and Reasoning
+              </span>
+              <span class="md-header-nav__topic">
+                Week 5
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/JohnGiorgi/CSC412-2506-course-notes/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      JohnGiorgi/CSC412-2506-course-notes
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://johngiorgi.github.io/CSC412-2506-course-notes/. " title="CSC412/2506 Winter 2019: Probabilistic Learning and Reasoning" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    CSC412/2506 Winter 2019: Probabilistic Learning and Reasoning
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/JohnGiorgi/CSC412-2506-course-notes/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      JohnGiorgi/CSC412-2506-course-notes
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Lectures
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Lectures
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../week_1/" title="Week 1" class="md-nav__link">
+      Week 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../week_2/" title="Week 2" class="md-nav__link">
+      Week 2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../week_3/" title="Week 3" class="md-nav__link">
+      Week 3
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../week_4/" title="Week 4" class="md-nav__link">
+      Week 4
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Week 5
+      </label>
+    
+    <a href="./" title="Week 5" class="md-nav__link md-nav__link--active">
+      Week 5
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#assigned-reading" title="Assigned Reading" class="md-nav__link">
+    Assigned Reading
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview" title="Overview" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inference-in-pgm" title="Inference in PGM" class="md-nav__link">
+    Inference in PGM
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#variable-elimination" title="Variable elimination" class="md-nav__link">
+    Variable elimination
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simple-example-chain" title="Simple Example: Chain" class="md-nav__link">
+    Simple Example: Chain
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simple-example-dgm" title="Simple Example: DGM" class="md-nav__link">
+    Simple Example: DGM
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary-so-far" title="Summary so far" class="md-nav__link">
+    Summary so far
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sum-product-inference" title="Sum-product inference" class="md-nav__link">
+    Sum-product inference
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-directed-graph" title="Example: Directed Graph" class="md-nav__link">
+    Example: Directed Graph
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Tutorials
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/week_1/" title="Week 1" class="md-nav__link">
+      Week 1
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../sample_midterm_answers/" title="Sample Midterm (Answers)" class="md-nav__link">
+      Sample Midterm (Answers)
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#assigned-reading" title="Assigned Reading" class="md-nav__link">
+    Assigned Reading
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview" title="Overview" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inference-in-pgm" title="Inference in PGM" class="md-nav__link">
+    Inference in PGM
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#variable-elimination" title="Variable elimination" class="md-nav__link">
+    Variable elimination
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simple-example-chain" title="Simple Example: Chain" class="md-nav__link">
+    Simple Example: Chain
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simple-example-dgm" title="Simple Example: DGM" class="md-nav__link">
+    Simple Example: DGM
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary-so-far" title="Summary so far" class="md-nav__link">
+    Summary so far
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sum-product-inference" title="Sum-product inference" class="md-nav__link">
+    Sum-product inference
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-directed-graph" title="Example: Directed Graph" class="md-nav__link">
+    Example: Directed Graph
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/JohnGiorgi/CSC412-2506-course-notes/edit/master/docs/lectures/week_5.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="week-5-exact-inference">Week 5: Exact Inference<a class="headerlink" href="#week-5-exact-inference" title="Permanent link">&para;</a></h1>
+<h3 id="assigned-reading">Assigned Reading<a class="headerlink" href="#assigned-reading" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Murphy: Chapter 20</li>
+<li>MacKay: Chapter 21.1 (worked example with numbers)</li>
+<li>MacKay: Chapter 16 (Message Passing, including soldier intuition)</li>
+<li>MacKay: Chapter 26 Exact Inference on Factor Graphs</li>
+</ul>
+<h3 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Variable elimination (VE)</li>
+<li>Complexity of VE</li>
+<li>Belief propogation</li>
+</ul>
+<h2 id="inference-in-pgm">Inference in PGM<a class="headerlink" href="#inference-in-pgm" title="Permanent link">&para;</a></h2>
+<p>In this lecture, we will explore <a href="https://en.wikipedia.org/wiki/Statistical_inference">inference</a> in probabilistic graphical models (PGM). Let</p>
+<div>
+<div class="MathJax_Preview">
+X_F = \text{The unobserved variable we want to infer} \\
+X_E = \text{The observed evidence} \\
+X_R = X - \{X_F, X_E\}
+</div>
+<script type="math/tex; mode=display">
+X_F = \text{The unobserved variable we want to infer} \\
+X_E = \text{The observed evidence} \\
+X_R = X - \{X_F, X_E\}
+</script>
+</div>
+<p>where <span><span class="MathJax_Preview">X_R</span><script type="math/tex">X_R</script></span> is the set of random variables in our model that are neither part of the query nor the evidence. We will focus computing the conditional probability distribution</p>
+<div>
+<div class="MathJax_Preview">
+p(X_F | X_E) = \frac{p(X_F, X_E)}{p(X_E)}
+</div>
+<script type="math/tex; mode=display">
+p(X_F | X_E) = \frac{p(X_F, X_E)}{p(X_E)}
+</script>
+</div>
+<p>i.e., we want to compute the posterior marginal density of some unobserved variables <span><span class="MathJax_Preview">X_F</span><script type="math/tex">X_F</script></span> given some evidence <span><span class="MathJax_Preview">X_E</span><script type="math/tex">X_E</script></span>. Our MAP estimate of <span><span class="MathJax_Preview">X_F</span><script type="math/tex">X_F</script></span>, <span><span class="MathJax_Preview">\hat X_F</span><script type="math/tex">\hat X_F</script></span> is</p>
+<div>
+<div class="MathJax_Preview">
+\text{MAP } \hat X_F = argmax_{X_F} p(X_E, X_F) = argmax_{X_F} P(X_F | X_E)
+</div>
+<script type="math/tex; mode=display">
+\text{MAP } \hat X_F = argmax_{X_F} p(X_E, X_F) = argmax_{X_F} P(X_F | X_E)
+</script>
+</div>
+<p>where each of the distributions we need to compute the conditional can be computed by marginalizing over the other variables.</p>
+<div>
+<div class="MathJax_Preview">
+p(X_F, X_E) = \sum_{X_R}p(X_F, X_E, X_R) \\
+p(X_E) = \sum_{X_F, X_R}p(X_F, X_E, X_R)
+</div>
+<script type="math/tex; mode=display">
+p(X_F, X_E) = \sum_{X_R}p(X_F, X_E, X_R) \\
+p(X_E) = \sum_{X_F, X_R}p(X_F, X_E, X_R)
+</script>
+</div>
+<p>However, naively marginalizing over all unobserved variables requires a number of computations exponential in the number of random variables, <span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span>, in our model.</p>
+<h3 id="variable-elimination">Variable elimination<a class="headerlink" href="#variable-elimination" title="Permanent link">&para;</a></h3>
+<p><a href="https://en.wikipedia.org/wiki/Variable_elimination">Variable elimination</a> is a simple and general exact inference algorithm in <em>any</em> probabilistic graphical models.</p>
+<p>The running time will depend on the <em>graph structure</em> of the model, <em>but</em>, by using <a href="https://en.wikipedia.org/wiki/Dynamic_programming">dynamic programming</a> we can avoid enumerating all assignments.</p>
+<h4 id="simple-example-chain">Simple Example: Chain<a class="headerlink" href="#simple-example-chain" title="Permanent link">&para;</a></h4>
+<p>Lets start with the example of a simple chain</p>
+<div>
+<div class="MathJax_Preview">
+A \rightarrow B \rightarrow C \rightarrow D
+</div>
+<script type="math/tex; mode=display">
+A \rightarrow B \rightarrow C \rightarrow D
+</script>
+</div>
+<p>where we want to compute <span><span class="MathJax_Preview">P(D)</span><script type="math/tex">P(D)</script></span>. We have</p>
+<div>
+<div class="MathJax_Preview">
+X_F = \{D\}, \ X_E = \{\}, \ X_R = \{A, B, C\}
+</div>
+<script type="math/tex; mode=display">
+X_F = \{D\}, \ X_E = \{\}, \ X_R = \{A, B, C\}
+</script>
+</div>
+<p>and</p>
+<div>
+<div class="MathJax_Preview">
+P(D) = \sum_{A, B, C}p(A, B, C, D) \\
+= \sum_C \sum_B \sum_A p(A)p(B | A) p(C | B) p(D | C)
+</div>
+<script type="math/tex; mode=display">
+P(D) = \sum_{A, B, C}p(A, B, C, D) \\
+= \sum_C \sum_B \sum_A p(A)p(B | A) p(C | B) p(D | C)
+</script>
+</div>
+<p>clearly, this is exponential in the number of variables (<span><span class="MathJax_Preview">\mathcal O(k^n)</span><script type="math/tex">\mathcal O(k^n)</script></span>). But, reordering the joint distribution</p>
+<div>
+<div class="MathJax_Preview">
+P(D) = \sum_C p(D | C) \sum_B p(C | B) \sum_A p(A)p(B | A)
+</div>
+<script type="math/tex; mode=display">
+P(D) = \sum_C p(D | C) \sum_B p(C | B) \sum_A p(A)p(B | A)
+</script>
+</div>
+<p>we can begin to simplify the summation</p>
+<div>
+<div class="MathJax_Preview">
+P(D) = \sum_C p(D | C) \sum_b p(C | B) \sum_A p(A)p(B | A) \\
+= \sum_C p(D | C) \sum_B p(C | B) P(B) \\
+= \sum_C p(D | C) P(C) \\
+</div>
+<script type="math/tex; mode=display">
+P(D) = \sum_C p(D | C) \sum_b p(C | B) \sum_A p(A)p(B | A) \\
+= \sum_C p(D | C) \sum_B p(C | B) P(B) \\
+= \sum_C p(D | C) P(C) \\
+</script>
+</div>
+<p>So, by using dynamic programming to do the computation <em>inside out</em> instead of <em>outside in</em>, we have done inference over the joint distribution represented by the chain <em>without generating it explicitly</em>. The cost of performing inference on the chain in this manner is <span><span class="MathJax_Preview">\mathcal O(nk^2)</span><script type="math/tex">\mathcal O(nk^2)</script></span>. In comparison, generating the full joint distribution and marginalizing over it has complexity <span><span class="MathJax_Preview">\mathcal O(k^n)</span><script type="math/tex">\mathcal O(k^n)</script></span>!</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>See slide 7-13 for a full derivation of this example, including the runtime <span><span class="MathJax_Preview">\mathcal O(nk^2)</span><script type="math/tex">\mathcal O(nk^2)</script></span>.</p>
+</div>
+<h4 id="simple-example-dgm">Simple Example: DGM<a class="headerlink" href="#simple-example-dgm" title="Permanent link">&para;</a></h4>
+<p>Lets take the DGM we saw in <a href="../week_3/#independence-assumptions-on-dagms">lecture 3</a></p>
+<p><img alt="" src="../../img/lecture_3_3.png" /></p>
+<p>What is <span><span class="MathJax_Preview">p(x_1 | \bar x_6)</span><script type="math/tex">p(x_1 | \bar x_6)</script></span>? We have</p>
+<div>
+<div class="MathJax_Preview">
+X_E = \{\bar x_6\}, \ X_F = \{x_1\}, \ X_R = \{x_2, x_3, x_4, x_5\}, \
+</div>
+<script type="math/tex; mode=display">
+X_E = \{\bar x_6\}, \ X_F = \{x_1\}, \ X_R = \{x_2, x_3, x_4, x_5\}, \
+</script>
+</div>
+<p>and</p>
+<div>
+<div class="MathJax_Preview">
+p(x_1 | \bar x_6) = \frac{p(x_1, \bar x_6)}{p(\bar x_6)} =  \frac{p(x_1, \bar x_6)}{\sum_{x_1}p(x_1, \bar x_6)}
+</div>
+<script type="math/tex; mode=display">
+p(x_1 | \bar x_6) = \frac{p(x_1, \bar x_6)}{p(\bar x_6)} =  \frac{p(x_1, \bar x_6)}{\sum_{x_1}p(x_1, \bar x_6)}
+</script>
+</div>
+<p>to compute <span><span class="MathJax_Preview">p(x_1, \bar x_6)</span><script type="math/tex">p(x_1, \bar x_6)</script></span>, we use variable elimination</p>
+<div>
+<div class="MathJax_Preview">
+p(x_1, \bar x_6) = p(x_1) \sum_{x_2} \sum_{x_3} \sum_{x_4} \sum_{x_5} p(x_2 | x_1)p(x_3 | x_1)p(x_4 | x_2)p(x_5 | x_3)p(\bar x_6 | x_2, x_5) \\
+= p(x_1)  \sum_{x_2} p(x_2 | x_1) \sum_{x_3} p(x_3 | x_1) \sum_{x_4} p(x_4 | x_2) p(\bar x_6 | x_2, x_3) \\
+= p(x_1) \sum_{x_2} p(x_2 | x_1) \sum_{x_3} p(x_3 | x_1) p(\bar x_6 | x_2, x_3) \\
+= p(x_1) \sum_{x_2} p(x_2 | x_1) p(\bar x_6 | x_1, x_2) \\
+= p(x_1) p(\bar x_6 | x_1) \\
+</div>
+<script type="math/tex; mode=display">
+p(x_1, \bar x_6) = p(x_1) \sum_{x_2} \sum_{x_3} \sum_{x_4} \sum_{x_5} p(x_2 | x_1)p(x_3 | x_1)p(x_4 | x_2)p(x_5 | x_3)p(\bar x_6 | x_2, x_5) \\
+= p(x_1)  \sum_{x_2} p(x_2 | x_1) \sum_{x_3} p(x_3 | x_1) \sum_{x_4} p(x_4 | x_2) p(\bar x_6 | x_2, x_3) \\
+= p(x_1) \sum_{x_2} p(x_2 | x_1) \sum_{x_3} p(x_3 | x_1) p(\bar x_6 | x_2, x_3) \\
+= p(x_1) \sum_{x_2} p(x_2 | x_1) p(\bar x_6 | x_1, x_2) \\
+= p(x_1) p(\bar x_6 | x_1) \\
+</script>
+</div>
+<h4 id="summary-so-far">Summary so far<a class="headerlink" href="#summary-so-far" title="Permanent link">&para;</a></h4>
+<p>A worst case analysis says that computing the joint distribution is NP-hard. In practice, some subexpressions in the joint depend only on a subset of variables due to the structure of the Bayesian network. We can therefore use dynamic programming to reduce the number of computations, however, this depends on choosing a <em>good variable elimination ordering</em>.</p>
+<h3 id="sum-product-inference">Sum-product inference<a class="headerlink" href="#sum-product-inference" title="Permanent link">&para;</a></h3>
+<p>We want an algorithm to compute <span><span class="MathJax_Preview">P(Y)</span><script type="math/tex">P(Y)</script></span> for <em>directed</em> and <em>undirected</em> models. This can be reduced to the following <strong>sum-product</strong> inference task</p>
+<div>
+<div class="MathJax_Preview">
+\tau(Y) = \sum_z \prod_{\phi \in \Phi} \phi(z_{Scope[\phi] \cap Z}, y_{Scope[\phi] \cap Y)} \quad \forall Y
+</div>
+<script type="math/tex; mode=display">
+\tau(Y) = \sum_z \prod_{\phi \in \Phi} \phi(z_{Scope[\phi] \cap Z}, y_{Scope[\phi] \cap Y)} \quad \forall Y
+</script>
+</div>
+<p>where <span><span class="MathJax_Preview">\Phi</span><script type="math/tex">\Phi</script></span> is a set of potentials or factors.</p>
+<p>For <strong>directed models</strong>, <span><span class="MathJax_Preview">\Phi</span><script type="math/tex">\Phi</script></span> is given by the conditional probability distributions for all variables</p>
+<div>
+<div class="MathJax_Preview">
+\Phi = \{\phi_{x_i}\}^N_{i=1} = \{p(x_i | x_{\pi_i})\}^N_{i=1}
+</div>
+<script type="math/tex; mode=display">
+\Phi = \{\phi_{x_i}\}^N_{i=1} = \{p(x_i | x_{\pi_i})\}^N_{i=1}
+</script>
+</div>
+<p>where the sum is over the set <span><span class="MathJax_Preview">Z = X - X_F</span><script type="math/tex">Z = X - X_F</script></span>.</p>
+<p>For <strong>undirected models</strong>, <span><span class="MathJax_Preview">\Phi</span><script type="math/tex">\Phi</script></span> is given by the set of potentials. Because the sum product returns unnormalized <span><span class="MathJax_Preview">\Phi</span><script type="math/tex">\Phi</script></span> distributions, we must normalize by <span><span class="MathJax_Preview">\sum_Y\tau(y)</span><script type="math/tex">\sum_Y\tau(y)</script></span>.</p>
+<h4 id="example-directed-graph">Example: Directed Graph<a class="headerlink" href="#example-directed-graph" title="Permanent link">&para;</a></h4>
+<p>Take the following directed graph as example</p>
+<p><img alt="" src="../../img/lecture_5_1.png" /></p>
+<p>The joint distribution is given by</p>
+<div>
+<div class="MathJax_Preview">
+p(C, D, I, G, S, L, H, J) = p(C)p(D|C)p(I)p(G | D, I)p(L | G)P(S | I)p(J | S, L)p(H | J, G)
+</div>
+<script type="math/tex; mode=display">
+p(C, D, I, G, S, L, H, J) = p(C)p(D|C)p(I)p(G | D, I)p(L | G)P(S | I)p(J | S, L)p(H | J, G)
+</script>
+</div>
+<p>with factors</p>
+<div>
+<div class="MathJax_Preview">
+\Psi = \{\psi_C(C), \psi_D(C, D), \psi_I(I), \psi_G(G, D, I), \psi_L(L, G), \psi_S(S, I), \psi_J(J, S, L), \psi_H(H, J, H)\}
+</div>
+<script type="math/tex; mode=display">
+\Psi = \{\psi_C(C), \psi_D(C, D), \psi_I(I), \psi_G(G, D, I), \psi_L(L, G), \psi_S(S, I), \psi_J(J, S, L), \psi_H(H, J, H)\}
+</script>
+</div>
+<p>Let's do variable elimination with ordering <span><span class="MathJax_Preview">\prec \{C, D, I, H, G, S, L\}</span><script type="math/tex">\prec \{C, D, I, H, G, S, L\}</script></span></p>
+<p><img alt="" src="../../img/lecture_5_2.png" /></p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../week_4/" title="Week 4" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Week 4
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../tutorials/week_1/" title="Week 1" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Week 1
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/JohnGiorgi" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.b41f3d20.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>
