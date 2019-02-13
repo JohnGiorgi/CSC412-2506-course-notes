@@ -627,22 +627,31 @@ p(X_{1:T}) = \prod_{i=1}^T p(X_i)
 p(X_{1:T}) = \prod_{i=1}^T p(X_i)
 </script>
 </div>
-<p>since observations <span><span class="MathJax_Preview">X_i</span><script type="math/tex">X_i</script></span> are independent of one another. Each observation <span><span class="MathJax_Preview">X_i</span><script type="math/tex">X_i</script></span> is sampled according to the marginal probability distribution</p>
+<p>since observations <span><span class="MathJax_Preview">X_i</span><script type="math/tex">X_i</script></span> are independent of one another. Each observation <span><span class="MathJax_Preview">X_i</span><script type="math/tex">X_i</script></span> is sampled according to the conditional probability distribution</p>
 <div>
 <div class="MathJax_Preview">
-\sum_zp(X_i | Z_i) \cdot p(Z_i)
+p(X_i | \text{parents of X_i})
 </div>
 <script type="math/tex; mode=display">
-\sum_zp(X_i | Z_i) \cdot p(Z_i)
+p(X_i | \text{parents of X_i})
+</script>
+</div>
+<p>Notice that this forms a chain, with probability</p>
+<div>
+<div class="MathJax_Preview">
+p(X_i | Z_i) p(Z_1) \prod_{j=2}^i p(Z_j | Z_{j-1})
+</div>
+<script type="math/tex; mode=display">
+p(X_i | Z_i) p(Z_1) \prod_{j=2}^i p(Z_j | Z_{j-1})
 </script>
 </div>
 <p>Putting it together, an observation is sampled from the model according to</p>
 <div>
 <div class="MathJax_Preview">
-p(X_{1:T}) = \prod_{i=1}^T \sum_z p(X_i | Z_i) \cdot p(Z_i)
+p(X_{1:T}) =  p(Z_1) \prod_{i=1}^T \bigg [ p(X_i | Z_i) \prod_{j=2}^i p(Z_j | Z_{j-1}) \bigg ]
 </div>
 <script type="math/tex; mode=display">
-p(X_{1:T}) = \prod_{i=1}^T \sum_z p(X_i | Z_i) \cdot p(Z_i)
+p(X_{1:T}) =  p(Z_1) \prod_{i=1}^T \bigg [ p(X_i | Z_i) \prod_{j=2}^i p(Z_j | Z_{j-1}) \bigg ]
 </script>
 </div>
                 

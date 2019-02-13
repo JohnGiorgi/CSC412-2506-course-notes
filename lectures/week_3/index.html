@@ -417,13 +417,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#canonical-micrographs" title="Canonical Micrographs" class="md-nav__link">
-    Canonical Micrographs
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#examples" title="Examples" class="md-nav__link">
     Examples
   </a>
@@ -794,13 +787,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#canonical-micrographs" title="Canonical Micrographs" class="md-nav__link">
-    Canonical Micrographs
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#examples" title="Examples" class="md-nav__link">
     Examples
   </a>
@@ -1025,14 +1011,14 @@
 </div>
 <p>and for <span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span> random variables</p>
 <div>
-<div class="MathJax_Preview">p(\cap^N_{i=1}) = \prod_{k=1}^N p(x_k | \cap^{k-1}_{j=1} x_j)</div>
-<script type="math/tex; mode=display">p(\cap^N_{i=1}) = \prod_{k=1}^N p(x_k | \cap^{k-1}_{j=1} x_j)</script>
+<div class="MathJax_Preview">p(\cap^N_{i=1} x_i) = \prod_{k=1}^N p(x_k | \cap^{k-1}_{j=1} x_j)</div>
+<script type="math/tex; mode=display">p(\cap^N_{i=1} x_i) = \prod_{k=1}^N p(x_k | \cap^{k-1}_{j=1} x_j)</script>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Note that this is a bit of an abuse of notation, but <span><span class="MathJax_Preview">p(x_k | \cap^{k-1}_{j=1} x_j)</span><script type="math/tex">p(x_k | \cap^{k-1}_{j=1} x_j)</script></span> will collpase to <span><span class="MathJax_Preview">p(x_1)</span><script type="math/tex">p(x_1)</script></span> when <span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span> = 1.</p>
 </div>
-<p>Graphical, we might represent a model</p>
+<p>Graphically, we might represent a model</p>
 <div>
 <div class="MathJax_Preview">p(x_i, x_{\pi_i}) = p(x_{\pi_i})p(x_i | x_{\pi_i})</div>
 <script type="math/tex; mode=display">p(x_i, x_{\pi_i}) = p(x_{\pi_i})p(x_i | x_{\pi_i})</script>
@@ -1080,7 +1066,7 @@
 <div class="MathJax_Preview">p(x_{1, ..., N}) = \prod_i^Np(x_i | x_{\pi_i})</div>
 <script type="math/tex; mode=display">p(x_{1, ..., N}) = \prod_i^Np(x_i | x_{\pi_i})</script>
 </div>
-<p>where <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span> is a random variable (node in the graphical model) and <span><span class="MathJax_Preview">x_{\pi_i}</span><script type="math/tex">x_{\pi_i}</script></span> are the parents of this node. In other words, the joint distribution of a DAGM factors into a product of <em>local conditional distributions</em>, where each random variable (or node) is conditionally dependent on its parent node(s), which could be empty.</p>
+<p>where <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span> is a random variable (node in the graphical model) and <span><span class="MathJax_Preview">x_{\pi_i}</span><script type="math/tex">x_{\pi_i}</script></span> are the parents of this node. In other words, the joint distribution of a DAGM factors into a product of <em>local conditional distributions</em>, where each node (a random variable) is conditionally dependent on its parent node(s), which could be empty.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>The Wikipedia entry on <a href="https://en.wikipedia.org/wiki/Graphical_model">Graphical models</a> is helpful, particularly the section on <a href="https://en.wikipedia.org/wiki/Graphical_model#Bayesian_network">Bayesian networks</a>.</p>
@@ -1108,6 +1094,7 @@
 <p>Cleary our assumptions on conditional independence have vastly simplified the model.</p>
 <p>Now Suppose each is <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span> is a binary random variable. Our assumptions on conditional independence also reduce the dimensionality of our model</p>
 <p><img alt="" src="../../img/lecture_3_4.png" /></p>
+<p>where the model now has only <span><span class="MathJax_Preview">2^1 + 4(2^2) + 2^3 = 26</span><script type="math/tex">2^1 + 4(2^2) + 2^3 = 26</script></span> possible configurations</p>
 <h4 id="missing-edges">Missing Edges<a class="headerlink" href="#missing-edges" title="Permanent link">&para;</a></h4>
 <p>Missing edges <em>imply conditional independence</em>. Recall that from the chain rule, we can get (for any joint distribution)</p>
 <div>
@@ -1232,12 +1219,9 @@ P(z | x, y) &= \frac{P(x)P(z)P(y | x,  z)}{P(x)P(y|x)} \\
 </div>
 <p>Here’s a trick for the explaining away case: If <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span> <em>or any of its descendants</em> is <strong>shaded</strong>, the ball passes through.</p>
 <p><img alt="" src="../../img/lecture_3_10.png" /></p>
-<h5 id="canonical-micrographs">Canonical Micrographs<a class="headerlink" href="#canonical-micrographs" title="Permanent link">&para;</a></h5>
-<p>For reference, here are some canonical micrographs and the Bayes Balls algorithmic rules that apply to them</p>
-<p><img alt="" src="../../img/lecture_3_11.png" /></p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>See <a href="https://www.youtube.com/watch?v=jgt0G2PkWl0">this video</a> for an easy way to remember all the rules.</p>
+<p>See <a href="https://www.youtube.com/watch?v=jgt0G2PkWl0">this video</a> for an easy way to remember all 10 rules.</p>
 </div>
 <h5 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h5>
 <p><em>Question</em>: In the following graph, is <span><span class="MathJax_Preview">x_1 \bot x_6 | \{x_2, x_3\}</span><script type="math/tex">x_1 \bot x_6 | \{x_2, x_3\}</script></span>?</p>

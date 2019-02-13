@@ -801,16 +801,16 @@ p(C=c | x) = \frac{p(x, c)}{\sum_i p(x, c_i)}
 <p>What happens if <span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span> is never observed? Then we call this <a href="https://en.wikipedia.org/wiki/Cluster_analysis">clustering</a>. Clustering allows us to compute <span><span class="MathJax_Preview">p(C=c|x)</span><script type="math/tex">p(C=c|x)</script></span> ("the probability that the input belongs to some cluster") even if <span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span> is unobserved.</p>
 <div>
 <div class="MathJax_Preview">
-p(c | x) = \frac{p(c, x)}{p(x)} ; c \text{ is unobserved}
+p(C = c | x) = \frac{p(c, x)}{p(x)} ; c \text{ is unobserved}
 </div>
 <script type="math/tex; mode=display">
-p(c | x) = \frac{p(c, x)}{p(x)} ; c \text{ is unobserved}
+p(C = c | x) = \frac{p(c, x)}{p(x)} ; c \text{ is unobserved}
 </script>
 </div>
 <p>If our inputs and classes are continuous, we call this <a href="https://en.wikipedia.org/wiki/Regression_analysis">regression</a></p>
 <div>
-<div class="MathJax_Preview">p(y | x) = \frac{p(x, y)}{p(x)} = \frac{p(x, y)}{\int p(x,y)dy}</div>
-<script type="math/tex; mode=display">p(y | x) = \frac{p(x, y)}{p(x)} = \frac{p(x, y)}{\int p(x,y)dy}</script>
+<div class="MathJax_Preview">p(y | x) = \frac{p(x, y)}{p(x)} = \frac{p(x, y)}{\int_y p(x,y)dy}</div>
+<script type="math/tex; mode=display">p(y | x) = \frac{p(x, y)}{p(x)} = \frac{p(x, y)}{\int_y p(x,y)dy}</script>
 </div>
 <p>In general,</p>
 <ul>
@@ -820,13 +820,9 @@ p(c | x) = \frac{p(c, x)}{p(x)} ; c \text{ is unobserved}
 <p>In fact, we can mostly classify (no pun intended) the problems we care about into four types:</p>
 <ul>
 <li><strong>Classification</strong>: <span><span class="MathJax_Preview">p(c | x) = \frac{p(c, x)}{p(x)} = \frac{p(c, x)}{\sum_c p(c, x)}</span><script type="math/tex">p(c | x) = \frac{p(c, x)}{p(x)} = \frac{p(c, x)}{\sum_c p(c, x)}</script></span></li>
+<li><strong>Clustering</strong>: <span><span class="MathJax_Preview">p(c | x) = \frac{p(c, x)}{p(x)} \ ; \  c \text{ is unobserved}</span><script type="math/tex">p(c | x) = \frac{p(c, x)}{p(x)} \ ; \  c \text{ is unobserved}</script></span></li>
 <li>
-<ul>
-<li><strong>Clustering</strong>: <span><span class="MathJax_Preview">p(c | x) = \frac{p(c, x)}{p(x)} ; c \text{ is unobserved}</span><script type="math/tex">p(c | x) = \frac{p(c, x)}{p(x)} ; c \text{ is unobserved}</script></span></li>
-</ul>
-</li>
-<li>
-<p><strong>Regression</strong>: <span><span class="MathJax_Preview">p(y | x) = \frac{p(y, x)}{p(x)} = \frac{p(y, x)}{\int p(x)}</span><script type="math/tex">p(y | x) = \frac{p(y, x)}{p(x)} = \frac{p(y, x)}{\int p(x)}</script></span></p>
+<p><strong>Regression</strong>: <span><span class="MathJax_Preview">p(y | x) = \frac{p(y, x)}{p(x)} = \frac{p(y, x)}{\int_y p(x, y)dy}</span><script type="math/tex">p(y | x) = \frac{p(y, x)}{p(x)} = \frac{p(y, x)}{\int_y p(x, y)dy}</script></span></p>
 </li>
 <li>
 <p><strong>Density Estimation</strong>: <span><span class="MathJax_Preview">p(y | x) = \frac{p(y, x)}{p(x)} ; y \text{ is unobserved}</span><script type="math/tex">p(y | x) = \frac{p(y, x)}{p(x)} ; y \text{ is unobserved}</script></span></p>
@@ -852,7 +848,7 @@ p(c | x) = \frac{p(c, x)}{p(x)} ; c \text{ is unobserved}
 <li><strong>Efficient computation</strong>: we need to be able to compute the marginal and conditional probability from the joint distribution efficiently.</li>
 </ol>
 <h4 id="multiple-observations-complete-iid-data">Multiple observations, Complete IID data<a class="headerlink" href="#multiple-observations-complete-iid-data" title="Permanent link">&para;</a></h4>
-<p>A single observation of the data, <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> is rarely useful on its own. Generally we have data including many observations, which creates a set of random variables: <span><span class="MathJax_Preview">\mathcal D = \{x^{(1)}, ..., x^{(M)}\}</span><script type="math/tex">\mathcal D = \{x^{(1)}, ..., x^{(M)}\}</script></span></p>
+<p>A single observation of the data, <span><span class="MathJax_Preview">X_i</span><script type="math/tex">X_i</script></span> is rarely useful on its own. Generally we have data including many observations, which creates a set of random variables: <span><span class="MathJax_Preview">\mathcal D = \{X_1, ..., X_n\}</span><script type="math/tex">\mathcal D = \{X_1, ..., X_n\}</script></span></p>
 <p>To achieve our above-listed goals, we will make assumptions. Often, we assume the following:</p>
 <p><strong>1. Observations are <a href="https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables">independently and identically distributed</a> (i.i.d) according to the joint distribution of the model.</strong></p>
 <ul>
@@ -875,12 +871,12 @@ p(c | x) = \frac{p(c, x)}{p(x)} ; c \text{ is unobserved}
 \[ P(W=r) = 0.30 \]</p>
 <p>and that these states define a valid probability distribution, so</p>
 <div>
-<div class="MathJax_Preview">P(X) \ge 0 \; ; \; \sum_x P(x) = 1</div>
-<script type="math/tex; mode=display">P(X) \ge 0 \; ; \; \sum_x P(x) = 1</script>
+<div class="MathJax_Preview">P(X) \ge 0 \; ; \; \sum_x P(X = x) = 1</div>
+<script type="math/tex; mode=display">P(X) \ge 0 \; ; \; \sum_x P(X = x) = 1</script>
 </div>
 <p>We could create a parameterized, probabilistic model, <span><span class="MathJax_Preview">P(T, W)</span><script type="math/tex">P(T, W)</script></span> over the states</p>
-<p>\[P(T | \theta_T) ; \theta_T = \begin{bmatrix} 0.4 \\ 0.6 \end{bmatrix}\]
-\[P(W | \theta_W) ; \theta_W = \begin{bmatrix} 0.7 \\ 0.3 \end{bmatrix}\]</p>
+<p>\[P(T | \theta_T) \ ; \  \theta_T = \begin{bmatrix} 0.4 \\ 0.6 \end{bmatrix}\]
+\[P(W | \theta_W) \ ;\  \theta_W = \begin{bmatrix} 0.7 \\ 0.3 \end{bmatrix}\]</p>
 <p>Notice that <span><span class="MathJax_Preview">\theta_T</span><script type="math/tex">\theta_T</script></span> and <span><span class="MathJax_Preview">\theta_W</span><script type="math/tex">\theta_W</script></span> <em>are</em> the probability distributions of our random variables. Our parameters <em>define the probability of the data and explicitly and store it in a vector</em>.</p>
 <p>We can represent the joint distribution <span><span class="MathJax_Preview">P(T, W)</span><script type="math/tex">P(T, W)</script></span>, <em>our model</em> as:</p>
 <table>
@@ -949,8 +945,8 @@ P(W=r) = \sum_t P(W=r, T=t) = 0.30
 </div>
 <p>we could also ask questions about <em>conditional</em> probabilities, like</p>
 <div>
-<div class="MathJax_Preview">P(W = s | T = c) = \frac{P(s,c)}{P(T=c)} = \frac{P(s,c)}{\sum_w P(T=c, W=w)} =  \frac{0.42}{0.60} = 0.64</div>
-<script type="math/tex; mode=display">P(W = s | T = c) = \frac{P(s,c)}{P(T=c)} = \frac{P(s,c)}{\sum_w P(T=c, W=w)} =  \frac{0.42}{0.60} = 0.64</script>
+<div class="MathJax_Preview">P(W = s | T = c) = \frac{P(W=s,T=c)}{P(T=c)} = \frac{P(W=s,T=c)}{\sum_w P(T=c, W=w)} =  \frac{0.42}{0.60} = 0.64</div>
+<script type="math/tex; mode=display">P(W = s | T = c) = \frac{P(W=s,T=c)}{P(T=c)} = \frac{P(W=s,T=c)}{\sum_w P(T=c, W=w)} =  \frac{0.42}{0.60} = 0.64</script>
 </div>
 <h4 id="why-did-we-do-this">Why did we do this?<a class="headerlink" href="#why-did-we-do-this" title="Permanent link">&para;</a></h4>
 <p>The whole point of the above example was to show that from a probabilistic model, which itself is just a joint distribution represented as a matrix (or tensor), we can compute both the marginal and conditional probabilities. This will allow us to compute probabilities, generate data and perform inference.</p>
@@ -995,8 +991,8 @@ k^n = 2^4
 <h3 id="maximum-likelihood-estimation">Maximum likelihood estimation<a class="headerlink" href="#maximum-likelihood-estimation" title="Permanent link">&para;</a></h3>
 <p>The basic idea behind maximum likelihood estimation (MLE) is to pick values for our parameters which were most likely to have generated the data we saw</p>
 <div>
-<div class="MathJax_Preview">\theta_{MLE}^* = \underset{\theta}{\operatorname{argmax}} \ell(\theta ; D)</div>
-<script type="math/tex; mode=display">\theta_{MLE}^* = \underset{\theta}{\operatorname{argmax}} \ell(\theta ; D)</script>
+<div class="MathJax_Preview">\hat \theta_{MLE} = \underset{\theta}{\operatorname{argmax}} \ell(\theta ; \mathcal D)</div>
+<script type="math/tex; mode=display">\hat \theta_{MLE} = \underset{\theta}{\operatorname{argmax}} \ell(\theta ; \mathcal D)</script>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1013,8 +1009,8 @@ k^n = 2^4
 <h2 id="sufficient-statistics">Sufficient statistics<a class="headerlink" href="#sufficient-statistics" title="Permanent link">&para;</a></h2>
 <p>A <a href="https://en.wikipedia.org/wiki/Statistic">statistic</a> is a (possibly vector valued) deterministic function of a (set of) random variable(s). A <a href="https://en.wikipedia.org/wiki/Sufficient_statistic">sufficient statistic</a> is a statistic that conveys exactly the same information about the data generating process that created that data as the entire data itself. In other words, once we know the sufficient statistic, <span><span class="MathJax_Preview">T(x)</span><script type="math/tex">T(x)</script></span>, then our inferences are the same as would be obtained from our entire data. More formally, we say that <span><span class="MathJax_Preview">T(X)</span><script type="math/tex">T(X)</script></span> is a sufficient statistic for <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> if</p>
 <div>
-<div class="MathJax_Preview">T(x^{(1)}) = T(x^{(2)}) \Rightarrow L(\theta ; x^{(1)}) = L(\theta; x^{(2)}) \forall \theta</div>
-<script type="math/tex; mode=display">T(x^{(1)}) = T(x^{(2)}) \Rightarrow L(\theta ; x^{(1)}) = L(\theta; x^{(2)}) \forall \theta</script>
+<div class="MathJax_Preview">T(x^{(1)}) = T(x^{(2)}) \Rightarrow L(\theta ; x^{(1)}) = L(\theta; x^{(2)}) \ \forall \theta</div>
+<script type="math/tex; mode=display">T(x^{(1)}) = T(x^{(2)}) \Rightarrow L(\theta ; x^{(1)}) = L(\theta; x^{(2)}) \ \forall \theta</script>
 </div>
 <p>Put another way</p>
 <div>
@@ -1023,7 +1019,7 @@ k^n = 2^4
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Why is the useful? Well, if we have a particular large data sample, a lot of the data may be redundant. If we knew the sufficient statistic for that sample, we could use it in place of the full data sample.</p>
+<p>Why is this useful? Well, if we have a particular large data sample, a lot of the data may be redundant. If we knew the sufficient statistic for that sample, we could use it in place of the full data sample.</p>
 </div>
 <p>Equivalently (by the Neyman factorization theorem) we can write</p>
 <div>
@@ -1036,7 +1032,7 @@ k^n = 2^4
 <script type="math/tex; mode=display">p(x | \eta) = h(x)\exp\{\eta^TT(x)-A(\eta)\}</script>
 </div>
 <h3 id="sufficient-statistics-example-bernoulli-trials">Sufficient statistics example: Bernoulli Trials<a class="headerlink" href="#sufficient-statistics-example-bernoulli-trials" title="Permanent link">&para;</a></h3>
-<p>Let us take the example of flipping a fair coin. This process that generates our data is can be modeled as a <a href="https://en.wikipedia.org/wiki/Bernoulli_distribution">Bernoulli distribution</a></p>
+<p>Let us take the example of flipping a fair coin. This process that generates our data can be modeled as a <a href="https://en.wikipedia.org/wiki/Bernoulli_distribution">Bernoulli distribution</a></p>
 <div>
 <div class="MathJax_Preview">X \backsim \text{Ber}(\theta)</div>
 <script type="math/tex; mode=display">X \backsim \text{Ber}(\theta)</script>
@@ -1049,12 +1045,26 @@ k^n = 2^4
 \[= \theta^{\sum_{i=1}^N x_i}(1-\theta)^{N-\sum_{i=1}^N x_i}\]</p>
 <p>So we notice here that our likelihood depends on <span><span class="MathJax_Preview">\sum_{i=1}^N x_i</span><script type="math/tex">\sum_{i=1}^N x_i</script></span>. In other words, our data only enters the likelihood in this particular form. This tells us that if we know this summary statistic, which we will call <span><span class="MathJax_Preview">T(x) = \sum_{i=1}^N x_i</span><script type="math/tex">T(x) = \sum_{i=1}^N x_i</script></span> then essentially we know everything that is useful from our sample to do inference.</p>
 <p>To perform inference with <span><span class="MathJax_Preview">T(x)</span><script type="math/tex">T(x)</script></span>, we define the log likelihood</p>
-<p>\[\ell(\theta ; X) = \log p(X | \theta)\]
-\[ = T(X) \log \theta - (N - T(X)) \log(1-\theta) \]</p>
+<div>
+<div class="MathJax_Preview">
+\ell(\theta ; X) = \log p(X | \theta) \\
+= T(X) \log \theta + (N - T(X)) \log(1-\theta)
+</div>
+<script type="math/tex; mode=display">
+\ell(\theta ; X) = \log p(X | \theta) \\
+= T(X) \log \theta + (N - T(X)) \log(1-\theta)
+</script>
+</div>
 <p>then we take the derivative and set it to 0 to find the maximum</p>
 <div>
-<div class="MathJax_Preview">\frac{\partial \ell}{\partial \theta} = 0 = \frac{T(X)}{N}</div>
-<script type="math/tex; mode=display">\frac{\partial \ell}{\partial \theta} = 0 = \frac{T(X)}{N}</script>
+<div class="MathJax_Preview">
+\Rightarrow \frac{\partial \ell}{\partial \theta} = \frac{T(X)}{\theta} - \frac{N - T(X)}{1-\theta} \\
+\Rightarrow \hat \theta = \frac{T(X)}{N} \\
+</div>
+<script type="math/tex; mode=display">
+\Rightarrow \frac{\partial \ell}{\partial \theta} = \frac{T(X)}{\theta} - \frac{N - T(X)}{1-\theta} \\
+\Rightarrow \hat \theta = \frac{T(X)}{N} \\
+</script>
 </div>
 <p>This is our maximum likelihood estimation of the parameters <span><span class="MathJax_Preview">\theta</span><script type="math/tex">\theta</script></span>, <span><span class="MathJax_Preview">\theta^{\star}_{MLE}</span><script type="math/tex">\theta^{\star}_{MLE}</script></span>.</p>
 <div class="admonition note">
