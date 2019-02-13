@@ -610,10 +610,10 @@ p(A, ..., I) = p(A | B, C)P(B | D)P(C | E, F)P(D | G)P(E | G)P(F | H)P(G)P(H)P(I
 <p>(a) Assume you are able to sample from these conditional distributions, i.e.</p>
 <div>
 <div class="MathJax_Preview">
-x_i \sim p(X_i | \text{parents of } X_i)
+x_i \sim p(X_i \ | \ \text{parents of } X_i)
 </div>
 <script type="math/tex; mode=display">
-x_i \sim p(X_i | \text{parents of } X_i)
+x_i \sim p(X_i \ | \ \text{parents of } X_i)
 </script>
 </div>
 <p>Write down a step-by-step process to produce a sample observation from this model, i.e. <span><span class="MathJax_Preview">(x_1, x_2, x_3, ..., x_T)</span><script type="math/tex">(x_1, x_2, x_3, ..., x_T)</script></span> in terms of samples from the individual factors.</p>
@@ -630,30 +630,37 @@ p(X_{1:T}) = \prod_{i=1}^T p(X_i)
 <p>since observations <span><span class="MathJax_Preview">X_i</span><script type="math/tex">X_i</script></span> are independent of one another. Each observation <span><span class="MathJax_Preview">X_i</span><script type="math/tex">X_i</script></span> is sampled according to the conditional probability distribution</p>
 <div>
 <div class="MathJax_Preview">
-p(X_i | \text{parents of X_i})
+p(X_i \ | \ \text{parents of } X_i)
 </div>
 <script type="math/tex; mode=display">
-p(X_i | \text{parents of X_i})
+p(X_i \ | \ \text{parents of } X_i)
 </script>
 </div>
 <p>Notice that this forms a chain, with probability</p>
 <div>
 <div class="MathJax_Preview">
-p(X_i | Z_i) p(Z_1) \prod_{j=2}^i p(Z_j | Z_{j-1})
+\bigg [ p(X_i | Z_i) \bigg ] \bigg [ p(Z_1) \prod_{j=2}^i p(Z_j | Z_{j-1}) \bigg ]
 </div>
 <script type="math/tex; mode=display">
-p(X_i | Z_i) p(Z_1) \prod_{j=2}^i p(Z_j | Z_{j-1})
+\bigg [ p(X_i | Z_i) \bigg ] \bigg [ p(Z_1) \prod_{j=2}^i p(Z_j | Z_{j-1}) \bigg ]
 </script>
 </div>
-<p>Putting it together, an observation is sampled from the model according to</p>
+<p>Putting it together, the probability of a given observation <span><span class="MathJax_Preview">X_{1:T}</span><script type="math/tex">X_{1:T}</script></span> is sampled from the model according to</p>
 <div>
 <div class="MathJax_Preview">
-p(X_{1:T}) =  p(Z_1) \prod_{i=1}^T \bigg [ p(X_i | Z_i) \prod_{j=2}^i p(Z_j | Z_{j-1}) \bigg ]
+\bigg [ \prod_{i=1}^T p(X_i | Z_i) \bigg ] \bigg [ p(Z_1) \prod_{i=2}^T p(Z_i | Z_{i-1}) \bigg ]
 </div>
 <script type="math/tex; mode=display">
-p(X_{1:T}) =  p(Z_1) \prod_{i=1}^T \bigg [ p(X_i | Z_i) \prod_{j=2}^i p(Z_j | Z_{j-1}) \bigg ]
+\bigg [ \prod_{i=1}^T p(X_i | Z_i) \bigg ] \bigg [ p(Z_1) \prod_{i=2}^T p(Z_i | Z_{i-1}) \bigg ]
 </script>
 </div>
+<p><em>Step-by-step</em></p>
+<ol>
+<li>Start with <span><span class="MathJax_Preview">i=1</span><script type="math/tex">i=1</script></span></li>
+<li>Sample <span><span class="MathJax_Preview">Z_i</span><script type="math/tex">Z_i</script></span> according to <span><span class="MathJax_Preview">Z_i \sim p(Z_1) \prod_{j=2}^i p(Z_j | Z_{j-1})</span><script type="math/tex">Z_i \sim p(Z_1) \prod_{j=2}^i p(Z_j | Z_{j-1})</script></span></li>
+<li>Given the sampled <span><span class="MathJax_Preview">Z_i</span><script type="math/tex">Z_i</script></span>, sample <span><span class="MathJax_Preview">X_i</span><script type="math/tex">X_i</script></span> according to <span><span class="MathJax_Preview">X_i \sim \prod_{i=1}^T p(X_i | Z_i)</span><script type="math/tex">X_i \sim \prod_{i=1}^T p(X_i | Z_i)</script></span></li>
+<li>Increment <span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span> by 1, repeat steps 2-4 until <span><span class="MathJax_Preview">i=T</span><script type="math/tex">i=T</script></span></li>
+</ol>
                 
                   
                 
