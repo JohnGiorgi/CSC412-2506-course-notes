@@ -28,12 +28,12 @@ More formally, in probability the chain rule for two random variables is
 
 and for \(N\) random variables
 
-\[p(\cap^N_{i=1}) = \prod_{k=1}^N p(x_k | \cap^{k-1}_{j=1} x_j)\]
+\[p(\cap^N_{i=1} x_i) = \prod_{k=1}^N p(x_k | \cap^{k-1}_{j=1} x_j)\]
 
 !!! note
     Note that this is a bit of an abuse of notation, but \(p(x_k | \cap^{k-1}_{j=1} x_j)\) will collpase to \(p(x_1)\) when \(k\) = 1.
 
-Graphical, we might represent a model
+Graphically, we might represent a model
 
 \[p(x_i, x_{\pi_i}) = p(x_{\pi_i})p(x_i | x_{\pi_i})\]
 
@@ -83,7 +83,7 @@ A [directed acyclic graphical model](https://en.wikipedia.org/wiki/Graphical_mod
 
 \[p(x_{1, ..., N}) = \prod_i^Np(x_i | x_{\pi_i})\]
 
-where \(x_i\) is a random variable (node in the graphical model) and \(x_{\pi_i}\) are the parents of this node. In other words, the joint distribution of a DAGM factors into a product of _local conditional distributions_, where each random variable (or node) is conditionally dependent on its parent node(s), which could be empty.
+where \(x_i\) is a random variable (node in the graphical model) and \(x_{\pi_i}\) are the parents of this node. In other words, the joint distribution of a DAGM factors into a product of _local conditional distributions_, where each node (a random variable) is conditionally dependent on its parent node(s), which could be empty.
 
 !!! tip
     The Wikipedia entry on [Graphical models](https://en.wikipedia.org/wiki/Graphical_model) is helpful, particularly the section on [Bayesian networks](https://en.wikipedia.org/wiki/Graphical_model#Bayesian_network).
@@ -116,6 +116,8 @@ Cleary our assumptions on conditional independence have vastly simplified the mo
 Now Suppose each is \(x_i\) is a binary random variable. Our assumptions on conditional independence also reduce the dimensionality of our model
 
 ![](../img/lecture_3_4.png)
+
+where the model now has only \(2^1 + 4(2^2) + 2^3 = 26\) possible configurations
 
 #### Missing Edges
 
@@ -251,14 +253,8 @@ Here’s a trick for the explaining away case: If \(y\) _or any of its descendan
 
 ![](../img/lecture_3_10.png)
 
-##### Canonical Micrographs
-
-For reference, here are some canonical micrographs and the Bayes Balls algorithmic rules that apply to them
-
-![](../img/lecture_3_11.png)
-
 !!! tip
-    See [this video](https://www.youtube.com/watch?v=jgt0G2PkWl0) for an easy way to remember all the rules.
+    See [this video](https://www.youtube.com/watch?v=jgt0G2PkWl0) for an easy way to remember all 10 rules.
 
 ##### Examples
 
@@ -333,7 +329,7 @@ If variables are _occasionally unobserved_ then they are _missing data_, e.g., u
 !!! note
     Recall that \(p(x) = \sum_q p(x, q)\).
 
-#### Latent
+#### Latent variables
 
 What to do when a variable \(z\) is _always_ unobserved? Depends on where it appears in our model. If we never condition on it when computing the probability of the variables we do observe, then we can just forget about it and integrate it out.
 
@@ -430,8 +426,37 @@ Remember: we are _not_ modeling the density of the inputs \(x\).
 
 #### Gradient learning with mixtures
 
-!!! error
-    Left off at Gradient learning with Mixtures
+We can learn mixture densities using gradient descent on the likelihood as usual.
+
+\[
+\ell(\theta) = \log p(x | \theta) = \sum_k \alpha_kp_k(x_k | \theta_k) \\
+\Rightarrow \frac{\partial \ell}{\partial \theta} = \frac{1}{p(x | \theta)} \sum_k \alpha_k \frac{\partial p_k(x | \theta)}{\partial \theta} \\
+= \sum_k \alpha_k \frac{1}{p(x | \theta)}p_k(x | \theta_k)\frac{\partial \log p_k (x | \theta_k)}{\partial \theta} \\
+= \sum_k \alpha_k \frac{p_k(x | \theta_k)}{p(x | \theta)} \frac{\partial \ell_k}{\partial \theta_k} \\
+= \sum_k \alpha_k r_k \frac{\partial \ell_k}{\partial \theta_k}
+\]
+
+In other words, the gradient is the responsibility weighted sum of the individual log likelihood gradients
+
+!!! tip
+    We used two tricks here to derive the gradient, \(\frac{\partial \log f(\theta)}{\partial \theta} = \frac{1}{f(\theta)} \cdot \frac{\partial f(\theta)}{\partial \theta}\) and \( \frac{\partial f(\theta)}{\partial \theta} = f(\theta) \cdot \frac{\partial \log f(\theta)}{\partial \theta} \)
+
+### Hidden Markov Models (HMMs)
+
+[**Hidden Markov Model (HMM)**](https://en.wikipedia.org/wiki/Hidden_Markov_model) is a statistical Markov model in which the system being modeled is assumed to be a [Markov process](https://en.wikipedia.org/wiki/Markov_process) with unobserved (i.e. hidden) states. It is a very popular type of latent variable model
+
+![](../img/lecture_3_26.png)
+
+where
+
+- \(Z_t\) are _hidden states_ taking on one of \(K\) discrete values
+- \(X_t\) are _observed variables_ taking on values in any space
+
+the joint probability represented by the graph factorizes according to
+
+\[
+p(X_{1:T}, Z_{1:T}) = p(Z_{1:T})p(X_{1:T} | Z_{1:T}) = p(Z_1) \prod_{t=2}^T p(Z_t | Z_{t-1}) \prod_{t=1}^T p(X_t | Z_t)
+\]
 
 ## Appendix
 

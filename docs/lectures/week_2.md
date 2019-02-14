@@ -31,12 +31,12 @@ p(C=c | x) = \frac{p(x, c)}{\sum_i p(x, c_i)}
 What happens if \(c\) is never observed? Then we call this [clustering](https://en.wikipedia.org/wiki/Cluster_analysis). Clustering allows us to compute \(p(C=c|x)\) ("the probability that the input belongs to some cluster") even if \(c\) is unobserved.
 
 \[
-p(c | x) = \frac{p(c, x)}{p(x)} ; c \text{ is unobserved}
+p(C = c | x) = \frac{p(c, x)}{p(x)} ; c \text{ is unobserved}
 \]
 
 If our inputs and classes are continuous, we call this [regression](https://en.wikipedia.org/wiki/Regression_analysis)
 
-\[p(y | x) = \frac{p(x, y)}{p(x)} = \frac{p(x, y)}{\int p(x,y)dy}\]
+\[p(y | x) = \frac{p(x, y)}{p(x)} = \frac{p(x, y)}{\int_y p(x,y)dy}\]
 
 In general,
 
@@ -46,8 +46,8 @@ In general,
 In fact, we can mostly classify (no pun intended) the problems we care about into four types:
 
 - **Classification**: \(p(c | x) = \frac{p(c, x)}{p(x)} = \frac{p(c, x)}{\sum_c p(c, x)}\)
-- - **Clustering**: \(p(c | x) = \frac{p(c, x)}{p(x)} ; c \text{ is unobserved}\)
-- **Regression**: \(p(y | x) = \frac{p(y, x)}{p(x)} = \frac{p(y, x)}{\int p(x)}\)
+- **Clustering**: \(p(c | x) = \frac{p(c, x)}{p(x)} \ ; \  c \text{ is unobserved}\)
+- **Regression**: \(p(y | x) = \frac{p(y, x)}{p(x)} = \frac{p(y, x)}{\int_y p(x, y)dy}\)
 
 - **Density Estimation**: \(p(y | x) = \frac{p(y, x)}{p(x)} ; y \text{ is unobserved}\)
 
@@ -74,7 +74,7 @@ More specifically, we want two things of our probabilistic model:
 
 #### Multiple observations, Complete IID data
 
-A single observation of the data, \(X\) is rarely useful on its own. Generally we have data including many observations, which creates a set of random variables: \(\mathcal D = \{x^{(1)}, ..., x^{(M)}\}\)
+A single observation of the data, \(X_i\) is rarely useful on its own. Generally we have data including many observations, which creates a set of random variables: \(\mathcal D = \{X_1, ..., X_n\}\)
 
 To achieve our above-listed goals, we will make assumptions. Often, we assume the following:
 
@@ -92,8 +92,8 @@ __2. We observe all random variables in the domain on each observation (i.e. com
 
 Lets take an example with [discrete random variables](https://en.wikipedia.org/wiki/Random_variable#Discrete_random_variable).
 
-\\[ T: \text{Temperature} ; t = \text{"hot" or "cold"} \\]
-\\[ W: \text{Weather} ; w = \text{"sunny" or "raining"} \\]
+\\[ T: \text{Temperature} \; ; \; t = \text{"hot" or "cold"} \\]
+\\[ W: \text{Weather} \; ; \; w = \text{"sunny" or "raining"} \\]
 
 We know that
 
@@ -105,14 +105,14 @@ We know that
 
 and that these states define a valid probability distribution, so
 
-\[P(X) \ge 0 ; \sum_x P(x) = 1\]
+\[P(X) \ge 0 \; ; \; \sum_x P(X = x) = 1\]
 
 We could create a parameterized, probabilistic model, \(P(T, W)\) over the states
 
-\\[P(T | \theta_T) ; \theta_T = \begin{bmatrix} 0.4 \\\ 0.6 \end{bmatrix}\\]
-\\[P(W | \theta_W) ; \theta_W = \begin{bmatrix} 0.7 \\\ 0.3 \end{bmatrix}\\]
+\\[P(T | \theta_T) \ ; \  \theta_T = \begin{bmatrix} 0.4 \\\ 0.6 \end{bmatrix}\\]
+\\[P(W | \theta_W) \ ;\  \theta_W = \begin{bmatrix} 0.7 \\\ 0.3 \end{bmatrix}\\]
 
-Notice that \(\theta_T\) and \(\theta_W\) _are_ the probability distributions of our random variables. Our parameters _define the probability of the data explicitly and store it in a vector_.
+Notice that \(\theta_T\) and \(\theta_W\) _are_ the probability distributions of our random variables. Our parameters _define the probability of the data and explicitly and store it in a vector_.
 
 We can represent the joint distribution \(P(T, W)\), _our model_ as:
 
@@ -143,7 +143,7 @@ P(W=r) = \sum_t P(W=r, T=t) = 0.30
 
 we could also ask questions about _conditional_ probabilities, like
 
-\[P(W = s | T = c) = \frac{P(s,c)}{P(T=c)} = \frac{P(s,c)}{\sum_w P(T=c, W=w)} =  \frac{0.42}{0.60} = 0.64\]
+\[P(W = s | T = c) = \frac{P(W=s,T=c)}{P(T=c)} = \frac{P(W=s,T=c)}{\sum_w P(T=c, W=w)} =  \frac{0.42}{0.60} = 0.64\]
 
 #### Why did we do this?
 
@@ -151,9 +151,9 @@ The whole point of the above example was to show that from a probabilistic model
 
 #### Joint Dimensionality
 
-Lets take our previous example and expand on it. Firstly, it is helpful to think of the joint distribution as a grid with \(k^n\) squares, where \(n\) is our number of variables and \(k\) our states.
+Lets take our previous example and expand on it. Firstly, it is helpful to think of the joint distribution of some set of random variables as a grid with \(k^n\) squares, where \(n\) is our number of variables and \(k\) our states.
 
-For our running example, this means our joint distribution is parameterized by a 4 dimensional vector, containing the probabilities of seeing any pair of states. We could of course, add more random variables to our model. Imagine we add \(B\), for whether or not we _bike into work_ and \(H\), for _overall health_, each with two states. The dimensionality of our parameters then becomes
+For our running example, this means our joint distribution is parameterized by a 4 dimensional vector, containing the probabilities of seeing any pair of states. We could of course, add more random variables to our model. Imagine we add \(B\), for whether or not we _bike into work_ and \(H\), for _overall health_, each with two states. The dimensionality of our parameters (for the joint distribution over \(T, W, B, H\)) then becomes
 
 \[
 k^n = 2^4
@@ -190,7 +190,7 @@ The process of _learning_ is choosing \(\theta\) to minimize some cost or loss f
 
 The basic idea behind maximum likelihood estimation (MLE) is to pick values for our parameters which were most likely to have generated the data we saw
 
-\[\theta_{MLE}^* = \underset{\theta}{\operatorname{argmax}} \ell(\theta ; D)\]
+\[\hat \theta_{MLE} = \underset{\theta}{\operatorname{argmax}} \ell(\theta ; \mathcal D)\]
 
 !!! note
     MLE is commonly used in statistics, and often leads to "intuitive", "appealing" or "natural" estimators.
@@ -210,14 +210,14 @@ The IID assumption turns the log likelihood into a _sum_, making the derivative 
 
 A [statistic](https://en.wikipedia.org/wiki/Statistic) is a (possibly vector valued) deterministic function of a (set of) random variable(s). A [sufficient statistic](https://en.wikipedia.org/wiki/Sufficient_statistic) is a statistic that conveys exactly the same information about the data generating process that created that data as the entire data itself. In other words, once we know the sufficient statistic, \(T(x)\), then our inferences are the same as would be obtained from our entire data. More formally, we say that \(T(X)\) is a sufficient statistic for \(X\) if
 
-\[T(x^{(1)}) = T(x^{(2)}) \Rightarrow L(\theta ; x^{(1)}) = L(\theta; x^{(2)}) \forall \theta\]
+\[T(x^{(1)}) = T(x^{(2)}) \Rightarrow L(\theta ; x^{(1)}) = L(\theta; x^{(2)}) \ \forall \theta\]
 
 Put another way
 
 \[P(\theta | T(X)) = P(\theta | X)\]
 
 !!! note
-    Why is the useful? Well, if we have a particular large data sample, a lot of the data may be redundant. If we knew the sufficient statistic for that sample, we could use it in place of the full data sample.
+    Why is this useful? Well, if we have a particular large data sample, a lot of the data may be redundant. If we knew the sufficient statistic for that sample, we could use it in place of the full data sample.
 
 Equivalently (by the Neyman factorization theorem) we can write
 
@@ -229,7 +229,7 @@ An example is the [exponential family](https://en.wikipedia.org/wiki/Exponential
 
 ### Sufficient statistics example: Bernoulli Trials
 
-Let us take the example of flipping a fair coin. This process that generates our data is can be modeled as a [Bernoulli distribution](https://en.wikipedia.org/wiki/Bernoulli_distribution)
+Let us take the example of flipping a fair coin. This process that generates our data can be modeled as a [Bernoulli distribution](https://en.wikipedia.org/wiki/Bernoulli_distribution)
 
 \[X \backsim \text{Ber}(\theta)\]
 
@@ -247,12 +247,17 @@ So we notice here that our likelihood depends on \(\sum_{i=1}^N x_i\). In other 
 
 To perform inference with \(T(x)\), we define the log likelihood
 
-\\[\ell(\theta ; X) = \log p(X | \theta)\\]
-\\[ = T(X) \log \theta - (N - T(X)) \log(1-\theta) \\]
+\[
+\ell(\theta ; X) = \log p(X | \theta) \\
+= T(X) \log \theta + (N - T(X)) \log(1-\theta)
+\]
 
 then we take the derivative and set it to 0 to find the maximum
 
-\[\frac{\partial \ell}{\partial \theta} = 0 = \frac{T(X)}{N}\]
+\[
+\Rightarrow \frac{\partial \ell}{\partial \theta} = \frac{T(X)}{\theta} - \frac{N - T(X)}{1-\theta} \\
+\Rightarrow \hat \theta = \frac{T(X)}{N} \\
+\]
 
 This is our maximum likelihood estimation of the parameters \(\theta\), \(\theta^{\star}_{MLE}\).
 

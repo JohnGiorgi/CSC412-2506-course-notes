@@ -4,17 +4,13 @@
 
 - Murphy: Chapters 19-19.5
 
-### Overview
-
-- Will fill out when I get my notebook back.
-
 ## Directed Graphical Models (a Review)
 
-So far, we have seen [directed acyclic graph models (DAGMs)](../week_3/). These models represent large joint distributions using _local_ relationships specified by the graph, where each random variable is a node and the edges specify the conditional dependence between random variables (and therefore missing edges imply conditional independence). Graphically, these models looked like
+So far, we have seen [directed acyclic graphical models (DAGMs)](../week_3/). These models represent large joint distributions using _local_ relationships specified by the graph, where each random variable is a node and the edges specify the conditional dependence between random variables (and therefore missing edges imply conditional independence). Graphically, these models looked like
 
 ![](../img/lecture_4_1.png)
 
-The graph factorized according to the local conditional probabilities
+The graph factorizes according to the local conditional probabilities
 
 \[
 p(x_{1, ..., N}) = \prod_i^Np(x_i | x_{\pi_i})
@@ -35,6 +31,9 @@ For discrete variables, _each node_ stores a [conditional probability table](htt
 
 ![](../img/lecture_3_4.png)
 
+!!! example
+    The variables in the above model can take on \(2^{6}\) possible configurations.
+
 ### Are DAGMs always useful?
 
 For some problems, it is not always clear how to choose the direction for the edges in our DAGMs. Take the example of modeling dependencies in an image
@@ -48,36 +47,46 @@ mb(8) = \{3, 7\} \cup \{9, 13\} \cup \{12, 4\}
 \]
 
 !!! note
-    The [Markov blanket](https://en.wikipedia.org/wiki/Markov_blanket) contains the parents, children and co-parents of a node. More generally, it is the set of all variables that shield the node from the rest of the network.
+    The [Markov blanket](https://en.wikipedia.org/wiki/Markov_blanket) contains the parents, children and co-parents of a node. More generally, it is the set of all variables that shield the node from the rest of the network. I think the point of this example is that one would expect \(X_2\) and \(X_{14}\) to be conditionally dependent on \(X_8\), especially given that \(X_4\) and \(X_{12}\) are conditionally dependent on \(X_8\).
 
 An alternative to DAGMs, is undirected graphical models (UGMs).
 
 ## Undirected Graphical Models
 
-Undirected graphical models (UDGMs), also called [Markov random fields](https://en.wikipedia.org/wiki/Markov_random_field) (MRFs) or Markov networks, is a set of random variables described by an undirected graph. As in DAGMs, the _nodes_ in the graph represent _random variables_. However, in contrast to DAGMs, edges represent _probabilistic interactions_ between neighboring variables (as opposed to conditional dependence).
+Undirected graphical models (UDGMs), also called [Markov random fields](https://en.wikipedia.org/wiki/Markov_random_field) (MRFs) or Markov networks, are a set of random variables described by an undirected graph. As in DAGMs, the _nodes_ in the graph represent _random variables_. However, in contrast to DAGMs, edges represent _probabilistic interactions_ between neighboring variables (as opposed to conditional dependence).
 
 ### Dependencies in UGMs
 
-In DGMs, we used conditional probabilities to represent the distribution of nodes given their parents. In UGMs, we use a more _symmetric_ parameterization that captures the affinities between related variables:
+In DGMs, we used conditional probabilities to represent the distribution of nodes given their parents. In UGMs, we use a more _symmetric_ parameterization that captures the affinities between related variables.
 
-_def_. **Global Markov Property**: \(X_A \bot X_B | X_C\) iff C separates A from B (i.e. there is no path in the graph between A and B that doesn't go through C).
+The following three properties are used to determine if nodes are conditionally independent:
 
-_def_. **Markov Blanket (local property)**: The set of nodes that renders a node \(t\) conditionally independent of all the other nodes in the graph
+_def_. **Global Markov Property** (G): \(X_A \bot X_B | X_C\) iff C separates A from B (i.e. there is no path in the graph between A and B that doesn't go through C).
+
+_def_. **Local Markov Property (Markov Blanket)** (L): The set of nodes that renders a node \(t\) conditionally independent of all the other nodes in the graph
 
 \[
 t \bot \mathcal V \setminus cl(t) | mb(t)
 \]
 
-_def_. **Pairwise (Markov) Property**: The set of nodes that renders a node \(t\) conditionally independent of all the other nodes in the graph
+where \(cl(t) = mb(t) \cup t\) is the closure of node \(t\). It is the set of neighbors
+
+!!! example
+    In the UGM below, \(mb(5) = \{2, 3, 4, 6, 7\}\).
+
+_def_. **Pairwise (Markov) Property** (P): The set of nodes that renders two nodes, \(s\) and \(t\), conditionally independent of each other.
 
 \[
 s \bot t | \mathcal V \setminus \{s, t\} \Leftrightarrow G_{st} = 0
 \]
 
+!!! note
+    \(G_{st}\) is a function that counts the number of edges between nodes \(s, t\)
+
 where
 
 \[
-G \Rightarrow L \Rightarrow P \Rightarrow P \quad p(x) > 0
+G \Rightarrow L \Rightarrow P \Rightarrow G \quad p(x) > 0
 \]
 
 #### Simple example
@@ -130,7 +139,7 @@ For example, in the following graph a _maximal clique_ is show in blue, while th
 
 ### Parameterization of an UGM
 
-Let \(x = (x_1, ..., x_m)\) be the set of all random variables in our graph. Unlike in DGMs, there is no topological ordering associated with an undirected graph, and so we _cannot_ use the chain rule to represent \(p(x)\). Therefore, instead of associating conditional probabilities to each node, we associate __potential functions__ or __factors__ with each _maximal clique_ in the graph.
+Let \(x = (x_1, ..., x_m)\) be the set of all random variables in our graph. Unlike in DGMs, there is no topological ordering associated with an undirected graph, and so we _cannot_ use the chain rule to represent \(p(x)\). Therefore, instead of associating conditional probabilities with each node, we associate __potential functions__ or __factors__ with each _maximal clique_ in the graph.
 
 For a given clique \(c\), we define the potential function or factor
 
@@ -138,9 +147,13 @@ For a given clique \(c\), we define the potential function or factor
 \psi_c(x_c | \theta_c)
 \]
 
-to be any non-negative function, where \(x_c\) is some subset of variables in \(x\).
+to be any non-negative function, where \(x_c\) is some subset of variables in \(x\) involved in a unique, maximal clique.
 
-The joint distribution is the _proportional_ to the _product of clique potentials_.
+The joint distribution is _proportional_ to the _product of clique potentials_
+
+\[
+p(x) \propto \prod_{c \in \mathcal C}\psi_c(x_c | \theta_c)
+\]
 
 !!! note
     Any positive distribution whose conditional independencies are represented with an UGM can be represented this way.
@@ -153,7 +166,7 @@ A positive distribution \(p(x) > 0\) satisfies the conditional independence prop
 p(x | \theta) = \frac{1}{Z(\theta)}\prod_{c \in \mathcal C}\psi_c(x_c | \theta)
 \]
 
-where \(\mathcal C\) is the set of all (maximal) clique of \(G\), and \(Z(\theta)\) the **partition function**, defined as
+where \(\mathcal C\) is the set of all (maximal) cliques of \(G\), and \(Z(\theta)\) the **partition function**, defined as
 
 \[
 Z(\theta)= \sum_x \prod_{c \in \mathcal C} \psi_c(x_c|\theta_c)
@@ -167,20 +180,26 @@ The factored structure of the distribution makes it possible to more efficiently
 p(x) \propto \psi_{1, 2, 3}(x_1, x_2, x_3) \psi_{2, 3, 5}(x_2, x_3, x_5) \psi_{2, 4, 5}(x_2, x_4, x_5) \psi_{3, 5, 6}(x_3, x_5, x_6) \psi_{4, 5, 6, 7}(x_4, x_5, x_6, x_7)
 \]
 
-If the variables are discrete, we can represent the potential or energy functions as tables of (non-negative) numbers
+#### Representing potentials
+
+Recall how we parameterized DAGMs of discrete random variables by using conditional probability tables to represent the possible configurations of each node. In this case, the parameters were a valid probability distribution (i.e. the probabilities of the possible configurations summed to 1).
+
+In UGMs, we do something similar. If the variables are discrete, we can represent the _potential_ (or energy) functions as tables of (non-negative) numbers
 
 \[
 p(A, B, C, D) = \frac{1}{Z} \psi_{a, b}(A, B) \psi_{b, c}(B, C) \psi_{c, d}(C, D) \psi_{a, d}(A, D)
 \]
+
+where
 
 ![](../img/lecture_4_8.png)
 
 !!! error
     Why the switch from \(\psi\) to \(\phi\) here?
 
-It is important to note that these potential are _not_ probabilities, but represent compatibilities between the different assignments.
+It is important to note that these potentials are _not_ probabilities, but instead encode _relative affinities_ between the different assignments. For example, in the above table, \(a^0, b^0\) is taken to be 30X more likely than \(a^1, a^0\).
 
-#### Factor product
+#### Factor product   
 
 Given 3 disjoint sets of variables \(X, Y, Z\) and factors \(\psi_1(X, Y)\), \(\psi_2(Y, Z)\) the **factor product** is defined as:
 
@@ -192,3 +211,28 @@ Given 3 disjoint sets of variables \(X, Y, Z\) and factors \(\psi_1(X, Y)\), \(\
 
 !!! error
     Again, is the the switch from \(\psi\) to \(\phi\) a typo? Deliberate?
+
+From the factor product, we can make queries about the _marginal probabilities_, e.g.
+
+\[
+p(a_0, b_0, c_0, d_0) \propto (30)(100)(1)(100) = 300000
+\]
+
+enumerating all marginal probabilities in a table for our running example, we get
+
+![](../img/lecture_4_10.png)
+
+!!! tip
+    To get the normalized marginal probability, divide by the partition function \(Z(\theta) \sum_y \prod_{c \in \mathcal C} \psi_c(y_c | \theta)\)
+
+we can also make queires about the _conditional probability_. Conditioning on a assignment \(u\) to a subset of variables \(U\) can be done by
+
+1. Eliminating all entries that are inconsistent with the assignment
+2. Re-normalizing the remaining entries so that they sum to 1
+
+For example, conditioning on \(c_1\)
+
+![](../img/lecture_4_11.png)
+
+!!! error
+    I skipped some material for lecture 4 that was presented at the beginning of lecture 5. He said this would not be tested, so I will return to it after the midterm.
