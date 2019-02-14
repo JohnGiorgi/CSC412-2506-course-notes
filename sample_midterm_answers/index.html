@@ -581,15 +581,7 @@ p(D | \mu \lambda) = \prod^N_{i=1}(\frac{\lambda}{2\pi})^{\frac{1}{2}}\exp(-\fra
 <p><img alt="" src="../img/sample_midterm_1.png" /></p>
 <p>(a) List all variables that are independent of <span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span> given evidence on <span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span></p>
 <p><img alt="" src="../img/sample_midterm_2.png" /></p>
-<p>By Bayes' Balls</p>
-<div>
-<div class="MathJax_Preview">
-I \bot A | B
-</div>
-<script type="math/tex; mode=display">
-I \bot A | B
-</script>
-</div>
+<p>By Bayes' Balls, no variables are conditionally independent of <span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span> given evidence on <span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>.</p>
 <p>(b) Write down the factorized normalized joint distribution that this graphical model represents.</p>
 <div>
 <div class="MathJax_Preview">
@@ -600,10 +592,15 @@ p(A, ..., I) = p(A | B, C)P(B | D)P(C | E, F)P(D | G)P(E | G)P(F | H)P(G)P(H)P(I
 </script>
 </div>
 <p>(c) If each node is a single discrete random variable in <span><span class="MathJax_Preview">{1, ..., K}</span><script type="math/tex">{1, ..., K}</script></span> how many distinct joint states can the model take? That is, how many different configurations can the variables in this model be set?</p>
-<p>For each node (random variable) there is <span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span> states. We therefore have <span><span class="MathJax_Preview">k^n</span><script type="math/tex">k^n</script></span> possible configurations per node (<span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span>) where <span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span> is the number of states and <span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span> the number of parent nodes (<span><span class="MathJax_Preview">x_{\pi_i}</span><script type="math/tex">x_{\pi_i}</script></span>)</p>
-<p>Graphically:</p>
-<p><img alt="" src="../img/sample_midterm_3.png" /></p>
-<p>Together, there are <span><span class="MathJax_Preview">2(k^1) + 4(k^2) + 3(k^3)</span><script type="math/tex">2(k^1) + 4(k^2) + 3(k^3)</script></span> possible different configurations of the variables in this model.</p>
+<p>For each node (random variable) there is <span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span> states. There are <span><span class="MathJax_Preview">k^n</span><script type="math/tex">k^n</script></span> possible configurations where <span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span> is the number of states and <span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span> the number of nodes (<span><span class="MathJax_Preview">x_{\pi_i}</span><script type="math/tex">x_{\pi_i}</script></span>)</p>
+<div>
+<div class="MathJax_Preview">
+\therefore \text{number of possible configurations} = k^9
+</div>
+<script type="math/tex; mode=display">
+\therefore \text{number of possible configurations} = k^9
+</script>
+</div>
 <h2 id="question-4">Question 4<a class="headerlink" href="#question-4" title="Permanent link">&para;</a></h2>
 <p>Consider the Hidden Markov Model</p>
 <p><img alt="" src="../img/sample_midterm_4.png" /></p>
@@ -645,7 +642,7 @@ p(X_i \ | \ \text{parents of } X_i)
 \bigg [ p(X_i | Z_i) \bigg ] \bigg [ p(Z_1) \prod_{j=2}^i p(Z_j | Z_{j-1}) \bigg ]
 </script>
 </div>
-<p>Putting it together, the probability of a given observation <span><span class="MathJax_Preview">X_{1:T}</span><script type="math/tex">X_{1:T}</script></span> is sampled from the model according to</p>
+<p>Putting it together, a given observation <span><span class="MathJax_Preview">X_{1:T}</span><script type="math/tex">X_{1:T}</script></span> is sampled from the model according to</p>
 <div>
 <div class="MathJax_Preview">
 \bigg [ \prod_{i=1}^T p(X_i | Z_i) \bigg ] \bigg [ p(Z_1) \prod_{i=2}^T p(Z_i | Z_{i-1}) \bigg ]
@@ -658,7 +655,7 @@ p(X_i \ | \ \text{parents of } X_i)
 <ol>
 <li>Start with <span><span class="MathJax_Preview">i=1</span><script type="math/tex">i=1</script></span></li>
 <li>Sample <span><span class="MathJax_Preview">Z_i</span><script type="math/tex">Z_i</script></span> according to <span><span class="MathJax_Preview">Z_i \sim p(Z_1) \prod_{j=2}^i p(Z_j | Z_{j-1})</span><script type="math/tex">Z_i \sim p(Z_1) \prod_{j=2}^i p(Z_j | Z_{j-1})</script></span></li>
-<li>Given the sampled <span><span class="MathJax_Preview">Z_i</span><script type="math/tex">Z_i</script></span>, sample <span><span class="MathJax_Preview">X_i</span><script type="math/tex">X_i</script></span> according to <span><span class="MathJax_Preview">X_i \sim \prod_{i=1}^T p(X_i | Z_i)</span><script type="math/tex">X_i \sim \prod_{i=1}^T p(X_i | Z_i)</script></span></li>
+<li>Given the sampled <span><span class="MathJax_Preview">Z_i</span><script type="math/tex">Z_i</script></span>, sample <span><span class="MathJax_Preview">X_i</span><script type="math/tex">X_i</script></span> according to <span><span class="MathJax_Preview">X_i \sim \ p(X_i | Z_i)</span><script type="math/tex">X_i \sim \ p(X_i | Z_i)</script></span></li>
 <li>Increment <span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span> by 1, repeat steps 2-4 until <span><span class="MathJax_Preview">i=T</span><script type="math/tex">i=T</script></span></li>
 </ol>
                 
