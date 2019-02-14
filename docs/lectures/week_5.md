@@ -104,7 +104,7 @@ What is \(p(x_1 | \bar x_6)\)? We have
     The \(\bar x\) means that the variable is observed.
 
 \[
-X_E = \{\bar x_6\}, \ X_F = \{x_1\}, \ X_R = \{x_2, x_3, x_4, x_5\}, \
+\ X_F = \{x_1\}, X_E = \{\bar x_6\}, \ X_R = \{x_2, x_3, x_4, x_5\}
 \]
 
 and
