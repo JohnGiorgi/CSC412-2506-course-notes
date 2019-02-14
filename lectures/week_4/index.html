@@ -739,11 +739,11 @@ mb(8) = \{3, 7\} \cup \{9, 13\} \cup \{12, 4\}
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The <a href="https://en.wikipedia.org/wiki/Markov_blanket">Markov blanket</a> contains the parents, children and co-parents of a node. More generally, it is the set of all variables that shield the node from the rest of the network.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Markov_blanket">Markov blanket</a> contains the parents, children and co-parents of a node. More generally, it is the set of all variables that shield the node from the rest of the network. I think the point of this example is that one would expect <span><span class="MathJax_Preview">X_2</span><script type="math/tex">X_2</script></span> and <span><span class="MathJax_Preview">X_{14}</span><script type="math/tex">X_{14}</script></span> to be conditionally dependent on <span><span class="MathJax_Preview">X_8</span><script type="math/tex">X_8</script></span>, especially given that <span><span class="MathJax_Preview">X_4</span><script type="math/tex">X_4</script></span> and <span><span class="MathJax_Preview">X_{12}</span><script type="math/tex">X_{12}</script></span> are conditionally dependent on <span><span class="MathJax_Preview">X_8</span><script type="math/tex">X_8</script></span>.</p>
 </div>
 <p>An alternative to DAGMs, is undirected graphical models (UGMs).</p>
 <h2 id="undirected-graphical-models">Undirected Graphical Models<a class="headerlink" href="#undirected-graphical-models" title="Permanent link">&para;</a></h2>
-<p>Undirected graphical models (UDGMs), also called <a href="https://en.wikipedia.org/wiki/Markov_random_field">Markov random fields</a> (MRFs) or Markov networks, is a set of random variables described by an undirected graph. As in DAGMs, the <em>nodes</em> in the graph represent <em>random variables</em>. However, in contrast to DAGMs, edges represent <em>probabilistic interactions</em> between neighboring variables (as opposed to conditional dependence).</p>
+<p>Undirected graphical models (UDGMs), also called <a href="https://en.wikipedia.org/wiki/Markov_random_field">Markov random fields</a> (MRFs) or Markov networks, are a set of random variables described by an undirected graph. As in DAGMs, the <em>nodes</em> in the graph represent <em>random variables</em>. However, in contrast to DAGMs, edges represent <em>probabilistic interactions</em> between neighboring variables (as opposed to conditional dependence).</p>
 <h3 id="dependencies-in-ugms">Dependencies in UGMs<a class="headerlink" href="#dependencies-in-ugms" title="Permanent link">&para;</a></h3>
 <p>In DGMs, we used conditional probabilities to represent the distribution of nodes given their parents. In UGMs, we use a more <em>symmetric</em> parameterization that captures the affinities between related variables.</p>
 <p>The following three properties are used to determine if nodes are conditionally independent:</p>
@@ -762,7 +762,7 @@ t \bot \mathcal V \setminus cl(t) | mb(t)
 <p class="admonition-title">Example</p>
 <p>In the UGM below, <span><span class="MathJax_Preview">mb(5) = \{2, 3, 4, 6, 7\}</span><script type="math/tex">mb(5) = \{2, 3, 4, 6, 7\}</script></span>.</p>
 </div>
-<p><em>def</em>. <strong>Pairwise (Markov) Property</strong> (P):</p>
+<p><em>def</em>. <strong>Pairwise (Markov) Property</strong> (P): The set of nodes that renders two nodes, <span><span class="MathJax_Preview">s</span><script type="math/tex">s</script></span> and <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>, conditionally independent of each other.</p>
 <div>
 <div class="MathJax_Preview">
 s \bot t | \mathcal V \setminus \{s, t\} \Leftrightarrow G_{st} = 0
@@ -827,14 +827,14 @@ G \Rightarrow L \Rightarrow P \Rightarrow G \quad p(x) > 0
 \psi_c(x_c | \theta_c)
 </script>
 </div>
-<p>to be any non-negative function, where <span><span class="MathJax_Preview">x_c</span><script type="math/tex">x_c</script></span> is some subset of variables in <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>.</p>
-<p>The joint distribution is the <em>proportional</em> to the <em>product of clique potentials</em></p>
+<p>to be any non-negative function, where <span><span class="MathJax_Preview">x_c</span><script type="math/tex">x_c</script></span> is some subset of variables in <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> involved in a unique, maximal clique.</p>
+<p>The joint distribution is <em>proportional</em> to the <em>product of clique potentials</em></p>
 <div>
 <div class="MathJax_Preview">
-p(X) \propto \prod_{c \in \mathcal C}\psi_c(x_c | \theta_c)
+p(x) \propto \prod_{c \in \mathcal C}\psi_c(x_c | \theta_c)
 </div>
 <script type="math/tex; mode=display">
-p(X) \propto \prod_{c \in \mathcal C}\psi_c(x_c | \theta_c)
+p(x) \propto \prod_{c \in \mathcal C}\psi_c(x_c | \theta_c)
 </script>
 </div>
 <div class="admonition note">

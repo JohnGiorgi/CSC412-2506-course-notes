@@ -635,7 +635,8 @@
 <li>Belief propogation</li>
 </ul>
 <h2 id="inference-in-pgm">Inference in PGM<a class="headerlink" href="#inference-in-pgm" title="Permanent link">&para;</a></h2>
-<p>In this lecture, we will explore <a href="https://en.wikipedia.org/wiki/Statistical_inference">inference</a> in probabilistic graphical models (PGM). Let</p>
+<p>In this lecture, we will explore <a href="https://en.wikipedia.org/wiki/Statistical_inference">inference</a> in probabilistic graphical models (PGM).</p>
+<p>Let</p>
 <div>
 <div class="MathJax_Preview">
 X_F = \text{The unobserved variable we want to infer} \\
@@ -660,13 +661,13 @@ p(X_F | X_E) = \frac{p(X_F, X_E)}{p(X_E)}
 <p>i.e., we want to compute the posterior marginal density of some unobserved variables <span><span class="MathJax_Preview">X_F</span><script type="math/tex">X_F</script></span> given some evidence <span><span class="MathJax_Preview">X_E</span><script type="math/tex">X_E</script></span>. Our MAP estimate of <span><span class="MathJax_Preview">X_F</span><script type="math/tex">X_F</script></span>, <span><span class="MathJax_Preview">\hat X_F</span><script type="math/tex">\hat X_F</script></span> is</p>
 <div>
 <div class="MathJax_Preview">
-\text{MAP } \hat X_F = argmax_{X_F} p(X_E, X_F) = argmax_{X_F} P(X_F | X_E)
+\text{MAP } \hat X_F = \underset{X_F}{\operatorname{argmax}} p(X_E, X_F) = \underset{X_F}{\operatorname{argmax}} P(X_F | X_E)
 </div>
 <script type="math/tex; mode=display">
-\text{MAP } \hat X_F = argmax_{X_F} p(X_E, X_F) = argmax_{X_F} P(X_F | X_E)
+\text{MAP } \hat X_F = \underset{X_F}{\operatorname{argmax}} p(X_E, X_F) = \underset{X_F}{\operatorname{argmax}} P(X_F | X_E)
 </script>
 </div>
-<p>where each of the distributions we need to compute the conditional can be computed by marginalizing over the other variables.</p>
+<p>each of the distributions we need to compute scan be computed by marginalizing over the other variables.</p>
 <div>
 <div class="MathJax_Preview">
 p(X_F, X_E) = \sum_{X_R}p(X_F, X_E, X_R) \\
@@ -742,6 +743,10 @@ P(D) = \sum_C p(D | C) \sum_b p(C | B) \sum_A p(A)p(B | A) \\
 <p>Lets take the DGM we saw in <a href="../week_3/#independence-assumptions-on-dagms">lecture 3</a></p>
 <p><img alt="" src="../../img/lecture_3_3.png" /></p>
 <p>What is <span><span class="MathJax_Preview">p(x_1 | \bar x_6)</span><script type="math/tex">p(x_1 | \bar x_6)</script></span>? We have</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <span><span class="MathJax_Preview">\bar x</span><script type="math/tex">\bar x</script></span> means that the variable is observed.</p>
+</div>
 <div>
 <div class="MathJax_Preview">
 X_E = \{\bar x_6\}, \ X_F = \{x_1\}, \ X_R = \{x_2, x_3, x_4, x_5\}, \
