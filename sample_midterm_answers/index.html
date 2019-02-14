@@ -421,6 +421,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#question-3" title="Question 3" class="md-nav__link">
+    Question 3
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#question-4" title="Question 4" class="md-nav__link">
     Question 4
   </a>
@@ -468,6 +475,13 @@
         <li class="md-nav__item">
   <a href="#question-2" title="Question 2" class="md-nav__link">
     Question 2
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#question-3" title="Question 3" class="md-nav__link">
+    Question 3
   </a>
   
 </li>
@@ -545,36 +559,25 @@ p(D | \mu \lambda) = \prod^N_{i=1}(\frac{\lambda}{2\pi})^{\frac{1}{2}}\exp(-\fra
 <p>Start by expanding the terms in the exponent</p>
 <div>
 <div class="MathJax_Preview">
-= \prod^N_{i=1}(\frac{\lambda}{2\pi})^{\frac{1}{2}}\exp(-\frac{\lambda}{2}x_i^2 + \lambda u x_i - \frac{\lambda}{2}\mu^2) \\
+= \prod^N_{i=1}(\frac{\lambda}{2\pi})^{\frac{1}{2}} \exp(\sum_{i=1}^N -\frac{\lambda}{2}x_i^2 + \lambda u x_i - \frac{\lambda}{2}\mu^2) \\
 </div>
 <script type="math/tex; mode=display">
-= \prod^N_{i=1}(\frac{\lambda}{2\pi})^{\frac{1}{2}}\exp(-\frac{\lambda}{2}x_i^2 + \lambda u x_i - \frac{\lambda}{2}\mu^2) \\
+= \prod^N_{i=1}(\frac{\lambda}{2\pi})^{\frac{1}{2}} \exp(\sum_{i=1}^N -\frac{\lambda}{2}x_i^2 + \lambda u x_i - \frac{\lambda}{2}\mu^2) \\
 </script>
 </div>
 <p>from here, we can rearrange the exponent into <span><span class="MathJax_Preview">\eta^TT(x)</span><script type="math/tex">\eta^TT(x)</script></span></p>
 <div>
 <div class="MathJax_Preview">
-= \prod^N_{i=1}(\frac{\lambda}{2\pi})^{\frac{1}{2}}\exp( - \frac{\lambda}{2}\mu^2)\exp(\begin{bmatrix}\lambda u &amp; -\frac{\lambda}{2}\end{bmatrix} \begin{bmatrix}x_i \\ x_i^2\end{bmatrix}) \\
+= \prod^N_{i=1}(\frac{\lambda}{2\pi})^{\frac{1}{2}}\exp(\sum_{i=1}^N - \frac{\lambda}{2}\mu^2)\exp(\begin{bmatrix}\lambda u &amp; -\frac{\lambda}{2} &amp; \dotsc &amp; \lambda u &amp; -\frac{\lambda}{2}\end{bmatrix} \begin{bmatrix}x_1 \\ x_1^2 \\ \vdots \\ x_N \\ x_N^2\end{bmatrix}) \\
 </div>
 <script type="math/tex; mode=display">
-= \prod^N_{i=1}(\frac{\lambda}{2\pi})^{\frac{1}{2}}\exp( - \frac{\lambda}{2}\mu^2)\exp(\begin{bmatrix}\lambda u & -\frac{\lambda}{2}\end{bmatrix} \begin{bmatrix}x_i \\ x_i^2\end{bmatrix}) \\
-</script>
-</div>
-<p>finally, let <span><span class="MathJax_Preview">\eta_1 = \lambda u</span><script type="math/tex">\eta_1 = \lambda u</script></span> and <span><span class="MathJax_Preview">\eta_2 = -\frac{\lambda}{2}</span><script type="math/tex">\eta_2 = -\frac{\lambda}{2}</script></span>, then rewrite the above equations in terms of <span><span class="MathJax_Preview">\eta</span><script type="math/tex">\eta</script></span></p>
-<div>
-<div class="MathJax_Preview">
-= \prod^N_{i=1}(2\pi)^{-\frac{1}{2}} (-2\eta_2)^{-\frac{1}{2}}  \exp(\frac{\eta_1^2}{4\eta_2})\exp(\begin{bmatrix}\lambda u &amp; -\frac{\lambda}{2}\end{bmatrix} \begin{bmatrix}x_i \\ x_i^2\end{bmatrix})
-</div>
-<script type="math/tex; mode=display">
-= \prod^N_{i=1}(2\pi)^{-\frac{1}{2}} (-2\eta_2)^{-\frac{1}{2}}  \exp(\frac{\eta_1^2}{4\eta_2})\exp(\begin{bmatrix}\lambda u & -\frac{\lambda}{2}\end{bmatrix} \begin{bmatrix}x_i \\ x_i^2\end{bmatrix})
+= \prod^N_{i=1}(\frac{\lambda}{2\pi})^{\frac{1}{2}}\exp(\sum_{i=1}^N - \frac{\lambda}{2}\mu^2)\exp(\begin{bmatrix}\lambda u & -\frac{\lambda}{2} & \dotsc & \lambda u & -\frac{\lambda}{2}\end{bmatrix} \begin{bmatrix}x_1 \\ x_1^2 \\ \vdots \\ x_N \\ x_N^2\end{bmatrix}) \\
 </script>
 </div>
 <p>where</p>
 <ul>
-<li><span><span class="MathJax_Preview">\eta^T = \begin{bmatrix}\lambda u &amp; -\frac{\lambda}{2}u^2\end{bmatrix}</span><script type="math/tex">\eta^T = \begin{bmatrix}\lambda u & -\frac{\lambda}{2}u^2\end{bmatrix}</script></span></li>
-<li><span><span class="MathJax_Preview">T(x) = \begin{bmatrix}x_i \\ x_i^2\end{bmatrix}</span><script type="math/tex">T(x) = \begin{bmatrix}x_i \\ x_i^2\end{bmatrix}</script></span></li>
-<li><span><span class="MathJax_Preview">h(x) = (2\pi)^{-\frac{1}{2}}</span><script type="math/tex">h(x) = (2\pi)^{-\frac{1}{2}}</script></span></li>
-<li><span><span class="MathJax_Preview">g(\eta) = (-2\eta_2)^{-\frac{1}{2}}  \exp(\frac{\eta_1^2}{4\eta_2})</span><script type="math/tex">g(\eta) = (-2\eta_2)^{-\frac{1}{2}}  \exp(\frac{\eta_1^2}{4\eta_2})</script></span></li>
+<li><span><span class="MathJax_Preview">\eta^T = \begin{bmatrix}\lambda u &amp; -\frac{\lambda}{2} &amp; \dotsc &amp; \lambda u &amp; -\frac{\lambda}{2}\end{bmatrix}</span><script type="math/tex">\eta^T = \begin{bmatrix}\lambda u & -\frac{\lambda}{2} & \dotsc & \lambda u & -\frac{\lambda}{2}\end{bmatrix}</script></span></li>
+<li><span><span class="MathJax_Preview">T(x) = \begin{bmatrix}x_1 \\ x_1^2 \\ \vdots \\ x_N \\ x_N^2\end{bmatrix}</span><script type="math/tex">T(x) = \begin{bmatrix}x_1 \\ x_1^2 \\ \vdots \\ x_N \\ x_N^2\end{bmatrix}</script></span></li>
 </ul>
 <h2 id="question-2">Question 2<a class="headerlink" href="#question-2" title="Permanent link">&para;</a></h2>
 <p>Consider the following directed graphical model:</p>
@@ -601,6 +604,10 @@ p(A, ..., I) = p(A | B, C)P(B | D)P(C | E, F)P(D | G)P(E | G)P(F | H)P(G)P(H)P(I
 \therefore \text{number of possible configurations} = k^9
 </script>
 </div>
+<h2 id="question-3">Question 3<a class="headerlink" href="#question-3" title="Permanent link">&para;</a></h2>
+<p><strong>ANSWER</strong></p>
+<p>a) The size of the maximum factor is 3.</p>
+<p>c) The size of the maximum factor is 4.</p>
 <h2 id="question-4">Question 4<a class="headerlink" href="#question-4" title="Permanent link">&para;</a></h2>
 <p>Consider the Hidden Markov Model</p>
 <p><img alt="" src="../img/sample_midterm_4.png" /></p>
@@ -615,48 +622,49 @@ x_i \sim p(X_i \ | \ \text{parents of } X_i)
 </div>
 <p>Write down a step-by-step process to produce a sample observation from this model, i.e. <span><span class="MathJax_Preview">(x_1, x_2, x_3, ..., x_T)</span><script type="math/tex">(x_1, x_2, x_3, ..., x_T)</script></span> in terms of samples from the individual factors.</p>
 <p><strong>ANSWER</strong></p>
-<p>To produce a sample observation from the model, we need to sample observations <span><span class="MathJax_Preview">x_1, x_2, x_3, ..., x_T</span><script type="math/tex">x_1, x_2, x_3, ..., x_T</script></span> according to</p>
+<p>We want to sample a sequence of observations <span><span class="MathJax_Preview">x_1, x_2, x_3, ..., x_T</span><script type="math/tex">x_1, x_2, x_3, ..., x_T</script></span> from the model according to</p>
 <div>
 <div class="MathJax_Preview">
-p(X_{1:T}) = \prod_{i=1}^T p(X_i)
+p(x_{1:T}) \sim \prod_{i=1}^T p(X_i)
 </div>
 <script type="math/tex; mode=display">
-p(X_{1:T}) = \prod_{i=1}^T p(X_i)
+p(x_{1:T}) \sim \prod_{i=1}^T p(X_i)
 </script>
 </div>
-<p>since observations <span><span class="MathJax_Preview">X_i</span><script type="math/tex">X_i</script></span> are independent of one another. Each observation <span><span class="MathJax_Preview">X_i</span><script type="math/tex">X_i</script></span> is sampled according to the conditional probability distribution</p>
+<p>since observations <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span> are independent of one another. Each observation <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span> is sampled according to the conditional probability distribution</p>
 <div>
 <div class="MathJax_Preview">
-p(X_i \ | \ \text{parents of } X_i)
+x_i \sim p(X_i \ | \ \text{parents of } X_i)
 </div>
 <script type="math/tex; mode=display">
-p(X_i \ | \ \text{parents of } X_i)
+x_i \sim p(X_i \ | \ \text{parents of } X_i)
 </script>
 </div>
 <p>Notice that this forms a chain, with probability</p>
 <div>
 <div class="MathJax_Preview">
-\bigg [ p(X_i | Z_i) \bigg ] \bigg [ p(Z_1) \prod_{j=2}^i p(Z_j | Z_{j-1}) \bigg ]
+\bigg [ p(X_i | z_i) \bigg ] \bigg [ p(z_1) \prod_{j=2}^i p(Z_j | z_{j-1}) \bigg ]
 </div>
 <script type="math/tex; mode=display">
-\bigg [ p(X_i | Z_i) \bigg ] \bigg [ p(Z_1) \prod_{j=2}^i p(Z_j | Z_{j-1}) \bigg ]
+\bigg [ p(X_i | z_i) \bigg ] \bigg [ p(z_1) \prod_{j=2}^i p(Z_j | z_{j-1}) \bigg ]
 </script>
 </div>
 <p>Putting it together, a given observation <span><span class="MathJax_Preview">X_{1:T}</span><script type="math/tex">X_{1:T}</script></span> is sampled from the model according to</p>
 <div>
 <div class="MathJax_Preview">
-\bigg [ \prod_{i=1}^T p(X_i | Z_i) \bigg ] \bigg [ p(Z_1) \prod_{i=2}^T p(Z_i | Z_{i-1}) \bigg ]
+\bigg [ \prod_{i=1}^T p(X_i | z_i) \bigg ] \bigg [ p(z_1) \prod_{i=2}^T p(Z_i | z_{i-1}) \bigg ]
 </div>
 <script type="math/tex; mode=display">
-\bigg [ \prod_{i=1}^T p(X_i | Z_i) \bigg ] \bigg [ p(Z_1) \prod_{i=2}^T p(Z_i | Z_{i-1}) \bigg ]
+\bigg [ \prod_{i=1}^T p(X_i | z_i) \bigg ] \bigg [ p(z_1) \prod_{i=2}^T p(Z_i | z_{i-1}) \bigg ]
 </script>
 </div>
 <p><em>Step-by-step</em></p>
 <ol>
 <li>Start with <span><span class="MathJax_Preview">i=1</span><script type="math/tex">i=1</script></span></li>
-<li>Sample <span><span class="MathJax_Preview">Z_i</span><script type="math/tex">Z_i</script></span> according to <span><span class="MathJax_Preview">Z_i \sim p(Z_1) \prod_{j=2}^i p(Z_j | Z_{j-1})</span><script type="math/tex">Z_i \sim p(Z_1) \prod_{j=2}^i p(Z_j | Z_{j-1})</script></span></li>
-<li>Given the sampled <span><span class="MathJax_Preview">Z_i</span><script type="math/tex">Z_i</script></span>, sample <span><span class="MathJax_Preview">X_i</span><script type="math/tex">X_i</script></span> according to <span><span class="MathJax_Preview">X_i \sim \ p(X_i | Z_i)</span><script type="math/tex">X_i \sim \ p(X_i | Z_i)</script></span></li>
-<li>Increment <span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span> by 1, repeat steps 2-4 until <span><span class="MathJax_Preview">i=T</span><script type="math/tex">i=T</script></span></li>
+<li>Sample <span><span class="MathJax_Preview">z_i</span><script type="math/tex">z_i</script></span> according to <span><span class="MathJax_Preview">z_i \sim p(z_1) \prod_{j=2}^i p(Z_j | z_{j-1})</span><script type="math/tex">z_i \sim p(z_1) \prod_{j=2}^i p(Z_j | z_{j-1})</script></span></li>
+<li>Given the sampled <span><span class="MathJax_Preview">z_i</span><script type="math/tex">z_i</script></span>, sample <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span> according to <span><span class="MathJax_Preview">x_i \sim \ p(X_i | z_i)</span><script type="math/tex">x_i \sim \ p(X_i | z_i)</script></span></li>
+<li>Increment <span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span> by 1</li>
+<li>Repeat steps 2-4 until <span><span class="MathJax_Preview">i=T</span><script type="math/tex">i=T</script></span></li>
 </ol>
                 
                   
