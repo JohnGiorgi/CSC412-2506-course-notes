@@ -111,31 +111,19 @@ __ANSWER__
 We want to sample a sequence of observations \(x_1, x_2, x_3, ..., x_T\) from the model according to
 
 \[
-p(x_{1:T}) \sim \prod_{i=1}^T p(X_i)
+x_{1:T} \sim \prod_{t=1}^T p(X_t \ | \ \text{parents of } X_t)
 \]
 
-since observations \(x_i\) are independent of one another. Each observation \(x_i\) is sampled according to the conditional probability distribution
+since observations \(x_t\) are independent of one another. Notice that this forms a chain, with probability
 
 \[
-x_i \sim p(X_i \ | \ \text{parents of } X_i)
-\]
-
-Notice that this forms a chain, with probability
-
-\[
-\bigg [ p(X_i | z_i) \bigg ] \bigg [ p(z_1) \prod_{j=2}^i p(Z_j | z_{j-1}) \bigg ]
-\]
-
-Putting it together, a given observation \(X_{1:T}\) is sampled from the model according to
-
-\[
-\bigg [ \prod_{i=1}^T p(X_i | z_i) \bigg ] \bigg [ p(z_1) \prod_{i=2}^T p(Z_i | z_{i-1}) \bigg ]
+p(x_{1:T}) \sim \bigg [ \prod_{t=1}^T p(X_t | z_t) \bigg ] \bigg [ p(z_1) \prod_{t=2}^T p(Z_t | z_{t-1}) \bigg ]
 \]
 
 _Step-by-step_
 
-1. Start with \(i=1\)
-2. Sample \(z_i\) according to \(z_i \sim p(z_1) \prod_{j=2}^i p(Z_j | z_{j-1})\)
-3. Given the sampled \(z_i\), sample \(x_i\) according to \(x_i \sim \ p(X_i | z_i)\)
-4. Increment \(i\) by 1
-5. Repeat steps 2-4 until \(i=T\)
+1. Start with \(t=1\)
+2. Sample \(z_t\) according to \(z_t \sim p(z_1) \prod_{i=2}^t p(Z_i | z_{i-1})\)
+3. Given the sampled \(z_t\), sample \(x_t\) according to \(x_t \sim \ p(X_t | z_t)\)
+4. Increment \(t\) by 1
+5. Repeat steps 2-4 until \(t=T\)
