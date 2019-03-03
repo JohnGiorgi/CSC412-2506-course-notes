@@ -333,6 +333,30 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lectures/week_6/" title="Week 6" class="md-nav__link">
+      Week 6
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lectures/week_7/" title="Week 7" class="md-nav__link">
+      Week 7
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -434,6 +458,40 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#probability-rules" title="Probability Rules" class="md-nav__link">
+    Probability Rules
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-rule-of-sum-marginalization" title="1. Rule of Sum (marginalization)" class="md-nav__link">
+    1. Rule of Sum (marginalization)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-chain-rule" title="2. Chain Rule" class="md-nav__link">
+    2. Chain Rule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-bayes-rule" title="3. Bayes' Rule" class="md-nav__link">
+    3. Bayes' Rule
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -443,6 +501,33 @@
   <a href="#exponential-family" title="Exponential Family" class="md-nav__link">
     Exponential Family
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bernoulli" title="Bernoulli" class="md-nav__link">
+    Bernoulli
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multinomial" title="Multinomial" class="md-nav__link">
+    Multinomial
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gaussian" title="Gaussian" class="md-nav__link">
+    Gaussian
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -537,6 +622,40 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#probability-rules" title="Probability Rules" class="md-nav__link">
+    Probability Rules
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-rule-of-sum-marginalization" title="1. Rule of Sum (marginalization)" class="md-nav__link">
+    1. Rule of Sum (marginalization)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-chain-rule" title="2. Chain Rule" class="md-nav__link">
+    2. Chain Rule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-bayes-rule" title="3. Bayes' Rule" class="md-nav__link">
+    3. Bayes' Rule
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -546,6 +665,33 @@
   <a href="#exponential-family" title="Exponential Family" class="md-nav__link">
     Exponential Family
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bernoulli" title="Bernoulli" class="md-nav__link">
+    Bernoulli
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multinomial" title="Multinomial" class="md-nav__link">
+    Multinomial
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gaussian" title="Gaussian" class="md-nav__link">
+    Gaussian
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -579,8 +725,12 @@
 </ul>
 <h2 id="notation">Notation<a class="headerlink" href="#notation" title="Permanent link">&para;</a></h2>
 <p>A random variable, <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> represents outcomes or states of the world. In this class, we will write <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span> to mean <span><span class="MathJax_Preview">p(X=x)</span><script type="math/tex">p(X=x)</script></span>, the probability of the random variable <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> taking on state <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>See <a href="https://en.wikipedia.org/wiki/Notation_in_probability_and_statistics#Probability_theory">here</a> for a helpful list of notational norms in probability.</p>
+</div>
 <p>The <strong>sample space</strong> is the space of all possible outcomes, which may be discrete, continuous, or mixed.</p>
-<p><span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span> is the <strong>probability mass (or density) function</strong> (PMF/PDF), and assigns a non-negative number to each point in the  sample space. The PMF/PDF <em>must</em> sum (or integrate) to 1. Intuitively, we can understand the PMF/PDF at <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> as representing how often <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> occurs, or how much we <em>believe</em> in <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>.</p>
+<p><span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span> is the <strong><a href="https://en.wikipedia.org/wiki/Probability_mass_function">probability mass</a> (or <a href="https://en.wikipedia.org/wiki/Probability_density_function">density</a>) function</strong> (PMF/PDF), and assigns a non-negative number to each point in the  sample space. The PMF/PDF <em>must</em> sum (or integrate) to 1. Intuitively, we can understand the PMF/PDF at <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> as representing how often <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> occurs, or how much we <em>believe</em> in <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>There is no requirement however, that the PMF/PDF cannot take values greater than 1. A commonly cited and intuitive example is the uniform distribution on the interval <span><span class="MathJax_Preview">[0, \frac{1}{2}]</span><script type="math/tex">[0, \frac{1}{2}]</script></span>. While the value of the pdf <span><span class="MathJax_Preview">f_X(x)</span><script type="math/tex">f_X(x)</script></span> is 2 for <span><span class="MathJax_Preview">0 \le x \le \frac{1}{2}</span><script type="math/tex">0 \le x \le \frac{1}{2}</script></span>, the area under the graph of <span><span class="MathJax_Preview">f_X(x)</span><script type="math/tex">f_X(x)</script></span> is rectangular, and therefore equal to base <span><span class="MathJax_Preview">\times</span><script type="math/tex">\times</script></span> width <span><span class="MathJax_Preview">= \frac{1}{2} * 2 = 1</span><script type="math/tex">= \frac{1}{2} * 2 = 1</script></span>.</p>
@@ -596,7 +746,7 @@ P(X=x, Y=y)
 P(X=x, Y=y)
 </script>
 </div>
-<p>which is read as "the probability of <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> taking on <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> and <span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span> taking on <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>"</p>
+<p>which is read as "the probability of <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> taking on <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> and <span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span> taking on <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>".</p>
 <h4 id="2-conditional-probability-distribution">2. <a href="https://en.wikipedia.org/wiki/Conditional_probability_distribution"><strong>Conditional Probability Distribution</strong></a><a class="headerlink" href="#2-conditional-probability-distribution" title="Permanent link">&para;</a></h4>
 <p>The conditional probability distribution of <span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span> given <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> is the probability distribution of <span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span> when <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> is known to be a particular value.</p>
 <div>
@@ -609,7 +759,7 @@ P(Y=y | X=x)
 = \frac{p(x, y)}{p(x)}
 </script>
 </div>
-<p>which is read as "the probability of <span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span> taking on <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span> given that <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> is <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>"</p>
+<p>which is read as "the probability of <span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span> taking on <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span> given that <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> is <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>".</p>
 <h4 id="3-marginal-probability-distribution">3. <a href="https://en.wikipedia.org/wiki/Conditional_probability_distribution"><strong>Marginal Probability Distribution</strong></a><a class="headerlink" href="#3-marginal-probability-distribution" title="Permanent link">&para;</a></h4>
 <p>The marginal distribution of a subset of a collection of random variables is the probability distribution of the variables contained in the subset</p>
 <div>
@@ -639,6 +789,31 @@ p(X=x) = \int_Yp(X=x,Y=y) \; ; \; p(Y=y) = \int_Xp(X=x,Y=y)
 </script>
 </div>
 <p>which is read as "the probability of <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> taking on <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>" or "the probability of <span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span> taking on <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>".</p>
+<h3 id="probability-rules">Probability Rules<a class="headerlink" href="#probability-rules" title="Permanent link">&para;</a></h3>
+<p>Some important rules in probability include</p>
+<h4 id="1-rule-of-sum-marginalization">1. <a href="https://brilliant.org/wiki/probability-rule-of-sum/">Rule of Sum</a> (marginalization)<a class="headerlink" href="#1-rule-of-sum-marginalization" title="Permanent link">&para;</a></h4>
+<p>Gives the situations in which the probability of a <em>union</em> of events can be calculated by <em>summing</em> probabilities together. It is often used on mutually exclusive events, meaning events that cannot both happen at the same time.</p>
+<div>
+<div class="MathJax_Preview">
+p(x) = \sum_Y p(X=x, Y=y)
+</div>
+<script type="math/tex; mode=display">
+p(x) = \sum_Y p(X=x, Y=y)
+</script>
+</div>
+<h4 id="2-chain-rule">2. <a href="https://en.wikipedia.org/wiki/Chain_rule_%28probability%29">Chain Rule</a><a class="headerlink" href="#2-chain-rule" title="Permanent link">&para;</a></h4>
+<p>Permits the calculation of any member of the joint distribution of a set of random variables using only conditional probabilities. The rule is useful in the study of Bayesian networks, which describe a probability distribution in terms of conditional probabilities.</p>
+<h4 id="3-bayes-rule">3. <a href="https://en.wikipedia.org/wiki/Chain_rule_%28probability%29">Bayes' Rule</a><a class="headerlink" href="#3-bayes-rule" title="Permanent link">&para;</a></h4>
+<p>Bayes' theorem is a formula that describes how to update the probabilities of hypotheses when given evidence. It follows simply from the axioms of conditional probability, but can be used to powerfully reason about a wide range of problems involving belief updates.</p>
+<div>
+<div class="MathJax_Preview">
+p(x | y) = \frac{p(y | x)p(x)}{p(y)} = \frac{p(y | x)p(x)}{\sum_{x'}p(y | x')p(x')}
+</div>
+<script type="math/tex; mode=display">
+p(x | y) = \frac{p(y | x)p(x)}{p(y)} = \frac{p(y | x)p(x)}{\sum_{x'}p(y | x')p(x')}
+</script>
+</div>
+<p>which is read as "the posterior is equal to the likelihood times the prior divided by the evidence".</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Skipped some slides here. Come back and finish them.</p>
@@ -654,11 +829,137 @@ p(X=x) = \int_Yp(X=x,Y=y) \; ; \; p(Y=y) = \int_Xp(X=x,Y=y)
 <p><em>def</em>. <strong>Eponential family</strong>: The exponential family of distributions over <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>, given parameter <span><span class="MathJax_Preview">\eta</span><script type="math/tex">\eta</script></span> (eta) is the set of distributions of the form</p>
 <div>
 <div class="MathJax_Preview">
-p(x | \eta) = h(x)g(\eta)exp\{\eta^T\mu(x)\}
+p(x | \eta) = h(x)g(\eta)exp\{\eta^TT(x)\}
 </div>
 <script type="math/tex; mode=display">
-p(x | \eta) = h(x)g(\eta)exp\{\eta^T\mu(x)\}
+p(x | \eta) = h(x)g(\eta)exp\{\eta^TT(x)\}
 </script>
+</div>
+<p>where</p>
+<ul>
+<li><span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> is a scalar or a vector and is either continuous or discrete</li>
+<li><span><span class="MathJax_Preview">\eta</span><script type="math/tex">\eta</script></span> are the <strong>natural parameter</strong> or <strong>canonical parameters</strong></li>
+<li><span><span class="MathJax_Preview">T(x)</span><script type="math/tex">T(x)</script></span> is a vector of <strong>sufficient statistics</strong></li>
+<li><span><span class="MathJax_Preview">h(x)</span><script type="math/tex">h(x)</script></span> is the <strong>scaling constant</strong> or <strong>base measure</strong></li>
+<li><span><span class="MathJax_Preview">g(\eta)</span><script type="math/tex">g(\eta)</script></span> is the normalizing constant that guarantees the sum/integral equals 1.</li>
+</ul>
+<p>Lets show some examples of rearranging distributions into their exponential family forms</p>
+<h3 id="bernoulli">Bernoulli<a class="headerlink" href="#bernoulli" title="Permanent link">&para;</a></h3>
+<p>The Bernoulli distribution is given by</p>
+<div>
+<div class="MathJax_Preview">
+p(x | \mu) = \mu^x(1 - \mu)^{1-x}
+</div>
+<script type="math/tex; mode=display">
+p(x | \mu) = \mu^x(1 - \mu)^{1-x}
+</script>
+</div>
+<p>re-arranging into exponential family form, we get</p>
+<div>
+<div class="MathJax_Preview">
+= \exp\{\ln(\mu^x(1 - \mu)^{1-x})\} \\
+= \exp\{\ln(\mu^x) + \ln((1 - \mu)^{1-x})\} \\
+= \exp\{x\ln(\mu) + (1-x)\ln(1 - \mu)\} \\
+= \exp\{\ln(1 - \mu) + x\ln(\mu) - x\ln(1 - \mu)\} \\
+= (1 - \mu)\exp\{\ln(\frac{\mu}{1 - \mu})x\} \\
+</div>
+<script type="math/tex; mode=display">
+= \exp\{\ln(\mu^x(1 - \mu)^{1-x})\} \\
+= \exp\{\ln(\mu^x) + \ln((1 - \mu)^{1-x})\} \\
+= \exp\{x\ln(\mu) + (1-x)\ln(1 - \mu)\} \\
+= \exp\{\ln(1 - \mu) + x\ln(\mu) - x\ln(1 - \mu)\} \\
+= (1 - \mu)\exp\{\ln(\frac{\mu}{1 - \mu})x\} \\
+</script>
+</div>
+<p>from here, it is clear that</p>
+<ul>
+<li><span><span class="MathJax_Preview">\eta = \ln(\frac{\mu}{1 - \mu})</span><script type="math/tex">\eta = \ln(\frac{\mu}{1 - \mu})</script></span></li>
+<li><span><span class="MathJax_Preview">T(x) = x</span><script type="math/tex">T(x) = x</script></span></li>
+<li><span><span class="MathJax_Preview">h(x) = 1</span><script type="math/tex">h(x) = 1</script></span></li>
+</ul>
+<p>noting that</p>
+<div>
+<div class="MathJax_Preview">
+\eta = \ln(\frac{\mu}{1 - \mu}) \\
+\Rightarrow \exp(\eta) = \exp(\ln(\frac{\mu}{1 - \mu})) \\
+\Rightarrow 0 = e^\eta - ue^\eta - u \\
+\Rightarrow u = \frac{e^\eta}{e^\eta + 1} \\
+= \frac{1}{1 + e^{-\eta}} \\
+= \sigma(\eta) \\
+</div>
+<script type="math/tex; mode=display">
+\eta = \ln(\frac{\mu}{1 - \mu}) \\
+\Rightarrow \exp(\eta) = \exp(\ln(\frac{\mu}{1 - \mu})) \\
+\Rightarrow 0 = e^\eta - ue^\eta - u \\
+\Rightarrow u = \frac{e^\eta}{e^\eta + 1} \\
+= \frac{1}{1 + e^{-\eta}} \\
+= \sigma(\eta) \\
+</script>
+</div>
+<p>we can see that <span><span class="MathJax_Preview">g(\eta) = (1 - \mu) = \sigma(-\eta)</span><script type="math/tex">g(\eta) = (1 - \mu) = \sigma(-\eta)</script></span>.</p>
+<h3 id="multinomial">Multinomial<a class="headerlink" href="#multinomial" title="Permanent link">&para;</a></h3>
+<p>The multinomial distribution is given by</p>
+<div>
+<div class="MathJax_Preview">
+p(x_1, ..., x_M | \mu) = \prod_{k=1}^M \mu_k^{x_k}
+</div>
+<script type="math/tex; mode=display">
+p(x_1, ..., x_M | \mu) = \prod_{k=1}^M \mu_k^{x_k}
+</script>
+</div>
+<p>re-arranging into exponential family form, we get</p>
+<div>
+<div class="MathJax_Preview">
+= \exp(\ln(\prod_{k=1}^M \mu_k^{x_k})) \\
+= \exp(\sum_{k=1}^M x_k \ln\mu_k) \\
+</div>
+<script type="math/tex; mode=display">
+= \exp(\ln(\prod_{k=1}^M \mu_k^{x_k})) \\
+= \exp(\sum_{k=1}^M x_k \ln\mu_k) \\
+</script>
+</div>
+<p>from here, it is clear that</p>
+<ul>
+<li><span><span class="MathJax_Preview">\eta = \begin{bmatrix}\ln(u_1) &amp; \cdots &amp; \ln(u_M)\end{bmatrix}</span><script type="math/tex">\eta = \begin{bmatrix}\ln(u_1) & \cdots & \ln(u_M)\end{bmatrix}</script></span></li>
+<li><span><span class="MathJax_Preview">T(x) = x</span><script type="math/tex">T(x) = x</script></span></li>
+<li><span><span class="MathJax_Preview">h(x) = 1</span><script type="math/tex">h(x) = 1</script></span></li>
+</ul>
+<h3 id="gaussian">Gaussian<a class="headerlink" href="#gaussian" title="Permanent link">&para;</a></h3>
+<p>The univariate normal or Gaussian distribution is given by</p>
+<div>
+<div class="MathJax_Preview">
+p(x | \mu, \sigma) = \frac{1}{\sqrt{2\pi}\sigma}\exp\{-\frac{1}{2\sigma^2}(x-\mu)^2\} \\
+= \frac{1}{\sqrt{2 \pi} \sigma} \exp \{-\frac{1}{2\sigma^2}x^2 + \frac{1}{\sigma^2}xu - \frac{1}{2\sigma^2}u^2\} \\
+= \frac{1}{\sqrt{2 \pi} \sigma} \exp\{- \frac{1}{2\sigma^2}u^2\} \exp \{  \begin{bmatrix}\frac{1}{\sigma^2}u -\frac{1}{2\sigma^2}\end{bmatrix} \begin{bmatrix}x \\\ x^2\end{bmatrix} \} \\
+</div>
+<script type="math/tex; mode=display">
+p(x | \mu, \sigma) = \frac{1}{\sqrt{2\pi}\sigma}\exp\{-\frac{1}{2\sigma^2}(x-\mu)^2\} \\
+= \frac{1}{\sqrt{2 \pi} \sigma} \exp \{-\frac{1}{2\sigma^2}x^2 + \frac{1}{\sigma^2}xu - \frac{1}{2\sigma^2}u^2\} \\
+= \frac{1}{\sqrt{2 \pi} \sigma} \exp\{- \frac{1}{2\sigma^2}u^2\} \exp \{  \begin{bmatrix}\frac{1}{\sigma^2}u -\frac{1}{2\sigma^2}\end{bmatrix} \begin{bmatrix}x \\\ x^2\end{bmatrix} \} \\
+</script>
+</div>
+<p>from here, it is clear that</p>
+<ul>
+<li><span><span class="MathJax_Preview">\eta = \begin{bmatrix}\frac{1}{\sigma^2}u -\frac{1}{2\sigma^2}\end{bmatrix}</span><script type="math/tex">\eta = \begin{bmatrix}\frac{1}{\sigma^2}u -\frac{1}{2\sigma^2}\end{bmatrix}</script></span></li>
+<li><span><span class="MathJax_Preview">T(x) = \begin{bmatrix}x \\\ x^2\end{bmatrix}</span><script type="math/tex">T(x) = \begin{bmatrix}x \\\ x^2\end{bmatrix}</script></span></li>
+</ul>
+<p>re-writing in terms of <span><span class="MathJax_Preview">\eta</span><script type="math/tex">\eta</script></span></p>
+<div>
+<div class="MathJax_Preview">
+= (\sqrt{2 \pi})^{-\frac{1}{2}} \cdot (-2\eta_2)^{\frac{1}{2}} \cdot \exp\{\frac{\eta_1^2}{4\eta_2}\} \cdot \exp \{  \begin{bmatrix}\frac{1}{\sigma^2}u -\frac{1}{2\sigma^2}\end{bmatrix} \begin{bmatrix}x \\\ x^2\end{bmatrix} \} \\
+</div>
+<script type="math/tex; mode=display">
+= (\sqrt{2 \pi})^{-\frac{1}{2}} \cdot (-2\eta_2)^{\frac{1}{2}} \cdot \exp\{\frac{\eta_1^2}{4\eta_2}\} \cdot \exp \{  \begin{bmatrix}\frac{1}{\sigma^2}u -\frac{1}{2\sigma^2}\end{bmatrix} \begin{bmatrix}x \\\ x^2\end{bmatrix} \} \\
+</script>
+</div>
+<p>noting that</p>
+<ul>
+<li><span><span class="MathJax_Preview">h(x) = (\sqrt{2 \pi})^{-\frac{1}{2}}</span><script type="math/tex">h(x) = (\sqrt{2 \pi})^{-\frac{1}{2}}</script></span></li>
+<li><span><span class="MathJax_Preview">g(\eta) = (-2\eta_2)^{\frac{1}{2}} \cdot \exp\{\frac{\eta_1^2}{4\eta_2}\}</span><script type="math/tex">g(\eta) = (-2\eta_2)^{\frac{1}{2}} \cdot \exp\{\frac{\eta_1^2}{4\eta_2}\}</script></span></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Chapter 9.2 of <a href="https://doc.lagout.org/science/Artificial%20Intelligence/Machine%20learning/Machine%20Learning_%20A%20Probabilistic%20Perspective%20[Murphy%202012-08-24].pdf">K. Murphy, Machine Learning a Probabilistic Perspective</a> fleshes out these examples in more detail.</p>
 </div>
                 
                   
@@ -680,7 +981,7 @@ p(x | \eta) = h(x)g(\eta)exp\{\eta^T\mu(x)\}
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../../lectures/week_5/" title="Week 5" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../../lectures/week_7/" title="Week 7" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -689,7 +990,7 @@ p(x | \eta) = h(x)g(\eta)exp\{\eta^T\mu(x)\}
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Week 5
+                Week 7
               </span>
             </div>
           </a>

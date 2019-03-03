@@ -521,6 +521,30 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../week_6/" title="Week 6" class="md-nav__link">
+      Week 6
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../week_7/" title="Week 7" class="md-nav__link">
+      Week 7
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -792,10 +816,10 @@
 <p>where <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> are our inputs, <span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span> our classes and <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span> is the probability of our data (sometimes called the <em>evidence</em>). <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span> can be re-written as the marginal probability</p>
 <div>
 <div class="MathJax_Preview">
-p(C=c | x) = \frac{p(x, c)}{\sum_i p(x, c_i)}
+p(C=c | x) = \frac{p(x, c)}{\sum_C p(x, c_i)}
 </div>
 <script type="math/tex; mode=display">
-p(C=c | x) = \frac{p(x, c)}{\sum_i p(x, c_i)}
+p(C=c | x) = \frac{p(x, c)}{\sum_C p(x, c_i)}
 </script>
 </div>
 <p>What happens if <span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span> is never observed? Then we call this <a href="https://en.wikipedia.org/wiki/Cluster_analysis">clustering</a>. Clustering allows us to compute <span><span class="MathJax_Preview">p(C=c|x)</span><script type="math/tex">p(C=c|x)</script></span> ("the probability that the input belongs to some cluster") even if <span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span> is unobserved.</p>
@@ -809,8 +833,8 @@ p(C = c | x) = \frac{p(c, x)}{p(x)} ; c \text{ is unobserved}
 </div>
 <p>If our inputs and classes are continuous, we call this <a href="https://en.wikipedia.org/wiki/Regression_analysis">regression</a></p>
 <div>
-<div class="MathJax_Preview">p(y | x) = \frac{p(x, y)}{p(x)} = \frac{p(x, y)}{\int_y p(x,y)dy}</div>
-<script type="math/tex; mode=display">p(y | x) = \frac{p(x, y)}{p(x)} = \frac{p(x, y)}{\int_y p(x,y)dy}</script>
+<div class="MathJax_Preview">p(y | x) = \frac{p(x, y)}{p(x)} = \frac{p(x, y)}{\int_Y p(x,y)dy}</div>
+<script type="math/tex; mode=display">p(y | x) = \frac{p(x, y)}{p(x)} = \frac{p(x, y)}{\int_Y p(x,y)dy}</script>
 </div>
 <p>In general,</p>
 <ul>
@@ -819,10 +843,10 @@ p(C = c | x) = \frac{p(c, x)}{p(x)} ; c \text{ is unobserved}
 </ul>
 <p>In fact, we can mostly classify (no pun intended) the problems we care about into four types:</p>
 <ul>
-<li><strong>Classification</strong>: <span><span class="MathJax_Preview">p(c | x) = \frac{p(c, x)}{p(x)} = \frac{p(c, x)}{\sum_c p(c, x)}</span><script type="math/tex">p(c | x) = \frac{p(c, x)}{p(x)} = \frac{p(c, x)}{\sum_c p(c, x)}</script></span></li>
+<li><strong>Classification</strong>: <span><span class="MathJax_Preview">p(c | x) = \frac{p(c, x)}{p(x)} = \frac{p(c, x)}{\sum_C p(c, x)}</span><script type="math/tex">p(c | x) = \frac{p(c, x)}{p(x)} = \frac{p(c, x)}{\sum_C p(c, x)}</script></span></li>
 <li><strong>Clustering</strong>: <span><span class="MathJax_Preview">p(c | x) = \frac{p(c, x)}{p(x)} \ ; \  c \text{ is unobserved}</span><script type="math/tex">p(c | x) = \frac{p(c, x)}{p(x)} \ ; \  c \text{ is unobserved}</script></span></li>
 <li>
-<p><strong>Regression</strong>: <span><span class="MathJax_Preview">p(y | x) = \frac{p(y, x)}{p(x)} = \frac{p(y, x)}{\int_y p(x, y)dy}</span><script type="math/tex">p(y | x) = \frac{p(y, x)}{p(x)} = \frac{p(y, x)}{\int_y p(x, y)dy}</script></span></p>
+<p><strong>Regression</strong>: <span><span class="MathJax_Preview">p(y | x) = \frac{p(y, x)}{p(x)} = \frac{p(y, x)}{\int_Y p(x, y)dy}</span><script type="math/tex">p(y | x) = \frac{p(y, x)}{p(x)} = \frac{p(y, x)}{\int_Y p(x, y)dy}</script></span></p>
 </li>
 <li>
 <p><strong>Density Estimation</strong>: <span><span class="MathJax_Preview">p(y | x) = \frac{p(y, x)}{p(x)} ; y \text{ is unobserved}</span><script type="math/tex">p(y | x) = \frac{p(y, x)}{p(x)} ; y \text{ is unobserved}</script></span></p>
@@ -836,6 +860,10 @@ p(C = c | x) = \frac{p(c, x)}{p(x)} ; c \text{ is unobserved}
 <li><strong>Inference</strong>: Compute expectations of some things given others which are observed or marginalized.</li>
 <li><strong>Learning</strong>: Set the parameters of the joint distribution given some (partially) observed data to maximize the probability of seeing the data.</li>
 </ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>I believe "configuration" means the likelihood of all the variables of our model taking on some set of specific values.</p>
+</div>
 <h3 id="goals-of-a-probabilistic-model">Goals of a Probabilistic Model<a class="headerlink" href="#goals-of-a-probabilistic-model" title="Permanent link">&para;</a></h3>
 <p>We want to build prediction systems automatically based on data, and as little as possible on expert information. In this course, we’ll use probability to combine evidence from data and make predictions. We’ll use graphical models as a visual shorthand language to express and reason about families of model assumptions, structures, dependencies and information flow, without specifying exact distributional forms or parameters. In this case learning means <em>setting parameters of distributions given a model structure</em>.</p>
 <div class="admonition note">
@@ -1028,8 +1056,13 @@ k^n = 2^4
 </div>
 <p>An example is the <a href="https://en.wikipedia.org/wiki/Exponential_family">exponential family</a></p>
 <div>
-<div class="MathJax_Preview">p(x | \eta) = h(x)\exp\{\eta^TT(x)-A(\eta)\}</div>
-<script type="math/tex; mode=display">p(x | \eta) = h(x)\exp\{\eta^TT(x)-A(\eta)\}</script>
+<div class="MathJax_Preview">p(x | \eta) = h(x)\exp\{\eta^TT(x)-g(\eta)\}</div>
+<script type="math/tex; mode=display">p(x | \eta) = h(x)\exp\{\eta^TT(x)-g(\eta)\}</script>
+</div>
+<p>or, equivalently</p>
+<div>
+<div class="MathJax_Preview">p(x | \eta) = h(x)g(\eta)\exp\{\eta^TT(x)\}</div>
+<script type="math/tex; mode=display">p(x | \eta) = h(x)g(\eta)\exp\{\eta^TT(x)\}</script>
 </div>
 <h3 id="sufficient-statistics-example-bernoulli-trials">Sufficient statistics example: Bernoulli Trials<a class="headerlink" href="#sufficient-statistics-example-bernoulli-trials" title="Permanent link">&para;</a></h3>
 <p>Let us take the example of flipping a fair coin. This process that generates our data can be modeled as a <a href="https://en.wikipedia.org/wiki/Bernoulli_distribution">Bernoulli distribution</a></p>

@@ -481,6 +481,30 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../week_6/" title="Week 6" class="md-nav__link">
+      Week 6
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../week_7/" title="Week 7" class="md-nav__link">
+      Week 7
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -694,7 +718,7 @@
 <li>Murphy: Chapters 19-19.5</li>
 </ul>
 <h2 id="directed-graphical-models-a-review">Directed Graphical Models (a Review)<a class="headerlink" href="#directed-graphical-models-a-review" title="Permanent link">&para;</a></h2>
-<p>So far, we have seen <a href="../week_3/">directed acyclic graphical models (DAGMs)</a>. These models represent large joint distributions using <em>local</em> relationships specified by the graph, where each random variable is a node and the edges specify the conditional dependence between random variables (and therefore missing edges imply conditional independence). Graphically, these models looked like</p>
+<p>So far, we have seen <a href="../week_3/">directed acyclic graphical models (DAGMs)</a>. These models represent large <em>joint</em> distributions using <em>local</em> relationships specified by the graph, where each random variable is a <strong>node</strong> and the <strong>edges</strong> specify the <em>conditional dependence</em> between random variables (and therefore missing edges imply conditional independence). Graphically, these models looked like</p>
 <p><img alt="" src="../../img/lecture_4_1.png" /></p>
 <p>The graph factorizes according to the local conditional probabilities</p>
 <div>
@@ -743,7 +767,7 @@ mb(8) = \{3, 7\} \cup \{9, 13\} \cup \{12, 4\}
 </div>
 <p>An alternative to DAGMs, is undirected graphical models (UGMs).</p>
 <h2 id="undirected-graphical-models">Undirected Graphical Models<a class="headerlink" href="#undirected-graphical-models" title="Permanent link">&para;</a></h2>
-<p>Undirected graphical models (UDGMs), also called <a href="https://en.wikipedia.org/wiki/Markov_random_field">Markov random fields</a> (MRFs) or Markov networks, are a set of random variables described by an undirected graph. As in DAGMs, the <em>nodes</em> in the graph represent <em>random variables</em>. However, in contrast to DAGMs, edges represent <em>probabilistic interactions</em> between neighboring variables (as opposed to conditional dependence).</p>
+<p>Undirected graphical models (UDGMs), also called <a href="https://en.wikipedia.org/wiki/Markov_random_field">Markov random fields</a> (MRFs) or Markov networks, are a set of random variables described by an undirected graph. As in DAGMs, the <strong>nodes</strong> in the graph represent <em>random variables</em>. However, in contrast to DAGMs, <strong>edges</strong> represent <em>probabilistic interactions</em> between neighboring variables (as opposed to conditional dependence).</p>
 <h3 id="dependencies-in-ugms">Dependencies in UGMs<a class="headerlink" href="#dependencies-in-ugms" title="Permanent link">&para;</a></h3>
 <p>In DGMs, we used conditional probabilities to represent the distribution of nodes given their parents. In UGMs, we use a more <em>symmetric</em> parameterization that captures the affinities between related variables.</p>
 <p>The following three properties are used to determine if nodes are conditionally independent:</p>
@@ -793,12 +817,16 @@ G \Rightarrow L \Rightarrow P \Rightarrow G \quad p(x) > 0
 </ul>
 <h4 id="image-example">Image example<a class="headerlink" href="#image-example" title="Permanent link">&para;</a></h4>
 <p><img alt="" src="../../img/lecture_4_3.png" /></p>
-<div class="admonition error">
-<p class="admonition-title">Error</p>
-<p>I don't know how to solve the examples on the lecture slides (slide 11). Leaving blank for now.</p>
+<ul>
+<li>Global: <span><span class="MathJax_Preview">\{X_1, X_2\} \bot \{X_{15}, X_{20}\} | \{X_3, X_6, X_7\}</span><script type="math/tex">\{X_1, X_2\} \bot \{X_{15}, X_{20}\} | \{X_3, X_6, X_7\}</script></span></li>
+<li>Local: <span><span class="MathJax_Preview">1 \bot \text{rest} | \{X_2, X_6\}</span><script type="math/tex">1 \bot \text{rest} | \{X_2, X_6\}</script></span></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>I didn't understand the pairwise examples on the lecture slides, so I omitted them here (lecture 4, slide 11).</p>
 </div>
 <h3 id="not-all-ugms-can-be-represented-as-dgms">Not all UGMs can be represented as DGMs<a class="headerlink" href="#not-all-ugms-can-be-represented-as-dgms" title="Permanent link">&para;</a></h3>
-<p>Take the follow UGM for example (a) and our attempts at encoding this as a DGM (b, c).</p>
+<p>Take the following UGM for example (a) and our attempts at encoding this as a DGM (b, c).</p>
 <p><img alt="" src="../../img/lecture_4_5.png" /></p>
 <p>First, note the two conditional independencies of our UGM in (a):</p>
 <ol>
@@ -875,16 +903,16 @@ p(x) \propto \psi_{1, 2, 3}(x_1, x_2, x_3) \psi_{2, 3, 5}(x_2, x_3, x_5) \psi_{2
 <p>In UGMs, we do something similar. If the variables are discrete, we can represent the <em>potential</em> (or energy) functions as tables of (non-negative) numbers</p>
 <div>
 <div class="MathJax_Preview">
-p(A, B, C, D) = \frac{1}{Z} \psi_{a, b}(A, B) \psi_{b, c}(B, C) \psi_{c, d}(C, D) \psi_{a, d}(A, D)
+p(A, B, C, D) = \frac{1}{Z} \psi_{A, B}(A, B) \psi_{B, C}(B, C) \psi_{C, D}(C, D) \psi_{A, D}(A, D)
 </div>
 <script type="math/tex; mode=display">
-p(A, B, C, D) = \frac{1}{Z} \psi_{a, b}(A, B) \psi_{b, c}(B, C) \psi_{c, d}(C, D) \psi_{a, d}(A, D)
+p(A, B, C, D) = \frac{1}{Z} \psi_{A, B}(A, B) \psi_{B, C}(B, C) \psi_{C, D}(C, D) \psi_{A, D}(A, D)
 </script>
 </div>
 <p>where</p>
 <p><img alt="" src="../../img/lecture_4_8.png" /></p>
-<div class="admonition error">
-<p class="admonition-title">Error</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
 <p>Why the switch from <span><span class="MathJax_Preview">\psi</span><script type="math/tex">\psi</script></span> to <span><span class="MathJax_Preview">\phi</span><script type="math/tex">\phi</script></span> here?</p>
 </div>
 <p>It is important to note that these potentials are <em>not</em> probabilities, but instead encode <em>relative affinities</em> between the different assignments. For example, in the above table, <span><span class="MathJax_Preview">a^0, b^0</span><script type="math/tex">a^0, b^0</script></span> is taken to be 30X more likely than <span><span class="MathJax_Preview">a^1, a^0</span><script type="math/tex">a^1, a^0</script></span>.</p>
@@ -892,42 +920,68 @@ p(A, B, C, D) = \frac{1}{Z} \psi_{a, b}(A, B) \psi_{b, c}(B, C) \psi_{c, d}(C, D
 <p>Given 3 disjoint sets of variables <span><span class="MathJax_Preview">X, Y, Z</span><script type="math/tex">X, Y, Z</script></span> and factors <span><span class="MathJax_Preview">\psi_1(X, Y)</span><script type="math/tex">\psi_1(X, Y)</script></span>, <span><span class="MathJax_Preview">\psi_2(Y, Z)</span><script type="math/tex">\psi_2(Y, Z)</script></span> the <strong>factor product</strong> is defined as:</p>
 <div>
 <div class="MathJax_Preview">
-\psi_{X, Y, Z}(X, Y, Z) = \psi_{X, Y}(X, Y)\phi_{Y, Z}(Y, Z)
+\psi_{X, Y, Z}(X, Y, Z) = \psi_{X, Y}(X, Y)\psi_{Y, Z}(Y, Z)
 </div>
 <script type="math/tex; mode=display">
-\psi_{X, Y, Z}(X, Y, Z) = \psi_{X, Y}(X, Y)\phi_{Y, Z}(Y, Z)
+\psi_{X, Y, Z}(X, Y, Z) = \psi_{X, Y}(X, Y)\psi_{Y, Z}(Y, Z)
 </script>
 </div>
 <p><img alt="" src="../../img/lecture_4_9.png" /></p>
-<div class="admonition error">
-<p class="admonition-title">Error</p>
-<p>Again, is the the switch from <span><span class="MathJax_Preview">\psi</span><script type="math/tex">\psi</script></span> to <span><span class="MathJax_Preview">\phi</span><script type="math/tex">\phi</script></span> a typo? Deliberate?</p>
-</div>
 <p>From the factor product, we can make queries about the <em>marginal probabilities</em>, e.g.</p>
 <div>
 <div class="MathJax_Preview">
-p(a_0, b_0, c_0, d_0) \propto (30)(100)(1)(100) = 300000
+p(a^0, b^0, c^0, d^0) \propto \psi_{A, B, C, D}(a^0, b^0, c^0, d^0)\\
+\propto \psi_{A, B}(a^0, b^0)\psi_{B, C}(b^0, c^0)\psi_{C, D}(c^0, d^0)\psi_{A, D}(a^0, d^0) \\
+\propto (30)(100)(1)(100) = 300000
 </div>
 <script type="math/tex; mode=display">
-p(a_0, b_0, c_0, d_0) \propto (30)(100)(1)(100) = 300000
+p(a^0, b^0, c^0, d^0) \propto \psi_{A, B, C, D}(a^0, b^0, c^0, d^0)\\
+\propto \psi_{A, B}(a^0, b^0)\psi_{B, C}(b^0, c^0)\psi_{C, D}(c^0, d^0)\psi_{A, D}(a^0, d^0) \\
+\propto (30)(100)(1)(100) = 300000
 </script>
 </div>
 <p>enumerating all marginal probabilities in a table for our running example, we get</p>
 <p><img alt="" src="../../img/lecture_4_10.png" /></p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>To get the normalized marginal probability, divide by the partition function <span><span class="MathJax_Preview">Z(\theta) \sum_y \prod_{c \in \mathcal C} \psi_c(y_c | \theta)</span><script type="math/tex">Z(\theta) \sum_y \prod_{c \in \mathcal C} \psi_c(y_c | \theta)</script></span></p>
+<p>To get the normalized marginal probability, divide by the partition function <span><span class="MathJax_Preview">Z(\theta) \sum_x \prod_{c \in \mathcal C} \psi_c(x_c | \theta_c)</span><script type="math/tex">Z(\theta) \sum_x \prod_{c \in \mathcal C} \psi_c(x_c | \theta_c)</script></span></p>
 </div>
-<p>we can also make queires about the <em>conditional probability</em>. Conditioning on a assignment <span><span class="MathJax_Preview">u</span><script type="math/tex">u</script></span> to a subset of variables <span><span class="MathJax_Preview">U</span><script type="math/tex">U</script></span> can be done by</p>
+<p>to compute the marginal probability of a single variable in our graph, e.g. <span><span class="MathJax_Preview">p(b_0)</span><script type="math/tex">p(b_0)</script></span>, marginalize over the other variables</p>
+<div>
+<div class="MathJax_Preview">
+p(b^0) \propto \sum_{a, c, d} p(a, b^o, c, d) \\
+\propto \sum_{a, c, d} \psi_{A, B, C, D}(a, b^0, c, d) \\
+\propto \sum_{a, c, d} \psi_{A, B}(a, b^0)\psi_{B, C}(b^0, c)\psi_{C, D}(c, d)\psi_{A, D}(a, d)
+</div>
+<script type="math/tex; mode=display">
+p(b^0) \propto \sum_{a, c, d} p(a, b^o, c, d) \\
+\propto \sum_{a, c, d} \psi_{A, B, C, D}(a, b^0, c, d) \\
+\propto \sum_{a, c, d} \psi_{A, B}(a, b^0)\psi_{B, C}(b^0, c)\psi_{C, D}(c, d)\psi_{A, D}(a, d)
+</script>
+</div>
+<p>we can also make queries about the <em>conditional probability</em>. Conditioning on a assignment <span><span class="MathJax_Preview">u</span><script type="math/tex">u</script></span> to a subset of variables <span><span class="MathJax_Preview">U</span><script type="math/tex">U</script></span> can be done by</p>
 <ol>
 <li>Eliminating all entries that are inconsistent with the assignment</li>
 <li>Re-normalizing the remaining entries so that they sum to 1</li>
 </ol>
 <p>For example, conditioning on <span><span class="MathJax_Preview">c_1</span><script type="math/tex">c_1</script></span></p>
+<div>
+<div class="MathJax_Preview">
+p(c^1 | a, b, d) \propto \sum_{a, b, d} p(a, b, c^1, d) \\
+\propto \sum_{a, b, d} \psi_{A, B, C, D}(a, b, c^1, d) \\
+\propto \sum_{a, b, d} \psi_{A, B}(a, b)\psi_{B, C}(b, c^1)\psi_{C, D}(c^1, d)\psi_{A, D}(a, d)
+</div>
+<script type="math/tex; mode=display">
+p(c^1 | a, b, d) \propto \sum_{a, b, d} p(a, b, c^1, d) \\
+\propto \sum_{a, b, d} \psi_{A, B, C, D}(a, b, c^1, d) \\
+\propto \sum_{a, b, d} \psi_{A, B}(a, b)\psi_{B, C}(b, c^1)\psi_{C, D}(c^1, d)\psi_{A, D}(a, d)
+</script>
+</div>
+<p>from this sum, take only factors consistent with the assignment <span><span class="MathJax_Preview">c^1</span><script type="math/tex">c^1</script></span>, re-normalize remaining entries and then sum.</p>
 <p><img alt="" src="../../img/lecture_4_11.png" /></p>
 <div class="admonition error">
 <p class="admonition-title">Error</p>
-<p>I skipped some material for lecture 4 that was presented at the beginning of lecture 5. He said this would not be tested, so I will return to it after the midterm.</p>
+<p>I don't fully understand this section. Seems to be a disconnect between lecture notes and lecture slides. Re-visit, clean-up, and if I still don't understand go to office hours.</p>
 </div>
                 
                   
