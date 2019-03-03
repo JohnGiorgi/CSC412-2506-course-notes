@@ -25,7 +25,7 @@ In a [generative model](https://en.wikipedia.org/wiki/Generative_model), we assu
 where \(X\) are our inputs, \(C\) our classes and \(p(x)\) is the probability of our data (sometimes called the _evidence_). \(p(x)\) can be re-written as the marginal probability
 
 \[
-p(C=c | x) = \frac{p(x, c)}{\sum_i p(x, c_i)}
+p(C=c | x) = \frac{p(x, c)}{\sum_C p(x, c_i)}
 \]
 
 What happens if \(c\) is never observed? Then we call this [clustering](https://en.wikipedia.org/wiki/Cluster_analysis). Clustering allows us to compute \(p(C=c|x)\) ("the probability that the input belongs to some cluster") even if \(c\) is unobserved.
@@ -36,7 +36,7 @@ p(C = c | x) = \frac{p(c, x)}{p(x)} ; c \text{ is unobserved}
 
 If our inputs and classes are continuous, we call this [regression](https://en.wikipedia.org/wiki/Regression_analysis)
 
-\[p(y | x) = \frac{p(x, y)}{p(x)} = \frac{p(x, y)}{\int_y p(x,y)dy}\]
+\[p(y | x) = \frac{p(x, y)}{p(x)} = \frac{p(x, y)}{\int_Y p(x,y)dy}\]
 
 In general,
 
@@ -45,9 +45,9 @@ In general,
 
 In fact, we can mostly classify (no pun intended) the problems we care about into four types:
 
-- **Classification**: \(p(c | x) = \frac{p(c, x)}{p(x)} = \frac{p(c, x)}{\sum_c p(c, x)}\)
+- **Classification**: \(p(c | x) = \frac{p(c, x)}{p(x)} = \frac{p(c, x)}{\sum_C p(c, x)}\)
 - **Clustering**: \(p(c | x) = \frac{p(c, x)}{p(x)} \ ; \  c \text{ is unobserved}\)
-- **Regression**: \(p(y | x) = \frac{p(y, x)}{p(x)} = \frac{p(y, x)}{\int_y p(x, y)dy}\)
+- **Regression**: \(p(y | x) = \frac{p(y, x)}{p(x)} = \frac{p(y, x)}{\int_Y p(x, y)dy}\)
 
 - **Density Estimation**: \(p(y | x) = \frac{p(y, x)}{p(x)} ; y \text{ is unobserved}\)
 
@@ -59,6 +59,9 @@ The fundamental operations we will perform on a probabilistic modal are:
 - **Compute probabilities**: When all nodes are either observed or marginalized the result is a single number which is the probability of the configuration.
 - **Inference**: Compute expectations of some things given others which are observed or marginalized.
 - **Learning**: Set the parameters of the joint distribution given some (partially) observed data to maximize the probability of seeing the data.
+
+!!! tip
+    I believe "configuration" means the likelihood of all the variables of our model taking on some set of specific values.
 
 ### Goals of a Probabilistic Model
 
@@ -225,7 +228,11 @@ Equivalently (by the Neyman factorization theorem) we can write
 
 An example is the [exponential family](https://en.wikipedia.org/wiki/Exponential_family)
 
-\[p(x | \eta) = h(x)\exp\{\eta^TT(x)-A(\eta)\}\]
+\[p(x | \eta) = h(x)\exp\{\eta^TT(x)-g(\eta)\}\]
+
+or, equivalently
+
+\[p(x | \eta) = h(x)g(\eta)\exp\{\eta^TT(x)\}\]
 
 ### Sufficient statistics example: Bernoulli Trials
 

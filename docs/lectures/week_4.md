@@ -6,7 +6,7 @@
 
 ## Directed Graphical Models (a Review)
 
-So far, we have seen [directed acyclic graphical models (DAGMs)](../week_3/). These models represent large joint distributions using _local_ relationships specified by the graph, where each random variable is a node and the edges specify the conditional dependence between random variables (and therefore missing edges imply conditional independence). Graphically, these models looked like
+So far, we have seen [directed acyclic graphical models (DAGMs)](../week_3/). These models represent large _joint_ distributions using _local_ relationships specified by the graph, where each random variable is a **node** and the **edges** specify the _conditional dependence_ between random variables (and therefore missing edges imply conditional independence). Graphically, these models looked like
 
 ![](../img/lecture_4_1.png)
 
@@ -53,7 +53,7 @@ An alternative to DAGMs, is undirected graphical models (UGMs).
 
 ## Undirected Graphical Models
 
-Undirected graphical models (UDGMs), also called [Markov random fields](https://en.wikipedia.org/wiki/Markov_random_field) (MRFs) or Markov networks, are a set of random variables described by an undirected graph. As in DAGMs, the _nodes_ in the graph represent _random variables_. However, in contrast to DAGMs, edges represent _probabilistic interactions_ between neighboring variables (as opposed to conditional dependence).
+Undirected graphical models (UDGMs), also called [Markov random fields](https://en.wikipedia.org/wiki/Markov_random_field) (MRFs) or Markov networks, are a set of random variables described by an undirected graph. As in DAGMs, the __nodes__ in the graph represent _random variables_. However, in contrast to DAGMs, __edges__ represent _probabilistic interactions_ between neighboring variables (as opposed to conditional dependence).
 
 ### Dependencies in UGMs
 
@@ -101,12 +101,16 @@ G \Rightarrow L \Rightarrow P \Rightarrow G \quad p(x) > 0
 
 ![](../img/lecture_4_3.png)
 
-!!! error
-    I don't know how to solve the examples on the lecture slides (slide 11). Leaving blank for now.
+- Global: \(\{X_1, X_2\} \bot \{X_{15}, X_{20}\} | \{X_3, X_6, X_7\}\)
+- Local: \(1 \bot \text{rest} | \{X_2, X_6\}\)
+
+!!! warning
+
+    I didn't understand the pairwise examples on the lecture slides, so I omitted them here (lecture 4, slide 11).
 
 ### Not all UGMs can be represented as DGMs
 
-Take the follow UGM for example (a) and our attempts at encoding this as a DGM (b, c).
+Take the following UGM for example (a) and our attempts at encoding this as a DGM (b, c).
 
 ![](../img/lecture_4_5.png)
 
@@ -187,14 +191,14 @@ Recall how we parameterized DAGMs of discrete random variables by using conditio
 In UGMs, we do something similar. If the variables are discrete, we can represent the _potential_ (or energy) functions as tables of (non-negative) numbers
 
 \[
-p(A, B, C, D) = \frac{1}{Z} \psi_{a, b}(A, B) \psi_{b, c}(B, C) \psi_{c, d}(C, D) \psi_{a, d}(A, D)
+p(A, B, C, D) = \frac{1}{Z} \psi_{A, B}(A, B) \psi_{B, C}(B, C) \psi_{C, D}(C, D) \psi_{A, D}(A, D)
 \]
 
 where
 
 ![](../img/lecture_4_8.png)
 
-!!! error
+!!! warning
     Why the switch from \(\psi\) to \(\phi\) here?
 
 It is important to note that these potentials are _not_ probabilities, but instead encode _relative affinities_ between the different assignments. For example, in the above table, \(a^0, b^0\) is taken to be 30X more likely than \(a^1, a^0\).
@@ -204,18 +208,17 @@ It is important to note that these potentials are _not_ probabilities, but inste
 Given 3 disjoint sets of variables \(X, Y, Z\) and factors \(\psi_1(X, Y)\), \(\psi_2(Y, Z)\) the **factor product** is defined as:
 
 \[
-\psi_{X, Y, Z}(X, Y, Z) = \psi_{X, Y}(X, Y)\phi_{Y, Z}(Y, Z)
+\psi_{X, Y, Z}(X, Y, Z) = \psi_{X, Y}(X, Y)\psi_{Y, Z}(Y, Z)
 \]
 
 ![](../img/lecture_4_9.png)
 
-!!! error
-    Again, is the the switch from \(\psi\) to \(\phi\) a typo? Deliberate?
-
 From the factor product, we can make queries about the _marginal probabilities_, e.g.
 
 \[
-p(a_0, b_0, c_0, d_0) \propto (30)(100)(1)(100) = 300000
+p(a^0, b^0, c^0, d^0) \propto \psi_{A, B, C, D}(a^0, b^0, c^0, d^0)\\
+\propto \psi_{A, B}(a^0, b^0)\psi_{B, C}(b^0, c^0)\psi_{C, D}(c^0, d^0)\psi_{A, D}(a^0, d^0) \\
+\propto (30)(100)(1)(100) = 300000
 \]
 
 enumerating all marginal probabilities in a table for our running example, we get
@@ -223,16 +226,33 @@ enumerating all marginal probabilities in a table for our running example, we ge
 ![](../img/lecture_4_10.png)
 
 !!! tip
-    To get the normalized marginal probability, divide by the partition function \(Z(\theta) \sum_y \prod_{c \in \mathcal C} \psi_c(y_c | \theta)\)
+    To get the normalized marginal probability, divide by the partition function \(Z(\theta) \sum_x \prod_{c \in \mathcal C} \psi_c(x_c | \theta_c)\)
 
-we can also make queires about the _conditional probability_. Conditioning on a assignment \(u\) to a subset of variables \(U\) can be done by
+to compute the marginal probability of a single variable in our graph, e.g. \(p(b_0)\), marginalize over the other variables
+
+\[
+p(b^0) \propto \sum_{a, c, d} p(a, b^o, c, d) \\
+\propto \sum_{a, c, d} \psi_{A, B, C, D}(a, b^0, c, d) \\
+\propto \sum_{a, c, d} \psi_{A, B}(a, b^0)\psi_{B, C}(b^0, c)\psi_{C, D}(c, d)\psi_{A, D}(a, d)
+\]
+
+we can also make queries about the _conditional probability_. Conditioning on a assignment \(u\) to a subset of variables \(U\) can be done by
 
 1. Eliminating all entries that are inconsistent with the assignment
 2. Re-normalizing the remaining entries so that they sum to 1
 
 For example, conditioning on \(c_1\)
 
+\[
+p(c^1 | a, b, d) \propto \sum_{a, b, d} p(a, b, c^1, d) \\
+\propto \sum_{a, b, d} \psi_{A, B, C, D}(a, b, c^1, d) \\
+\propto \sum_{a, b, d} \psi_{A, B}(a, b)\psi_{B, C}(b, c^1)\psi_{C, D}(c^1, d)\psi_{A, D}(a, d)
+\]
+
+from this sum, take only factors consistent with the assignment \(c^1\), re-normalize remaining entries and then sum.
+
+
 ![](../img/lecture_4_11.png)
 
 !!! error
-    I skipped some material for lecture 4 that was presented at the beginning of lecture 5. He said this would not be tested, so I will return to it after the midterm.
+    I don't fully understand this section. Seems to be a disconnect between lecture notes and lecture slides. Re-visit, clean-up, and if I still don't understand go to office hours.

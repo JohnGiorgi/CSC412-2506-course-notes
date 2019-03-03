@@ -11,7 +11,6 @@
 
 - Variable elimination (VE)
 - Complexity of VE
-- Belief propogation
 
 ## Inference in PGM
 
@@ -31,13 +30,7 @@ where \(X_R\) is the set of random variables in our model that are neither part 
 p(X_F | X_E) = \frac{p(X_F, X_E)}{p(X_E)}
 \]
 
-i.e., we want to compute the posterior marginal density of some unobserved variables \(X_F\) given some evidence \(X_E\). Our MAP estimate of \(X_F\), \(\hat X_F\) is
-
-\[
-\text{MAP } \hat X_F = \underset{X_F}{\operatorname{argmax}} p(X_E, X_F) = \underset{X_F}{\operatorname{argmax}} P(X_F | X_E)
-\]
-
-each of the distributions we need to compute scan be computed by marginalizing over the other variables.
+each of the distributions we need to compute can be computed by marginalizing over the other variables.
 
 \[
 p(X_F, X_E) = \sum_{X_R}p(X_F, X_E, X_R) \\
@@ -69,7 +62,8 @@ X_F = \{D\}, \ X_E = \{\}, \ X_R = \{A, B, C\}
 and
 
 \[
-P(D) = \sum_{A, B, C}p(A, B, C, D) \\
+P(D) = \sum_{X_R}X_F, X_R \\
+= \sum_{A, B, C}p(A, B, C, D) \\
 = \sum_C \sum_B \sum_A p(A)p(B | A) p(C | B) p(D | C)
 \]
 
@@ -104,13 +98,13 @@ What is \(p(x_1 | \bar x_6)\)? We have
     The \(\bar x\) means that the variable is observed.
 
 \[
-\ X_F = \{x_1\}, X_E = \{\bar x_6\}, \ X_R = \{x_2, x_3, x_4, x_5\}
+\ X_F = \{x_1\}, X_E = \{x_6\}, \ X_R = \{x_2, x_3, x_4, x_5\}
 \]
 
 and
 
 \[
-p(x_1 | \bar x_6) = \frac{p(x_1, \bar x_6)}{p(\bar x_6)} =  \frac{p(x_1, \bar x_6)}{\sum_{x_1}p(x_1, \bar x_6)}
+p(x_1 | \bar x_6) = \frac{p(x_1, \bar x_6)}{p(\bar x_6)} =  \frac{p(x_1, \bar x_6)}{\sum_{x}p(x, \bar x_6)}
 \]
 
 
