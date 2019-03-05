@@ -120,6 +120,9 @@ given in figure (a).
 
 Just because we can plot this distribution, that does not mean we can draw samples from it. To start, we don't know the normalizing constant, \(Z\).
 
+!!! warning
+    Note the some of these images come from MacKay, who uses a different notation. We use lowercase \(p\) and \(q\) in place of his upper case \(P\) and \(Q\), and we use \(\tilde p\) / \(\tilde q\) in place of his \(p^*\) / \(q^*\).
+
 To simplify the problem, we could discretize the variable \(x\) and sample from the discrete probability distribution over a finite set of uniformly spaced points \(\{x_i\}\) (figure (d)). If we evaluate \(\tilde p_i = \tilde p(x_i)\) at each point \(x_i\), we could compute
 
 \[
@@ -178,3 +181,87 @@ We begin with the same assumption we have made earlier; the density from which w
 \[
 p(x) = \frac{\tilde p(x)}{Z}
 \]
+
+We further assume we have a simpler density, \(q(x)\) from which it is easy to _sample_ from (i.e. \(x \sim q(x)\)) and easy to _evaluate_ (i.e. \(\tilde q(x)\))
+
+\[
+q(x) = \frac{\tilde q(x)}{Z_Q}
+\]
+
+we call such a density \(q(x)\) the __sampler density__. An example of the functions \(\tilde p, \tilde q\) and \(\phi\) is given in in figure 29.5.
+
+![](../img/lecture_7_4.png)
+
+In importance sampling, we generate \(R\) samples from \(q(x)\)
+
+\[
+\{x^{(r)}\}^R_{r=1} \sim q(x)
+\]
+
+If these points were samples from \(p(x)\) then we could estimate \(\Phi\) by
+
+\[
+\Phi = \mathbb E_{x \sim p(x)}[\phi(x)] \approx \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) = \hat \Phi
+\]
+
+But when we generate samples from \(q\), values of \(x\) where \(q(x)\) is greater than \(p(x)\) will be _over-represented_ in this estimator, and points where \(q(x)\) is less than \(p(x)\) will be _under-represented_. To take into account the fact that we have sampled from the wrong distribution, we introduce _weights_.
+
+\[
+\tilde w_r = \frac{\tilde p(x^{(r)})}{\tilde q(x^{(r)})}
+\]
+
+Finally, we rewrite our estimator under \(q\)
+
+\[
+\Phi = \int \phi(x)p(x)dx\\
+= \int \phi(x) \cdot \frac{p(x)}{q(x)} \cdot q(x)dx \\
+\approx \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)})\frac{p(x^{(r)})}{q(x^{(r)})}
+\]
+
+however, the estimator as written still relies on \(p(x)\), we want an estimator that relies on \(\tilde p(x)\)
+
+\[
+= \frac{Z_q}{Z_p}\int \phi(x) \cdot \frac{\tilde p(x)}{\tilde q(x)} \cdot q(x) dx \\
+\approx \frac{Z_q}{Z_p} \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot \tilde w_r \\
+= \frac{\frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot  \tilde w_r}{\frac{1}{R}\sum_{r=1}^R \tilde w_r} \\
+= \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot  w_r \\
+= \hat \Phi_{iw}
+\]
+
+!!! warning
+    I don't know where the \(q(x)\) went from line 1 to 2?
+
+where \(\frac{Z_p}{Z_q} = \frac{1}{R}\sum_{r=1}^R \tilde w_r\), \(w_r = \frac{\tilde w_r}{\sum_{r=1}^R \tilde w_r}\) and \(\hat \Phi_{iw}\) is our importance weighted estimator.
+
+!!! note
+    \(\hat \Phi_{iw}\) is biased, by consistent.
+
+### Rejection Sampling
+
+In [**rejection sampling**](https://en.wikipedia.org/wiki/Rejection_sampling) we assume again a one-dimensional density \(p(x) = \tilde p(x)/Z\) that is too complicated a function for us to be able to sample from it directly. We assume that we have a simpler _proposal density_ \(q(x)\) which we can evaluate (within a multiplicative factor \(Z_Q\), as before), and from which we can generate samples. We further assume that we know the value of a constant \(c\) such that
+
+\[
+c \tilde q(x) > \tilde p(x) \quad \forall x
+\]
+
+A schematic picture of two such functions is shown below
+
+![](../img/lecture_7_5.png)
+
+The procedure is as follows:
+
+1. Generate two random numbers.
+    1. The first, \(x\), is generated from the proposal density \(q(x)\).
+    2. The second, \(u\) is generated uniformly from the interval \([0, c \tilde q(x)]\) (see figure (b) above).
+2. Evaluate \(\tilde p(x)\) and accept or reject the sample \(x\) by comparing the value of \(u\) with the value of \(\tilde p(x)\)
+    1. If \(u > \tilde p(x)\), then \(x\) is rejected
+    2. Otherwise \(x\) is accepted; \(x\) is added to our set of samples \(\{x^{(r)}\}\) and the value of \(u\) discarded.
+
+Why does this procedure generate samples from \(p(x)\)? The proposed point \((x, u)\) comes with uniform probability from the lightly shaded area underneath the curve \(c \tilde q(x)\) as shown in figure (b) above. The rejection rule rejects all the points that lie above the curve \(\tilde p(x)\). So the points \((x,u)\) that are accepted are uniformly distributed in the heavily shaded area under \(\tilde p(x)\). This implies that the probability density of the x-coordinates of the accepted points must be proportional to \(\tilde p(x)\), so the samples must be independent samples from \(p(x)\).
+
+!!! note
+    Rejection sampling will work best if \(q\) is a good approximation to \(p\). If \(q\) is very different from \(p\) then, for \(cq\) to exceed \(p\) everywhere, \(c\) will necessarily have to be large and the frequency of rejection will be large.
+
+#### Rejection sampling in many dimensions
+
+In a high-dimensional problem it is very likely that the requirement that c Q∗ be an upper bound for P ∗ will force c to be so huge that acceptances will be very rare indeed. Finding such a value of c may be difficult too, since in many problems we know neither where the modes of P ∗ are located nor how high they are.
