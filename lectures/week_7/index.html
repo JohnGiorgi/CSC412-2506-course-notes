@@ -482,6 +482,26 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#rejection-sampling" title="Rejection Sampling" class="md-nav__link">
+    Rejection Sampling
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rejection-sampling-in-many-dimensions" title="Rejection sampling in many dimensions" class="md-nav__link">
+    Rejection sampling in many dimensions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -674,6 +694,26 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#rejection-sampling" title="Rejection Sampling" class="md-nav__link">
+    Rejection Sampling
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rejection-sampling-in-many-dimensions" title="Rejection sampling in many dimensions" class="md-nav__link">
+    Rejection sampling in many dimensions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -837,6 +877,10 @@ p(x) = \frac{\tilde p(x)}{Z}
 <p>given in figure (a).</p>
 <p><img alt="" src="../../img/lecture_7_1.png" /></p>
 <p>Just because we can plot this distribution, that does not mean we can draw samples from it. To start, we don't know the normalizing constant, <span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Note the some of these images come from MacKay, who uses a different notation. We use lowercase <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> and <span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span> in place of his upper case <span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span> and <span><span class="MathJax_Preview">Q</span><script type="math/tex">Q</script></span>, and we use <span><span class="MathJax_Preview">\tilde p</span><script type="math/tex">\tilde p</script></span> / <span><span class="MathJax_Preview">\tilde q</span><script type="math/tex">\tilde q</script></span> in place of his <span><span class="MathJax_Preview">p^*</span><script type="math/tex">p^*</script></span> / <span><span class="MathJax_Preview">q^*</span><script type="math/tex">q^*</script></span>.</p>
+</div>
 <p>To simplify the problem, we could discretize the variable <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> and sample from the discrete probability distribution over a finite set of uniformly spaced points <span><span class="MathJax_Preview">\{x_i\}</span><script type="math/tex">\{x_i\}</script></span> (figure (d)). If we evaluate <span><span class="MathJax_Preview">\tilde p_i = \tilde p(x_i)</span><script type="math/tex">\tilde p_i = \tilde p(x_i)</script></span> at each point <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span>, we could compute</p>
 <div>
 <div class="MathJax_Preview">
@@ -901,6 +945,115 @@ p(x) = \frac{\tilde p(x)}{Z}
 p(x) = \frac{\tilde p(x)}{Z}
 </script>
 </div>
+<p>We further assume we have a simpler density, <span><span class="MathJax_Preview">q(x)</span><script type="math/tex">q(x)</script></span> from which it is easy to <em>sample</em> from (i.e. <span><span class="MathJax_Preview">x \sim q(x)</span><script type="math/tex">x \sim q(x)</script></span>) and easy to <em>evaluate</em> (i.e. <span><span class="MathJax_Preview">\tilde q(x)</span><script type="math/tex">\tilde q(x)</script></span>)</p>
+<div>
+<div class="MathJax_Preview">
+q(x) = \frac{\tilde q(x)}{Z_Q}
+</div>
+<script type="math/tex; mode=display">
+q(x) = \frac{\tilde q(x)}{Z_Q}
+</script>
+</div>
+<p>we call such a density <span><span class="MathJax_Preview">q(x)</span><script type="math/tex">q(x)</script></span> the <strong>sampler density</strong>. An example of the functions <span><span class="MathJax_Preview">\tilde p, \tilde q</span><script type="math/tex">\tilde p, \tilde q</script></span> and <span><span class="MathJax_Preview">\phi</span><script type="math/tex">\phi</script></span> is given in in figure 29.5.</p>
+<p><img alt="" src="../../img/lecture_7_4.png" /></p>
+<p>In importance sampling, we generate <span><span class="MathJax_Preview">R</span><script type="math/tex">R</script></span> samples from <span><span class="MathJax_Preview">q(x)</span><script type="math/tex">q(x)</script></span></p>
+<div>
+<div class="MathJax_Preview">
+\{x^{(r)}\}^R_{r=1} \sim q(x)
+</div>
+<script type="math/tex; mode=display">
+\{x^{(r)}\}^R_{r=1} \sim q(x)
+</script>
+</div>
+<p>If these points were samples from <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span> then we could estimate <span><span class="MathJax_Preview">\Phi</span><script type="math/tex">\Phi</script></span> by</p>
+<div>
+<div class="MathJax_Preview">
+\Phi = \mathbb E_{x \sim p(x)}[\phi(x)] \approx \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) = \hat \Phi
+</div>
+<script type="math/tex; mode=display">
+\Phi = \mathbb E_{x \sim p(x)}[\phi(x)] \approx \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) = \hat \Phi
+</script>
+</div>
+<p>But when we generate samples from <span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span>, values of <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> where <span><span class="MathJax_Preview">q(x)</span><script type="math/tex">q(x)</script></span> is greater than <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span> will be <em>over-represented</em> in this estimator, and points where <span><span class="MathJax_Preview">q(x)</span><script type="math/tex">q(x)</script></span> is less than <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span> will be <em>under-represented</em>. To take into account the fact that we have sampled from the wrong distribution, we introduce <em>weights</em>.</p>
+<div>
+<div class="MathJax_Preview">
+\tilde w_r = \frac{\tilde p(x^{(r)})}{\tilde q(x^{(r)})}
+</div>
+<script type="math/tex; mode=display">
+\tilde w_r = \frac{\tilde p(x^{(r)})}{\tilde q(x^{(r)})}
+</script>
+</div>
+<p>Finally, we rewrite our estimator under <span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span></p>
+<div>
+<div class="MathJax_Preview">
+\Phi = \int \phi(x)p(x)dx\\
+= \int \phi(x) \cdot \frac{p(x)}{q(x)} \cdot q(x)dx \\
+\approx \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)})\frac{p(x^{(r)})}{q(x^{(r)})}
+</div>
+<script type="math/tex; mode=display">
+\Phi = \int \phi(x)p(x)dx\\
+= \int \phi(x) \cdot \frac{p(x)}{q(x)} \cdot q(x)dx \\
+\approx \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)})\frac{p(x^{(r)})}{q(x^{(r)})}
+</script>
+</div>
+<p>however, the estimator as written still relies on <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span>, we want an estimator that relies on <span><span class="MathJax_Preview">\tilde p(x)</span><script type="math/tex">\tilde p(x)</script></span></p>
+<div>
+<div class="MathJax_Preview">
+= \frac{Z_q}{Z_p}\int \phi(x) \cdot \frac{\tilde p(x)}{\tilde q(x)} \cdot q(x) dx \\
+\approx \frac{Z_q}{Z_p} \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot \tilde w_r \\
+= \frac{\frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot  \tilde w_r}{\frac{1}{R}\sum_{r=1}^R \tilde w_r} \\
+= \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot  w_r \\
+= \hat \Phi_{iw}
+</div>
+<script type="math/tex; mode=display">
+= \frac{Z_q}{Z_p}\int \phi(x) \cdot \frac{\tilde p(x)}{\tilde q(x)} \cdot q(x) dx \\
+\approx \frac{Z_q}{Z_p} \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot \tilde w_r \\
+= \frac{\frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot  \tilde w_r}{\frac{1}{R}\sum_{r=1}^R \tilde w_r} \\
+= \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot  w_r \\
+= \hat \Phi_{iw}
+</script>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>I don't know where the <span><span class="MathJax_Preview">q(x)</span><script type="math/tex">q(x)</script></span> went from line 1 to 2?</p>
+</div>
+<p>where <span><span class="MathJax_Preview">\frac{Z_p}{Z_q} = \frac{1}{R}\sum_{r=1}^R \tilde w_r</span><script type="math/tex">\frac{Z_p}{Z_q} = \frac{1}{R}\sum_{r=1}^R \tilde w_r</script></span>, <span><span class="MathJax_Preview">w_r = \frac{\tilde w_r}{\sum_{r=1}^R \tilde w_r}</span><script type="math/tex">w_r = \frac{\tilde w_r}{\sum_{r=1}^R \tilde w_r}</script></span> and <span><span class="MathJax_Preview">\hat \Phi_{iw}</span><script type="math/tex">\hat \Phi_{iw}</script></span> is our importance weighted estimator.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><span><span class="MathJax_Preview">\hat \Phi_{iw}</span><script type="math/tex">\hat \Phi_{iw}</script></span> is biased, by consistent.</p>
+</div>
+<h3 id="rejection-sampling">Rejection Sampling<a class="headerlink" href="#rejection-sampling" title="Permanent link">&para;</a></h3>
+<p>In <a href="https://en.wikipedia.org/wiki/Rejection_sampling"><strong>rejection sampling</strong></a> we assume again a one-dimensional density <span><span class="MathJax_Preview">p(x) = \tilde p(x)/Z</span><script type="math/tex">p(x) = \tilde p(x)/Z</script></span> that is too complicated a function for us to be able to sample from it directly. We assume that we have a simpler <em>proposal density</em> <span><span class="MathJax_Preview">q(x)</span><script type="math/tex">q(x)</script></span> which we can evaluate (within a multiplicative factor <span><span class="MathJax_Preview">Z_Q</span><script type="math/tex">Z_Q</script></span>, as before), and from which we can generate samples. We further assume that we know the value of a constant <span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span> such that</p>
+<div>
+<div class="MathJax_Preview">
+c \tilde q(x) &gt; \tilde p(x) \quad \forall x
+</div>
+<script type="math/tex; mode=display">
+c \tilde q(x) > \tilde p(x) \quad \forall x
+</script>
+</div>
+<p>A schematic picture of two such functions is shown below</p>
+<p><img alt="" src="../../img/lecture_7_5.png" /></p>
+<p>The procedure is as follows:</p>
+<ol>
+<li>Generate two random numbers.<ol>
+<li>The first, <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>, is generated from the proposal density <span><span class="MathJax_Preview">q(x)</span><script type="math/tex">q(x)</script></span>.</li>
+<li>The second, <span><span class="MathJax_Preview">u</span><script type="math/tex">u</script></span> is generated uniformly from the interval <span><span class="MathJax_Preview">[0, c \tilde q(x)]</span><script type="math/tex">[0, c \tilde q(x)]</script></span> (see figure (b) above).</li>
+</ol>
+</li>
+<li>Evaluate <span><span class="MathJax_Preview">\tilde p(x)</span><script type="math/tex">\tilde p(x)</script></span> and accept or reject the sample <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> by comparing the value of <span><span class="MathJax_Preview">u</span><script type="math/tex">u</script></span> with the value of <span><span class="MathJax_Preview">\tilde p(x)</span><script type="math/tex">\tilde p(x)</script></span><ol>
+<li>If <span><span class="MathJax_Preview">u &gt; \tilde p(x)</span><script type="math/tex">u > \tilde p(x)</script></span>, then <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> is rejected</li>
+<li>Otherwise <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> is accepted; <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> is added to our set of samples <span><span class="MathJax_Preview">\{x^{(r)}\}</span><script type="math/tex">\{x^{(r)}\}</script></span> and the value of <span><span class="MathJax_Preview">u</span><script type="math/tex">u</script></span> discarded.</li>
+</ol>
+</li>
+</ol>
+<p>Why does this procedure generate samples from <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span>? The proposed point <span><span class="MathJax_Preview">(x, u)</span><script type="math/tex">(x, u)</script></span> comes with uniform probability from the lightly shaded area underneath the curve <span><span class="MathJax_Preview">c \tilde q(x)</span><script type="math/tex">c \tilde q(x)</script></span> as shown in figure (b) above. The rejection rule rejects all the points that lie above the curve <span><span class="MathJax_Preview">\tilde p(x)</span><script type="math/tex">\tilde p(x)</script></span>. So the points <span><span class="MathJax_Preview">(x,u)</span><script type="math/tex">(x,u)</script></span> that are accepted are uniformly distributed in the heavily shaded area under <span><span class="MathJax_Preview">\tilde p(x)</span><script type="math/tex">\tilde p(x)</script></span>. This implies that the probability density of the x-coordinates of the accepted points must be proportional to <span><span class="MathJax_Preview">\tilde p(x)</span><script type="math/tex">\tilde p(x)</script></span>, so the samples must be independent samples from <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Rejection sampling will work best if <span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span> is a good approximation to <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>. If <span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span> is very different from <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> then, for <span><span class="MathJax_Preview">cq</span><script type="math/tex">cq</script></span> to exceed <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> everywhere, <span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span> will necessarily have to be large and the frequency of rejection will be large.</p>
+</div>
+<h4 id="rejection-sampling-in-many-dimensions">Rejection sampling in many dimensions<a class="headerlink" href="#rejection-sampling-in-many-dimensions" title="Permanent link">&para;</a></h4>
+<p>In a high-dimensional problem it is very likely that the requirement that c Q∗ be an upper bound for P ∗ will force c to be so huge that acceptances will be very rare indeed. Finding such a value of c may be difficult too, since in many problems we know neither where the modes of P ∗ are located nor how high they are.</p>
                 
                   
                 
