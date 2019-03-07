@@ -502,6 +502,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#metropolis-hastings-method" title="Metropolis-Hastings method" class="md-nav__link">
+    Metropolis-Hastings method
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -711,6 +718,13 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metropolis-hastings-method" title="Metropolis-Hastings method" class="md-nav__link">
+    Metropolis-Hastings method
+  </a>
   
 </li>
         
@@ -1053,7 +1067,42 @@ c \tilde q(x) > \tilde p(x) \quad \forall x
 <p>Rejection sampling will work best if <span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span> is a good approximation to <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>. If <span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span> is very different from <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> then, for <span><span class="MathJax_Preview">cq</span><script type="math/tex">cq</script></span> to exceed <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> everywhere, <span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span> will necessarily have to be large and the frequency of rejection will be large.</p>
 </div>
 <h4 id="rejection-sampling-in-many-dimensions">Rejection sampling in many dimensions<a class="headerlink" href="#rejection-sampling-in-many-dimensions" title="Permanent link">&para;</a></h4>
-<p>In a high-dimensional problem it is very likely that the requirement that c Q∗ be an upper bound for P ∗ will force c to be so huge that acceptances will be very rare indeed. Finding such a value of c may be difficult too, since in many problems we know neither where the modes of P ∗ are located nor how high they are.</p>
+<p>In a high-dimensional problem it is very likely that the requirement that <span><span class="MathJax_Preview">c \tilde q</span><script type="math/tex">c \tilde q</script></span> be an upper bound for <span><span class="MathJax_Preview">\tilde p</span><script type="math/tex">\tilde p</script></span> will force <span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span> to be so huge that acceptances will be very rare indeed. Finding such a value of <span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span> may be difficult too, since in many problems we know neither where the modes of <span><span class="MathJax_Preview">\tilde p</span><script type="math/tex">\tilde p</script></span> are located nor how high they are.</p>
+<p>In general <span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span> grows exponentially with the dimensionality <span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span>, so the acceptance rate is expected to be exponentially small in <span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span></p>
+<div>
+<div class="MathJax_Preview">
+\text{acceptance rate} = \frac{\text{area under } \tilde p}{\text{area under } \tilde q} = \frac{1}{Z}
+</div>
+<script type="math/tex; mode=display">
+\text{acceptance rate} = \frac{\text{area under } \tilde p}{\text{area under } \tilde q} = \frac{1}{Z}
+</script>
+</div>
+<h3 id="metropolis-hastings-method">Metropolis-Hastings method<a class="headerlink" href="#metropolis-hastings-method" title="Permanent link">&para;</a></h3>
+<p>Importance sampling and rejection sampling work well only if the proposal density <span><span class="MathJax_Preview">q(x)</span><script type="math/tex">q(x)</script></span> is similar to <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span>. In high dimensions, it is hard to find one such <span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span>.</p>
+<p>The <strong>Metropolis–Hastings</strong> algorithm instead makes use of a <em>proposal density</em> <span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span> which depends on the current state <span><span class="MathJax_Preview">x^{(t)}</span><script type="math/tex">x^{(t)}</script></span>. The density <span><span class="MathJax_Preview">q(x' | x^{(t)})</span><script type="math/tex">q(x' | x^{(t)})</script></span> might be a simple distribution such as a Gaussian centered on the current <span><span class="MathJax_Preview">x^{(t)}</span><script type="math/tex">x^{(t)}</script></span>, but in general can be <em>any</em> fixed density from which we can draw samples.</p>
+<p>In contrast to importance sampling and rejection sampling, it is not necessary <span><span class="MathJax_Preview">q(x' | x^{(t)})</span><script type="math/tex">q(x' | x^{(t)})</script></span> look at all similar to <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span> in order for the algorithm to be practically useful. An example of a proposal density with two different states (<span><span class="MathJax_Preview">x^{(1)}, x^{(2)}</span><script type="math/tex">x^{(1)}, x^{(2)}</script></span>) is shown in figure 29.10.</p>
+<p><img alt="" src="../../img/lecture_7_6.png" /></p>
+<p>As before, we assume we can evaluate <span><span class="MathJax_Preview">\tilde p(x)</span><script type="math/tex">\tilde p(x)</script></span> for any <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>. The procedure is as follows:</p>
+<p>A tentative new state <span><span class="MathJax_Preview">x'</span><script type="math/tex">x'</script></span> is generated from the proposal density <span><span class="MathJax_Preview">q(x' | x^{(t)})</span><script type="math/tex">q(x' | x^{(t)})</script></span>. To decide whether to accept the new state, we compute</p>
+<div>
+<div class="MathJax_Preview">
+a = \frac{\tilde p(x')q(x^{(t)} | x')}{\tilde p(x^{(t)}) q(x' | x^{(t)})}
+</div>
+<script type="math/tex; mode=display">
+a = \frac{\tilde p(x')q(x^{(t)} | x')}{\tilde p(x^{(t)}) q(x' | x^{(t)})}
+</script>
+</div>
+<ul>
+<li>If <span><span class="MathJax_Preview">a \ge 1</span><script type="math/tex">a \ge 1</script></span> then the new state is accepted. Set <span><span class="MathJax_Preview">x^{(t + 1)} = x'</span><script type="math/tex">x^{(t + 1)} = x'</script></span>.</li>
+<li>Otherwise, the new state is accepted with probability <span><span class="MathJax_Preview">a</span><script type="math/tex">a</script></span>. Set <span><span class="MathJax_Preview">x^{(t + 1)} = x^{(t)}</span><script type="math/tex">x^{(t + 1)} = x^{(t)}</script></span>.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note the difference from rejection sampling: in rejection sampling, rejected points are discarded and have no influence on the list of samples <span><span class="MathJax_Preview">\{x^{(r)}\}</span><script type="math/tex">\{x^{(r)}\}</script></span> that we collected. Here, a rejection causes the current state to be written again onto the list.</p>
+</div>
+<p>Metropolis–Hastings converges to <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span> for any <span><span class="MathJax_Preview">q(x' | x^{(t)}) \ge 0 \quad \forall x', x^{(t)}</span><script type="math/tex">q(x' | x^{(t)}) \ge 0 \quad \forall x', x^{(t)}</script></span> as <span><span class="MathJax_Preview">t \rightarrow \infty</span><script type="math/tex">t \rightarrow \infty</script></span>. That is, our list of samples converges towards the true distribution <span><span class="MathJax_Preview">\{x^{(r)}\}_{r=1}^R \rightarrow p(x) </span><script type="math/tex">\{x^{(r)}\}_{r=1}^R \rightarrow p(x) </script></span>.</p>
+<p>There are however, no guarantees on convergence. The Metropolis method is an example of a Markov chain Monte Carlo method (abbreviated MCMC). In contrast to rejection sampling, where the accepted points <span><span class="MathJax_Preview">\{x^{(t)}\}</span><script type="math/tex">\{x^{(t)}\}</script></span> are independent samples from the desired distribution, Markov chain Monte Carlo methods involve a Markov process in which a sequence of states <span><span class="MathJax_Preview">\{x^{(t)}\}</span><script type="math/tex">\{x^{(t)}\}</script></span> is generated, each sample <span><span class="MathJax_Preview">x^{(t)}</span><script type="math/tex">x^{(t)}</script></span> having a probability distribution that depends on the previous value, <span><span class="MathJax_Preview">x^{(t-1)}</span><script type="math/tex">x^{(t-1)}</script></span>. Since successive samples are dependent, the Markov chain may have to be run for a considerable time in order to generate samples that are effectively independent samples from <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>.</p>
+<p>Just as it was difficult to estimate the variance of an importance sampling estimator, so it is difficult to assess whether a Markov chain Monte Carlo method has ‘converged’, and to quantify how long one has to wait to obtain samples that are effectively independent samples from <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>.</p>
                 
                   
                 
