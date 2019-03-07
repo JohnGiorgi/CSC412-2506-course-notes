@@ -264,4 +264,41 @@ Why does this procedure generate samples from \(p(x)\)? The proposed point \((x,
 
 #### Rejection sampling in many dimensions
 
-In a high-dimensional problem it is very likely that the requirement that c Q∗ be an upper bound for P ∗ will force c to be so huge that acceptances will be very rare indeed. Finding such a value of c may be difficult too, since in many problems we know neither where the modes of P ∗ are located nor how high they are.
+In a high-dimensional problem it is very likely that the requirement that \(c \tilde q\) be an upper bound for \(\tilde p\) will force \(c\) to be so huge that acceptances will be very rare indeed. Finding such a value of \(c\) may be difficult too, since in many problems we know neither where the modes of \(\tilde p\) are located nor how high they are.
+
+In general \(c\) grows exponentially with the dimensionality \(N\), so the acceptance rate is expected to be exponentially small in \(N\)
+
+\[
+\text{acceptance rate} = \frac{\text{area under } \tilde p}{\text{area under } \tilde q} = \frac{1}{Z}
+\]
+
+### Metropolis-Hastings method
+
+
+Importance sampling and rejection sampling work well only if the proposal density \(q(x)\) is similar to \(p(x)\). In high dimensions, it is hard to find one such \(q\).
+
+The **Metropolis–Hastings** algorithm instead makes use of a _proposal density_ \(q\) which depends on the current state \(x^{(t)}\). The density \(q(x' | x^{(t)})\) might be a simple distribution such as a Gaussian centered on the current \(x^{(t)}\), but in general can be _any_ fixed density from which we can draw samples.
+
+In contrast to importance sampling and rejection sampling, it is not necessary \(q(x' | x^{(t)})\) look at all similar to \(p(x)\) in order for the algorithm to be practically useful. An example of a proposal density with two different states (\(x^{(1)}, x^{(2)}\)) is shown in figure 29.10.
+
+![](../img/lecture_7_6.png)
+
+As before, we assume we can evaluate \(\tilde p(x)\) for any \(x\). The procedure is as follows:
+
+A tentative new state \(x'\) is generated from the proposal density \(q(x' | x^{(t)})\). To decide whether to accept the new state, we compute
+
+\[
+a = \frac{\tilde p(x')q(x^{(t)} | x')}{\tilde p(x^{(t)}) q(x' | x^{(t)})}
+\]
+
+- If \(a \ge 1\) then the new state is accepted. Set \(x^{(t + 1)} = x'\).
+- Otherwise, the new state is accepted with probability \(a\). Set \(x^{(t + 1)} = x^{(t)}\).
+
+!!! note
+    Note the difference from rejection sampling: in rejection sampling, rejected points are discarded and have no influence on the list of samples \(\{x^{(r)}\}\) that we collected. Here, a rejection causes the current state to be written again onto the list.
+
+Metropolis–Hastings converges to \(p(x)\) for any \(q(x' | x^{(t)}) \ge 0 \quad \forall x', x^{(t)}\) as \(t \rightarrow \infty\). That is, our list of samples converges towards the true distribution \(\{x^{(r)}\}_{r=1}^R \rightarrow p(x) \).
+
+There are however, no guarantees on convergence. The Metropolis method is an example of a Markov chain Monte Carlo method (abbreviated MCMC). In contrast to rejection sampling, where the accepted points \(\{x^{(t)}\}\) are independent samples from the desired distribution, Markov chain Monte Carlo methods involve a Markov process in which a sequence of states \(\{x^{(t)}\}\) is generated, each sample \(x^{(t)}\) having a probability distribution that depends on the previous value, \(x^{(t-1)}\). Since successive samples are dependent, the Markov chain may have to be run for a considerable time in order to generate samples that are effectively independent samples from \(p\).
+
+Just as it was difficult to estimate the variance of an importance sampling estimator, so it is difficult to assess whether a Markov chain Monte Carlo method has ‘converged’, and to quantify how long one has to wait to obtain samples that are effectively independent samples from \(p\).
