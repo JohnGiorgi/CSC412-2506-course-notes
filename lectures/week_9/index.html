@@ -105,7 +105,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#week-9-sampling-and-monte-carlo-methods" tabindex="1" class="md-skip">
+      <a href="#week-9-hidden-markov-models" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -428,6 +428,53 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#aside" title="Aside" class="md-nav__link">
+    Aside
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hidden-markov-models" title="Hidden Markov Models" class="md-nav__link">
+    Hidden Markov Models
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simple-example" title="Simple Example" class="md-nav__link">
+    Simple Example
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hmms-main-task" title="HMMS Main Task" class="md-nav__link">
+    HMMS Main Task
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#forward-backward-algorithm" title="Forward-backward algorithm" class="md-nav__link">
+    Forward-backward algorithm
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -559,6 +606,53 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#aside" title="Aside" class="md-nav__link">
+    Aside
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hidden-markov-models" title="Hidden Markov Models" class="md-nav__link">
+    Hidden Markov Models
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simple-example" title="Simple Example" class="md-nav__link">
+    Simple Example
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hmms-main-task" title="HMMS Main Task" class="md-nav__link">
+    HMMS Main Task
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#forward-backward-algorithm" title="Forward-backward algorithm" class="md-nav__link">
+    Forward-backward algorithm
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -588,7 +682,7 @@
                   <a href="https://github.com/JohnGiorgi/CSC412-2506-course-notes/edit/master/docs/lectures/week_9.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="week-9-sampling-and-monte-carlo-methods">Week 9: Sampling and Monte Carlo Methods<a class="headerlink" href="#week-9-sampling-and-monte-carlo-methods" title="Permanent link">&para;</a></h1>
+                <h1 id="week-9-hidden-markov-models">Week 9: Hidden Markov Models<a class="headerlink" href="#week-9-hidden-markov-models" title="Permanent link">&para;</a></h1>
 <h3 id="assigned-reading">Assigned Reading<a class="headerlink" href="#assigned-reading" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Murphy: Chapter 18</li>
@@ -694,6 +788,141 @@ p(x_t | x_{1:t-1}) = p(x_t | x_{t-m:t-1})
 <p class="admonition-title">Tip</p>
 <p>He hinted that this would be useful for assignment 2. Seems like it might be the answer to question 4a.</p>
 </div>
+<h4 id="aside">Aside<a class="headerlink" href="#aside" title="Permanent link">&para;</a></h4>
+<p>So far, we have been thinking about models that operate in <em>discrete space</em> and <em>discrete time</em> but we could also think about models that operate in
+<em>continuous space</em> or <em>continuous time</em>.</p>
+<p><img alt="" src="../../img/lecture_8_1.png" /></p>
+<h2 id="hidden-markov-models">Hidden Markov Models<a class="headerlink" href="#hidden-markov-models" title="Permanent link">&para;</a></h2>
+<p><a href="https://duckduckgo.com/?q=hidden+markov+models&amp;t=ffab&amp;ia=web"><strong>Hidden Markov models (HMMs)</strong></a>, make another restrictive assumption: the state of our variables is <em>fully observed</em>.</p>
+<p>HMMs hide the temporal dependence by keeping it in the <em>unobserved</em> state. No assumptions on the temporal dependence of observations is made. For each observation <span><span class="MathJax_Preview">x_t</span><script type="math/tex">x_t</script></span>, we associate a corresponding unobserved hidden/latent variable <span><span class="MathJax_Preview">z_t</span><script type="math/tex">z_t</script></span></p>
+<p><img alt="" src="../../img/lecture_8_2.png" /></p>
+<p>The joint distribution of the model becomes</p>
+<div>
+<div class="MathJax_Preview">
+p(x_{1:T}, z_{1:T}) = p(z_1)\prod_{t=2}^Tp(z_t | z_{t-1})\prod_{t=1}^Tp(x_t | z_t)
+</div>
+<script type="math/tex; mode=display">
+p(x_{1:T}, z_{1:T}) = p(z_1)\prod_{t=2}^Tp(z_t | z_{t-1})\prod_{t=1}^Tp(x_t | z_t)
+</script>
+</div>
+<p>Unlike simple Markov chains, the observations are not limited by a Markov assumption of any order. Assuming we have a <em>homogeneous</em> model, we only have to learn three distributions</p>
+<ol>
+<li><strong>Initial distribution</strong>: <span><span class="MathJax_Preview">\pi(i) = p(z_1 = i)</span><script type="math/tex">\pi(i) = p(z_1 = i)</script></span>. The probability of the first hidden variable being in state <span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span> (often denoted <span><span class="MathJax_Preview">\pi</span><script type="math/tex">\pi</script></span>)</li>
+<li><strong>Transition distribution</strong>: <span><span class="MathJax_Preview">T(i, j) = p(z_{t + 1} = j | z_t = i) \quad i \in \{1, ..., k\}</span><script type="math/tex">T(i, j) = p(z_{t + 1} = j | z_t = i) \quad i \in \{1, ..., k\}</script></span>. The probability of moving from hidden state <span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span> to hidden state <span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>.</li>
+<li><strong>Emission probability</strong>: <span><span class="MathJax_Preview">\varepsilon_i(x) = p(x | z_t = i)</span><script type="math/tex">\varepsilon_i(x) = p(x | z_t = i)</script></span>. The probability of an observed random variable <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> given the state of the hidden variable that <em>"emitted"</em> it.</li>
+</ol>
+<h3 id="simple-example">Simple Example<a class="headerlink" href="#simple-example" title="Permanent link">&para;</a></h3>
+<p>Say we have the following simple chain</p>
+<p><img alt="" src="../../img/lecture_8_3.png" /></p>
+<p>where</p>
+<ul>
+<li><span><span class="MathJax_Preview">x_t \in [N, Z, A]</span><script type="math/tex">x_t \in [N, Z, A]</script></span></li>
+<li><span><span class="MathJax_Preview">z_t \in [H, S]</span><script type="math/tex">z_t \in [H, S]</script></span></li>
+</ul>
+<p>where our observed states are whether or not we are watching Netflix (<span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span>), sleeping (<span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>), or working on the assignment (<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>) and our hidden states are whether we are happy (<span><span class="MathJax_Preview">H</span><script type="math/tex">H</script></span>) or sad (<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>). Say futher that we are given the initial (<span><span class="MathJax_Preview">\pi</span><script type="math/tex">\pi</script></span>), transition (<span><span class="MathJax_Preview">T</span><script type="math/tex">T</script></span>), and emission probabilities (<span><span class="MathJax_Preview">\varepsilon</span><script type="math/tex">\varepsilon</script></span>)</p>
+<table>
+<thead>
+<tr>
+<th><span><span class="MathJax_Preview">\pi</span><script type="math/tex">\pi</script></span></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H</td>
+<td>0.70</td>
+</tr>
+<tr>
+<td>S</td>
+<td>0.30</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><span><span class="MathJax_Preview">\varepsilon</span><script type="math/tex">\varepsilon</script></span></th>
+<th>N</th>
+<th>Z</th>
+<th>A</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H</td>
+<td>0.40</td>
+<td>0.50</td>
+<td>0.10</td>
+</tr>
+<tr>
+<td>S</td>
+<td>0.10</td>
+<td>0.30</td>
+<td>0.60</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>T</th>
+<th>H</th>
+<th>S</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H</td>
+<td>0.80</td>
+<td>0.20</td>
+</tr>
+<tr>
+<td>S</td>
+<td>0.10</td>
+<td>0.90</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is the <em>rows</em> of these tables that need to sum to 1, not the columns!</p>
+</div>
+<p>From these conditional probabilities, we can preform inference with the model, e.g.</p>
+<div>
+<div class="MathJax_Preview">
+p(z_3 = H | z_1 = S) = p(z_3 = H | z_2 = H)p(z_2 = H | z_1 = S) + p(z_3 = H | z_2 = S)p(z_2 = S | z_1 = S) \\
+= (0.80)(0.1) + (0.10)(0.90) \\
+= 0.17 \\
+</div>
+<script type="math/tex; mode=display">
+p(z_3 = H | z_1 = S) = p(z_3 = H | z_2 = H)p(z_2 = H | z_1 = S) + p(z_3 = H | z_2 = S)p(z_2 = S | z_1 = S) \\
+= (0.80)(0.1) + (0.10)(0.90) \\
+= 0.17 \\
+</script>
+</div>
+<p>or</p>
+<div>
+<div class="MathJax_Preview">
+p(x_3 = A | z_1 = S) = p(x_3 = A | z_3 = H)p(z_3 = H | z_1 = S) + p(x_3 = A | z_3 = S)p(z_3 = S | z_1 = S) \\
+= (0.10)(0.17) + (0.60)(1 - 0.17) \\
+= 0.515
+</div>
+<script type="math/tex; mode=display">
+p(x_3 = A | z_1 = S) = p(x_3 = A | z_3 = H)p(z_3 = H | z_1 = S) + p(x_3 = A | z_3 = S)p(z_3 = S | z_1 = S) \\
+= (0.10)(0.17) + (0.60)(1 - 0.17) \\
+= 0.515
+</script>
+</div>
+<h3 id="hmms-main-task">HMMS Main Task<a class="headerlink" href="#hmms-main-task" title="Permanent link">&para;</a></h3>
+<p>The main tasks we perform with HMMs are as follows:</p>
+<p><strong>1. Compute the probability of a <em>latent</em> sequence given an <em>observation</em> sequence</strong></p>
+<p>That is, we want to be able to compute <span><span class="MathJax_Preview">p(z_{1:t} | x_{1:t})</span><script type="math/tex">p(z_{1:t} | x_{1:t})</script></span>. This is achieved with the <a href="https://en.wikipedia.org/wiki/Forward%E2%80%93backward_algorithm">Forward-Backward algorithm</a>.</p>
+<p><strong>2. Infer the most likely sequence of hidden states</strong></p>
+<p>That is, we want to be able to compute <span><span class="MathJax_Preview">Z^{\star} = \underset{z_{1:T}}{\operatorname{argmax}} p(z_{1:T} | x_{1:T})</span><script type="math/tex">Z^{\star} = \underset{z_{1:T}}{\operatorname{argmax}} p(z_{1:T} | x_{1:T})</script></span>.</p>
+<p><strong>3. Learn the parameters</strong></p>
+<p>The parameters of a HMM are typically learned with the <a href="https://en.wikipedia.org/wiki/Baum%E2%80%93Welch_algorithm">Baum-Welch algorithm</a>, a special case of the <a href="https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm">Expectation–maximization algorithm</a> algorithm.</p>
+<p>In this course, we will focus on the first two tasks.</p>
+<h4 id="forward-backward-algorithm">Forward-backward algorithm<a class="headerlink" href="#forward-backward-algorithm" title="Permanent link">&para;</a></h4>
                 
                   
                 
