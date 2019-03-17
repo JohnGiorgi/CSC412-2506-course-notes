@@ -461,22 +461,43 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#hmms-main-task" title="HMMS Main Task" class="md-nav__link">
-    HMMS Main Task
+  <a href="#hmms-main-task" title="HMMs Main Task" class="md-nav__link">
+    HMMs Main Task
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
   <a href="#forward-backward-algorithm" title="Forward-backward algorithm" class="md-nav__link">
     Forward-backward algorithm
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#forward-recursion" title="Forward Recursion" class="md-nav__link">
+    Forward Recursion
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backward-recursion" title="Backward Recursion" class="md-nav__link">
+    Backward Recursion
+  </a>
+  
 </li>
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#viterbi-algorithm" title="Viterbi Algorithm" class="md-nav__link">
+    Viterbi Algorithm
+  </a>
   
 </li>
         
@@ -639,22 +660,43 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#hmms-main-task" title="HMMS Main Task" class="md-nav__link">
-    HMMS Main Task
+  <a href="#hmms-main-task" title="HMMs Main Task" class="md-nav__link">
+    HMMs Main Task
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
   <a href="#forward-backward-algorithm" title="Forward-backward algorithm" class="md-nav__link">
     Forward-backward algorithm
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#forward-recursion" title="Forward Recursion" class="md-nav__link">
+    Forward Recursion
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backward-recursion" title="Backward Recursion" class="md-nav__link">
+    Backward Recursion
+  </a>
+  
 </li>
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#viterbi-algorithm" title="Viterbi Algorithm" class="md-nav__link">
+    Viterbi Algorithm
+  </a>
   
 </li>
         
@@ -913,16 +955,111 @@ p(x_3 = A | z_1 = S) = p(x_3 = A | z_3 = H)p(z_3 = H | z_1 = S) + p(x_3 = A | z_
 = 0.515
 </script>
 </div>
-<h3 id="hmms-main-task">HMMS Main Task<a class="headerlink" href="#hmms-main-task" title="Permanent link">&para;</a></h3>
+<h3 id="hmms-main-task">HMMs Main Task<a class="headerlink" href="#hmms-main-task" title="Permanent link">&para;</a></h3>
 <p>The main tasks we perform with HMMs are as follows:</p>
 <p><strong>1. Compute the probability of a <em>latent</em> sequence given an <em>observation</em> sequence</strong></p>
 <p>That is, we want to be able to compute <span><span class="MathJax_Preview">p(z_{1:t} | x_{1:t})</span><script type="math/tex">p(z_{1:t} | x_{1:t})</script></span>. This is achieved with the <a href="https://en.wikipedia.org/wiki/Forward%E2%80%93backward_algorithm">Forward-Backward algorithm</a>.</p>
 <p><strong>2. Infer the most likely sequence of hidden states</strong></p>
-<p>That is, we want to be able to compute <span><span class="MathJax_Preview">Z^{\star} = \underset{z_{1:T}}{\operatorname{argmax}} p(z_{1:T} | x_{1:T})</span><script type="math/tex">Z^{\star} = \underset{z_{1:T}}{\operatorname{argmax}} p(z_{1:T} | x_{1:T})</script></span>.</p>
+<p>That is, we want to be able to compute <span><span class="MathJax_Preview">Z^{\star} = \underset{z_{1:T}}{\operatorname{argmax}} p(z_{1:T} | x_{1:T})</span><script type="math/tex">Z^{\star} = \underset{z_{1:T}}{\operatorname{argmax}} p(z_{1:T} | x_{1:T})</script></span>. This is achieved using the <a href="https://en.wikipedia.org/wiki/Viterbi_algorithm">Viterbi algorithm</a>.</p>
 <p><strong>3. Learn the parameters</strong></p>
 <p>The parameters of a HMM are typically learned with the <a href="https://en.wikipedia.org/wiki/Baum%E2%80%93Welch_algorithm">Baum-Welch algorithm</a>, a special case of the <a href="https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm">Expectation–maximization algorithm</a> algorithm.</p>
 <p>In this course, we will focus on the first two tasks.</p>
-<h4 id="forward-backward-algorithm">Forward-backward algorithm<a class="headerlink" href="#forward-backward-algorithm" title="Permanent link">&para;</a></h4>
+<h3 id="forward-backward-algorithm">Forward-backward algorithm<a class="headerlink" href="#forward-backward-algorithm" title="Permanent link">&para;</a></h3>
+<p>The Forward-backward algorithm is used to efficiently estimate the <em>latent</em> sequence given an <em>observation</em> sequence under a HMM. That is, we want to compute</p>
+<div>
+<div class="MathJax_Preview">
+p(z_{t} | x_{1:T}) \quad \forall_t \in [1, T]
+</div>
+<script type="math/tex; mode=display">
+p(z_{t} | x_{1:T}) \quad \forall_t \in [1, T]
+</script>
+</div>
+<p>assuming that we know the <em>initial</em> <span><span class="MathJax_Preview">p(z_1)</span><script type="math/tex">p(z_1)</script></span>, <em>transition</em> <span><span class="MathJax_Preview">p(z_t | z_{t-1})</span><script type="math/tex">p(z_t | z_{t-1})</script></span>, and <em>emission</em> <span><span class="MathJax_Preview">p(x_t | z_t)</span><script type="math/tex">p(x_t | z_t)</script></span> probabilities <span><span class="MathJax_Preview">\forall_t \in [1 ,T]</span><script type="math/tex">\forall_t \in [1 ,T]</script></span>. This task of hidden state inference breaks down into the following:</p>
+<ul>
+<li><strong>Filtering</strong>: compute posterior over <em>current</em> hidden state, <span><span class="MathJax_Preview">p(z_t | x_{1:t})</span><script type="math/tex">p(z_t | x_{1:t})</script></span>.</li>
+<li><strong>Prediction</strong>: compute posterior over <em>future</em> hidden state, <span><span class="MathJax_Preview">p(z_{t+k} | x_{1:t})</span><script type="math/tex">p(z_{t+k} | x_{1:t})</script></span>.</li>
+<li><strong>Smoothing</strong>: compute posterior over <em>past</em> hidden state, <span><span class="MathJax_Preview">p(z_n | x_{1:t}) \quad 1 \lt n \lt t</span><script type="math/tex">p(z_n | x_{1:t}) \quad 1 \lt n \lt t</script></span>.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Forward-backward algorithm is dynamic, i.e. results are stored as they are computed.</p>
+</div>
+<p>Our probability of interest, <span><span class="MathJax_Preview">p(z_{t} | x_{1:T})</span><script type="math/tex">p(z_{t} | x_{1:T})</script></span> is computed using a forward and backward recursion</p>
+<ul>
+<li><strong>Forward Recursion</strong>: <span><span class="MathJax_Preview">p(z_{t} | x_{1:t})</span><script type="math/tex">p(z_{t} | x_{1:t})</script></span></li>
+<li><strong>Backward Recursion</strong>: <span><span class="MathJax_Preview">p(x_{1 + t : T} | z_t)</span><script type="math/tex">p(x_{1 + t : T} | z_t)</script></span></li>
+</ul>
+<p>We note that</p>
+<div>
+<div class="MathJax_Preview">
+p(z_t | x_{1:T}) \propto p(z_t, x_{1:T}) \\
+= p(z_t, x_{1:t})p(x_{t+1:T} | z_t, x_{1:t}) \\
+= p(z_t, x_{1:t})p(x_{t+1:T} | z_t) \\
+= (\text{Forward Recursion})(\text{Backward Recursion})
+</div>
+<script type="math/tex; mode=display">
+p(z_t | x_{1:T}) \propto p(z_t, x_{1:T}) \\
+= p(z_t, x_{1:t})p(x_{t+1:T} | z_t, x_{1:t}) \\
+= p(z_t, x_{1:t})p(x_{t+1:T} | z_t) \\
+= (\text{Forward Recursion})(\text{Backward Recursion})
+</script>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The third line is arrived at by noting the conditional independence <span><span class="MathJax_Preview">x_{t+1:T} \bot x_{1:t} | z</span><script type="math/tex">x_{t+1:T} \bot x_{1:t} | z</script></span>. If it is not clear why this conditional independence holds, try to draw out the HMM conditioned on <span><span class="MathJax_Preview">z_t</span><script type="math/tex">z_t</script></span>.</p>
+</div>
+<h4 id="forward-recursion">Forward Recursion<a class="headerlink" href="#forward-recursion" title="Permanent link">&para;</a></h4>
+<div>
+<div class="MathJax_Preview">
+p(z_t, x_{1:t}) = \sum^k_{z_{t-1} = 1}p(z_{t-1}, z_t, x_{1:t}) \\
+= \sum^k_{z_{t-1} = 1} p(x_t | z_{t-1}, z_t, x_{1:t-1})p(z_t | z_{t-1}, x_{1:t-1})p(z_{t-1}, x_{1:t-1}) \\
+= \alpha_t(z_t) = p(x_t | z_t) \sum^k_{z_{t-1} = 1} p(z_t | z_{t-1}) \alpha_{t-1}(z_{t-1})\\
+</div>
+<script type="math/tex; mode=display">
+p(z_t, x_{1:t}) = \sum^k_{z_{t-1} = 1}p(z_{t-1}, z_t, x_{1:t}) \\
+= \sum^k_{z_{t-1} = 1} p(x_t | z_{t-1}, z_t, x_{1:t-1})p(z_t | z_{t-1}, x_{1:t-1})p(z_{t-1}, x_{1:t-1}) \\
+= \alpha_t(z_t) = p(x_t | z_t) \sum^k_{z_{t-1} = 1} p(z_t | z_{t-1}) \alpha_{t-1}(z_{t-1})\\
+</script>
+</div>
+<p>Notice that our forward recursion contains our emission, <span><span class="MathJax_Preview">p(x_t | z_t)</span><script type="math/tex">p(x_t | z_t)</script></span> and transition, <span><span class="MathJax_Preview">p(z_t | z_{t-1})</span><script type="math/tex">p(z_t | z_{t-1})</script></span> probabilities. If we recurse all the way down to <span><span class="MathJax_Preview">\alpha_1(z_1)</span><script type="math/tex">\alpha_1(z_1)</script></span>, we get</p>
+<div>
+<div class="MathJax_Preview">
+\alpha_1(z_1) = p(z_1, x_1) = p(z_1)p(x_1 | z_1)
+</div>
+<script type="math/tex; mode=display">
+\alpha_1(z_1) = p(z_1, x_1) = p(z_1)p(x_1 | z_1)
+</script>
+</div>
+<p>the initial probability times the emission probability of the first observed state, as expected</p>
+<h4 id="backward-recursion">Backward Recursion<a class="headerlink" href="#backward-recursion" title="Permanent link">&para;</a></h4>
+<div>
+<div class="MathJax_Preview">\begin{align}
+p(x_{t+1:T} | z_t) &amp;= \sum_{z_{t+1}}^k p(z_{t+1}, x_{t+1:T} | z_t) \\
+&amp;= \sum_{z_{t+1}}^k p(x_{t+2:T} | z_{t+1}, z_t, x_{t+1})p(x_{t+1} | z_{t+1}, z_t)p(z_{t+1} | z_t) \\
+&amp;= \sum_{z_{t+1}}^k p(x_{t+2:T} | z_{t+1})p(x_{t+1} | z_{t+1})p(z_{t+1} | z_t) \\
+&amp;= \sum_{z_{t+1}}^k \beta_{t+1}(z_t) \varepsilon_{t+1} T_{t \rightarrow t+1}\ \\
+\end{align}</div>
+<script type="math/tex; mode=display">\begin{align}
+p(x_{t+1:T} | z_t) &= \sum_{z_{t+1}}^k p(z_{t+1}, x_{t+1:T} | z_t) \\
+&= \sum_{z_{t+1}}^k p(x_{t+2:T} | z_{t+1}, z_t, x_{t+1})p(x_{t+1} | z_{t+1}, z_t)p(z_{t+1} | z_t) \\
+&= \sum_{z_{t+1}}^k p(x_{t+2:T} | z_{t+1})p(x_{t+1} | z_{t+1})p(z_{t+1} | z_t) \\
+&= \sum_{z_{t+1}}^k \beta_{t+1}(z_t) \varepsilon_{t+1} T_{t \rightarrow t+1}\ \\
+\end{align}</script>
+</div>
+<p>Notice that our backward recursion contains our emission, <span><span class="MathJax_Preview">p(x_{t+1} | z_{t+1})</span><script type="math/tex">p(x_{t+1} | z_{t+1})</script></span> and transition, <span><span class="MathJax_Preview">pp(z_{t+1} | z_t)</span><script type="math/tex">pp(z_{t+1} | z_t)</script></span> probabilities. If we recurse all the way down to <span><span class="MathJax_Preview">\beta_1(z_1)</span><script type="math/tex">\beta_1(z_1)</script></span>, we get</p>
+<div>
+<div class="MathJax_Preview">
+\beta_1(z_1) = p(x_{3:T} | z_{2})p(x_{2} | z_{2})p(z_{2} | z_1) \\
+</div>
+<script type="math/tex; mode=display">
+\beta_1(z_1) = p(x_{3:T} | z_{2})p(x_{2} | z_{2})p(z_{2} | z_1) \\
+</script>
+</div>
+<h3 id="viterbi-algorithm">Viterbi Algorithm<a class="headerlink" href="#viterbi-algorithm" title="Permanent link">&para;</a></h3>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p>Need to finish this, it was rushed into the last 5 minutes of lecture so my notes are poor. Use textbook/lecture slides to fill in the details.</p>
+</div>
                 
                   
                 
