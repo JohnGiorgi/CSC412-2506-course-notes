@@ -164,7 +164,7 @@ p(x_3 = A | z_1 = S) = p(x_3 = A | z_3 = H)p(z_3 = H | z_1 = S) + p(x_3 = A | z_
 = 0.515
 \]
 
-### HMMS Main Task
+### HMMs Main Task
 
 The main tasks we perform with HMMs are as follows:
 
@@ -174,7 +174,7 @@ That is, we want to be able to compute \(p(z_{1:t} | x_{1:t})\). This is achieve
 
 __2. Infer the most likely sequence of hidden states__
 
-That is, we want to be able to compute \(Z^{\star} = \underset{z_{1:T}}{\operatorname{argmax}} p(z_{1:T} | x_{1:T})\).
+That is, we want to be able to compute \(Z^{\star} = \underset{z_{1:T}}{\operatorname{argmax}} p(z_{1:T} | x_{1:T})\). This is achieved using the [Viterbi algorithm](https://en.wikipedia.org/wiki/Viterbi_algorithm).
 
 __3. Learn the parameters__
 
@@ -182,4 +182,72 @@ The parameters of a HMM are typically learned with the [Baum-Welch algorithm](ht
 
 In this course, we will focus on the first two tasks.
 
-#### Forward-backward algorithm
+### Forward-backward algorithm
+
+The Forward-backward algorithm is used to efficiently estimate the _latent_ sequence given an _observation_ sequence under a HMM. That is, we want to compute
+
+\[
+p(z_{t} | x_{1:T}) \quad \forall_t \in [1, T]
+\]
+
+assuming that we know the _initial_ \(p(z_1)\), _transition_ \(p(z_t | z_{t-1})\), and _emission_ \(p(x_t | z_t)\) probabilities \(\forall_t \in [1 ,T]\). This task of hidden state inference breaks down into the following:
+
+- **Filtering**: compute posterior over _current_ hidden state, \(p(z_t | x_{1:t})\).
+- **Prediction**: compute posterior over _future_ hidden state, \(p(z_{t+k} | x_{1:t})\).
+- **Smoothing**: compute posterior over _past_ hidden state, \(p(z_n | x_{1:t}) \quad 1 \lt n \lt t\).
+
+!!! note
+    The Forward-backward algorithm is dynamic, i.e. results are stored as they are computed.
+
+Our probability of interest, \(p(z_{t} | x_{1:T})\) is computed using a forward and backward recursion
+
+- **Forward Recursion**: \(p(z_{t} | x_{1:t})\)
+- **Backward Recursion**: \(p(x_{1 + t : T} | z_t)\)
+
+We note that
+
+\[
+p(z_t | x_{1:T}) \propto p(z_t, x_{1:T}) \\
+= p(z_t, x_{1:t})p(x_{t+1:T} | z_t, x_{1:t}) \\
+= p(z_t, x_{1:t})p(x_{t+1:T} | z_t) \\
+= (\text{Forward Recursion})(\text{Backward Recursion})
+\]
+
+!!! note
+    The third line is arrived at by noting the conditional independence \(x_{t+1:T} \bot x_{1:t} | z\). If it is not clear why this conditional independence holds, try to draw out the HMM conditioned on \(z_t\).
+
+#### Forward Recursion
+
+\[
+p(z_t, x_{1:t}) = \sum^k_{z_{t-1} = 1}p(z_{t-1}, z_t, x_{1:t}) \\
+= \sum^k_{z_{t-1} = 1} p(x_t | z_{t-1}, z_t, x_{1:t-1})p(z_t | z_{t-1}, x_{1:t-1})p(z_{t-1}, x_{1:t-1}) \\
+= \alpha_t(z_t) = p(x_t | z_t) \sum^k_{z_{t-1} = 1} p(z_t | z_{t-1}) \alpha_{t-1}(z_{t-1})\\
+\]
+
+Notice that our forward recursion contains our emission, \(p(x_t | z_t)\) and transition, \(p(z_t | z_{t-1})\) probabilities. If we recurse all the way down to \(\alpha_1(z_1)\), we get
+
+\[
+\alpha_1(z_1) = p(z_1, x_1) = p(z_1)p(x_1 | z_1)
+\]
+
+the initial probability times the emission probability of the first observed state, as expected
+
+#### Backward Recursion
+
+\begin{align}
+p(x_{t+1:T} | z_t) &= \sum_{z_{t+1}}^k p(z_{t+1}, x_{t+1:T} | z_t) \\
+&= \sum_{z_{t+1}}^k p(x_{t+2:T} | z_{t+1}, z_t, x_{t+1})p(x_{t+1} | z_{t+1}, z_t)p(z_{t+1} | z_t) \\
+&= \sum_{z_{t+1}}^k p(x_{t+2:T} | z_{t+1})p(x_{t+1} | z_{t+1})p(z_{t+1} | z_t) \\
+&= \sum_{z_{t+1}}^k \beta_{t+1}(z_t) \varepsilon_{t+1} T_{t \rightarrow t+1}\ \\
+\end{align}
+
+Notice that our backward recursion contains our emission, \(p(x_{t+1} | z_{t+1})\) and transition, \(pp(z_{t+1} | z_t)\) probabilities. If we recurse all the way down to \(\beta_1(z_1)\), we get
+
+\[
+\beta_1(z_1) = p(x_{3:T} | z_{2})p(x_{2} | z_{2})p(z_{2} | z_1) \\
+\]
+
+### Viterbi Algorithm
+
+!!! error
+    Need to finish this, it was rushed into the last 5 minutes of lecture so my notes are poor. Use textbook/lecture slides to fill in the details.
