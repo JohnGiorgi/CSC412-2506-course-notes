@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://johngiorgi.github.io/CSC412-2506-course-notes/. /lectures/week_5/">
+        <link rel="canonical" href="https://johngiorgi.github.io/CSC412-2506-course-notes/. /lectures/week_10/">
       
       
         <meta name="author" content="John Giorgi">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Week 5 - CSC412/2506 Winter 2019: Probabilistic Learning and Reasoning</title>
+        <title>Week 10 - CSC412/2506 Winter 2019: Probabilistic Learning and Reasoning</title>
       
     
     
@@ -105,7 +105,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#week-5-exact-inference" tabindex="1" class="md-skip">
+      <a href="#week-10-stochastic-variational-inference" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -131,7 +131,7 @@
                 CSC412/2506 Winter 2019: Probabilistic Learning and Reasoning
               </span>
               <span class="md-header-nav__topic">
-                Week 5
+                Week 10
               </span>
             
           
@@ -327,123 +327,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Week 5
-      </label>
-    
-    <a href="./" title="Week 5" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../week_5/" title="Week 5" class="md-nav__link">
       Week 5
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#assigned-reading" title="Assigned Reading" class="md-nav__link">
-    Assigned Reading
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#overview" title="Overview" class="md-nav__link">
-    Overview
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#inference-in-pgm" title="Inference in PGM" class="md-nav__link">
-    Inference in PGM
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#variable-elimination" title="Variable elimination" class="md-nav__link">
-    Variable elimination
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#simple-example-chain" title="Simple Example: Chain" class="md-nav__link">
-    Simple Example: Chain
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#simple-example-dgm" title="Simple Example: DGM" class="md-nav__link">
-    Simple Example: DGM
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#summary-so-far" title="Summary so far" class="md-nav__link">
-    Summary so far
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sum-product-inference" title="Sum-product inference" class="md-nav__link">
-    Sum-product inference
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#example-directed-graph" title="Example: Directed Graph" class="md-nav__link">
-    Example: Directed Graph
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -487,11 +375,122 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../week_10/" title="Week 10" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Week 10
+      </label>
+    
+    <a href="./" title="Week 10" class="md-nav__link md-nav__link--active">
       Week 10
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#assigned-reading" title="Assigned Reading" class="md-nav__link">
+    Assigned Reading
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview" title="Overview" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#posterior-inference-for-latent-variable-models" title="Posterior Inference for Latent Variable Models" class="md-nav__link">
+    Posterior Inference for Latent Variable Models
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#approximating-the-posterior-inference-with-variational-methods" title="Approximating the Posterior Inference with Variational Methods" class="md-nav__link">
+    Approximating the Posterior Inference with Variational Methods
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kullback-leibler-divergence" title="Kullback-Leibler Divergence" class="md-nav__link">
+    Kullback-Leibler Divergence
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#properties-of-the-kl-divergence" title="Properties of the KL Divergence" class="md-nav__link">
+    Properties of the KL Divergence
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variational-objective" title="Variational Objective" class="md-nav__link">
+    Variational Objective
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alternative-derivation" title="Alternative Derivation" class="md-nav__link">
+    Alternative Derivation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -583,38 +582,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#inference-in-pgm" title="Inference in PGM" class="md-nav__link">
-    Inference in PGM
+  <a href="#posterior-inference-for-latent-variable-models" title="Posterior Inference for Latent Variable Models" class="md-nav__link">
+    Posterior Inference for Latent Variable Models
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#variable-elimination" title="Variable elimination" class="md-nav__link">
-    Variable elimination
+  <a href="#approximating-the-posterior-inference-with-variational-methods" title="Approximating the Posterior Inference with Variational Methods" class="md-nav__link">
+    Approximating the Posterior Inference with Variational Methods
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#simple-example-chain" title="Simple Example: Chain" class="md-nav__link">
-    Simple Example: Chain
+  <a href="#kullback-leibler-divergence" title="Kullback-Leibler Divergence" class="md-nav__link">
+    Kullback-Leibler Divergence
   </a>
   
-</li>
+    <nav class="md-nav">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#simple-example-dgm" title="Simple Example: DGM" class="md-nav__link">
-    Simple Example: DGM
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#summary-so-far" title="Summary so far" class="md-nav__link">
-    Summary so far
+  <a href="#properties-of-the-kl-divergence" title="Properties of the KL Divergence" class="md-nav__link">
+    Properties of the KL Divergence
   </a>
   
 </li>
@@ -624,17 +617,22 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+        
           <li class="md-nav__item">
-  <a href="#sum-product-inference" title="Sum-product inference" class="md-nav__link">
-    Sum-product inference
+  <a href="#variational-objective" title="Variational Objective" class="md-nav__link">
+    Variational Objective
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#example-directed-graph" title="Example: Directed Graph" class="md-nav__link">
-    Example: Directed Graph
+  <a href="#alternative-derivation" title="Alternative Derivation" class="md-nav__link">
+    Alternative Derivation
   </a>
   
 </li>
@@ -665,213 +663,159 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/JohnGiorgi/CSC412-2506-course-notes/edit/master/docs/lectures/week_5.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/JohnGiorgi/CSC412-2506-course-notes/edit/master/docs/lectures/week_10.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="week-5-exact-inference">Week 5: Exact Inference<a class="headerlink" href="#week-5-exact-inference" title="Permanent link">&para;</a></h1>
+                <h1 id="week-10-stochastic-variational-inference">Week 10:  Stochastic Variational Inference<a class="headerlink" href="#week-10-stochastic-variational-inference" title="Permanent link">&para;</a></h1>
 <h3 id="assigned-reading">Assigned Reading<a class="headerlink" href="#assigned-reading" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Murphy: Chapter 20</li>
-<li>MacKay: Chapter 21.1 (worked example with numbers)</li>
-<li>MacKay: Chapter 16 (Message Passing, including soldier intuition)</li>
-<li>MacKay: Chapter 26 Exact Inference on Factor Graphs</li>
+<li>Murphy: Chapter 18</li>
 </ul>
 <h3 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Variable elimination (VE)</li>
-<li>Complexity of VE</li>
+<li>Review Variational Inference</li>
+<li>Derive the variational objective</li>
+<li>ELBO intuition</li>
+<li>Stochastic optimization</li>
 </ul>
-<h2 id="inference-in-pgm">Inference in PGM<a class="headerlink" href="#inference-in-pgm" title="Permanent link">&para;</a></h2>
-<p>In this lecture, we will explore <a href="https://en.wikipedia.org/wiki/Statistical_inference">inference</a> in probabilistic graphical models (PGM).</p>
-<p>Let</p>
+<h2 id="posterior-inference-for-latent-variable-models">Posterior Inference for Latent Variable Models<a class="headerlink" href="#posterior-inference-for-latent-variable-models" title="Permanent link">&para;</a></h2>
+<p>Imagine we had the following latent variable model</p>
+<p><img alt="" src="../../img/lecture_10_1.png" /></p>
+<p>which represents the probabilistic model <span><span class="MathJax_Preview">p(x z ; \theta)</span><script type="math/tex">p(x z ; \theta)</script></span> where</p>
+<ul>
+<li><span><span class="MathJax_Preview">x_{1:N}</span><script type="math/tex">x_{1:N}</script></span> are the observations</li>
+<li><span><span class="MathJax_Preview">z_{1:N}</span><script type="math/tex">z_{1:N}</script></span> are the unobserved local latent variables</li>
+<li><span><span class="MathJax_Preview">\theta</span><script type="math/tex">\theta</script></span> are the global latent variables (i.e. the parameters)</li>
+</ul>
+<p>The conditional distribution of the unobserved variables given the observed variables (the posterior inference) is</p>
 <div>
 <div class="MathJax_Preview">
-X_F = \text{The unobserved variable we want to infer} \\
-X_E = \text{The observed evidence} \\
-X_R = X - \{X_F, X_E\}
+p(z, \theta | x) = \frac{p(x | z, \theta)}{p(x)} = \frac{p(x | z, \theta)}{\int\int p(x, z, \theta)d_zd_{\theta}}
 </div>
 <script type="math/tex; mode=display">
-X_F = \text{The unobserved variable we want to infer} \\
-X_E = \text{The observed evidence} \\
-X_R = X - \{X_F, X_E\}
+p(z, \theta | x) = \frac{p(x | z, \theta)}{p(x)} = \frac{p(x | z, \theta)}{\int\int p(x, z, \theta)d_zd_{\theta}}
 </script>
 </div>
-<p>where <span><span class="MathJax_Preview">X_R</span><script type="math/tex">X_R</script></span> is the set of random variables in our model that are neither part of the query nor the evidence. We will focus computing the conditional probability distribution</p>
-<div>
-<div class="MathJax_Preview">
-p(X_F | X_E) = \frac{p(X_F, X_E)}{p(X_E)}
-</div>
-<script type="math/tex; mode=display">
-p(X_F | X_E) = \frac{p(X_F, X_E)}{p(X_E)}
-</script>
-</div>
-<p>each of the distributions we need to compute can be computed by marginalizing over the other variables.</p>
-<div>
-<div class="MathJax_Preview">
-p(X_F, X_E) = \sum_{X_R}p(X_F, X_E, X_R) \\
-p(X_E) = \sum_{X_F, X_R}p(X_F, X_E, X_R)
-</div>
-<script type="math/tex; mode=display">
-p(X_F, X_E) = \sum_{X_R}p(X_F, X_E, X_R) \\
-p(X_E) = \sum_{X_F, X_R}p(X_F, X_E, X_R)
-</script>
-</div>
-<p>However, naively marginalizing over all unobserved variables requires a number of computations exponential in the number of random variables, <span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span>, in our model.</p>
-<h3 id="variable-elimination">Variable elimination<a class="headerlink" href="#variable-elimination" title="Permanent link">&para;</a></h3>
-<p><a href="https://en.wikipedia.org/wiki/Variable_elimination">Variable elimination</a> is a simple and general exact inference algorithm in <em>any</em> probabilistic graphical models.</p>
-<p>The running time will depend on the <em>graph structure</em> of the model, <em>but</em>, by using <a href="https://en.wikipedia.org/wiki/Dynamic_programming">dynamic programming</a> we can avoid enumerating all assignments.</p>
-<h4 id="simple-example-chain">Simple Example: Chain<a class="headerlink" href="#simple-example-chain" title="Permanent link">&para;</a></h4>
-<p>Lets start with the example of a simple chain</p>
-<div>
-<div class="MathJax_Preview">
-A \rightarrow B \rightarrow C \rightarrow D
-</div>
-<script type="math/tex; mode=display">
-A \rightarrow B \rightarrow C \rightarrow D
-</script>
-</div>
-<p>where we want to compute <span><span class="MathJax_Preview">P(D)</span><script type="math/tex">P(D)</script></span>. We have</p>
-<div>
-<div class="MathJax_Preview">
-X_F = \{D\}, \ X_E = \{\}, \ X_R = \{A, B, C\}
-</div>
-<script type="math/tex; mode=display">
-X_F = \{D\}, \ X_E = \{\}, \ X_R = \{A, B, C\}
-</script>
-</div>
-<p>and</p>
-<div>
-<div class="MathJax_Preview">
-P(D) = \sum_{X_R}X_F, X_R \\
-= \sum_{A, B, C}p(A, B, C, D) \\
-= \sum_C \sum_B \sum_A p(A)p(B | A) p(C | B) p(D | C)
-</div>
-<script type="math/tex; mode=display">
-P(D) = \sum_{X_R}X_F, X_R \\
-= \sum_{A, B, C}p(A, B, C, D) \\
-= \sum_C \sum_B \sum_A p(A)p(B | A) p(C | B) p(D | C)
-</script>
-</div>
-<p>clearly, this is exponential in the number of variables (<span><span class="MathJax_Preview">\mathcal O(k^n)</span><script type="math/tex">\mathcal O(k^n)</script></span>). But, reordering the joint distribution</p>
-<div>
-<div class="MathJax_Preview">
-P(D) = \sum_C p(D | C) \sum_B p(C | B) \sum_A p(A)p(B | A)
-</div>
-<script type="math/tex; mode=display">
-P(D) = \sum_C p(D | C) \sum_B p(C | B) \sum_A p(A)p(B | A)
-</script>
-</div>
-<p>we can begin to simplify the summation</p>
-<div>
-<div class="MathJax_Preview">
-P(D) = \sum_C p(D | C) \sum_b p(C | B) \sum_A p(A)p(B | A) \\
-= \sum_C p(D | C) \sum_B p(C | B) P(B) \\
-= \sum_C p(D | C) P(C) \\
-</div>
-<script type="math/tex; mode=display">
-P(D) = \sum_C p(D | C) \sum_b p(C | B) \sum_A p(A)p(B | A) \\
-= \sum_C p(D | C) \sum_B p(C | B) P(B) \\
-= \sum_C p(D | C) P(C) \\
-</script>
-</div>
-<p>So, by using dynamic programming to do the computation <em>inside out</em> instead of <em>outside in</em>, we have done inference over the joint distribution represented by the chain <em>without generating it explicitly</em>. The cost of performing inference on the chain in this manner is <span><span class="MathJax_Preview">\mathcal O(nk^2)</span><script type="math/tex">\mathcal O(nk^2)</script></span>. In comparison, generating the full joint distribution and marginalizing over it has complexity <span><span class="MathJax_Preview">\mathcal O(k^n)</span><script type="math/tex">\mathcal O(k^n)</script></span>!</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>See slide 7-13 for a full derivation of this example, including the runtime <span><span class="MathJax_Preview">\mathcal O(nk^2)</span><script type="math/tex">\mathcal O(nk^2)</script></span>.</p>
-</div>
-<h4 id="simple-example-dgm">Simple Example: DGM<a class="headerlink" href="#simple-example-dgm" title="Permanent link">&para;</a></h4>
-<p>Lets take the DGM we saw in <a href="../week_3/#independence-assumptions-on-dagms">lecture 3</a></p>
-<p><img alt="" src="../../img/lecture_3_3.png" /></p>
-<p>What is <span><span class="MathJax_Preview">p(x_1 | \bar x_6)</span><script type="math/tex">p(x_1 | \bar x_6)</script></span>? We have</p>
+<p>which we will denote as <span><span class="MathJax_Preview">p_{\theta}(z | x)</span><script type="math/tex">p_{\theta}(z | x)</script></span>.</p>
+<p>Because the computation <span><span class="MathJax_Preview">\int\int p(x, z, \theta)d_zd_{\theta}</span><script type="math/tex">\int\int p(x, z, \theta)d_zd_{\theta}</script></span> is intractable, making the computation of the conditional distribution itself intractable, we must turn to variational methods.</p>
+<h3 id="approximating-the-posterior-inference-with-variational-methods">Approximating the Posterior Inference with Variational Methods<a class="headerlink" href="#approximating-the-posterior-inference-with-variational-methods" title="Permanent link">&para;</a></h3>
+<p>Approximation of the posterior inference with variational methods works as follows:</p>
+<ol>
+<li>Introduce a variational family, <span><span class="MathJax_Preview">q_\phi(z | x)</span><script type="math/tex">q_\phi(z | x)</script></span> with parameters <span><span class="MathJax_Preview">\phi</span><script type="math/tex">\phi</script></span>.</li>
+<li>Encode some notion of "distance" between <span><span class="MathJax_Preview">p_\theta</span><script type="math/tex">p_\theta</script></span> and <span><span class="MathJax_Preview">q_\phi</span><script type="math/tex">q_\phi</script></span>.</li>
+<li>Minimize this distance.</li>
+</ol>
+<p>This process effectively turns Bayesian Inference into an optimization problem (and we <em>love</em> optimization problems in machine learning).</p>
+<p>It is important to note that whatever function we choose for <span><span class="MathJax_Preview">q_\phi</span><script type="math/tex">q_\phi</script></span>, it is unlikely that our variational family will have the true distribution <span><span class="MathJax_Preview">p_\theta</span><script type="math/tex">p_\theta</script></span> in it.</p>
+<p><img alt="" src="../../img/lecture_10_2.png" /></p>
+<h4 id="kullback-leibler-divergence">Kullback-Leibler Divergence<a class="headerlink" href="#kullback-leibler-divergence" title="Permanent link">&para;</a></h4>
+<p>We will measure the distance between <span><span class="MathJax_Preview">q_\phi</span><script type="math/tex">q_\phi</script></span> and <span><span class="MathJax_Preview">p_\theta</span><script type="math/tex">p_\theta</script></span> using the <a href="https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence"><strong>Kullback-Leibler divergence</strong></a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The <span><span class="MathJax_Preview">\bar x</span><script type="math/tex">\bar x</script></span> means that the variable is observed.</p>
+<p>Kullback–Leibler divergence has lots of names, we will stick to <em>"KL divergence"</em>.</p>
 </div>
+<p>We compute <span><span class="MathJax_Preview">D_{KL}</span><script type="math/tex">D_{KL}</script></span> as follows:</p>
+<div>
+<div class="MathJax_Preview">\begin{align}
+  D_{KL}(q_\phi(z | x) || p_\theta(z | x)) &amp;= \int q_\phi(z | x) \log \frac{q_\phi(z | x)}{p_\theta(z | x)}dz \\
+  &amp;= E_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)}
+\end{align}</div>
+<script type="math/tex; mode=display">\begin{align}
+  D_{KL}(q_\phi(z | x) || p_\theta(z | x)) &= \int q_\phi(z | x) \log \frac{q_\phi(z | x)}{p_\theta(z | x)}dz \\
+  &= E_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)}
+\end{align}</script>
+</div>
+<h5 id="properties-of-the-kl-divergence">Properties of the KL Divergence<a class="headerlink" href="#properties-of-the-kl-divergence" title="Permanent link">&para;</a></h5>
+<ol>
+<li><span><span class="MathJax_Preview">D_{KL}(q_\phi || p_\theta) \ge 0</span><script type="math/tex">D_{KL}(q_\phi || p_\theta) \ge 0</script></span></li>
+<li><span><span class="MathJax_Preview">D_{KL}(q_\phi || p_\theta) = 0 \Leftrightarrow q_\phi = p_\theta</span><script type="math/tex">D_{KL}(q_\phi || p_\theta) = 0 \Leftrightarrow q_\phi = p_\theta</script></span></li>
+<li><span><span class="MathJax_Preview">D_{KL}(q_\phi || p_\theta) \not = D_{KL}(p_\theta || q_\phi)</span><script type="math/tex">D_{KL}(q_\phi || p_\theta) \not = D_{KL}(p_\theta || q_\phi)</script></span></li>
+</ol>
+<p>The significance of the last property is that <span><span class="MathJax_Preview">D_{KL}</span><script type="math/tex">D_{KL}</script></span> is <em>not</em> a true distance measure.</p>
+<h3 id="variational-objective">Variational Objective<a class="headerlink" href="#variational-objective" title="Permanent link">&para;</a></h3>
+<p>We want to approximate <span><span class="MathJax_Preview">p_\theta</span><script type="math/tex">p_\theta</script></span> by finding a <span><span class="MathJax_Preview">q_\phi</span><script type="math/tex">q_\phi</script></span> such that</p>
 <div>
 <div class="MathJax_Preview">
-\ X_F = \{x_1\}, X_E = \{x_6\}, \ X_R = \{x_2, x_3, x_4, x_5\}
+q_\phi \approx p_\theta \Rightarrow D_{KL}(q_\phi || p_\theta) \Rightarrow 0
 </div>
 <script type="math/tex; mode=display">
-\ X_F = \{x_1\}, X_E = \{x_6\}, \ X_R = \{x_2, x_3, x_4, x_5\}
+q_\phi \approx p_\theta \Rightarrow D_{KL}(q_\phi || p_\theta) \Rightarrow 0
 </script>
 </div>
-<p>and</p>
+<p>but the computation of <span><span class="MathJax_Preview">D_{KL}(q_\phi || p_\theta)</span><script type="math/tex">D_{KL}(q_\phi || p_\theta)</script></span> is intractable (as discussed above).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><span><span class="MathJax_Preview">D_{KL}(q_\phi || p_\theta)</span><script type="math/tex">D_{KL}(q_\phi || p_\theta)</script></span> is intractable because it contains the term <span><span class="MathJax_Preview">p_\theta(z | x)</span><script type="math/tex">p_\theta(z | x)</script></span>, which we have already established, is intractable.</p>
+</div>
+<p>To circumvent this issue of intractability, we will derive the <a href="https://en.wikipedia.org/wiki/Evidence_lower_bound"><strong>evidence lower bound (ELBO)</strong></a>, and show that maximizing the ELBO <span><span class="MathJax_Preview">\Rightarrow</span><script type="math/tex">\Rightarrow</script></span> minimizing <span><span class="MathJax_Preview">D_{KL}(q_\phi || p_\theta)</span><script type="math/tex">D_{KL}(q_\phi || p_\theta)</script></span>.</p>
+<div>
+<div class="MathJax_Preview">\begin{align}
+  D_{KL}(q_\phi || p_\theta) &amp;= E_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)} \\
+  &amp;= E_{z \sim q_\phi} \Bigg [ \log \Bigg ( q_\phi(z | x) \cdot \frac{p_\theta(x)}{p_\theta(z, x)} \Bigg ) \Bigg ] \\
+  &amp;= E_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z, x)}  + E_{z \sim q_\phi} \log p_\theta(x) \\
+  &amp;= -L(x ; \phi)  + \log p_\theta(x) \\
+\end{align}</div>
+<script type="math/tex; mode=display">\begin{align}
+  D_{KL}(q_\phi || p_\theta) &= E_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)} \\
+  &= E_{z \sim q_\phi} \Bigg [ \log \Bigg ( q_\phi(z | x) \cdot \frac{p_\theta(x)}{p_\theta(z, x)} \Bigg ) \Bigg ] \\
+  &= E_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z, x)}  + E_{z \sim q_\phi} \log p_\theta(x) \\
+  &= -L(x ; \phi)  + \log p_\theta(x) \\
+\end{align}</script>
+</div>
+<p>Where <span><span class="MathJax_Preview">L(x ; \theta)</span><script type="math/tex">L(x ; \theta)</script></span> is the <strong>ELBO</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Notice that <span><span class="MathJax_Preview">\log p_\theta(x)</span><script type="math/tex">\log p_\theta(x)</script></span> is <em>not</em> dependent on <span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span>.</p>
+</div>
+<p>Rearranging, we get</p>
+<div>
+<div class="MathJax_Preview">\begin{align}
+  D_{KL}(q_\phi || p_\theta) &amp;= -L(x ; \phi)  + \log p_\theta(x) \\
+  \Rightarrow L(x ; \phi) + D_{KL}(q_\phi || p_\theta) &amp;= \log p_\theta(x) \\
+\end{align}</div>
+<script type="math/tex; mode=display">\begin{align}
+  D_{KL}(q_\phi || p_\theta) &= -L(x ; \phi)  + \log p_\theta(x) \\
+  \Rightarrow L(x ; \phi) + D_{KL}(q_\phi || p_\theta) &= \log p_\theta(x) \\
+\end{align}</script>
+</div>
+<p>Because <span><span class="MathJax_Preview">D_{KL}(q_\phi || p_\theta) \ge 0</span><script type="math/tex">D_{KL}(q_\phi || p_\theta) \ge 0</script></span></p>
 <div>
 <div class="MathJax_Preview">
-p(x_1 | \bar x_6) = \frac{p(x_1, \bar x_6)}{p(\bar x_6)} =  \frac{p(x_1, \bar x_6)}{\sum_{x}p(x, \bar x_6)}
+L(x ; \phi) \le \log p_\theta(x)
 </div>
 <script type="math/tex; mode=display">
-p(x_1 | \bar x_6) = \frac{p(x_1, \bar x_6)}{p(\bar x_6)} =  \frac{p(x_1, \bar x_6)}{\sum_{x}p(x, \bar x_6)}
+L(x ; \phi) \le \log p_\theta(x)
 </script>
 </div>
-<p>to compute <span><span class="MathJax_Preview">p(x_1, \bar x_6)</span><script type="math/tex">p(x_1, \bar x_6)</script></span>, we use variable elimination</p>
+<p><span><span class="MathJax_Preview">\therefore</span><script type="math/tex">\therefore</script></span> maximizing the ELBO <span><span class="MathJax_Preview">\Rightarrow</span><script type="math/tex">\Rightarrow</script></span> minimizing <span><span class="MathJax_Preview">D_{KL}(q_\phi || p_\theta)</span><script type="math/tex">D_{KL}(q_\phi || p_\theta)</script></span>.</p>
+<h4 id="alternative-derivation">Alternative Derivation<a class="headerlink" href="#alternative-derivation" title="Permanent link">&para;</a></h4>
+<p>Starting with <a href="https://en.wikipedia.org/wiki/Jensen%27s_inequality"><strong>Jenson's inequality</strong></a>,</p>
 <div>
 <div class="MathJax_Preview">
-p(x_1, \bar x_6) = p(x_1) \sum_{x_2} \sum_{x_3} \sum_{x_4} \sum_{x_5} p(x_2 | x_1)p(x_3 | x_1)p(x_4 | x_2)p(x_5 | x_3)p(\bar x_6 | x_2, x_5)\\
-= p(x_1) \sum_{x_2} p(x_2 | x_1) \sum_{x_3} p(x_3 | x_1) \sum_{x_4} p(x_4 | x_2) \sum_{x_5} p(x_5 | x_3)p(\bar x_6 | x_2, x_5) \\
-= p(x_1)  \sum_{x_2} p(x_2 | x_1) \sum_{x_3} p(x_3 | x_1) \sum_{x_4} p(x_4 | x_2) p(\bar x_6 | x_2, x_3) \\
-= p(x_1)  \sum_{x_2} p(x_2 | x_1) \sum_{x_3} p(x_3 | x_1) p(\bar x_6 | x_2, x_3) \sum_{x_4} p(x_4 | x_2)  \\
-= p(x_1) \sum_{x_2} p(x_2 | x_1) \sum_{x_3} p(x_3 | x_1) p(\bar x_6 | x_2, x_3) \\
-= p(x_1) \sum_{x_2} p(x_2 | x_1) p(\bar x_6 | x_1, x_2) \\
-= p(x_1) p(\bar x_6 | x_1) \\
+f(E[X]) \le E[f(x)]
 </div>
 <script type="math/tex; mode=display">
-p(x_1, \bar x_6) = p(x_1) \sum_{x_2} \sum_{x_3} \sum_{x_4} \sum_{x_5} p(x_2 | x_1)p(x_3 | x_1)p(x_4 | x_2)p(x_5 | x_3)p(\bar x_6 | x_2, x_5)\\
-= p(x_1) \sum_{x_2} p(x_2 | x_1) \sum_{x_3} p(x_3 | x_1) \sum_{x_4} p(x_4 | x_2) \sum_{x_5} p(x_5 | x_3)p(\bar x_6 | x_2, x_5) \\
-= p(x_1)  \sum_{x_2} p(x_2 | x_1) \sum_{x_3} p(x_3 | x_1) \sum_{x_4} p(x_4 | x_2) p(\bar x_6 | x_2, x_3) \\
-= p(x_1)  \sum_{x_2} p(x_2 | x_1) \sum_{x_3} p(x_3 | x_1) p(\bar x_6 | x_2, x_3) \sum_{x_4} p(x_4 | x_2)  \\
-= p(x_1) \sum_{x_2} p(x_2 | x_1) \sum_{x_3} p(x_3 | x_1) p(\bar x_6 | x_2, x_3) \\
-= p(x_1) \sum_{x_2} p(x_2 | x_1) p(\bar x_6 | x_1, x_2) \\
-= p(x_1) p(\bar x_6 | x_1) \\
+f(E[X]) \le E[f(x)]
 </script>
 </div>
-<h4 id="summary-so-far">Summary so far<a class="headerlink" href="#summary-so-far" title="Permanent link">&para;</a></h4>
-<p>A worst case analysis says that computing the joint distribution is NP-hard. In practice, some subexpressions in the joint depend only on a subset of variables due to the structure of the Bayesian network. We can therefore use dynamic programming to reduce the number of computations, however, this depends on choosing a <em>good variable elimination ordering</em>.</p>
-<h3 id="sum-product-inference">Sum-product inference<a class="headerlink" href="#sum-product-inference" title="Permanent link">&para;</a></h3>
-<p>We want an algorithm to compute <span><span class="MathJax_Preview">P(Y)</span><script type="math/tex">P(Y)</script></span> for <em>directed</em> and <em>undirected</em> models. This can be reduced to the following <strong>sum-product</strong> inference task</p>
+<p>if <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> is a random variable and <span><span class="MathJax_Preview">f</span><script type="math/tex">f</script></span> is a convex function.</p>
+<p>Given that <span><span class="MathJax_Preview">\log</span><script type="math/tex">\log</script></span> is a concave function, we have</p>
 <div>
-<div class="MathJax_Preview">
-\tau(Y) = \sum_z \prod_{\phi \in \Phi} \phi(z_{Scope[\phi] \cap Z}, y_{Scope[\phi] \cap Y)} \quad \forall Y
+<div class="MathJax_Preview">\begin{align}
+\log p(x) &amp;= \log \int p_\theta(x, z)dz \\
+&amp;= \log \int p_\theta(x, z) \frac{q_\phi(z | x)}{q_\phi(z | x)} dz \\
+&amp;= \log E_{z \sim q_\phi} \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
+\Rightarrow  \log E_{z \sim q_\phi} \frac{p_\theta(x, z)}{q_\phi(z | x)} &amp; \ge E_{z \sim q_\phi} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\  
+&amp;= - E_{z \sim q_\phi} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
+\end{align}</div>
+<script type="math/tex; mode=display">\begin{align}
+\log p(x) &= \log \int p_\theta(x, z)dz \\
+&= \log \int p_\theta(x, z) \frac{q_\phi(z | x)}{q_\phi(z | x)} dz \\
+&= \log E_{z \sim q_\phi} \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
+\Rightarrow  \log E_{z \sim q_\phi} \frac{p_\theta(x, z)}{q_\phi(z | x)} & \ge E_{z \sim q_\phi} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\  
+&= - E_{z \sim q_\phi} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
+\end{align}</script>
 </div>
-<script type="math/tex; mode=display">
-\tau(Y) = \sum_z \prod_{\phi \in \Phi} \phi(z_{Scope[\phi] \cap Z}, y_{Scope[\phi] \cap Y)} \quad \forall Y
-</script>
-</div>
-<p>where <span><span class="MathJax_Preview">\Phi</span><script type="math/tex">\Phi</script></span> is a set of potentials or factors.</p>
-<p>For <strong>directed models</strong>, <span><span class="MathJax_Preview">\Phi</span><script type="math/tex">\Phi</script></span> is given by the conditional probability distributions for all variables</p>
-<div>
-<div class="MathJax_Preview">
-\Phi = \{\phi_{x_i}\}^N_{i=1} = \{p(x_i | x_{\pi_i})\}^N_{i=1}
-</div>
-<script type="math/tex; mode=display">
-\Phi = \{\phi_{x_i}\}^N_{i=1} = \{p(x_i | x_{\pi_i})\}^N_{i=1}
-</script>
-</div>
-<p>where the sum is over the set <span><span class="MathJax_Preview">Z = X - X_F</span><script type="math/tex">Z = X - X_F</script></span>.</p>
-<p>For <strong>undirected models</strong>, <span><span class="MathJax_Preview">\Phi</span><script type="math/tex">\Phi</script></span> is given by the set of potentials. Because the sum product returns unnormalized <span><span class="MathJax_Preview">\Phi</span><script type="math/tex">\Phi</script></span> distributions, we must normalize by <span><span class="MathJax_Preview">\sum_Y\tau(y)</span><script type="math/tex">\sum_Y\tau(y)</script></span>.</p>
-<h4 id="example-directed-graph">Example: Directed Graph<a class="headerlink" href="#example-directed-graph" title="Permanent link">&para;</a></h4>
-<p>Take the following directed graph as example</p>
-<p><img alt="" src="../../img/lecture_5_1.png" /></p>
-<p>The joint distribution is given by</p>
-<div>
-<div class="MathJax_Preview">
-p(C, D, I, G, S, L, H, J) = p(C)p(D|C)p(I)p(G | D, I)p(L | G)P(S | I)p(J | S, L)p(H | J, G)
-</div>
-<script type="math/tex; mode=display">
-p(C, D, I, G, S, L, H, J) = p(C)p(D|C)p(I)p(G | D, I)p(L | G)P(S | I)p(J | S, L)p(H | J, G)
-</script>
-</div>
-<p>with factors</p>
-<div>
-<div class="MathJax_Preview">
-\Psi = \{\psi_C(C), \psi_D(C, D), \psi_I(I), \psi_G(G, D, I), \psi_L(L, G), \psi_S(S, I), \psi_J(J, S, L), \psi_H(H, J, H)\}
-</div>
-<script type="math/tex; mode=display">
-\Psi = \{\psi_C(C), \psi_D(C, D), \psi_I(I), \psi_G(G, D, I), \psi_L(L, G), \psi_S(S, I), \psi_J(J, S, L), \psi_H(H, J, H)\}
-</script>
-</div>
-<p>Let's do variable elimination with ordering <span><span class="MathJax_Preview">\prec \{C, D, I, H, G, S, L\}</span><script type="math/tex">\prec \{C, D, I, H, G, S, L\}</script></span></p>
-<p><img alt="" src="../../img/lecture_5_2.png" /></p>
                 
                   
                 
@@ -892,7 +836,7 @@ p(C, D, I, G, S, L, H, J) = p(C)p(D|C)p(I)p(G | D, I)p(L | G)P(S | I)p(J | S, L)
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../week_4/" title="Week 4" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../week_9/" title="Week 9" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -901,19 +845,19 @@ p(C, D, I, G, S, L, H, J) = p(C)p(D|C)p(I)p(G | D, I)p(L | G)P(S | I)p(J | S, L)
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Week 4
+                Week 9
               </span>
             </div>
           </a>
         
         
-          <a href="../week_6/" title="Week 6" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../../tutorials/week_1/" title="Week 1" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Week 6
+                Week 1
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
