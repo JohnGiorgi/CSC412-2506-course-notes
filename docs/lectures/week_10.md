@@ -15,7 +15,7 @@
 
 Imagine we had the following latent variable model
 
-![](../img/lecture_10_1.png)
+![](../img/lecture_9_1.png)
 
 which represents the probabilistic model \(p(x z ; \theta)\) where
 
@@ -45,7 +45,7 @@ This process effectively turns Bayesian Inference into an optimization problem (
 
 It is important to note that whatever function we choose for \(q_\phi\), it is unlikely that our variational family will have the true distribution \(p_\theta\) in it.
 
-![](../img/lecture_10_2.png)
+![](../img/lecture_9_2.png)
 
 #### Kullback-Leibler Divergence
 
@@ -58,7 +58,7 @@ We compute \(D_{KL}\) as follows:
 
 \begin{align}
   D_{KL}(q_\phi(z | x) || p_\theta(z | x)) &= \int q_\phi(z | x) \log \frac{q_\phi(z | x)}{p_\theta(z | x)}dz \\
-  &= E_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)}
+  &= E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)}
 \end{align}
 
 ##### Properties of the KL Divergence
@@ -85,9 +85,9 @@ but the computation of \(D_{KL}(q_\phi || p_\theta)\) is intractable (as discuss
 To circumvent this issue of intractability, we will derive the [**evidence lower bound (ELBO)**](https://en.wikipedia.org/wiki/Evidence_lower_bound), and show that maximizing the ELBO \(\Rightarrow\) minimizing \(D_{KL}(q_\phi || p_\theta)\).
 
 \begin{align}
-  D_{KL}(q_\phi || p_\theta) &= E_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)} \\
-  &= E_{z \sim q_\phi} \Bigg [ \log \Bigg ( q_\phi(z | x) \cdot \frac{p_\theta(x)}{p_\theta(z, x)} \Bigg ) \Bigg ] \\
-  &= E_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z, x)}  + E_{z \sim q_\phi} \log p_\theta(x) \\
+  D_{KL}(q_\phi || p_\theta) &= E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)} \\
+  &= E_{z_\phi \sim q_\phi} \Bigg [ \log \Bigg ( q_\phi(z | x) \cdot \frac{p_\theta(x)}{p_\theta(z, x)} \Bigg ) \Bigg ] \\
+  &= E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z, x)}  + E_{z_\phi \sim q_\phi} \log p_\theta(x) \\
   &= -L(x ; \phi)  + \log p_\theta(x) \\
 \end{align}
 
@@ -126,7 +126,45 @@ Given that \(\log\) is a concave function, we have
 \begin{align}
 \log p(x) &= \log \int p_\theta(x, z)dz \\
 &= \log \int p_\theta(x, z) \frac{q_\phi(z | x)}{q_\phi(z | x)} dz \\
-&= \log E_{z \sim q_\phi} \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
-\Rightarrow  \log E_{z \sim q_\phi} \frac{p_\theta(x, z)}{q_\phi(z | x)} & \ge E_{z \sim q_\phi} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\  
-&= - E_{z \sim q_\phi} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
+&= \log E_{z_\phi \sim q_\phi} \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
+\Rightarrow  \log E_{z_\phi \sim q_\phi} \frac{p_\theta(x, z)}{q_\phi(z | x)} & \ge E_{z_\phi \sim q_\phi} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\  
+&= - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
+&= L(x ; \phi)
 \end{align}
+
+### Alternative Forms of ELBO and Intuitions
+
+Recall that
+
+\[
+\text{ELBO} = L(x ; \phi) = - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)}
+\]
+
+1) The most general interpretation of the ELBO is given by
+
+\begin{align}
+  L &= - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
+  &= E_{z_\phi \sim q_\phi} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
+  &= E_{z_\phi \sim q_\phi} \log \frac{p_\theta(z)p_\theta(x | z)}{q_\phi(z | x)} \\
+  &= E_{z_\phi \sim q_\phi} \Big [ \log p_\theta({x | z}) + \log p_\theta({z}) - \log {q_\phi(z | x)} \Big ]\\
+\end{align}
+
+2) We can also re-write 1) using entropy
+
+\[
+E_{z_\phi \sim q_\phi} \Big [ \log p_\theta({x | z}) + \log p_\theta({z}) \Big ] H \Big [ q_\phi(z | x) \Big ] \\
+\]
+
+3) Another re-write and we arrive at
+
+\[
+E_{z_\phi \sim q_\phi} \Big [ \log p_\theta({x | z}) \Big ] - D_{KL}(q_\phi(z | x) || p_\theta(z))
+\]
+
+!!! tip
+    The instructor suggest that this would be useful for assignment 3.
+
+This frames the EBLO has a tradeoff. The first term can be thought of as a "reconstruction likelihood", i.e. how probable is \(x\) given \(z\), which encourages the model to choose the distribution which best reconstructs the data. The second term acts as regularization, by enforcing the idea that our parameterization shouldn't move us too far from the true distribution.
+
+!!! note
+    The instructor recommends we read "sticking the landing".
