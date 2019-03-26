@@ -88,10 +88,10 @@ To circumvent this issue of intractability, we will derive the [**evidence lower
   D_{KL}(q_\phi || p_\theta) &= E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)} \\
   &= E_{z_\phi \sim q_\phi} \Bigg [ \log \Bigg ( q_\phi(z | x) \cdot \frac{p_\theta(x)}{p_\theta(z, x)} \Bigg ) \Bigg ] \\
   &= E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z, x)}  + E_{z_\phi \sim q_\phi} \log p_\theta(x) \\
-  &= -L(x ; \phi)  + \log p_\theta(x) \\
+  &= -\mathcal L(\theta, \phi ; x)  + \log p_\theta(x) \\
 \end{align}
 
-Where \(L(x ; \theta)\) is the **ELBO**.
+Where \(\mathcal L(\theta, \phi ; x)\) is the **ELBO**.
 
 !!! note
     Notice that \(\log p_\theta(x)\) is _not_ dependent on \(z\).
@@ -99,14 +99,14 @@ Where \(L(x ; \theta)\) is the **ELBO**.
 Rearranging, we get
 
 \begin{align}
-  D_{KL}(q_\phi || p_\theta) &= -L(x ; \phi)  + \log p_\theta(x) \\
-  \Rightarrow L(x ; \phi) + D_{KL}(q_\phi || p_\theta) &= \log p_\theta(x) \\
+  D_{KL}(q_\phi || p_\theta) &= -\mathcal L(\theta, \phi ; x)  + \log p_\theta(x) \\
+  \Rightarrow \mathcal L(\theta, \phi ; x) + D_{KL}(q_\phi || p_\theta) &= \log p_\theta(x) \\
 \end{align}
 
 Because \(D_{KL}(q_\phi || p_\theta) \ge 0\)
 
 \[
-L(x ; \phi) \le \log p_\theta(x)
+\mathcal L(\theta, \phi ; x) \le \log p_\theta(x)
 \]
 
 \(\therefore\) maximizing the ELBO \(\Rightarrow\) minimizing \(D_{KL}(q_\phi || p_\theta)\).
@@ -129,21 +129,21 @@ Given that \(\log\) is a concave function, we have
 &= \log E_{z_\phi \sim q_\phi} \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
 \Rightarrow  \log E_{z_\phi \sim q_\phi} \frac{p_\theta(x, z)}{q_\phi(z | x)} & \ge E_{z_\phi \sim q_\phi} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\  
 &= - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
-&= L(x ; \phi)
+&= \mathcal L(\theta, \phi ; x)
 \end{align}
 
 ### Alternative Forms of ELBO and Intuitions
 
-Recall that
+We have that
 
 \[
-\text{ELBO} = L(x ; \phi) = - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)}
+\mathcal L(\theta, \phi ; x) = -\text{ELBO} = - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)}
 \]
 
 1) The most general interpretation of the ELBO is given by
 
 \begin{align}
-  L &= - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
+  \mathcal L(\theta, \phi ; x) &= - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
   &= E_{z_\phi \sim q_\phi} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
   &= E_{z_\phi \sim q_\phi} \log \frac{p_\theta(z)p_\theta(x | z)}{q_\phi(z | x)} \\
   &= E_{z_\phi \sim q_\phi} \Big [ \log p_\theta({x | z}) + \log p_\theta({z}) - \log {q_\phi(z | x)} \Big ]\\
@@ -168,3 +168,15 @@ This frames the EBLO has a tradeoff. The first term can be thought of as a "reco
 
 !!! note
     The instructor recommends we read "sticking the landing".
+
+### Mean Field Variational Inference
+
+This section was a bit of a mess, I will return to it when I have time.
+
+## Appendix
+
+### Useful Resources
+
+- [High level overview](https://lingpipe-blog.com/2013/03/25/mean-field-variational-inference-made-easy/) on variational inference.
+
+### Glossary of Terms

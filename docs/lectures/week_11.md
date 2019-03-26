@@ -102,6 +102,9 @@ assuming our model looks like
 
 ![](../img/lecture_10_3.png)
 
+!!! cite
+    [Kingma, Diederik P., and Max Welling. "Auto-encoding variational bayes." arXiv preprint arXiv:1312.6114 (2013)](https://arxiv.org/abs/1312.6114).
+
 then learning the model is just inference:
 
 \[
@@ -129,17 +132,17 @@ D_{KL}(q_\phi(z | x) || p_\theta(z | x))
 finally, we demonstrated that minimizing \(D_{KL}\) was equivalent to maximizing the ELBO, \(L\)
 
 \[
-\text{ELBO} = L(x ; \phi) = - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)}
+\mathcal L(\theta, \phi ; x) = -\text{ELBO} = - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)}
 \]
 
 We also talked about two other [alternative forms or "intuitions" of the ELBO](../week_10/#alternative-forms-of-elbo-and-intuitions):
 
 \begin{align}
-\text{ELBO} &= E_{z_\phi \sim q_\phi} \Big [ \log p_\theta({x | z}) + \log p_\theta({z}) - \log {q_\phi(z | x)} \Big ] \tag*{intuition (1)} \\
+\mathcal L(\theta, \phi ; x) &= E_{z_\phi \sim q_\phi} \Big [ \log p_\theta({x | z}) + \log p_\theta({z}) - \log {q_\phi(z | x)} \Big ] \tag*{intuition (1)} \\
 &= E_{z_\phi \sim q_\phi} \Big [ \log p_\theta({x | z}) \Big ] - D_{KL}(q_\phi(z | x) || p_\theta(z)) \tag*{intuition (3)}\\
 \end{align}
 
-Notice now that the first term corresponds to the _likelihood of our input under the distribution decoded from \(z\)_ and the second term the _divergence of the approximate distribution posterior from the prior of the true distribution_.
+The second of which (intuition 3) is the loss function we use for training VAEs. Notice now that the first term corresponds to the _likelihood of our input under the distribution decoded from \(z\)_ and the second term the _divergence of the approximate distribution posterior from the prior of the true distribution_.
 
 !!! note
     We talked last week about how the second terms acts a regularization, by enforcing the idea that our parameterization shouldn't move us too far from the true distribution. Alos note that this term as a simple, closed form if the posterior and prior are Gaussians.
@@ -162,12 +165,108 @@ _Problem 2_
 
 The first term in the ELBO is the _reconstruction likelihood_, i.e. the likelihood that we would have re-constructed our data under our model. This serves as our measure of "goodness" of the reconstructed inputs.
 
+### VAE Pipeline
+
+1. Run a given input, \(x_i\) through the encoder: \(g(x_i) = \phi_i\) to get the parameters of the approximate distribution \(q_{\phi_i}(z | x)\).
+2. Sample \(z_i \sim q_{\phi_i}(z | x)\). This is the code in our feature space \(F\).
+3. Run the sampled code through the decoder: \(f(z_i) = \theta_i\) to get the parameters of the true distribution \(p_{\theta_i}(x | z)\).
+4. Compute the loss function: \(\mathcal L(x ; \theta, \phi) = - E_{z_\phi \sim q_\phi} \Big [ \log p_\theta({x | z}) \Big ] + D_{KL}(q_\phi(z | x) || p_\theta(z))\)
+5. Use gradient-based optimization to backpropogate the loses \(\nabla_\theta L\), \(\nabla_\phi L\)
+
+Once a VAE is trained, we can sample new inputs
+
+\[
+\tilde x_i \sim p_\theta(x | z_i)
+\]
+
+We can also interpolate between inputs, using simple vector arithmetic.
+
+!!! note
+    This sampling is never performed during training.
+
+### Gradient Example: MNIST
+
+Lets walk through an example of computing the gradients for a VAE on MNIST.
+
+We will choose our prior on \(z\) to be the standard Gaussian with zero mean and unit variance
+
+\[
+\mathcal{N}(0, I)
+\]
+
+our likelihood function to be
+
+\[
+p_\theta(x | z) = \Big \{^{\text{Bernoulli if binarized}}_{\sigma (\text{Gaussian}) \text{ else}}
+\]
+
+and our approximate distribution to be
+
+\[
+q_\phi(z | x) = \mathcal{N}(\mu(x), \sigma(x)I)
+\]
+
+!!! note
+    Notice that our mean and variance are functions of the input.
+
+Finally, we use neural networks as our encoder and decoder
+
+**Encoder**: \(g_\phi(x_i) = \phi_i = [u_i, \log \sigma_i]\)
+
+**Decoder**: \(f_\theta(z_i) = \theta_i\)
+
+Where \(\theta_i\) are the Bernoulli variables for each pixel in the input. To get our reconstructed input, we simply evaluate
+
+\[
+\tilde x_i \sim p_{\theta_i}(x | z)
+\]
+
+!!! note
+    We log the variance in the encoder (\(\log \sigma_i\)) in order to force outputs to be positive. This allows the neural network to learn parameters in an unconstrained space.
+
+The entire model looks like:
+
+![](https://mohitjainweb.files.wordpress.com/2018/10/variational-autoencoder.png?w=700)
+
+!!! cite
+    [Variational Autoencoder Explained](https://mohitjain.me/2018/10/26/variational-autoencoder/).
+
+Where inputs \(x_i\) are encoded to vectors \(\mu\) and \(\log \sigma_i\), which parameterize \(q_\phi(z | x)\). Before decoding, we draw a sample \(z \sim q_\phi(z | x) = \mathcal{N}(\mu(x), \sigma(x)I)\) and evaluate its likelihood under the model with \(p_\theta(x | z)\). We compute the loss function \(\mathcal L(\theta, \phi ; x)\) and propagate its derivative with respect to \(\theta\) and \(\phi\), \(\nabla_\theta L\), \(\nabla_\phi L\), through the network during training.
+
+### The Reparameterization Trick
+
+The decoder generates a reconstruction by first sampling from the distribution \(q_\phi(z | x)\). This sampling process introduces a major problem: gradients are blocked from flowing into the encoder, and hence it will not train. To solve this problem, the [reparameterization trick](https://medium.com/@llionj/the-reparameterization-trick-4ff30fe92954) is used.
+
+The trick goes as follows: Instead of sampling \(z\) directly from its distribution (e.g. \(z \sim \mathcal{N}(\mu(x), \sigma(x)I)\)) we express \(z\) as a deterministic variable
+
+\[
+z = g_\phi(\varepsilon, x)
+\]
+
+where \(\varepsilon\) is an auxiliary independent randome variable a \(g_\phi\) converts \(\varepsilon\) to \(z\).
+
+In the case of where our approximate distribution is chosen to be the multivariate normal with diagonal covariance, the reparameterization trick gives:
+
+\[
+z = \mu + \sigma * \varepsilon \quad \text{where } \varepsilon \sim \mathcal N(0, I)
+\]
+
+with this reparameterization, gradients can now flow through the entire network
+
+![](../img/lecture_10_4.png)
+
+
+
+
+
 ## Appendix
 
 ### Useful Resources
 
 - [Keras Blog](https://blog.keras.io/building-autoencoders-in-keras.html) on autoencoders.
-- [Blog](https://mohitjain.me/2018/10/26/variational-autoencoder/) on VAEs (if I didn't know better I would say some material in this lecture came from here).
+- [Blog](https://mohitjain.me/2018/10/26/variational-autoencoder/) on VAEs.
 - [Blog](https://towardsdatascience.com/intuitively-understanding-variational-autoencoders-1bfe67eb5daf) on the intuitive understanding of VAEs.
+- The [original VAE paper](https://arxiv.org/abs/1312.6114) (which assignment 3 is based on) and a [video](https://www.youtube.com/watch?time_continue=2&v=9zKuYvjFFS8) explanation.
+- [Blog](https://medium.com/@llionj/the-reparameterization-trick-4ff30fe92954) on the reparameterization trick.
 
 ### Glossary of Terms
