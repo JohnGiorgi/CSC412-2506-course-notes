@@ -34,8 +34,19 @@ nav:
     - Lectures:
       - Week 1: lectures/week_1.md
       - Week 2: lectures/week_2.md
+      - Week 3: lectures/week_3.md
+      - Week 4: lectures/week_4.md
+      - Week 5: lectures/week_5.md
+      - Week 6: lectures/week_6.md
+      - Week 8: lectures/week_8.md
+      - Week 9: lectures/week_9.md
+      - Week 10: lectures/week_10.md
+      - Week 11: lectures/week_11.md
+      - Week 12: lectures/week_12.md
+      - Week 13: lectures/week_13.md
     - Tutorials:
       - Week 1: tutorials/week_1.md
+    - Sample Midterm (Answers): sample_midterm_answers.md
 
 
 markdown_extensions:

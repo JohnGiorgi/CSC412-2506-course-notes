@@ -5,5 +5,6 @@
 
 ## When and Where
 
-- Lectures: Tuesdays 15:00-17:00 in SS 2117
-- Tutorials: Thursday 13:00-14:00 in SS 2117
+- **Lectures**: Tuesdays 15:00-17:00 in SS 2117
+- **Tutorials**: Thursday 13:00-14:00 in SS 2117
+- **Office hours**: Wednesdays 11:30-12:30 in Bahen (BA) 2283
