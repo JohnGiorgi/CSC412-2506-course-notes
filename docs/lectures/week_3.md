@@ -429,7 +429,7 @@ Remember: we are _not_ modeling the density of the inputs \(x\).
 We can learn mixture densities using gradient descent on the likelihood as usual.
 
 \[
-\ell(\theta) = \log p(x | \theta) = \sum_k \alpha_kp_k(x_k | \theta_k) \\
+\ell(\theta) = \log p(x | \theta) = \log \sum_k \alpha_kp_k(x_k | \theta_k) \\
 \Rightarrow \frac{\partial \ell}{\partial \theta} = \frac{1}{p(x | \theta)} \sum_k \alpha_k \frac{\partial p_k(x | \theta)}{\partial \theta} \\
 = \sum_k \alpha_k \frac{1}{p(x | \theta)}p_k(x | \theta_k)\frac{\partial \log p_k (x | \theta_k)}{\partial \theta} \\
 = \sum_k \alpha_k \frac{p_k(x | \theta_k)}{p(x | \theta)} \frac{\partial \ell_k}{\partial \theta_k} \\
