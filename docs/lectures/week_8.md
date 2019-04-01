@@ -46,7 +46,7 @@ Simple examples of functions \(\phi(x)\) whose expectations we might be interest
 
 \[
 \phi_1(x) = t(x) \Rightarrow \Phi_1 = \mathbb E_{x \sim p(x)}[\phi_1(x)] \Rightarrow \text{mean}(t) = \Phi_1 \\
-\phi_2(x) = (t(x))^2 \Rightarrow \Phi_2 = \mathbb E_{x \sim p(x)}[\phi_2(x)] \Rightarrow \text{var}(t) = \Phi_2 - (\Phi_2)^2 \\
+\phi_2(x) = (t(x))^2 \Rightarrow \Phi_2 = \mathbb E_{x \sim p(x)}[\phi_2(x)] \Rightarrow \text{var}(t) = \Phi_2 - (\Phi_1)^2 \\
 \]
 
 ### Simple Monte Carlo
