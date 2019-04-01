@@ -38,6 +38,9 @@ If our inputs and classes are continuous, we call this [regression](https://en.w
 
 \[p(y | x) = \frac{p(x, y)}{p(x)} = \frac{p(x, y)}{\int_Y p(x,y)dy}\]
 
+!!! note
+    The sum over our target/classes in the marginal distribution \(p(x)\) is replaced by an integral.
+
 In general,
 
 - if a variable is _always_ observed, we may _not_ want to model its density (regression / classification)
@@ -48,12 +51,11 @@ In fact, we can mostly classify (no pun intended) the problems we care about int
 - **Classification**: \(p(c | x) = \frac{p(c, x)}{p(x)} = \frac{p(c, x)}{\sum_C p(c, x)}\)
 - **Clustering**: \(p(c | x) = \frac{p(c, x)}{p(x)} \ ; \  c \text{ is unobserved}\)
 - **Regression**: \(p(y | x) = \frac{p(y, x)}{p(x)} = \frac{p(y, x)}{\int_Y p(x, y)dy}\)
-
-- **Density Estimation**: \(p(y | x) = \frac{p(y, x)}{p(x)} ; y \text{ is unobserved}\)
+- **Density Estimation**: \(p(y | x) = \frac{p(y, x)}{p(x)} \ ; \ y \text{ is unobserved}\)
 
 ### Operations on Probabilistic Models
 
-The fundamental operations we will perform on a probabilistic modal are:
+The fundamental operations we will perform on a probabilistic model are:
 
 - **Generate Data**: For this you need to know how to sample from local models (directed) or how to do Gibbs or other sampling (undirected).
 - **Compute probabilities**: When all nodes are either observed or marginalized the result is a single number which is the probability of the configuration.
@@ -119,12 +121,16 @@ Notice that \(\theta_T\) and \(\theta_W\) _are_ the probability distributions of
 
 We can represent the joint distribution \(P(T, W)\), _our model_ as:
 
+<center>
+
 | T   | W   | P    |
 | --- | --- | ---- |
 | h   | s   | 0.28 |
 | c   | r   | 0.18 |
 | h   | r   | 0.12 |
 | c   | s   | 0.42 |
+
+</center>
 
 from the joint distribution (which is again, essentially our model) we can compute the _marginals_
 
@@ -275,11 +281,15 @@ This is our maximum likelihood estimation of the parameters \(\theta\), \(\theta
 
 In general, _learning_ the parameters of a probabilistic model depends on whether our variables are observed or partially observed, continuous or discrete
 
+<center>
+
+
 |                              | Continuous                                        | Discrete                                             |
 | ---------------------------- | ------------------------------------------------- | ---------------------------------------------------- |
 | Fully observed variables     | Bespoke estimates from calculus                   | Normalized counts                                    |
 | Partially observed variables | Variational inference, recognition networks, [MCMC](https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo) | Message passing, variable elimination, [junction tree](https://en.wikipedia.org/wiki/Tree_decomposition) |
 
+</center>
 
 ## Appendix
 

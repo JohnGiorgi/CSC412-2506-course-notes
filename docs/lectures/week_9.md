@@ -129,21 +129,33 @@ where
 
 where our observed states are whether or not we are watching Netflix (\(N\)), sleeping (\(Z\)), or working on the assignment (\(A\)) and our hidden states are whether we are happy (\(H\)) or sad (\(S\)). Say futher that we are given the initial (\(\pi\)), transition (\(T\)), and emission probabilities (\(\varepsilon\))
 
+<center>
 
 | \(\pi\) |      |
 | ------- | ---- |
 | H       | 0.70 |
 | S       | 0.30 |
 
+</center>
+
+<center>
+
 | \(\varepsilon\) | N    | Z    | A    |
 | --------------- | ---- | ---- | ---- |
 | H               | 0.40 | 0.50 | 0.10 |
 | S               | 0.10 | 0.30 | 0.60 |
 
+</center>
+
+<center>
+
+
 | T   | H    | S    |
 | --- | ---- | ---- |
 | H   | 0.80 | 0.20 |
 | S   | 0.10 | 0.90 |
+
+</center>
 
 !!! note
     It is the _rows_ of these tables that need to sum to 1, not the columns!
