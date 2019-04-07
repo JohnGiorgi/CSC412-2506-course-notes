@@ -514,6 +514,33 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#appendix" title="Appendix" class="md-nav__link">
+    Appendix
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#useful-resources" title="Useful Resources" class="md-nav__link">
+    Useful Resources
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#glossary-of-terms" title="Glossary of Terms" class="md-nav__link">
+    Glossary of Terms
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
       
       
       
@@ -793,6 +820,33 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#appendix" title="Appendix" class="md-nav__link">
+    Appendix
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#useful-resources" title="Useful Resources" class="md-nav__link">
+    Useful Resources
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#glossary-of-terms" title="Glossary of Terms" class="md-nav__link">
+    Glossary of Terms
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
       
       
       
@@ -859,11 +913,11 @@ p(x) = \frac{\tilde p(x)}{Z}
 <div>
 <div class="MathJax_Preview">
 \phi_1(x) = t(x) \Rightarrow \Phi_1 = \mathbb E_{x \sim p(x)}[\phi_1(x)] \Rightarrow \text{mean}(t) = \Phi_1 \\
-\phi_2(x) = (t(x))^2 \Rightarrow \Phi_2 = \mathbb E_{x \sim p(x)}[\phi_2(x)] \Rightarrow \text{var}(t) = \Phi_2 - (\Phi_2)^2 \\
+\phi_2(x) = (t(x))^2 \Rightarrow \Phi_2 = \mathbb E_{x \sim p(x)}[\phi_2(x)] \Rightarrow \text{var}(t) = \Phi_2 - (\Phi_1)^2 \\
 </div>
 <script type="math/tex; mode=display">
 \phi_1(x) = t(x) \Rightarrow \Phi_1 = \mathbb E_{x \sim p(x)}[\phi_1(x)] \Rightarrow \text{mean}(t) = \Phi_1 \\
-\phi_2(x) = (t(x))^2 \Rightarrow \Phi_2 = \mathbb E_{x \sim p(x)}[\phi_2(x)] \Rightarrow \text{var}(t) = \Phi_2 - (\Phi_2)^2 \\
+\phi_2(x) = (t(x))^2 \Rightarrow \Phi_2 = \mathbb E_{x \sim p(x)}[\phi_2(x)] \Rightarrow \text{var}(t) = \Phi_2 - (\Phi_1)^2 \\
 </script>
 </div>
 <h3 id="simple-monte-carlo">Simple Monte Carlo<a class="headerlink" href="#simple-monte-carlo" title="Permanent link">&para;</a></h3>
@@ -955,22 +1009,22 @@ p(x) = \frac{\tilde p(x)}{Z}
 <p class="admonition-title">Warning</p>
 <p>Note the some of these images come from MacKay, who uses a different notation. We use lowercase <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> and <span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span> in place of his upper case <span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span> and <span><span class="MathJax_Preview">Q</span><script type="math/tex">Q</script></span>, and we use <span><span class="MathJax_Preview">\tilde p</span><script type="math/tex">\tilde p</script></span> / <span><span class="MathJax_Preview">\tilde q</span><script type="math/tex">\tilde q</script></span> in place of his <span><span class="MathJax_Preview">p^*</span><script type="math/tex">p^*</script></span> / <span><span class="MathJax_Preview">q^*</span><script type="math/tex">q^*</script></span>.</p>
 </div>
-<p>To simplify the problem, we could discretize the variable <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> and sample from the discrete probability distribution over a finite set of uniformly spaced points <span><span class="MathJax_Preview">\{x_i\}</span><script type="math/tex">\{x_i\}</script></span> (figure (d)). If we evaluate <span><span class="MathJax_Preview">\tilde p_i = \tilde p(x_i)</span><script type="math/tex">\tilde p_i = \tilde p(x_i)</script></span> at each point <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span>, we could compute</p>
+<p>To simplify the problem, we could discretize the variable <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> and sample from the discrete probability distribution over a finite set of uniformly spaced points <span><span class="MathJax_Preview">\{x_i\}</span><script type="math/tex">\{x_i\}</script></span> (figure (d)). If we evaluate <span><span class="MathJax_Preview">\tilde p(x_i)</span><script type="math/tex">\tilde p(x_i)</script></span> at each point <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span>, we could compute</p>
 <div>
 <div class="MathJax_Preview">
-Z = \sum_i \tilde p_i
+Z = \sum_i \tilde p_i(x_i)
 </div>
 <script type="math/tex; mode=display">
-Z = \sum_i \tilde p_i
+Z = \sum_i \tilde p_i(x_i)
 </script>
 </div>
 <p>and</p>
 <div>
 <div class="MathJax_Preview">
-\tilde p_i = \frac{\tilde p_i}{Z}
+p_i = \frac{\tilde p_i}{Z}
 </div>
 <script type="math/tex; mode=display">
-\tilde p_i = \frac{\tilde p_i}{Z}
+p_i = \frac{\tilde p_i}{Z}
 </script>
 </div>
 <p>and could sample from the probability distribution <span><span class="MathJax_Preview">\{p_i\}_{i=1}^R</span><script type="math/tex">\{p_i\}_{i=1}^R</script></span> using various methods based on a source of random bits. Unfortunately, the cost of this procedure is intractable.</p>
@@ -1022,10 +1076,10 @@ p(x) = \frac{\tilde p(x)}{Z}
 <p>We further assume we have a simpler density, <span><span class="MathJax_Preview">q(x)</span><script type="math/tex">q(x)</script></span> from which it is easy to <em>sample</em> from (i.e. <span><span class="MathJax_Preview">x \sim q(x)</span><script type="math/tex">x \sim q(x)</script></span>) and easy to <em>evaluate</em> (i.e. <span><span class="MathJax_Preview">\tilde q(x)</span><script type="math/tex">\tilde q(x)</script></span>)</p>
 <div>
 <div class="MathJax_Preview">
-q(x) = \frac{\tilde q(x)}{Z_Q}
+q(x) = \frac{\tilde q(x)}{Z_q}
 </div>
 <script type="math/tex; mode=display">
-q(x) = \frac{\tilde q(x)}{Z_Q}
+q(x) = \frac{\tilde q(x)}{Z_q}
 </script>
 </div>
 <p>we call such a density <span><span class="MathJax_Preview">q(x)</span><script type="math/tex">q(x)</script></span> the <strong>sampler density</strong>. An example of the functions <span><span class="MathJax_Preview">\tilde p, \tilde q</span><script type="math/tex">\tilde p, \tilde q</script></span> and <span><span class="MathJax_Preview">\phi</span><script type="math/tex">\phi</script></span> is given in in figure 29.5.</p>
@@ -1097,7 +1151,7 @@ q(x) = \frac{\tilde q(x)}{Z_Q}
 <p><span><span class="MathJax_Preview">\hat \Phi_{iw}</span><script type="math/tex">\hat \Phi_{iw}</script></span> is biased, by consistent.</p>
 </div>
 <h3 id="rejection-sampling">Rejection Sampling<a class="headerlink" href="#rejection-sampling" title="Permanent link">&para;</a></h3>
-<p>In <a href="https://en.wikipedia.org/wiki/Rejection_sampling"><strong>rejection sampling</strong></a> we assume again a one-dimensional density <span><span class="MathJax_Preview">p(x) = \tilde p(x)/Z</span><script type="math/tex">p(x) = \tilde p(x)/Z</script></span> that is too complicated a function for us to be able to sample from it directly. We assume that we have a simpler <em>proposal density</em> <span><span class="MathJax_Preview">q(x)</span><script type="math/tex">q(x)</script></span> which we can evaluate (within a multiplicative factor <span><span class="MathJax_Preview">Z_Q</span><script type="math/tex">Z_Q</script></span>, as before), and from which we can generate samples. We further assume that we know the value of a constant <span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span> such that</p>
+<p>In <a href="https://en.wikipedia.org/wiki/Rejection_sampling"><strong>rejection sampling</strong></a> we assume again a one-dimensional density <span><span class="MathJax_Preview">p(x) = \tilde p(x)/Z</span><script type="math/tex">p(x) = \tilde p(x)/Z</script></span> that is too complicated a function for us to be able to sample from it directly. We assume that we have a simpler <em>proposal density</em> <span><span class="MathJax_Preview">q(x)</span><script type="math/tex">q(x)</script></span> which we can evaluate (within a multiplicative factor <span><span class="MathJax_Preview">Z_q</span><script type="math/tex">Z_q</script></span>, as before), and from which we can generate samples. We further assume that we know the value of a constant <span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span> such that</p>
 <div>
 <div class="MathJax_Preview">
 c \tilde q(x) &gt; \tilde p(x) \quad \forall x
@@ -1153,8 +1207,13 @@ a = \frac{\tilde p(x')q(x^{(t)} | x')}{\tilde p(x^{(t)}) q(x' | x^{(t)})}
 </script>
 </div>
 <ul>
-<li>If <span><span class="MathJax_Preview">a \ge 1</span><script type="math/tex">a \ge 1</script></span> then the new state is accepted. Set <span><span class="MathJax_Preview">x^{(t + 1)} = x'</span><script type="math/tex">x^{(t + 1)} = x'</script></span>.</li>
-<li>Otherwise, the new state is accepted with probability <span><span class="MathJax_Preview">a</span><script type="math/tex">a</script></span>. Set <span><span class="MathJax_Preview">x^{(t + 1)} = x^{(t)}</span><script type="math/tex">x^{(t + 1)} = x^{(t)}</script></span>.</li>
+<li>If <span><span class="MathJax_Preview">a \ge 1</span><script type="math/tex">a \ge 1</script></span> then the new state is accepted.</li>
+<li>
+<p>Otherwise, the new state is accepted with probability <span><span class="MathJax_Preview">a</span><script type="math/tex">a</script></span>.</p>
+<ul>
+<li>If accepted, set <span><span class="MathJax_Preview">x^{(t + 1)} = x'</span><script type="math/tex">x^{(t + 1)} = x'</script></span>. Otherwise, set <span><span class="MathJax_Preview">x^{(t + 1)} = x^{(t)}</span><script type="math/tex">x^{(t + 1)} = x^{(t)}</script></span>.</li>
+</ul>
+</li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1163,6 +1222,12 @@ a = \frac{\tilde p(x')q(x^{(t)} | x')}{\tilde p(x^{(t)}) q(x' | x^{(t)})}
 <p>Metropolis–Hastings converges to <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span> for any <span><span class="MathJax_Preview">q(x' | x^{(t)}) \ge 0 \quad \forall x', x^{(t)}</span><script type="math/tex">q(x' | x^{(t)}) \ge 0 \quad \forall x', x^{(t)}</script></span> as <span><span class="MathJax_Preview">t \rightarrow \infty</span><script type="math/tex">t \rightarrow \infty</script></span>. That is, our list of samples converges towards the true distribution <span><span class="MathJax_Preview">\{x^{(r)}\}_{r=1}^R \rightarrow p(x) </span><script type="math/tex">\{x^{(r)}\}_{r=1}^R \rightarrow p(x) </script></span>.</p>
 <p>There are however, no guarantees on convergence. The Metropolis method is an example of a Markov chain Monte Carlo method (abbreviated MCMC). In contrast to rejection sampling, where the accepted points <span><span class="MathJax_Preview">\{x^{(t)}\}</span><script type="math/tex">\{x^{(t)}\}</script></span> are independent samples from the desired distribution, Markov chain Monte Carlo methods involve a Markov process in which a sequence of states <span><span class="MathJax_Preview">\{x^{(t)}\}</span><script type="math/tex">\{x^{(t)}\}</script></span> is generated, each sample <span><span class="MathJax_Preview">x^{(t)}</span><script type="math/tex">x^{(t)}</script></span> having a probability distribution that depends on the previous value, <span><span class="MathJax_Preview">x^{(t-1)}</span><script type="math/tex">x^{(t-1)}</script></span>. Since successive samples are dependent, the Markov chain may have to be run for a considerable time in order to generate samples that are effectively independent samples from <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>.</p>
 <p>Just as it was difficult to estimate the variance of an importance sampling estimator, so it is difficult to assess whether a Markov chain Monte Carlo method has ‘converged’, and to quantify how long one has to wait to obtain samples that are effectively independent samples from <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>.</p>
+<h2 id="appendix">Appendix<a class="headerlink" href="#appendix" title="Permanent link">&para;</a></h2>
+<h3 id="useful-resources">Useful Resources<a class="headerlink" href="#useful-resources" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://chi-feng.github.io/mcmc-demo/app.html#RandomWalkMH,banana">Interactive Metropolis Hastings Online Demo</a></li>
+</ul>
+<h3 id="glossary-of-terms">Glossary of Terms<a class="headerlink" href="#glossary-of-terms" title="Permanent link">&para;</a></h3>
                 
                   
                 

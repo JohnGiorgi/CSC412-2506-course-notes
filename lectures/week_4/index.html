@@ -823,15 +823,19 @@ mb(8) = \{3, 7\} \cup \{9, 13\} \cup \{12, 4\}
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The <a href="https://en.wikipedia.org/wiki/Markov_blanket">Markov blanket</a> contains the parents, children and co-parents of a node. More generally, it is the set of all variables that shield the node from the rest of the network. I think the point of this example is that one would expect <span><span class="MathJax_Preview">X_2</span><script type="math/tex">X_2</script></span> and <span><span class="MathJax_Preview">X_{14}</span><script type="math/tex">X_{14}</script></span> to be conditionally dependent on <span><span class="MathJax_Preview">X_8</span><script type="math/tex">X_8</script></span>, especially given that <span><span class="MathJax_Preview">X_4</span><script type="math/tex">X_4</script></span> and <span><span class="MathJax_Preview">X_{12}</span><script type="math/tex">X_{12}</script></span> are conditionally dependent on <span><span class="MathJax_Preview">X_8</span><script type="math/tex">X_8</script></span>.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Markov_blanket">Markov blanket</a> contains the parents, children and co-parents of a node. More generally, it is the set of all variables that shield the node from the rest of the network. I think the point of this example is that one would expect <span><span class="MathJax_Preview">X_2</span><script type="math/tex">X_2</script></span> and <span><span class="MathJax_Preview">X_{14}</span><script type="math/tex">X_{14}</script></span> to be in the Markov blanket <span><span class="MathJax_Preview">mb(8)</span><script type="math/tex">mb(8)</script></span>, especially given that <span><span class="MathJax_Preview">X_4</span><script type="math/tex">X_4</script></span> and <span><span class="MathJax_Preview">X_{12}</span><script type="math/tex">X_{12}</script></span> are.</p>
 </div>
 <p>An alternative to DAGMs, is undirected graphical models (UGMs).</p>
 <h2 id="undirected-graphical-models">Undirected Graphical Models<a class="headerlink" href="#undirected-graphical-models" title="Permanent link">&para;</a></h2>
 <p>Undirected graphical models (UDGMs), also called <a href="https://en.wikipedia.org/wiki/Markov_random_field">Markov random fields</a> (MRFs) or Markov networks, are a set of random variables described by an undirected graph. As in DAGMs, the <strong>nodes</strong> in the graph represent <em>random variables</em>. However, in contrast to DAGMs, <strong>edges</strong> represent <em>probabilistic interactions</em> between neighboring variables (as opposed to conditional dependence).</p>
 <h3 id="dependencies-in-ugms">Dependencies in UGMs<a class="headerlink" href="#dependencies-in-ugms" title="Permanent link">&para;</a></h3>
-<p>In DGMs, we used conditional probabilities to represent the distribution of nodes given their parents. In UGMs, we use a more <em>symmetric</em> parameterization that captures the affinities between related variables.</p>
+<p>In DAGMs, we used conditional probabilities to represent the distribution of nodes given their parents. In UGMs, we use a more <em>symmetric</em> parameterization that captures the affinities between related variables.</p>
 <p>The following three properties are used to determine if nodes are conditionally independent:</p>
-<p><em>def</em>. <strong>Global Markov Property</strong> (G): <span><span class="MathJax_Preview">X_A \bot X_B | X_C</span><script type="math/tex">X_A \bot X_B | X_C</script></span> iff C separates A from B (i.e. there is no path in the graph between A and B that doesn't go through C).</p>
+<p><em>def</em>. <strong>Global Markov Property</strong> (G): <span><span class="MathJax_Preview">X_A \bot X_B | X_C</span><script type="math/tex">X_A \bot X_B | X_C</script></span> iff <span><span class="MathJax_Preview">X_C</span><script type="math/tex">X_C</script></span> separates <span><span class="MathJax_Preview">X_A</span><script type="math/tex">X_A</script></span> from <span><span class="MathJax_Preview">X_B</span><script type="math/tex">X_B</script></span></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>That is, there is no path in the graph between <span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span> and <span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span> that doesn't go through <span><span class="MathJax_Preview">X_C</span><script type="math/tex">X_C</script></span>.</p>
+</div>
 <p><em>def</em>. <strong>Local Markov Property (Markov Blanket)</strong> (L): The set of nodes that renders a node <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> conditionally independent of all the other nodes in the graph</p>
 <div>
 <div class="MathJax_Preview">
@@ -841,11 +845,7 @@ t \bot \mathcal V \setminus cl(t) | mb(t)
 t \bot \mathcal V \setminus cl(t) | mb(t)
 </script>
 </div>
-<p>where <span><span class="MathJax_Preview">cl(t) = mb(t) \cup t</span><script type="math/tex">cl(t) = mb(t) \cup t</script></span> is the closure of node <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>. It is the set of neighbors</p>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p>In the UGM below, <span><span class="MathJax_Preview">mb(5) = \{2, 3, 4, 6, 7\}</span><script type="math/tex">mb(5) = \{2, 3, 4, 6, 7\}</script></span>.</p>
-</div>
+<p>where <span><span class="MathJax_Preview">cl(t) = mb(t) \cup t</span><script type="math/tex">cl(t) = mb(t) \cup t</script></span> is the closure of node <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>.</p>
 <p><em>def</em>. <strong>Pairwise (Markov) Property</strong> (P): The set of nodes that renders two nodes, <span><span class="MathJax_Preview">s</span><script type="math/tex">s</script></span> and <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>, conditionally independent of each other.</p>
 <div>
 <div class="MathJax_Preview">
@@ -880,11 +880,8 @@ G \Rightarrow L \Rightarrow P \Rightarrow G \quad p(x) > 0
 <ul>
 <li>Global: <span><span class="MathJax_Preview">\{X_1, X_2\} \bot \{X_{15}, X_{20}\} | \{X_3, X_6, X_7\}</span><script type="math/tex">\{X_1, X_2\} \bot \{X_{15}, X_{20}\} | \{X_3, X_6, X_7\}</script></span></li>
 <li>Local: <span><span class="MathJax_Preview">1 \bot \text{rest} | \{X_2, X_6\}</span><script type="math/tex">1 \bot \text{rest} | \{X_2, X_6\}</script></span></li>
+<li>Pairwise: <span><span class="MathJax_Preview">1 \bot 7 | \text{rest}</span><script type="math/tex">1 \bot 7 | \text{rest}</script></span>, <span><span class="MathJax_Preview">1 \bot 20 | \text{rest}</span><script type="math/tex">1 \bot 20 | \text{rest}</script></span></li>
 </ul>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>I didn't understand the pairwise examples on the lecture slides, so I omitted them here (lecture 4, slide 11).</p>
-</div>
 <h3 id="not-all-ugms-can-be-represented-as-dgms">Not all UGMs can be represented as DGMs<a class="headerlink" href="#not-all-ugms-can-be-represented-as-dgms" title="Permanent link">&para;</a></h3>
 <p>Take the following UGM for example (a) and our attempts at encoding this as a DGM (b, c).</p>
 <p><img alt="" src="../../img/lecture_4_5.png" /></p>
@@ -900,12 +897,13 @@ G \Rightarrow L \Rightarrow P \Rightarrow G \quad p(x) > 0
 <p>An undirected model is unable to capture the marginal independence, <span><span class="MathJax_Preview">X \bot Y</span><script type="math/tex">X \bot Y</script></span> that holds at the same time as <span><span class="MathJax_Preview">\neg (X \bot Y | Z )</span><script type="math/tex">\neg (X \bot Y | Z )</script></span>.</p>
 <h3 id="cliques">Cliques<a class="headerlink" href="#cliques" title="Permanent link">&para;</a></h3>
 <p>A <a href="https://en.wikipedia.org/wiki/Clique_(graph_theory)"><strong>clique</strong></a> in an undirected graph is a subset of its vertices such that every two vertices in the subset are connected by an edge (i.e., the subgraph induced by the clique is <a href="https://en.wikipedia.org/wiki/Complete_graph">complete</a>).</p>
-<p><em>def</em>. The <a href="https://en.wikipedia.org/wiki/Clique_(graph_theory)#Definitions"><strong>maximal clique</strong></a> is a clique that cannot be extended by including one more adjacent vertex.</p>
-<p><em>def</em>. The <strong>maximum clique</strong> is a clique of the <em>largest possible size</em> in a given graph.</p>
-<p>For example, in the following graph a <em>maximal clique</em> is show in blue, while the <em>maximum clique</em> is shown in green.</p>
+<p><em>def</em>. A <a href="https://en.wikipedia.org/wiki/Clique_(graph_theory)#Definitions"><strong>maximal clique</strong></a> is a clique that cannot be extended by including one more adjacent vertex.</p>
+<p><em>def</em>. A <a href="https://en.wikipedia.org/wiki/Clique_(graph_theory)#Definitions"><strong>maximum clique</strong></a> is a clique of the <em>largest possible size</em> in a given graph.</p>
+<p>For example, in the following graph a <em>maximal clique</em> is show in blue, while a <em>maximum clique</em> is shown in green.</p>
 <p><img alt="" src="../../img/lecture_4_7.png" /></p>
 <h3 id="parameterization-of-an-ugm">Parameterization of an UGM<a class="headerlink" href="#parameterization-of-an-ugm" title="Permanent link">&para;</a></h3>
-<p>Let <span><span class="MathJax_Preview">x = (x_1, ..., x_m)</span><script type="math/tex">x = (x_1, ..., x_m)</script></span> be the set of all random variables in our graph. Unlike in DGMs, there is no topological ordering associated with an undirected graph, and so we <em>cannot</em> use the chain rule to represent <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span>. Therefore, instead of associating conditional probabilities with each node, we associate <strong>potential functions</strong> or <strong>factors</strong> with each <em>maximal clique</em> in the graph.</p>
+<p>Let <span><span class="MathJax_Preview">x = (x_1, ..., x_m)</span><script type="math/tex">x = (x_1, ..., x_m)</script></span> be the set of all random variables in our graph. Unlike in DGMs, there is no topological ordering associated with an undirected graph, and so we <em>cannot</em> use the chain rule to represent the joint distribution <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span>.</p>
+<p>Instead of associating conditional probabilities with each node, we associate <strong>potential functions</strong> or <strong>factors</strong> with each <em>maximal clique</em> in the graph.</p>
 <p>For a given clique <span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span>, we define the potential function or factor</p>
 <div>
 <div class="MathJax_Preview">
@@ -933,10 +931,10 @@ p(x) \propto \prod_{c \in \mathcal C}\psi_c(x_c | \theta_c)
 <p>A positive distribution <span><span class="MathJax_Preview">p(x) &gt; 0</span><script type="math/tex">p(x) > 0</script></span> satisfies the conditional independence properties of an undirected graph <span><span class="MathJax_Preview">G</span><script type="math/tex">G</script></span> iff <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> can be represented as a product of factors, one per maximal clique, i.e.,</p>
 <div>
 <div class="MathJax_Preview">
-p(x | \theta) = \frac{1}{Z(\theta)}\prod_{c \in \mathcal C}\psi_c(x_c | \theta)
+p(x | \theta) = \frac{1}{Z(\theta)}\prod_{c \in \mathcal C}\psi_c(x_c | \theta_c)
 </div>
 <script type="math/tex; mode=display">
-p(x | \theta) = \frac{1}{Z(\theta)}\prod_{c \in \mathcal C}\psi_c(x_c | \theta)
+p(x | \theta) = \frac{1}{Z(\theta)}\prod_{c \in \mathcal C}\psi_c(x_c | \theta_c)
 </script>
 </div>
 <p>where <span><span class="MathJax_Preview">\mathcal C</span><script type="math/tex">\mathcal C</script></span> is the set of all (maximal) cliques of <span><span class="MathJax_Preview">G</span><script type="math/tex">G</script></span>, and <span><span class="MathJax_Preview">Z(\theta)</span><script type="math/tex">Z(\theta)</script></span> the <strong>partition function</strong>, defined as</p>
@@ -948,7 +946,8 @@ Z(\theta)= \sum_x \prod_{c \in \mathcal C} \psi_c(x_c|\theta_c)
 Z(\theta)= \sum_x \prod_{c \in \mathcal C} \psi_c(x_c|\theta_c)
 </script>
 </div>
-<p>The factored structure of the distribution makes it possible to more efficiently do the sums/integrals needed to compute it. Lets see how to factorize the undirected graph of our running example:</p>
+<p>The factored structure of the distribution makes it possible to more efficiently do the sums/integrals needed to compute it.</p>
+<p>Lets see how to factorize the undirected graph of our running example:</p>
 <p><img alt="" src="../../img/lecture_4_4.png" /></p>
 <div>
 <div class="MathJax_Preview">
@@ -1004,7 +1003,7 @@ p(a^0, b^0, c^0, d^0) \propto \psi_{A, B, C, D}(a^0, b^0, c^0, d^0)\\
 <p><img alt="" src="../../img/lecture_4_10.png" /></p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>To get the normalized marginal probability, divide by the partition function <span><span class="MathJax_Preview">Z(\theta) \sum_x \prod_{c \in \mathcal C} \psi_c(x_c | \theta_c)</span><script type="math/tex">Z(\theta) \sum_x \prod_{c \in \mathcal C} \psi_c(x_c | \theta_c)</script></span></p>
+<p>To get the normalized marginal probability, divide by the partition function <span><span class="MathJax_Preview">Z(\theta) = \sum_x \prod_{c \in \mathcal C} \psi_c(x_c | \theta_c)</span><script type="math/tex">Z(\theta) = \sum_x \prod_{c \in \mathcal C} \psi_c(x_c | \theta_c)</script></span></p>
 </div>
 <p>to compute the marginal probability of a single variable in our graph, e.g. <span><span class="MathJax_Preview">p(b_0)</span><script type="math/tex">p(b_0)</script></span>, marginalize over the other variables</p>
 <div>

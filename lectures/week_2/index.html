@@ -896,6 +896,10 @@ p(C = c | x) = \frac{p(c, x)}{p(x)} ; c \text{ is unobserved}
 <div class="MathJax_Preview">p(y | x) = \frac{p(x, y)}{p(x)} = \frac{p(x, y)}{\int_Y p(x,y)dy}</div>
 <script type="math/tex; mode=display">p(y | x) = \frac{p(x, y)}{p(x)} = \frac{p(x, y)}{\int_Y p(x,y)dy}</script>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The sum over our target/classes in the marginal distribution <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span> is replaced by an integral.</p>
+</div>
 <p>In general,</p>
 <ul>
 <li>if a variable is <em>always</em> observed, we may <em>not</em> want to model its density (regression / classification)</li>
@@ -905,15 +909,11 @@ p(C = c | x) = \frac{p(c, x)}{p(x)} ; c \text{ is unobserved}
 <ul>
 <li><strong>Classification</strong>: <span><span class="MathJax_Preview">p(c | x) = \frac{p(c, x)}{p(x)} = \frac{p(c, x)}{\sum_C p(c, x)}</span><script type="math/tex">p(c | x) = \frac{p(c, x)}{p(x)} = \frac{p(c, x)}{\sum_C p(c, x)}</script></span></li>
 <li><strong>Clustering</strong>: <span><span class="MathJax_Preview">p(c | x) = \frac{p(c, x)}{p(x)} \ ; \  c \text{ is unobserved}</span><script type="math/tex">p(c | x) = \frac{p(c, x)}{p(x)} \ ; \  c \text{ is unobserved}</script></span></li>
-<li>
-<p><strong>Regression</strong>: <span><span class="MathJax_Preview">p(y | x) = \frac{p(y, x)}{p(x)} = \frac{p(y, x)}{\int_Y p(x, y)dy}</span><script type="math/tex">p(y | x) = \frac{p(y, x)}{p(x)} = \frac{p(y, x)}{\int_Y p(x, y)dy}</script></span></p>
-</li>
-<li>
-<p><strong>Density Estimation</strong>: <span><span class="MathJax_Preview">p(y | x) = \frac{p(y, x)}{p(x)} ; y \text{ is unobserved}</span><script type="math/tex">p(y | x) = \frac{p(y, x)}{p(x)} ; y \text{ is unobserved}</script></span></p>
-</li>
+<li><strong>Regression</strong>: <span><span class="MathJax_Preview">p(y | x) = \frac{p(y, x)}{p(x)} = \frac{p(y, x)}{\int_Y p(x, y)dy}</span><script type="math/tex">p(y | x) = \frac{p(y, x)}{p(x)} = \frac{p(y, x)}{\int_Y p(x, y)dy}</script></span></li>
+<li><strong>Density Estimation</strong>: <span><span class="MathJax_Preview">p(y | x) = \frac{p(y, x)}{p(x)} \ ; \ y \text{ is unobserved}</span><script type="math/tex">p(y | x) = \frac{p(y, x)}{p(x)} \ ; \ y \text{ is unobserved}</script></span></li>
 </ul>
 <h3 id="operations-on-probabilistic-models">Operations on Probabilistic Models<a class="headerlink" href="#operations-on-probabilistic-models" title="Permanent link">&para;</a></h3>
-<p>The fundamental operations we will perform on a probabilistic modal are:</p>
+<p>The fundamental operations we will perform on a probabilistic model are:</p>
 <ul>
 <li><strong>Generate Data</strong>: For this you need to know how to sample from local models (directed) or how to do Gibbs or other sampling (undirected).</li>
 <li><strong>Compute probabilities</strong>: When all nodes are either observed or marginalized the result is a single number which is the probability of the configuration.</li>
@@ -967,6 +967,7 @@ p(C = c | x) = \frac{p(c, x)}{p(x)} ; c \text{ is unobserved}
 \[P(W | \theta_W) \ ;\  \theta_W = \begin{bmatrix} 0.7 \\ 0.3 \end{bmatrix}\]</p>
 <p>Notice that <span><span class="MathJax_Preview">\theta_T</span><script type="math/tex">\theta_T</script></span> and <span><span class="MathJax_Preview">\theta_W</span><script type="math/tex">\theta_W</script></span> <em>are</em> the probability distributions of our random variables. Our parameters <em>define the probability of the data and explicitly and store it in a vector</em>.</p>
 <p>We can represent the joint distribution <span><span class="MathJax_Preview">P(T, W)</span><script type="math/tex">P(T, W)</script></span>, <em>our model</em> as:</p>
+<p><center></p>
 <table>
 <thead>
 <tr>
@@ -998,6 +999,7 @@ p(C = c | x) = \frac{p(c, x)}{p(x)} ; c \text{ is unobserved}
 </tr>
 </tbody>
 </table>
+<p></center></p>
 <p>from the joint distribution (which is again, essentially our model) we can compute the <em>marginals</em></p>
 <div>
 <div class="MathJax_Preview">
@@ -1166,6 +1168,7 @@ k^n = 2^4
 </div>
 <h2 id="summary-of-probabilistic-models">Summary of Probabilistic Models<a class="headerlink" href="#summary-of-probabilistic-models" title="Permanent link">&para;</a></h2>
 <p>In general, <em>learning</em> the parameters of a probabilistic model depends on whether our variables are observed or partially observed, continuous or discrete</p>
+<p><center></p>
 <table>
 <thead>
 <tr>
@@ -1187,6 +1190,7 @@ k^n = 2^4
 </tr>
 </tbody>
 </table>
+<p></center></p>
 <h2 id="appendix">Appendix<a class="headerlink" href="#appendix" title="Permanent link">&para;</a></h2>
 <h3 id="useful-resources">Useful Resources<a class="headerlink" href="#useful-resources" title="Permanent link">&para;</a></h3>
 <ul>

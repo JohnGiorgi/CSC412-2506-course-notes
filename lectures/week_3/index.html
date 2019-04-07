@@ -1084,10 +1084,10 @@
 <h2 id="graphical-model-notation">Graphical model notation<a class="headerlink" href="#graphical-model-notation" title="Permanent link">&para;</a></h2>
 <p>The joint distribution of <span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span> random variables can be computed by the <a href="https://en.wikipedia.org/wiki/Chain_rule_%28probability%29">chain rule</a></p>
 <div>
-<div class="MathJax_Preview">p(x_{1, ..., N}) = p(x_1)p(x_2|x_1)p(x_3 | x_2, x_1) \ldots </div>
-<script type="math/tex; mode=display">p(x_{1, ..., N}) = p(x_1)p(x_2|x_1)p(x_3 | x_2, x_1) \ldots </script>
+<div class="MathJax_Preview">p(x_{1, ..., N}) = p(x_1)p(x_2|x_1)p(x_3 | x_2, x_1) \ldots p(x_n | x_{n-1 : 1}) </div>
+<script type="math/tex; mode=display">p(x_{1, ..., N}) = p(x_1)p(x_2|x_1)p(x_3 | x_2, x_1) \ldots p(x_n | x_{n-1 : 1}) </script>
 </div>
-<p>this is true for <em>any joint distribution over any random variables</em>.</p>
+<p>this is true for <em>any joint distribution over any random variables</em> (assuming full dependence between variables).</p>
 <p>More formally, in probability the chain rule for two random variables is</p>
 <div>
 <div class="MathJax_Preview">p(x, y) = p(x | y)p(y)</div>
@@ -1095,8 +1095,8 @@
 </div>
 <p>and for <span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span> random variables</p>
 <div>
-<div class="MathJax_Preview">p(\cap^N_{i=1} x_i) = \prod_{k=1}^N p(x_k | \cap^{k-1}_{j=1} x_j)</div>
-<script type="math/tex; mode=display">p(\cap^N_{i=1} x_i) = \prod_{k=1}^N p(x_k | \cap^{k-1}_{j=1} x_j)</script>
+<div class="MathJax_Preview">p(\cap^N_{i=1} x_i) = \prod_{j=1}^N p(x_j | \cap^{j-1}_{k=1} x_k)</div>
+<script type="math/tex; mode=display">p(\cap^N_{i=1} x_i) = \prod_{j=1}^N p(x_j | \cap^{j-1}_{k=1} x_k)</script>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1155,7 +1155,7 @@
 <p class="admonition-title">Tip</p>
 <p>The Wikipedia entry on <a href="https://en.wikipedia.org/wiki/Graphical_model">Graphical models</a> is helpful, particularly the section on <a href="https://en.wikipedia.org/wiki/Graphical_model#Bayesian_network">Bayesian networks</a>.</p>
 </div>
-<p>Notice the difference between a DAGM and the chain rule for probability we introduced early: we are conditioning on <em>parent nodes</em> as opposed to <em>every node</em>. Therefore, the model that represents this distribution is exponential in the <a href="https://en.wikipedia.org/wiki/Fan-in">fan-in</a> of each node (the number of nodes in the parent set), instead of in <span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span>.</p>
+<p>Notice the difference between a DAGM and the chain rule for probability we introduced early on: we are conditioning on <em>parent nodes</em> as opposed to <em>every node</em>. Therefore, the model that represents this distribution is exponential in the <a href="https://en.wikipedia.org/wiki/Fan-in">fan-in</a> of each node (the number of nodes in the parent set), instead of in <span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span>.</p>
 <h3 id="independence-assumptions-on-dagms">Independence assumptions on DAGMs<a class="headerlink" href="#independence-assumptions-on-dagms" title="Permanent link">&para;</a></h3>
 <p>Lets look again at the graphical model <span><span class="MathJax_Preview">p(x_{1, ..., 6})</span><script type="math/tex">p(x_{1, ..., 6})</script></span> we introduced above.</p>
 <p>First, lets sort the DAGM topologically. The conditional independence of our random variables becomes</p>
@@ -1290,8 +1290,17 @@ P(z | x, y) &= \frac{P(x)P(z)P(y | x,  z)}{P(x)P(y|x)} \\
 <p>Imaging flipping two coins independently, represented by events <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> and <span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span>. Furthermore, let <span><span class="MathJax_Preview">y=1</span><script type="math/tex">y=1</script></span> if the coins come up the same and <span><span class="MathJax_Preview">y=0</span><script type="math/tex">y=0</script></span> if they come up differently. Clearly, <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> and <span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span> are independent, but if I tell you <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>, they become coupled!</p>
 </div>
 <h4 id="bayes-balls-algorithm">Bayes-Balls Algorithm<a class="headerlink" href="#bayes-balls-algorithm" title="Permanent link">&para;</a></h4>
-<p>An alternative algorithm for determining conditional independence is the <a href="https://metacademy.org/graphs/concepts/bayes_ball#focus=bayes_ball&amp;mode=learn">Bayes Balls</a> algorithm. To check if <span><span class="MathJax_Preview">x_A \bot x_B | x_C</span><script type="math/tex">x_A \bot x_B | x_C</script></span> we need to check if every variable in <span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span> is d-seperated from every variable in <span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span> conditioned on all variables in <span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span>. In other words, given that all the nodes in <span><span class="MathJax_Preview">x_C</span><script type="math/tex">x_C</script></span> are "clamped", when we "wiggle" nodes <span><span class="MathJax_Preview">x_A</span><script type="math/tex">x_A</script></span> can we change any of the nodes in <span><span class="MathJax_Preview">x_B</span><script type="math/tex">x_B</script></span>?</p>
-<p>In general, the algorithm works as follows: We shade all nodes <span><span class="MathJax_Preview">x_C</span><script type="math/tex">x_C</script></span>, place "balls" at each node in <span><span class="MathJax_Preview">x_A</span><script type="math/tex">x_A</script></span> (or <span><span class="MathJax_Preview">x_B</span><script type="math/tex">x_B</script></span>), let them "bounce" around according to some rules, and then ask if any of the balls reach any of the nodes in <span><span class="MathJax_Preview">x_B</span><script type="math/tex">x_B</script></span> (or <span><span class="MathJax_Preview">x_A</span><script type="math/tex">x_A</script></span>).</p>
+<p>An alternative algorithm for determining conditional independence in a DAGM is the <a href="https://metacademy.org/graphs/concepts/bayes_ball#focus=bayes_ball&amp;mode=learn">Bayes Balls</a> algorithm. To check if <span><span class="MathJax_Preview">x_A \bot x_B | x_C</span><script type="math/tex">x_A \bot x_B | x_C</script></span> we need to check if every variable in <span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span> is d-seperated from every variable in <span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span> conditioned on all variables in <span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span>. In other words, given that all the nodes in <span><span class="MathJax_Preview">x_C</span><script type="math/tex">x_C</script></span> are "clamped", when we "wiggle" nodes <span><span class="MathJax_Preview">x_A</span><script type="math/tex">x_A</script></span> can we change any of the nodes in <span><span class="MathJax_Preview">x_B</span><script type="math/tex">x_B</script></span>?</p>
+<p>In general, the algorithm works as follows:</p>
+<ol>
+<li>Shade all nodes <span><span class="MathJax_Preview">x_C</span><script type="math/tex">x_C</script></span></li>
+<li>Place "balls" at each node in <span><span class="MathJax_Preview">x_A</span><script type="math/tex">x_A</script></span> (or <span><span class="MathJax_Preview">x_B</span><script type="math/tex">x_B</script></span>)</li>
+<li>Let the "balls" "bounce" around according to some rules<ul>
+<li>If any of the balls reach any of the nodes in <span><span class="MathJax_Preview">x_B</span><script type="math/tex">x_B</script></span> from <span><span class="MathJax_Preview">x_A</span><script type="math/tex">x_A</script></span> (or <span><span class="MathJax_Preview">x_A</span><script type="math/tex">x_A</script></span> from <span><span class="MathJax_Preview">x_B</span><script type="math/tex">x_B</script></span>) then <span><span class="MathJax_Preview">x_A \not \bot x_B | x_C</span><script type="math/tex">x_A \not \bot x_B | x_C</script></span></li>
+<li>Otherwise <span><span class="MathJax_Preview">x_A \bot x_B | x_C</span><script type="math/tex">x_A \bot x_B | x_C</script></span></li>
+</ul>
+</li>
+</ol>
 <p><em>The rules are as follows</em>:</p>
 <p><img alt="" src="../../img/lecture_3_8.png" /></p>
 <p>including the <em>boundary rules</em>:</p>
@@ -1459,14 +1468,14 @@ p(y | x, \theta) = \sum_k \alpha_k \mathcal N(y | \beta_k^Tx, \sigma_k^2)
 <p>We can learn mixture densities using gradient descent on the likelihood as usual.</p>
 <div>
 <div class="MathJax_Preview">
-\ell(\theta) = \log p(x | \theta) = \sum_k \alpha_kp_k(x_k | \theta_k) \\
+\ell(\theta) = \log p(x | \theta) = \log \sum_k \alpha_kp_k(x_k | \theta_k) \\
 \Rightarrow \frac{\partial \ell}{\partial \theta} = \frac{1}{p(x | \theta)} \sum_k \alpha_k \frac{\partial p_k(x | \theta)}{\partial \theta} \\
 = \sum_k \alpha_k \frac{1}{p(x | \theta)}p_k(x | \theta_k)\frac{\partial \log p_k (x | \theta_k)}{\partial \theta} \\
 = \sum_k \alpha_k \frac{p_k(x | \theta_k)}{p(x | \theta)} \frac{\partial \ell_k}{\partial \theta_k} \\
 = \sum_k \alpha_k r_k \frac{\partial \ell_k}{\partial \theta_k}
 </div>
 <script type="math/tex; mode=display">
-\ell(\theta) = \log p(x | \theta) = \sum_k \alpha_kp_k(x_k | \theta_k) \\
+\ell(\theta) = \log p(x | \theta) = \log \sum_k \alpha_kp_k(x_k | \theta_k) \\
 \Rightarrow \frac{\partial \ell}{\partial \theta} = \frac{1}{p(x | \theta)} \sum_k \alpha_k \frac{\partial p_k(x | \theta)}{\partial \theta} \\
 = \sum_k \alpha_k \frac{1}{p(x | \theta)}p_k(x | \theta_k)\frac{\partial \log p_k (x | \theta_k)}{\partial \theta} \\
 = \sum_k \alpha_k \frac{p_k(x | \theta_k)}{p(x | \theta)} \frac{\partial \ell_k}{\partial \theta_k} \\
@@ -1498,7 +1507,7 @@ p(X_{1:T}, Z_{1:T}) = p(Z_{1:T})p(X_{1:T} | Z_{1:T}) = p(Z_1) \prod_{t=2}^T p(Z_
 <h2 id="appendix">Appendix<a class="headerlink" href="#appendix" title="Permanent link">&para;</a></h2>
 <h3 id="useful-resources">Useful Resources<a class="headerlink" href="#useful-resources" title="Permanent link">&para;</a></h3>
 <ul>
-<li><a href="https://metacademy.org/graphs/concepts/bayes_ball#focus=bayes_ball&amp;mode=learn">Metacademy lesson on Bayes Balls</a>. In fact, that link will bring you to a short course on a couple important concepts for this corse, including conditional probability, conditional independence, Bayesian networks and d-separation.</li>
+<li><a href="https://metacademy.org/graphs/concepts/bayes_ball#focus=bayes_ball&amp;mode=learn">Metacademy lesson on Bayes Balls</a>. In fact, that link will bring you to a short course on a couple important concepts for this course, including conditional probability, conditional independence, Bayesian networks and d-separation.</li>
 <li><a href="https://www.youtube.com/watch?v=jgt0G2PkWl0">A video</a> on how to memorize the Bayes Balls rules (this is linked in the above course).</li>
 </ul>
 <h3 id="glossary-of-terms">Glossary of Terms<a class="headerlink" href="#glossary-of-terms" title="Permanent link">&para;</a></h3>

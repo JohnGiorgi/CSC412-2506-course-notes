@@ -1091,8 +1091,8 @@
 <p><img alt="" src="../../img/lecture_1_4.png" /></p>
 <p>Once the joint distribution is learned, we could provide a word and ask the model to sample from the learned distribution and return a picture (or vice versa!):</p>
 <p><img alt="" src="../../img/lecture_1_5.png" /></p>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
+<div class="admonition cite">
+<p class="admonition-title">Cite</p>
 <p>Nguyen A, Dosovitskiy A, Yosinski J, Brox T, Clune J (2016). Synthesizing the preferred inputs for neurons in neural networks via deep generator networks. Advances in Neural Information Processing Systems 29</p>
 </div>
 <p>In fact, this is the key idea behind image captioning models:</p>
@@ -1100,8 +1100,8 @@
 <h3 id="latent-representations">Latent Representations<a class="headerlink" href="#latent-representations" title="Permanent link">&para;</a></h3>
 <p>Once learned, latent representations of our data allow us to do some powerful things. For example, neural networks that are able to fill-in occuluded (or missing) portions of digital images:</p>
 <p><img alt="" src="../../img/lecture_1_7.png" /></p>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
+<div class="admonition cite">
+<p class="admonition-title">Cite</p>
 <p>Pixel Recurrent Neural Networks. Aaron van den Oord, Nal Kalchbrenner, Koray Kavukcuoglu</p>
 </div>
 <p>Because our latent space is really a <a href="https://en.wikipedia.org/wiki/Vector_space"><strong>vector space</strong></a>, we have access to all the mathematical operations that are defined on vectors, such as <em>addition</em> and <em>subtraction</em>. Furthermore, out latent representations (which themselves are just vector learned during model training) can be decoded into images (or words, or molecules, etc!).</p>
@@ -1125,6 +1125,7 @@
 <p>For fitting and inference in high-dimensional models, gradient-based methods are basically the only game in town</p>
 <p>Lots of methods conflate model and fitting algorithm, we will try to separate these.</p>
 <h3 id="ml-as-a-bag-of-tricks">ML as a Bag of Tricks<a class="headerlink" href="#ml-as-a-bag-of-tricks" title="Permanent link">&para;</a></h3>
+<p><center></p>
 <table>
 <thead>
 <tr>
@@ -1159,7 +1160,9 @@
 </tr>
 </tbody>
 </table>
+<p></center></p>
 <h3 id="regularization-as-a-bag-of-tricks">Regularization as a Bag of Tricks<a class="headerlink" href="#regularization-as-a-bag-of-tricks" title="Permanent link">&para;</a></h3>
+<p><center></p>
 <table>
 <thead>
 <tr>
@@ -1194,10 +1197,12 @@
 </tr>
 </tbody>
 </table>
+<p></center></p>
 <h3 id="a-language-of-models">A Language of Models<a class="headerlink" href="#a-language-of-models" title="Permanent link">&para;</a></h3>
 <p>Our goal will be to develop a language of models, a <em>toolbox</em>. For example, hidden Markov models, mixture of Gaussians, and logistic regression are all examples from a language of models. We will try to show a larger family, and point out common special cases.</p>
 <p>Using this language, you will be able to build you own custom models.</p>
 <p>In fact, we can talk about this family of models using very few ideas. Really, all we need are <em>deep probabilistic latent-variable models</em> and some <em>decision theory</em>.</p>
+<p><center></p>
 <table>
 <thead>
 <tr>
@@ -1232,6 +1237,7 @@
 </tr>
 </tbody>
 </table>
+<p></center></p>
 <h4 id="advantages-of-probabilistic-latent-variable-models">Advantages of probabilistic latent-variable models<a class="headerlink" href="#advantages-of-probabilistic-latent-variable-models" title="Permanent link">&para;</a></h4>
 <p><strong>Data-efficient Learning</strong></p>
 <ul>
@@ -1276,6 +1282,7 @@
 <p>but a neural network who's job is to come up with a convincing distribution over where you can expect to see data does much better</p>
 <p><img alt="" src="../../img/lecture_1_14.png" /></p>
 <p>this brings us to a comparison of probabilistic graphical models and deep learning</p>
+<p><center></p>
 <table>
 <thead>
 <tr>
@@ -1310,6 +1317,7 @@
 </tr>
 </tbody>
 </table>
+<p></center></p>
 <p>❗ Left off on slide 35</p>
 <h2 id="the-unreasonable-easiness-of-deep-learning">The Unreasonable Easiness of Deep Learning<a class="headerlink" href="#the-unreasonable-easiness-of-deep-learning" title="Permanent link">&para;</a></h2>
 <p>The deep learning recipe involves defining an <strong>objective function</strong> (i.e. a probability of data given parameters) and optimizing the parameters to maximize the object. Gradients are computed automatically, you just need to define a model by some computation.</p>

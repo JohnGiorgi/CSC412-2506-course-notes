@@ -105,7 +105,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#week-10-stochastic-variational-inference" tabindex="1" class="md-skip">
+      <a href="#week-10-stochastic-variational-inference-automatic-differentiation-variation-inference-sad-vi" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -784,7 +784,7 @@
                   <a href="https://github.com/JohnGiorgi/CSC412-2506-course-notes/edit/master/docs/lectures/week_10.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="week-10-stochastic-variational-inference">Week 10:  Stochastic Variational Inference<a class="headerlink" href="#week-10-stochastic-variational-inference" title="Permanent link">&para;</a></h1>
+                <h1 id="week-10-stochastic-variational-inference-automatic-differentiation-variation-inference-sad-vi">Week 10:  Stochastic Variational Inference / Automatic Differentiation Variation Inference (SAD VI)<a class="headerlink" href="#week-10-stochastic-variational-inference-automatic-differentiation-variation-inference-sad-vi" title="Permanent link">&para;</a></h1>
 <h3 id="assigned-reading">Assigned Reading<a class="headerlink" href="#assigned-reading" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Murphy: Chapter 18</li>
@@ -799,7 +799,7 @@
 <h2 id="posterior-inference-for-latent-variable-models">Posterior Inference for Latent Variable Models<a class="headerlink" href="#posterior-inference-for-latent-variable-models" title="Permanent link">&para;</a></h2>
 <p>Imagine we had the following latent variable model</p>
 <p><img alt="" src="../../img/lecture_9_1.png" /></p>
-<p>which represents the probabilistic model <span><span class="MathJax_Preview">p(x z ; \theta)</span><script type="math/tex">p(x z ; \theta)</script></span> where</p>
+<p>which represents the probabilistic model <span><span class="MathJax_Preview">p(x, z ; \theta)</span><script type="math/tex">p(x, z ; \theta)</script></span> where</p>
 <ul>
 <li><span><span class="MathJax_Preview">x_{1:N}</span><script type="math/tex">x_{1:N}</script></span> are the observations</li>
 <li><span><span class="MathJax_Preview">z_{1:N}</span><script type="math/tex">z_{1:N}</script></span> are the unobserved local latent variables</li>
@@ -854,10 +854,10 @@ p(z, \theta | x) = \frac{p(x | z, \theta)}{p(x)} = \frac{p(x | z, \theta)}{\int\
 <p>We want to approximate <span><span class="MathJax_Preview">p_\theta</span><script type="math/tex">p_\theta</script></span> by finding a <span><span class="MathJax_Preview">q_\phi</span><script type="math/tex">q_\phi</script></span> such that</p>
 <div>
 <div class="MathJax_Preview">
-q_\phi \approx p_\theta \Rightarrow D_{KL}(q_\phi || p_\theta) \Rightarrow 0
+q_\phi \approx p_\theta \Rightarrow D_{KL}(q_\phi || p_\theta) = 0
 </div>
 <script type="math/tex; mode=display">
-q_\phi \approx p_\theta \Rightarrow D_{KL}(q_\phi || p_\theta) \Rightarrow 0
+q_\phi \approx p_\theta \Rightarrow D_{KL}(q_\phi || p_\theta) = 0
 </script>
 </div>
 <p>but the computation of <span><span class="MathJax_Preview">D_{KL}(q_\phi || p_\theta)</span><script type="math/tex">D_{KL}(q_\phi || p_\theta)</script></span> is intractable (as discussed above).</p>
@@ -940,10 +940,10 @@ f(E[X]) \le E[f(x)]
 <p>We have that</p>
 <div>
 <div class="MathJax_Preview">
-\mathcal L(\theta, \phi ; x) = -\text{ELBO} = - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)}
+\mathcal L(\theta, \phi ; x) = \text{ELBO} = - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)}
 </div>
 <script type="math/tex; mode=display">
-\mathcal L(\theta, \phi ; x) = -\text{ELBO} = - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)}
+\mathcal L(\theta, \phi ; x) = \text{ELBO} = - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)}
 </script>
 </div>
 <p>1) The most general interpretation of the ELBO is given by</p>
@@ -983,7 +983,7 @@ E_{z_\phi \sim q_\phi} \Big [ \log p_\theta({x | z}) \Big ] - D_{KL}(q_\phi(z | 
 <p class="admonition-title">Tip</p>
 <p>The instructor suggest that this would be useful for assignment 3.</p>
 </div>
-<p>This frames the EBLO has a tradeoff. The first term can be thought of as a "reconstruction likelihood", i.e. how probable is <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> given <span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span>, which encourages the model to choose the distribution which best reconstructs the data. The second term acts as regularization, by enforcing the idea that our parameterization shouldn't move us too far from the true distribution.</p>
+<p>This frames the ELBO as a tradeoff. The first term can be thought of as a "reconstruction likelihood", i.e. how probable is <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> given <span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span>, which encourages the model to choose the distribution which best reconstructs the data. The second term acts as regularization, by enforcing the idea that our parameterization shouldn't move us too far from the true distribution.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The instructor recommends we read "sticking the landing".</p>
