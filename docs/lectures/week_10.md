@@ -1,4 +1,4 @@
-# Week 10:  Stochastic Variational Inference
+# Week 10:  Stochastic Variational Inference / Automatic Differentiation Variation Inference (SAD VI)
 
 ### Assigned Reading
 
@@ -17,7 +17,7 @@ Imagine we had the following latent variable model
 
 ![](../img/lecture_9_1.png)
 
-which represents the probabilistic model \(p(x z ; \theta)\) where
+which represents the probabilistic model \(p(x, z ; \theta)\) where
 
 - \(x_{1:N}\) are the observations
 - \(z_{1:N}\) are the unobserved local latent variables
@@ -74,7 +74,7 @@ The significance of the last property is that \(D_{KL}\) is _not_ a true distanc
 We want to approximate \(p_\theta\) by finding a \(q_\phi\) such that
 
 \[
-q_\phi \approx p_\theta \Rightarrow D_{KL}(q_\phi || p_\theta) \Rightarrow 0
+q_\phi \approx p_\theta \Rightarrow D_{KL}(q_\phi || p_\theta) = 0
 \]
 
 but the computation of \(D_{KL}(q_\phi || p_\theta)\) is intractable (as discussed above).
@@ -137,7 +137,7 @@ Given that \(\log\) is a concave function, we have
 We have that
 
 \[
-\mathcal L(\theta, \phi ; x) = -\text{ELBO} = - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)}
+\mathcal L(\theta, \phi ; x) = \text{ELBO} = - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)}
 \]
 
 1) The most general interpretation of the ELBO is given by
@@ -164,14 +164,25 @@ E_{z_\phi \sim q_\phi} \Big [ \log p_\theta({x | z}) \Big ] - D_{KL}(q_\phi(z | 
 !!! tip
     The instructor suggest that this would be useful for assignment 3.
 
-This frames the EBLO has a tradeoff. The first term can be thought of as a "reconstruction likelihood", i.e. how probable is \(x\) given \(z\), which encourages the model to choose the distribution which best reconstructs the data. The second term acts as regularization, by enforcing the idea that our parameterization shouldn't move us too far from the true distribution.
+This frames the ELBO as a tradeoff. The first term can be thought of as a "reconstruction likelihood", i.e. how probable is \(x\) given \(z\), which encourages the model to choose the distribution which best reconstructs the data. The second term acts as regularization, by enforcing the idea that our parameterization shouldn't move us too far from the true distribution.
 
 !!! note
     The instructor recommends we read "sticking the landing".
 
 ### Mean Field Variational Inference
 
-This section was a bit of a mess, I will return to it when I have time.
+In [mean field variational inference](https://en.wikipedia.org/wiki/Variational_Bayesian_methods#Mean_field_approximation), the approximate distribution \(q\) is assumed to factorize over some partition of latent variables
+
+\[
+q_\phi(z, \theta | \phi) = q_\phi(\theta | \phi_{\theta})\prod_{i=1}^Nq(z_i | \phi_i)
+\]
+
+!!! warning
+    I don't get this at all. The lecture had gotten pretty messy on the blackboard by this point.
+
+If \(q\)s are in the same family as \(p\)s, we can optimize via coordinate ascent.
+
+we restrict ourselves to variational families, \(q\), that we can compute the gradient of
 
 ## Appendix
 

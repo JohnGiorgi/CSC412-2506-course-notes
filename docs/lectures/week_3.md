@@ -18,9 +18,9 @@
 
 The joint distribution of \(N\) random variables can be computed by the [chain rule](https://en.wikipedia.org/wiki/Chain_rule_%28probability%29)
 
-\[p(x_{1, ..., N}) = p(x_1)p(x_2|x_1)p(x_3 | x_2, x_1) \ldots \]
+\[p(x_{1, ..., N}) = p(x_1)p(x_2|x_1)p(x_3 | x_2, x_1) \ldots p(x_n | x_{n-1 : 1}) \]
 
-this is true for _any joint distribution over any random variables_.
+this is true for _any joint distribution over any random variables_ (assuming full dependence between variables).
 
 More formally, in probability the chain rule for two random variables is
 
@@ -28,7 +28,7 @@ More formally, in probability the chain rule for two random variables is
 
 and for \(N\) random variables
 
-\[p(\cap^N_{i=1} x_i) = \prod_{k=1}^N p(x_k | \cap^{k-1}_{j=1} x_j)\]
+\[p(\cap^N_{i=1} x_i) = \prod_{j=1}^N p(x_j | \cap^{j-1}_{k=1} x_k)\]
 
 !!! note
     Note that this is a bit of an abuse of notation, but \(p(x_k | \cap^{k-1}_{j=1} x_j)\) will collpase to \(p(x_1)\) when \(k\) = 1.
@@ -88,7 +88,7 @@ where \(x_i\) is a random variable (node in the graphical model) and \(x_{\pi_i}
 !!! tip
     The Wikipedia entry on [Graphical models](https://en.wikipedia.org/wiki/Graphical_model) is helpful, particularly the section on [Bayesian networks](https://en.wikipedia.org/wiki/Graphical_model#Bayesian_network).
 
-Notice the difference between a DAGM and the chain rule for probability we introduced early: we are conditioning on _parent nodes_ as opposed to _every node_. Therefore, the model that represents this distribution is exponential in the [fan-in](https://en.wikipedia.org/wiki/Fan-in) of each node (the number of nodes in the parent set), instead of in \(N\).
+Notice the difference between a DAGM and the chain rule for probability we introduced early on: we are conditioning on _parent nodes_ as opposed to _every node_. Therefore, the model that represents this distribution is exponential in the [fan-in](https://en.wikipedia.org/wiki/Fan-in) of each node (the number of nodes in the parent set), instead of in \(N\).
 
 ### Independence assumptions on DAGMs
 
@@ -232,9 +232,15 @@ In fact, \(x\) and \(z\) are _marginally independent_, but given \(y\) they are 
 
 #### Bayes-Balls Algorithm
 
-An alternative algorithm for determining conditional independence is the [Bayes Balls](https://metacademy.org/graphs/concepts/bayes_ball#focus=bayes_ball&mode=learn) algorithm. To check if \(x_A \bot x_B | x_C\) we need to check if every variable in \(A\) is d-seperated from every variable in \(B\) conditioned on all variables in \(C\). In other words, given that all the nodes in \(x_C\) are "clamped", when we "wiggle" nodes \(x_A\) can we change any of the nodes in \(x_B\)?
+An alternative algorithm for determining conditional independence in a DAGM is the [Bayes Balls](https://metacademy.org/graphs/concepts/bayes_ball#focus=bayes_ball&mode=learn) algorithm. To check if \(x_A \bot x_B | x_C\) we need to check if every variable in \(A\) is d-seperated from every variable in \(B\) conditioned on all variables in \(C\). In other words, given that all the nodes in \(x_C\) are "clamped", when we "wiggle" nodes \(x_A\) can we change any of the nodes in \(x_B\)?
 
-In general, the algorithm works as follows: We shade all nodes \(x_C\), place "balls" at each node in \(x_A\) (or \(x_B\)), let them "bounce" around according to some rules, and then ask if any of the balls reach any of the nodes in \(x_B\) (or \(x_A\)).
+In general, the algorithm works as follows:
+
+1. Shade all nodes \(x_C\)
+2. Place "balls" at each node in \(x_A\) (or \(x_B\))
+3. Let the "balls" "bounce" around according to some rules
+    - If any of the balls reach any of the nodes in \(x_B\) from \(x_A\) (or \(x_A\) from \(x_B\)) then \(x_A \not \bot x_B | x_C\)
+    - Otherwise \(x_A \bot x_B | x_C\)
 
 _The rules are as follows_:
 
@@ -462,7 +468,7 @@ p(X_{1:T}, Z_{1:T}) = p(Z_{1:T})p(X_{1:T} | Z_{1:T}) = p(Z_1) \prod_{t=2}^T p(Z_
 
 ### Useful Resources
 
-- [Metacademy lesson on Bayes Balls](https://metacademy.org/graphs/concepts/bayes_ball#focus=bayes_ball&mode=learn). In fact, that link will bring you to a short course on a couple important concepts for this corse, including conditional probability, conditional independence, Bayesian networks and d-separation.
+- [Metacademy lesson on Bayes Balls](https://metacademy.org/graphs/concepts/bayes_ball#focus=bayes_ball&mode=learn). In fact, that link will bring you to a short course on a couple important concepts for this course, including conditional probability, conditional independence, Bayesian networks and d-separation.
 - [A video](https://www.youtube.com/watch?v=jgt0G2PkWl0) on how to memorize the Bayes Balls rules (this is linked in the above course).
 
 ### Glossary of Terms

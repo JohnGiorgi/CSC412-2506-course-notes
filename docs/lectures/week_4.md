@@ -47,7 +47,7 @@ mb(8) = \{3, 7\} \cup \{9, 13\} \cup \{12, 4\}
 \]
 
 !!! note
-    The [Markov blanket](https://en.wikipedia.org/wiki/Markov_blanket) contains the parents, children and co-parents of a node. More generally, it is the set of all variables that shield the node from the rest of the network. I think the point of this example is that one would expect \(X_2\) and \(X_{14}\) to be conditionally dependent on \(X_8\), especially given that \(X_4\) and \(X_{12}\) are conditionally dependent on \(X_8\).
+    The [Markov blanket](https://en.wikipedia.org/wiki/Markov_blanket) contains the parents, children and co-parents of a node. More generally, it is the set of all variables that shield the node from the rest of the network. I think the point of this example is that one would expect \(X_2\) and \(X_{14}\) to be in the Markov blanket \(mb(8)\), especially given that \(X_4\) and \(X_{12}\) are.
 
 An alternative to DAGMs, is undirected graphical models (UGMs).
 
@@ -57,11 +57,14 @@ Undirected graphical models (UDGMs), also called [Markov random fields](https://
 
 ### Dependencies in UGMs
 
-In DGMs, we used conditional probabilities to represent the distribution of nodes given their parents. In UGMs, we use a more _symmetric_ parameterization that captures the affinities between related variables.
+In DAGMs, we used conditional probabilities to represent the distribution of nodes given their parents. In UGMs, we use a more _symmetric_ parameterization that captures the affinities between related variables.
 
 The following three properties are used to determine if nodes are conditionally independent:
 
-_def_. **Global Markov Property** (G): \(X_A \bot X_B | X_C\) iff C separates A from B (i.e. there is no path in the graph between A and B that doesn't go through C).
+_def_. **Global Markov Property** (G): \(X_A \bot X_B | X_C\) iff \(X_C\) separates \(X_A\) from \(X_B\)
+
+!!! note
+    That is, there is no path in the graph between \(A\) and \(B\) that doesn't go through \(X_C\).
 
 _def_. **Local Markov Property (Markov Blanket)** (L): The set of nodes that renders a node \(t\) conditionally independent of all the other nodes in the graph
 
@@ -69,10 +72,7 @@ _def_. **Local Markov Property (Markov Blanket)** (L): The set of nodes that ren
 t \bot \mathcal V \setminus cl(t) | mb(t)
 \]
 
-where \(cl(t) = mb(t) \cup t\) is the closure of node \(t\). It is the set of neighbors
-
-!!! example
-    In the UGM below, \(mb(5) = \{2, 3, 4, 6, 7\}\).
+where \(cl(t) = mb(t) \cup t\) is the closure of node \(t\).
 
 _def_. **Pairwise (Markov) Property** (P): The set of nodes that renders two nodes, \(s\) and \(t\), conditionally independent of each other.
 
@@ -103,10 +103,7 @@ G \Rightarrow L \Rightarrow P \Rightarrow G \quad p(x) > 0
 
 - Global: \(\{X_1, X_2\} \bot \{X_{15}, X_{20}\} | \{X_3, X_6, X_7\}\)
 - Local: \(1 \bot \text{rest} | \{X_2, X_6\}\)
-
-!!! warning
-
-    I didn't understand the pairwise examples on the lecture slides, so I omitted them here (lecture 4, slide 11).
+- Pairwise: \(1 \bot 7 | \text{rest}\), \(1 \bot 20 | \text{rest}\)
 
 ### Not all UGMs can be represented as DGMs
 
@@ -133,17 +130,19 @@ An undirected model is unable to capture the marginal independence, \(X \bot Y\)
 
 A [**clique**](https://en.wikipedia.org/wiki/Clique_(graph_theory)) in an undirected graph is a subset of its vertices such that every two vertices in the subset are connected by an edge (i.e., the subgraph induced by the clique is [complete](https://en.wikipedia.org/wiki/Complete_graph)).
 
-_def_. The [**maximal clique**](https://en.wikipedia.org/wiki/Clique_(graph_theory)#Definitions) is a clique that cannot be extended by including one more adjacent vertex.
+_def_. A [**maximal clique**](https://en.wikipedia.org/wiki/Clique_(graph_theory)#Definitions) is a clique that cannot be extended by including one more adjacent vertex.
 
-_def_. The **maximum clique** is a clique of the _largest possible size_ in a given graph.
+_def_. A [**maximum clique**](https://en.wikipedia.org/wiki/Clique_(graph_theory)#Definitions) is a clique of the _largest possible size_ in a given graph.
 
-For example, in the following graph a _maximal clique_ is show in blue, while the _maximum clique_ is shown in green.
+For example, in the following graph a _maximal clique_ is show in blue, while a _maximum clique_ is shown in green.
 
 ![](../img/lecture_4_7.png)
 
 ### Parameterization of an UGM
 
-Let \(x = (x_1, ..., x_m)\) be the set of all random variables in our graph. Unlike in DGMs, there is no topological ordering associated with an undirected graph, and so we _cannot_ use the chain rule to represent \(p(x)\). Therefore, instead of associating conditional probabilities with each node, we associate __potential functions__ or __factors__ with each _maximal clique_ in the graph.
+Let \(x = (x_1, ..., x_m)\) be the set of all random variables in our graph. Unlike in DGMs, there is no topological ordering associated with an undirected graph, and so we _cannot_ use the chain rule to represent the joint distribution \(p(x)\).
+
+Instead of associating conditional probabilities with each node, we associate __potential functions__ or __factors__ with each _maximal clique_ in the graph.
 
 For a given clique \(c\), we define the potential function or factor
 
@@ -167,7 +166,7 @@ _More formally_,
 A positive distribution \(p(x) > 0\) satisfies the conditional independence properties of an undirected graph \(G\) iff \(p\) can be represented as a product of factors, one per maximal clique, i.e.,
 
 \[
-p(x | \theta) = \frac{1}{Z(\theta)}\prod_{c \in \mathcal C}\psi_c(x_c | \theta)
+p(x | \theta) = \frac{1}{Z(\theta)}\prod_{c \in \mathcal C}\psi_c(x_c | \theta_c)
 \]
 
 where \(\mathcal C\) is the set of all (maximal) cliques of \(G\), and \(Z(\theta)\) the **partition function**, defined as
@@ -176,7 +175,9 @@ where \(\mathcal C\) is the set of all (maximal) cliques of \(G\), and \(Z(\thet
 Z(\theta)= \sum_x \prod_{c \in \mathcal C} \psi_c(x_c|\theta_c)
 \]
 
-The factored structure of the distribution makes it possible to more efficiently do the sums/integrals needed to compute it. Lets see how to factorize the undirected graph of our running example:
+The factored structure of the distribution makes it possible to more efficiently do the sums/integrals needed to compute it.
+
+Lets see how to factorize the undirected graph of our running example:
 
 ![](../img/lecture_4_4.png)
 
@@ -226,7 +227,7 @@ enumerating all marginal probabilities in a table for our running example, we ge
 ![](../img/lecture_4_10.png)
 
 !!! tip
-    To get the normalized marginal probability, divide by the partition function \(Z(\theta) \sum_x \prod_{c \in \mathcal C} \psi_c(x_c | \theta_c)\)
+    To get the normalized marginal probability, divide by the partition function \(Z(\theta) = \sum_x \prod_{c \in \mathcal C} \psi_c(x_c | \theta_c)\)
 
 to compute the marginal probability of a single variable in our graph, e.g. \(p(b_0)\), marginalize over the other variables
 

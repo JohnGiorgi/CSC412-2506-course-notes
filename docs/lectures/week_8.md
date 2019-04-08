@@ -123,16 +123,16 @@ Just because we can plot this distribution, that does not mean we can draw sampl
 !!! warning
     Note the some of these images come from MacKay, who uses a different notation. We use lowercase \(p\) and \(q\) in place of his upper case \(P\) and \(Q\), and we use \(\tilde p\) / \(\tilde q\) in place of his \(p^*\) / \(q^*\).
 
-To simplify the problem, we could discretize the variable \(x\) and sample from the discrete probability distribution over a finite set of uniformly spaced points \(\{x_i\}\) (figure (d)). If we evaluate \(\tilde p_i = \tilde p(x_i)\) at each point \(x_i\), we could compute
+To simplify the problem, we could discretize the variable \(x\) and sample from the discrete probability distribution over a finite set of uniformly spaced points \(\{x_i\}\) (figure (d)). If we evaluate \(\tilde p(x_i)\) at each point \(x_i\), we could compute
 
 \[
-Z = \sum_i \tilde p_i
+Z = \sum_i \tilde p_i(x_i)
 \]
 
 and
 
 \[
-\tilde p_i = \frac{\tilde p_i}{Z}
+p_i = \frac{\tilde p_i}{Z}
 \]
 
 and could sample from the probability distribution \(\{p_i\}_{i=1}^R\) using various methods based on a source of random bits. Unfortunately, the cost of this procedure is intractable.
@@ -185,7 +185,7 @@ p(x) = \frac{\tilde p(x)}{Z}
 We further assume we have a simpler density, \(q(x)\) from which it is easy to _sample_ from (i.e. \(x \sim q(x)\)) and easy to _evaluate_ (i.e. \(\tilde q(x)\))
 
 \[
-q(x) = \frac{\tilde q(x)}{Z_Q}
+q(x) = \frac{\tilde q(x)}{Z_q}
 \]
 
 we call such a density \(q(x)\) the __sampler density__. An example of the functions \(\tilde p, \tilde q\) and \(\phi\) is given in in figure 29.5.
@@ -238,7 +238,7 @@ where \(\frac{Z_p}{Z_q} = \frac{1}{R}\sum_{r=1}^R \tilde w_r\), \(w_r = \frac{\t
 
 ### Rejection Sampling
 
-In [**rejection sampling**](https://en.wikipedia.org/wiki/Rejection_sampling) we assume again a one-dimensional density \(p(x) = \tilde p(x)/Z\) that is too complicated a function for us to be able to sample from it directly. We assume that we have a simpler _proposal density_ \(q(x)\) which we can evaluate (within a multiplicative factor \(Z_Q\), as before), and from which we can generate samples. We further assume that we know the value of a constant \(c\) such that
+In [**rejection sampling**](https://en.wikipedia.org/wiki/Rejection_sampling) we assume again a one-dimensional density \(p(x) = \tilde p(x)/Z\) that is too complicated a function for us to be able to sample from it directly. We assume that we have a simpler _proposal density_ \(q(x)\) which we can evaluate (within a multiplicative factor \(Z_q\), as before), and from which we can generate samples. We further assume that we know the value of a constant \(c\) such that
 
 \[
 c \tilde q(x) > \tilde p(x) \quad \forall x
@@ -291,8 +291,10 @@ A tentative new state \(x'\) is generated from the proposal density \(q(x' | x^{
 a = \frac{\tilde p(x')q(x^{(t)} | x')}{\tilde p(x^{(t)}) q(x' | x^{(t)})}
 \]
 
-- If \(a \ge 1\) then the new state is accepted. Set \(x^{(t + 1)} = x'\).
-- Otherwise, the new state is accepted with probability \(a\). Set \(x^{(t + 1)} = x^{(t)}\).
+- If \(a \ge 1\) then the new state is accepted.
+- Otherwise, the new state is accepted with probability \(a\).
+
+    - If accepted, set \(x^{(t + 1)} = x'\). Otherwise, set \(x^{(t + 1)} = x^{(t)}\).
 
 !!! note
     Note the difference from rejection sampling: in rejection sampling, rejected points are discarded and have no influence on the list of samples \(\{x^{(r)}\}\) that we collected. Here, a rejection causes the current state to be written again onto the list.
@@ -302,3 +304,11 @@ Metropolis–Hastings converges to \(p(x)\) for any \(q(x' | x^{(t)}) \ge 0 \qua
 There are however, no guarantees on convergence. The Metropolis method is an example of a Markov chain Monte Carlo method (abbreviated MCMC). In contrast to rejection sampling, where the accepted points \(\{x^{(t)}\}\) are independent samples from the desired distribution, Markov chain Monte Carlo methods involve a Markov process in which a sequence of states \(\{x^{(t)}\}\) is generated, each sample \(x^{(t)}\) having a probability distribution that depends on the previous value, \(x^{(t-1)}\). Since successive samples are dependent, the Markov chain may have to be run for a considerable time in order to generate samples that are effectively independent samples from \(p\).
 
 Just as it was difficult to estimate the variance of an importance sampling estimator, so it is difficult to assess whether a Markov chain Monte Carlo method has ‘converged’, and to quantify how long one has to wait to obtain samples that are effectively independent samples from \(p\).
+
+## Appendix
+
+### Useful Resources
+
+- [Interactive Metropolis Hastings Online Demo](https://chi-feng.github.io/mcmc-demo/app.html#RandomWalkMH,banana)
+
+### Glossary of Terms

@@ -94,7 +94,7 @@ Once the joint distribution is learned, we could provide a word and ask the mode
 
 ![](../img/lecture_1_5.png)
 
-!!! info
+!!! cite
      Nguyen A, Dosovitskiy A, Yosinski J, Brox T, Clune J (2016). Synthesizing the preferred inputs for neurons in neural networks via deep generator networks. Advances in Neural Information Processing Systems 29
 
 In fact, this is the key idea behind image captioning models:
@@ -107,7 +107,7 @@ Once learned, latent representations of our data allow us to do some powerful th
 
 ![](../img/lecture_1_7.png)
 
-!!! info
+!!! cite
     Pixel Recurrent Neural Networks. Aaron van den Oord, Nal Kalchbrenner, Koray Kavukcuoglu
 
 Because our latent space is really a [**vector space**](https://en.wikipedia.org/wiki/Vector_space), we have access to all the mathematical operations that are defined on vectors, such as _addition_ and _subtraction_. Furthermore, out latent representations (which themselves are just vector learned during model training) can be decoded into images (or words, or molecules, etc!).
@@ -147,6 +147,8 @@ Lots of methods conflate model and fitting algorithm, we will try to separate th
 
 ### ML as a Bag of Tricks
 
+<center>
+
 | Fast special cases        | Extensible family      |
 | ------------------------- | ---------------------- |
 | K-means                   | Mixture of Gaussians   |
@@ -156,7 +158,11 @@ Lots of methods conflate model and fitting algorithm, we will try to separate th
 | Random Forests            | Bayesian neural nets   |
 | K-Nearest Neighbours      | ??                     |
 
+</center>
+
 ### Regularization as a Bag of Tricks
+
+<center>
 
 | Fast special cases       | Extensible family                |
 | ------------------------ | -------------------------------- |
@@ -167,6 +173,8 @@ Lots of methods conflate model and fitting algorithm, we will try to separate th
 | Dropout                  |                                  |
 | Expectation-Maximization |                                  |
 
+</center>
+
 ### A Language of Models
 
 Our goal will be to develop a language of models, a _toolbox_. For example, hidden Markov models, mixture of Gaussians, and logistic regression are all examples from a language of models. We will try to show a larger family, and point out common special cases.
@@ -174,6 +182,8 @@ Our goal will be to develop a language of models, a _toolbox_. For example, hidd
 Using this language, you will be able to build you own custom models.
 
 In fact, we can talk about this family of models using very few ideas. Really, all we need are _deep probabilistic latent-variable models_ and some _decision theory_.
+
+<center>
 
 | Russel and Norvig’s parts of AI | Extensible family                                           |
 | ------------------------------- | ----------------------------------------------------------- |
@@ -183,6 +193,8 @@ In fact, we can talk about this family of models using very few ideas. Really, a
 | Automated reasoning             |                                                             |
 | Computer vision                 |                                                             |
 | Robotics                        |                                                             |
+
+</center>
 
 #### Advantages of probabilistic latent-variable models
 
@@ -243,6 +255,8 @@ but a neural network who's job is to come up with a convincing distribution over
 
 this brings us to a comparison of probabilistic graphical models and deep learning
 
+<center>
+
 | Probabilistic graphical models       | Deep learning                 |
 | ------------------------------------ | ----------------------------- |
 | ➕ structured representations        | ➖ neural net "goo"           |
@@ -251,6 +265,8 @@ this brings us to a comparison of probabilistic graphical models and deep learni
 | ➖ rigid assumptions may not fit     | ➕ flexible                   |
 | ➖ feature engineering               | ➕ feature learning           |
 | ➖top-down inference                 | ➕ recognition networks       |
+
+</center>
 
 ❗ Left off on slide 35
 
