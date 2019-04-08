@@ -1,4 +1,4 @@
-# Week 10:  Stochastic Variational Inference / Automatic Differentiation Variation Inference (SAD VI)
+# Week 10: Stochastic Variational Inference / Automatic Differentiation Variation Inference (SAD VI)
 
 ### Assigned Reading
 
@@ -85,7 +85,7 @@ but the computation of \(D_{KL}(q_\phi || p_\theta)\) is intractable (as discuss
 To circumvent this issue of intractability, we will derive the [**evidence lower bound (ELBO)**](https://en.wikipedia.org/wiki/Evidence_lower_bound), and show that maximizing the ELBO \(\Rightarrow\) minimizing \(D_{KL}(q_\phi || p_\theta)\).
 
 \begin{align}
-  D_{KL}(q_\phi || p_\theta) &= E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)} \\
+  D_{KL}(q_\phi (z | x) || p_\theta (z | x)) &= E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)} \\
   &= E_{z_\phi \sim q_\phi} \Bigg [ \log \Bigg ( q_\phi(z | x) \cdot \frac{p_\theta(x)}{p_\theta(z, x)} \Bigg ) \Bigg ] \\
   &= E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z, x)}  + E_{z_\phi \sim q_\phi} \log p_\theta(x) \\
   &= -\mathcal L(\theta, \phi ; x)  + \log p_\theta(x) \\
@@ -99,17 +99,17 @@ Where \(\mathcal L(\theta, \phi ; x)\) is the **ELBO**.
 Rearranging, we get
 
 \begin{align}
-  D_{KL}(q_\phi || p_\theta) &= -\mathcal L(\theta, \phi ; x)  + \log p_\theta(x) \\
-  \Rightarrow \mathcal L(\theta, \phi ; x) + D_{KL}(q_\phi || p_\theta) &= \log p_\theta(x) \\
+  D_{KL}(q_\phi (z | x) || p_\theta (z | x)) &= -\mathcal L(\theta, \phi ; x)  + \log p_\theta(x) \\
+  \Rightarrow \mathcal L(\theta, \phi ; x) + D_{KL}(q_\phi (z | x) || p_\theta (z | x)) &= \log p_\theta(x) \\
 \end{align}
 
-Because \(D_{KL}(q_\phi || p_\theta) \ge 0\)
+Because \(D_{KL}(q_\phi (z | x) || p_\theta (z | x)) \ge 0\)
 
 \[
 \mathcal L(\theta, \phi ; x) \le \log p_\theta(x)
 \]
 
-\(\therefore\) maximizing the ELBO \(\Rightarrow\) minimizing \(D_{KL}(q_\phi || p_\theta)\).
+\(\therefore\) maximizing the ELBO \(\Rightarrow\) minimizing \(D_{KL}(q_\phi (z | x) || p_\theta (z | x))\).
 
 #### Alternative Derivation
 

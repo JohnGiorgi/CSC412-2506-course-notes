@@ -132,7 +132,7 @@ D_{KL}(q_\phi(z | x) || p_\theta(z | x))
 finally, we demonstrated that minimizing \(D_{KL}\) was equivalent to maximizing the ELBO, \(L\)
 
 \[
-\mathcal L(\theta, \phi ; x) = -\text{ELBO} = - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)}
+\mathcal L(\theta, \phi ; x) = \text{ELBO} = - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)}
 \]
 
 We also talked about two other [alternative forms or "intuitions" of the ELBO](../week_10/#alternative-forms-of-elbo-and-intuitions):
@@ -145,7 +145,7 @@ We also talked about two other [alternative forms or "intuitions" of the ELBO](.
 The second of which (intuition 3) is the loss function we use for training VAEs. Notice now that the first term corresponds to the _likelihood of our input under the distribution decoded from \(z\)_ and the second term the _divergence of the approximate distribution posterior from the prior of the true distribution_.
 
 !!! note
-    We talked last week about how the second terms acts a regularization, by enforcing the idea that our parameterization shouldn't move us too far from the true distribution. Alos note that this term as a simple, closed form if the posterior and prior are Gaussians.
+    We talked last week about how the second terms acts a regularization, by enforcing the idea that our parameterization shouldn't move us too far from the true distribution. Also note that this term as a simple, closed form if the posterior and prior are Gaussians.
 
 The encoder and decoder in a VAE become:
 
@@ -153,7 +153,7 @@ The encoder and decoder in a VAE become:
 
 **Decoder**: \(f(z_i) = \theta_i\)
 
-Where \(\phi_i\) are the parameters of \(q_\phi(z | x)\) (we are encoding a distribution, which is exactly just its parameters) and \(\theta_i\) are the parameters of \(p_\theta(\tilde x | z_i)\), the reconstruction likelihood.
+Where \(\phi_i\) are the parameters of \(q_\phi(z_i | x_i)\) (we are encoding a distribution, which is exactly just its parameters) and \(\theta_i\) are the parameters of \(p_\theta(\tilde x_i | z_i)\), the reconstruction likelihood.
 
 ### Why does a VAE solve the problems of a deterministic autoencoder?
 
@@ -237,13 +237,13 @@ Where inputs \(x_i\) are encoded to vectors \(\mu\) and \(\log \sigma_i\), which
 
 The decoder generates a reconstruction by first sampling from the distribution \(q_\phi(z | x)\). This sampling process introduces a major problem: gradients are blocked from flowing into the encoder, and hence it will not train. To solve this problem, the [reparameterization trick](https://medium.com/@llionj/the-reparameterization-trick-4ff30fe92954) is used.
 
-The trick goes as follows: Instead of sampling \(z\) directly from its distribution (e.g. \(z \sim \mathcal{N}(\mu(x), \sigma(x)I)\)) we express \(z\) as a deterministic variable
+The trick goes as follows: Instead of sampling \(z\) directly from its distribution (e.g. \(z \sim \mathcal{N}(\mu(x), \sigma(x)I)\)) we express \(z\) as a [deterministic variable](https://en.wikipedia.org/wiki/Deterministic_system):
 
 \[
 z = g_\phi(\varepsilon, x)
 \]
 
-where \(\varepsilon\) is an auxiliary independent randome variable a \(g_\phi\) converts \(\varepsilon\) to \(z\).
+where \(\varepsilon\) is an auxiliary independent random variable and \(g_\phi\) converts \(\varepsilon\) to \(z\).
 
 In the case of where our approximate distribution is chosen to be the multivariate normal with diagonal covariance, the reparameterization trick gives:
 

@@ -84,7 +84,7 @@ Assume \(x\) is a discrete random variable with \(k\) states. How many parameter
 
 - \(x_t\): \(k-1\), as the last state is implicit.
 - _first-order chain_: \(k(k-1)\), as we need \(k\) number of parameters of each parameter of \(x_t\)
-- _second-order chain_: \(k^m(k-1)\), as we need \(k^m\) number of parameters of each parameter of \(x_t\)
+- \(m\)_-order chain_: \(k^m(k-1)\), as we need \(k^m\) number of parameters of each parameter of \(x_t\)
 
 !!! tip
     He hinted that this would be useful for assignment 2. Seems like it might be the answer to question 4a.
