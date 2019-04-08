@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://johngiorgi.github.io/CSC412-2506-course-notes/. /lectures/week_6/">
+        <link rel="canonical" href="https://johngiorgi.github.io/CSC412-2506-course-notes/. /lectures/week_13/">
       
       
         <meta name="author" content="John Giorgi">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Week 6 - CSC412/2506 Winter 2019: Probabilistic Learning and Reasoning</title>
+        <title>Week 13 - CSC412/2506 Winter 2019: Probabilistic Learning and Reasoning</title>
       
     
     
@@ -105,7 +105,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#choosing-an-elimination-ordering" tabindex="1" class="md-skip">
+      <a href="#week-13-flow-based-models" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -131,7 +131,7 @@
                 CSC412/2506 Winter 2019: Probabilistic Learning and Reasoning
               </span>
               <span class="md-header-nav__topic">
-                Week 6
+                Week 13
               </span>
             
           
@@ -339,58 +339,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Week 6
-      </label>
-    
-    <a href="./" title="Week 6" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../week_6/" title="Week 6" class="md-nav__link">
       Week 6
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#choosing-an-elimination-ordering" title="Choosing an Elimination Ordering" class="md-nav__link">
-    Choosing an Elimination Ordering
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#belief-propagation" title="Belief Propagation" class="md-nav__link">
-    Belief Propagation
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -458,11 +411,20 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../week_13/" title="Week 13" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+    <a href="./" title="Week 13" class="md-nav__link md-nav__link--active">
       Week 13
     </a>
+    
   </li>
 
         
@@ -545,35 +507,8 @@
 <nav class="md-nav md-nav--secondary">
   
   
+    
   
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#choosing-an-elimination-ordering" title="Choosing an Elimination Ordering" class="md-nav__link">
-    Choosing an Elimination Ordering
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#belief-propagation" title="Belief Propagation" class="md-nav__link">
-    Belief Propagation
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
   
 </nav>
                   </div>
@@ -585,48 +520,11 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/JohnGiorgi/CSC412-2506-course-notes/edit/master/docs/lectures/week_6.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/JohnGiorgi/CSC412-2506-course-notes/edit/master/docs/lectures/week_13.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Week 6</h1>
-                
-                <h2 id="choosing-an-elimination-ordering">Choosing an Elimination Ordering<a class="headerlink" href="#choosing-an-elimination-ordering" title="Permanent link">&para;</a></h2>
-<p>To choose an elimination ordering, we use a set of heuristics:</p>
-<ul>
-<li><strong>Min-fill</strong>: the cost of a vertex is the number of edges that need to be added to the graph due to its elimination.</li>
-<li><strong>Weighted-Min-Fill</strong>: the cost of a vertex is the sum of weights of the edges that need to be added to the graph due to its elimination. Weight of an edge is the product of weights of its constituent vertices.</li>
-<li><strong>Min-neighbors</strong>: the cost of a vertex is the number of neighbors it has in the current graph.</li>
-<li><strong>Min-weight</strong>: the cost of a vertex is the product of weights (domain cardinality) of its neighbors.</li>
-</ul>
-<p>None of these criteria are <em>better</em> than the others. You often just have to try several.</p>
-<div class="admonition error">
-<p class="admonition-title">Error</p>
-<p>Skipped the section from lecture that came between <strong>Choosing an Elimination Ordering</strong> and <strong>Belief Propogation</strong>.</p>
-</div>
-<h3 id="belief-propagation">Belief Propagation<a class="headerlink" href="#belief-propagation" title="Permanent link">&para;</a></h3>
-<p>What if we want <span><span class="MathJax_Preview">p(x_i) \ \forall x_i \in X</span><script type="math/tex">p(x_i) \ \forall x_i \in X</script></span>? We could run variable elimination for each variable <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span>, but this is computationally expensive. Can we do something more efficient?</p>
-<p>Consider a tree:</p>
-<p><img alt="" src="../../img/lecture_6_1.png" /></p>
-<div>
-<div class="MathJax_Preview">
-P(X_{1:n}) = \frac{1}{z} \prod \phi(x_i) \prod_{(i, j) \in T} \phi_{i, j}(x_i, x_j)
-</div>
-<script type="math/tex; mode=display">
-P(X_{1:n}) = \frac{1}{z} \prod \phi(x_i) \prod_{(i, j) \in T} \phi_{i, j}(x_i, x_j)
-</script>
-</div>
-<p>We can compute the sum product belief propagation in order to compute all marginals with just two passes. Belief propagation is based on message-passing of "messages" between neighboring vertices of the graph.</p>
-<p>The message sent from variable <span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span> to <span><span class="MathJax_Preview">i \in N(j)</span><script type="math/tex">i \in N(j)</script></span> is</p>
-<div>
-<div class="MathJax_Preview">
-m_{j \rightarrow i}(x_i) = \sum_{x_j}\phi_j(x_j)\phi_{ij}(x_i, x_j)\prod_{k \in N(j) \not = i} m_{k \rightarrow j}(x_j)
-</div>
-<script type="math/tex; mode=display">
-m_{j \rightarrow i}(x_i) = \sum_{x_j}\phi_j(x_j)\phi_{ij}(x_i, x_j)\prod_{k \in N(j) \not = i} m_{k \rightarrow j}(x_j)
-</script>
-</div>
-<p><img alt="" src="../../img/lecture_6_2.png" /></p>
-<p>where each message <span><span class="MathJax_Preview">m_{j \rightarrow i}(x_i)</span><script type="math/tex">m_{j \rightarrow i}(x_i)</script></span> is a vector with one value for each state of <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span>.</p>
+                <h1 id="week-13-flow-based-models">Week 13: Flow-based Models<a class="headerlink" href="#week-13-flow-based-models" title="Permanent link">&para;</a></h1>
+<p>This week is <em>not</em> on the final exam, so I won't spend time converting my and written lecture notes into nicely formatted notes here.</p>
                 
                   
                 
@@ -647,7 +545,7 @@ m_{j \rightarrow i}(x_i) = \sum_{x_j}\phi_j(x_j)\phi_{ij}(x_i, x_j)\prod_{k \in 
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../week_5/" title="Week 5" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../week_12/" title="Week 12" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -656,19 +554,19 @@ m_{j \rightarrow i}(x_i) = \sum_{x_j}\phi_j(x_j)\phi_{ij}(x_i, x_j)\prod_{k \in 
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Week 5
+                Week 12
               </span>
             </div>
           </a>
         
         
-          <a href="../week_8/" title="Week 8" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../../tutorials/week_1/" title="Week 1" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Week 8
+                Week 1
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

@@ -554,7 +554,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../week_12.md" title="Week 12" class="md-nav__link">
+    <a href="../week_12/" title="Week 12" class="md-nav__link">
       Week 12
     </a>
   </li>
@@ -566,7 +566,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../week_13.md" title="Week 13" class="md-nav__link">
+    <a href="../week_13/" title="Week 13" class="md-nav__link">
       Week 13
     </a>
   </li>
@@ -932,10 +932,10 @@ D_{KL}(q_\phi(z | x) || p_\theta(z | x))
 <p>finally, we demonstrated that minimizing <span><span class="MathJax_Preview">D_{KL}</span><script type="math/tex">D_{KL}</script></span> was equivalent to maximizing the ELBO, <span><span class="MathJax_Preview">L</span><script type="math/tex">L</script></span></p>
 <div>
 <div class="MathJax_Preview">
-\mathcal L(\theta, \phi ; x) = -\text{ELBO} = - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)}
+\mathcal L(\theta, \phi ; x) = \text{ELBO} = - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)}
 </div>
 <script type="math/tex; mode=display">
-\mathcal L(\theta, \phi ; x) = -\text{ELBO} = - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)}
+\mathcal L(\theta, \phi ; x) = \text{ELBO} = - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)}
 </script>
 </div>
 <p>We also talked about two other <a href="../week_10/#alternative-forms-of-elbo-and-intuitions">alternative forms or "intuitions" of the ELBO</a>:</p>
@@ -952,12 +952,12 @@ D_{KL}(q_\phi(z | x) || p_\theta(z | x))
 <p>The second of which (intuition 3) is the loss function we use for training VAEs. Notice now that the first term corresponds to the <em>likelihood of our input under the distribution decoded from <span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span></em> and the second term the <em>divergence of the approximate distribution posterior from the prior of the true distribution</em>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>We talked last week about how the second terms acts a regularization, by enforcing the idea that our parameterization shouldn't move us too far from the true distribution. Alos note that this term as a simple, closed form if the posterior and prior are Gaussians.</p>
+<p>We talked last week about how the second terms acts a regularization, by enforcing the idea that our parameterization shouldn't move us too far from the true distribution. Also note that this term as a simple, closed form if the posterior and prior are Gaussians.</p>
 </div>
 <p>The encoder and decoder in a VAE become:</p>
 <p><strong>Encoder</strong>: <span><span class="MathJax_Preview">g(x_i) = \phi_i</span><script type="math/tex">g(x_i) = \phi_i</script></span></p>
 <p><strong>Decoder</strong>: <span><span class="MathJax_Preview">f(z_i) = \theta_i</span><script type="math/tex">f(z_i) = \theta_i</script></span></p>
-<p>Where <span><span class="MathJax_Preview">\phi_i</span><script type="math/tex">\phi_i</script></span> are the parameters of <span><span class="MathJax_Preview">q_\phi(z | x)</span><script type="math/tex">q_\phi(z | x)</script></span> (we are encoding a distribution, which is exactly just its parameters) and <span><span class="MathJax_Preview">\theta_i</span><script type="math/tex">\theta_i</script></span> are the parameters of <span><span class="MathJax_Preview">p_\theta(\tilde x | z_i)</span><script type="math/tex">p_\theta(\tilde x | z_i)</script></span>, the reconstruction likelihood.</p>
+<p>Where <span><span class="MathJax_Preview">\phi_i</span><script type="math/tex">\phi_i</script></span> are the parameters of <span><span class="MathJax_Preview">q_\phi(z_i | x_i)</span><script type="math/tex">q_\phi(z_i | x_i)</script></span> (we are encoding a distribution, which is exactly just its parameters) and <span><span class="MathJax_Preview">\theta_i</span><script type="math/tex">\theta_i</script></span> are the parameters of <span><span class="MathJax_Preview">p_\theta(\tilde x_i | z_i)</span><script type="math/tex">p_\theta(\tilde x_i | z_i)</script></span>, the reconstruction likelihood.</p>
 <h3 id="why-does-a-vae-solve-the-problems-of-a-deterministic-autoencoder">Why does a VAE solve the problems of a deterministic autoencoder?<a class="headerlink" href="#why-does-a-vae-solve-the-problems-of-a-deterministic-autoencoder" title="Permanent link">&para;</a></h3>
 <p><em>Problem 1</em></p>
 <p>Unlike the encoder of a normal autoencoder, which encodes each input as a distinct point and forms distinct clusters in the latent space to encode each type of data (class, etc) with discontinuities between clusters (as doing this will allow the decoder to easily reconstruct the input), the VAE generation model learns to reconstruct its inputs not only from the encoded points but also <em>from the area around them</em>. This allows the generation model to generate new data by sampling from an “area” instead of only being able to generate already seen data corresponding to the particular fixed encoded points.</p>
@@ -1109,13 +1109,13 @@ z = \mu + \sigma * \varepsilon \quad \text{where } \varepsilon \sim \mathcal N(0
           </a>
         
         
-          <a href="../../tutorials/week_1/" title="Week 1" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../week_12/" title="Week 12" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Week 1
+                Week 12
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
