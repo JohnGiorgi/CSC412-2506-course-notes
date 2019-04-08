@@ -618,8 +618,20 @@
 
 
   <li class="md-nav__item">
-    <a href="../../sample_midterm_answers/" title="Sample Midterm (Answers)" class="md-nav__link">
-      Sample Midterm (Answers)
+    <a href="../../sample_midterm/" title="Sample Midterm" class="md-nav__link">
+      Sample Midterm
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../sample_final/" title="Sample Final" class="md-nav__link">
+      Sample Final
     </a>
   </li>
 
@@ -989,7 +1001,21 @@ E_{z_\phi \sim q_\phi} \Big [ \log p_\theta({x | z}) \Big ] - D_{KL}(q_\phi(z | 
 <p>The instructor recommends we read "sticking the landing".</p>
 </div>
 <h3 id="mean-field-variational-inference">Mean Field Variational Inference<a class="headerlink" href="#mean-field-variational-inference" title="Permanent link">&para;</a></h3>
-<p>This section was a bit of a mess, I will return to it when I have time.</p>
+<p>In <a href="https://en.wikipedia.org/wiki/Variational_Bayesian_methods#Mean_field_approximation">mean field variational inference</a>, the approximate distribution <span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span> is assumed to factorize over some partition of latent variables</p>
+<div>
+<div class="MathJax_Preview">
+q_\phi(z, \theta | \phi) = q_\phi(\theta | \phi_{\theta})\prod_{i=1}^Nq(z_i | \phi_i)
+</div>
+<script type="math/tex; mode=display">
+q_\phi(z, \theta | \phi) = q_\phi(\theta | \phi_{\theta})\prod_{i=1}^Nq(z_i | \phi_i)
+</script>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>I don't get this at all. The lecture had gotten pretty messy on the blackboard by this point.</p>
+</div>
+<p>If <span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span>s are in the same family as <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>s, we can optimize via coordinate ascent.</p>
+<p>we restrict ourselves to variational families, <span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span>, that we can compute the gradient of</p>
 <h2 id="appendix">Appendix<a class="headerlink" href="#appendix" title="Permanent link">&para;</a></h2>
 <h3 id="useful-resources">Useful Resources<a class="headerlink" href="#useful-resources" title="Permanent link">&para;</a></h3>
 <ul>
