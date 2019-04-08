@@ -796,7 +796,7 @@
                   <a href="https://github.com/JohnGiorgi/CSC412-2506-course-notes/edit/master/docs/lectures/week_10.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="week-10-stochastic-variational-inference-automatic-differentiation-variation-inference-sad-vi">Week 10:  Stochastic Variational Inference / Automatic Differentiation Variation Inference (SAD VI)<a class="headerlink" href="#week-10-stochastic-variational-inference-automatic-differentiation-variation-inference-sad-vi" title="Permanent link">&para;</a></h1>
+                <h1 id="week-10-stochastic-variational-inference-automatic-differentiation-variation-inference-sad-vi">Week 10: Stochastic Variational Inference / Automatic Differentiation Variation Inference (SAD VI)<a class="headerlink" href="#week-10-stochastic-variational-inference-automatic-differentiation-variation-inference-sad-vi" title="Permanent link">&para;</a></h1>
 <h3 id="assigned-reading">Assigned Reading<a class="headerlink" href="#assigned-reading" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Murphy: Chapter 18</li>
@@ -880,13 +880,13 @@ q_\phi \approx p_\theta \Rightarrow D_{KL}(q_\phi || p_\theta) = 0
 <p>To circumvent this issue of intractability, we will derive the <a href="https://en.wikipedia.org/wiki/Evidence_lower_bound"><strong>evidence lower bound (ELBO)</strong></a>, and show that maximizing the ELBO <span><span class="MathJax_Preview">\Rightarrow</span><script type="math/tex">\Rightarrow</script></span> minimizing <span><span class="MathJax_Preview">D_{KL}(q_\phi || p_\theta)</span><script type="math/tex">D_{KL}(q_\phi || p_\theta)</script></span>.</p>
 <div>
 <div class="MathJax_Preview">\begin{align}
-  D_{KL}(q_\phi || p_\theta) &amp;= E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)} \\
+  D_{KL}(q_\phi (z | x) || p_\theta (z | x)) &amp;= E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)} \\
   &amp;= E_{z_\phi \sim q_\phi} \Bigg [ \log \Bigg ( q_\phi(z | x) \cdot \frac{p_\theta(x)}{p_\theta(z, x)} \Bigg ) \Bigg ] \\
   &amp;= E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z, x)}  + E_{z_\phi \sim q_\phi} \log p_\theta(x) \\
   &amp;= -\mathcal L(\theta, \phi ; x)  + \log p_\theta(x) \\
 \end{align}</div>
 <script type="math/tex; mode=display">\begin{align}
-  D_{KL}(q_\phi || p_\theta) &= E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)} \\
+  D_{KL}(q_\phi (z | x) || p_\theta (z | x)) &= E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)} \\
   &= E_{z_\phi \sim q_\phi} \Bigg [ \log \Bigg ( q_\phi(z | x) \cdot \frac{p_\theta(x)}{p_\theta(z, x)} \Bigg ) \Bigg ] \\
   &= E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z, x)}  + E_{z_\phi \sim q_\phi} \log p_\theta(x) \\
   &= -\mathcal L(\theta, \phi ; x)  + \log p_\theta(x) \\
@@ -900,15 +900,15 @@ q_\phi \approx p_\theta \Rightarrow D_{KL}(q_\phi || p_\theta) = 0
 <p>Rearranging, we get</p>
 <div>
 <div class="MathJax_Preview">\begin{align}
-  D_{KL}(q_\phi || p_\theta) &amp;= -\mathcal L(\theta, \phi ; x)  + \log p_\theta(x) \\
-  \Rightarrow \mathcal L(\theta, \phi ; x) + D_{KL}(q_\phi || p_\theta) &amp;= \log p_\theta(x) \\
+  D_{KL}(q_\phi (z | x) || p_\theta (z | x)) &amp;= -\mathcal L(\theta, \phi ; x)  + \log p_\theta(x) \\
+  \Rightarrow \mathcal L(\theta, \phi ; x) + D_{KL}(q_\phi (z | x) || p_\theta (z | x)) &amp;= \log p_\theta(x) \\
 \end{align}</div>
 <script type="math/tex; mode=display">\begin{align}
-  D_{KL}(q_\phi || p_\theta) &= -\mathcal L(\theta, \phi ; x)  + \log p_\theta(x) \\
-  \Rightarrow \mathcal L(\theta, \phi ; x) + D_{KL}(q_\phi || p_\theta) &= \log p_\theta(x) \\
+  D_{KL}(q_\phi (z | x) || p_\theta (z | x)) &= -\mathcal L(\theta, \phi ; x)  + \log p_\theta(x) \\
+  \Rightarrow \mathcal L(\theta, \phi ; x) + D_{KL}(q_\phi (z | x) || p_\theta (z | x)) &= \log p_\theta(x) \\
 \end{align}</script>
 </div>
-<p>Because <span><span class="MathJax_Preview">D_{KL}(q_\phi || p_\theta) \ge 0</span><script type="math/tex">D_{KL}(q_\phi || p_\theta) \ge 0</script></span></p>
+<p>Because <span><span class="MathJax_Preview">D_{KL}(q_\phi (z | x) || p_\theta (z | x)) \ge 0</span><script type="math/tex">D_{KL}(q_\phi (z | x) || p_\theta (z | x)) \ge 0</script></span></p>
 <div>
 <div class="MathJax_Preview">
 \mathcal L(\theta, \phi ; x) \le \log p_\theta(x)
@@ -917,7 +917,7 @@ q_\phi \approx p_\theta \Rightarrow D_{KL}(q_\phi || p_\theta) = 0
 \mathcal L(\theta, \phi ; x) \le \log p_\theta(x)
 </script>
 </div>
-<p><span><span class="MathJax_Preview">\therefore</span><script type="math/tex">\therefore</script></span> maximizing the ELBO <span><span class="MathJax_Preview">\Rightarrow</span><script type="math/tex">\Rightarrow</script></span> minimizing <span><span class="MathJax_Preview">D_{KL}(q_\phi || p_\theta)</span><script type="math/tex">D_{KL}(q_\phi || p_\theta)</script></span>.</p>
+<p><span><span class="MathJax_Preview">\therefore</span><script type="math/tex">\therefore</script></span> maximizing the ELBO <span><span class="MathJax_Preview">\Rightarrow</span><script type="math/tex">\Rightarrow</script></span> minimizing <span><span class="MathJax_Preview">D_{KL}(q_\phi (z | x) || p_\theta (z | x))</span><script type="math/tex">D_{KL}(q_\phi (z | x) || p_\theta (z | x))</script></span>.</p>
 <h4 id="alternative-derivation">Alternative Derivation<a class="headerlink" href="#alternative-derivation" title="Permanent link">&para;</a></h4>
 <p>Starting with <a href="https://en.wikipedia.org/wiki/Jensen%27s_inequality"><strong>Jenson's inequality</strong></a>,</p>
 <div>
