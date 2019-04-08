@@ -46,7 +46,8 @@ nav:
       - Week 13: lectures/week_13.md
     - Tutorials:
       - Week 1: tutorials/week_1.md
-    - Sample Midterm (Answers): sample_midterm_answers.md
+    - Sample Midterm: sample_midterm.md
+    - Sample Final: sample_final.md
 
 
 markdown_extensions:

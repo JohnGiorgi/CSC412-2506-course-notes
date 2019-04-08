@@ -1,4 +1,4 @@
-# Sample Midterm (Answers)
+# Sample Midterm
 
 _Things to know for the midterm_
 
