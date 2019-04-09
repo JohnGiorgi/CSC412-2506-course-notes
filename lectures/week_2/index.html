@@ -962,8 +962,8 @@ p(C = c | x) = \frac{p(c, x)}{p(x)} ; c \text{ is unobserved}
 </div>
 <h3 id="learning-parameters-for-a-distribution">Learning Parameters for a Distribution<a class="headerlink" href="#learning-parameters-for-a-distribution" title="Permanent link">&para;</a></h3>
 <p>Lets take an example with <a href="https://en.wikipedia.org/wiki/Random_variable#Discrete_random_variable">discrete random variables</a>.</p>
-<p>\[ T: \text{Temperature} \; ; \; t = \text{"hot" or "cold"} \]
-\[ W: \text{Weather} \; ; \; w = \text{"sunny" or "raining"} \]</p>
+<p>\[ T: \text{Temperature} \; ; \; h = \text{"hot" or } c = \text{"cold"} \]
+\[ W: \text{Weather} \; ; \; s = \text{"sunny" or } r = \text{"raining"} \]</p>
 <p>We know that</p>
 <p>\[ P(T=h) = 0.40 \]
 \[ P(T=c) = 0.60 \]</p>
@@ -977,8 +977,8 @@ p(C = c | x) = \frac{p(c, x)}{p(x)} ; c \text{ is unobserved}
 <p>We could create a parameterized, probabilistic model, <span><span class="MathJax_Preview">P(T, W)</span><script type="math/tex">P(T, W)</script></span> over the states</p>
 <p>\[P(T | \theta_T) \ ; \  \theta_T = \begin{bmatrix} 0.4 \\ 0.6 \end{bmatrix}\]
 \[P(W | \theta_W) \ ;\  \theta_W = \begin{bmatrix} 0.7 \\ 0.3 \end{bmatrix}\]</p>
-<p>Notice that <span><span class="MathJax_Preview">\theta_T</span><script type="math/tex">\theta_T</script></span> and <span><span class="MathJax_Preview">\theta_W</span><script type="math/tex">\theta_W</script></span> <em>are</em> the probability distributions of our random variables. Our parameters <em>define the probability of the data and explicitly and store it in a vector</em>.</p>
-<p>We can represent the joint distribution <span><span class="MathJax_Preview">P(T, W)</span><script type="math/tex">P(T, W)</script></span>, <em>our model</em> as:</p>
+<p>Notice that <span><span class="MathJax_Preview">\theta_T</span><script type="math/tex">\theta_T</script></span> and <span><span class="MathJax_Preview">\theta_W</span><script type="math/tex">\theta_W</script></span> <em>are</em> the probability distributions of our random variables. Our parameters <em>define the probability of the data explicitly and store it in a vector</em>.</p>
+<p>We can represent the joint distribution <span><span class="MathJax_Preview">P(T, W)</span><script type="math/tex">P(T, W)</script></span>, <em>our model</em>, as:</p>
 <p><center></p>
 <table>
 <thead>
@@ -1051,7 +1051,7 @@ P(W=r) = \sum_t P(W=r, T=t) = 0.30
 <script type="math/tex; mode=display">P(W = s | T = c) = \frac{P(W=s,T=c)}{P(T=c)} = \frac{P(W=s,T=c)}{\sum_w P(T=c, W=w)} =  \frac{0.42}{0.60} = 0.64</script>
 </div>
 <h4 id="why-did-we-do-this">Why did we do this?<a class="headerlink" href="#why-did-we-do-this" title="Permanent link">&para;</a></h4>
-<p>The whole point of the above example was to show that from a probabilistic model, which itself is just a joint distribution represented as a matrix (or tensor), we can compute both the marginal and conditional probabilities. This will allow us to compute probabilities, generate data and perform inference.</p>
+<p>The whole point of the above example was to show that from a probabilistic model, which itself is just a joint distribution represented as a matrix (or tensor), we can compute both the <em>marginal</em> and <em>conditional</em> probabilities. This will allow us to compute probabilities, generate data and perform inference.</p>
 <h4 id="joint-dimensionality">Joint Dimensionality<a class="headerlink" href="#joint-dimensionality" title="Permanent link">&para;</a></h4>
 <p>Lets take our previous example and expand on it. Firstly, it is helpful to think of the joint distribution of some set of random variables as a grid with <span><span class="MathJax_Preview">k^n</span><script type="math/tex">k^n</script></span> squares, where <span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span> is our number of variables and <span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span> our states.</p>
 <p>For our running example, this means our joint distribution is parameterized by a 4 dimensional vector, containing the probabilities of seeing any pair of states. We could of course, add more random variables to our model. Imagine we add <span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>, for whether or not we <em>bike into work</em> and <span><span class="MathJax_Preview">H</span><script type="math/tex">H</script></span>, for <em>overall health</em>, each with two states. The dimensionality of our parameters (for the joint distribution over <span><span class="MathJax_Preview">T, W, B, H</span><script type="math/tex">T, W, B, H</script></span>) then becomes</p>

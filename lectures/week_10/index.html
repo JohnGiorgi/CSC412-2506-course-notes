@@ -490,6 +490,26 @@
     Mean Field Variational Inference
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#traditional-variational-inference-aside" title="Traditional Variational Inference (ASIDE)" class="md-nav__link">
+    Traditional Variational Inference (ASIDE)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optimizing-elbo" title="Optimizing ELBO" class="md-nav__link">
+    Optimizing ELBO
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -743,6 +763,26 @@
     Mean Field Variational Inference
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#traditional-variational-inference-aside" title="Traditional Variational Inference (ASIDE)" class="md-nav__link">
+    Traditional Variational Inference (ASIDE)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optimizing-elbo" title="Optimizing ELBO" class="md-nav__link">
+    Optimizing ELBO
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -848,11 +888,11 @@ p(z, \theta | x) = \frac{p(x | z, \theta)}{p(x)} = \frac{p(x | z, \theta)}{\int\
 <div>
 <div class="MathJax_Preview">\begin{align}
   D_{KL}(q_\phi(z | x) || p_\theta(z | x)) &amp;= \int q_\phi(z | x) \log \frac{q_\phi(z | x)}{p_\theta(z | x)}dz \\
-  &amp;= E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)}
+  &amp;= \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)}
 \end{align}</div>
 <script type="math/tex; mode=display">\begin{align}
   D_{KL}(q_\phi(z | x) || p_\theta(z | x)) &= \int q_\phi(z | x) \log \frac{q_\phi(z | x)}{p_\theta(z | x)}dz \\
-  &= E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)}
+  &= \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)}
 \end{align}</script>
 </div>
 <h5 id="properties-of-the-kl-divergence">Properties of the KL Divergence<a class="headerlink" href="#properties-of-the-kl-divergence" title="Permanent link">&para;</a></h5>
@@ -880,15 +920,15 @@ q_\phi \approx p_\theta \Rightarrow D_{KL}(q_\phi || p_\theta) = 0
 <p>To circumvent this issue of intractability, we will derive the <a href="https://en.wikipedia.org/wiki/Evidence_lower_bound"><strong>evidence lower bound (ELBO)</strong></a>, and show that maximizing the ELBO <span><span class="MathJax_Preview">\Rightarrow</span><script type="math/tex">\Rightarrow</script></span> minimizing <span><span class="MathJax_Preview">D_{KL}(q_\phi || p_\theta)</span><script type="math/tex">D_{KL}(q_\phi || p_\theta)</script></span>.</p>
 <div>
 <div class="MathJax_Preview">\begin{align}
-  D_{KL}(q_\phi (z | x) || p_\theta (z | x)) &amp;= E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)} \\
-  &amp;= E_{z_\phi \sim q_\phi} \Bigg [ \log \Bigg ( q_\phi(z | x) \cdot \frac{p_\theta(x)}{p_\theta(z, x)} \Bigg ) \Bigg ] \\
-  &amp;= E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z, x)}  + E_{z_\phi \sim q_\phi} \log p_\theta(x) \\
+  D_{KL}(q_\phi (z | x) || p_\theta (z | x)) &amp;= \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)} \\
+  &amp;= \mathbb{E}_{z \sim q_\phi} \Bigg [ \log \Bigg ( q_\phi(z | x) \cdot \frac{p_\theta(x)}{p_\theta(z, x)} \Bigg ) \Bigg ] \\
+  &amp;= \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z, x)}  + \mathbb{E}_{z \sim q_\phi} \log p_\theta(x) \\
   &amp;= -\mathcal L(\theta, \phi ; x)  + \log p_\theta(x) \\
 \end{align}</div>
 <script type="math/tex; mode=display">\begin{align}
-  D_{KL}(q_\phi (z | x) || p_\theta (z | x)) &= E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)} \\
-  &= E_{z_\phi \sim q_\phi} \Bigg [ \log \Bigg ( q_\phi(z | x) \cdot \frac{p_\theta(x)}{p_\theta(z, x)} \Bigg ) \Bigg ] \\
-  &= E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z, x)}  + E_{z_\phi \sim q_\phi} \log p_\theta(x) \\
+  D_{KL}(q_\phi (z | x) || p_\theta (z | x)) &= \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)} \\
+  &= \mathbb{E}_{z \sim q_\phi} \Bigg [ \log \Bigg ( q_\phi(z | x) \cdot \frac{p_\theta(x)}{p_\theta(z, x)} \Bigg ) \Bigg ] \\
+  &= \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z, x)}  + \mathbb{E}_{z \sim q_\phi} \log p_\theta(x) \\
   &= -\mathcal L(\theta, \phi ; x)  + \log p_\theta(x) \\
 \end{align}</script>
 </div>
@@ -934,17 +974,17 @@ f(E[X]) \le E[f(x)]
 <div class="MathJax_Preview">\begin{align}
 \log p(x) &amp;= \log \int p_\theta(x, z)dz \\
 &amp;= \log \int p_\theta(x, z) \frac{q_\phi(z | x)}{q_\phi(z | x)} dz \\
-&amp;= \log E_{z_\phi \sim q_\phi} \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
-\Rightarrow  \log E_{z_\phi \sim q_\phi} \frac{p_\theta(x, z)}{q_\phi(z | x)} &amp; \ge E_{z_\phi \sim q_\phi} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\  
-&amp;= - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
+&amp;= \log \mathbb{E}_{z \sim q_\phi} \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
+\Rightarrow  \log \mathbb{E}_{z \sim q_\phi} \frac{p_\theta(x, z)}{q_\phi(z | x)} &amp; \ge \mathbb{E}_{z \sim q_\phi} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\  
+&amp;= - \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
 &amp;= \mathcal L(\theta, \phi ; x)
 \end{align}</div>
 <script type="math/tex; mode=display">\begin{align}
 \log p(x) &= \log \int p_\theta(x, z)dz \\
 &= \log \int p_\theta(x, z) \frac{q_\phi(z | x)}{q_\phi(z | x)} dz \\
-&= \log E_{z_\phi \sim q_\phi} \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
-\Rightarrow  \log E_{z_\phi \sim q_\phi} \frac{p_\theta(x, z)}{q_\phi(z | x)} & \ge E_{z_\phi \sim q_\phi} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\  
-&= - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
+&= \log \mathbb{E}_{z \sim q_\phi} \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
+\Rightarrow  \log \mathbb{E}_{z \sim q_\phi} \frac{p_\theta(x, z)}{q_\phi(z | x)} & \ge \mathbb{E}_{z \sim q_\phi} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\  
+&= - \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
 &= \mathcal L(\theta, \phi ; x)
 \end{align}</script>
 </div>
@@ -952,43 +992,43 @@ f(E[X]) \le E[f(x)]
 <p>We have that</p>
 <div>
 <div class="MathJax_Preview">
-\mathcal L(\theta, \phi ; x) = \text{ELBO} = - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)}
+\mathcal L(\theta, \phi ; x) = \text{ELBO} = - \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)}
 </div>
 <script type="math/tex; mode=display">
-\mathcal L(\theta, \phi ; x) = \text{ELBO} = - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)}
+\mathcal L(\theta, \phi ; x) = \text{ELBO} = - \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)}
 </script>
 </div>
 <p>1) The most general interpretation of the ELBO is given by</p>
 <div>
 <div class="MathJax_Preview">\begin{align}
-  \mathcal L(\theta, \phi ; x) &amp;= - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
-  &amp;= E_{z_\phi \sim q_\phi} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
-  &amp;= E_{z_\phi \sim q_\phi} \log \frac{p_\theta(z)p_\theta(x | z)}{q_\phi(z | x)} \\
-  &amp;= E_{z_\phi \sim q_\phi} \Big [ \log p_\theta({x | z}) + \log p_\theta({z}) - \log {q_\phi(z | x)} \Big ]\\
+  \mathcal L(\theta, \phi ; x) &amp;= - \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
+  &amp;= \mathbb{E}_{z \sim q_\phi} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
+  &amp;= \mathbb{E}_{z \sim q_\phi} \log \frac{p_\theta(z)p_\theta(x | z)}{q_\phi(z | x)} \\
+  &amp;= \mathbb{E}_{z \sim q_\phi} \Big [ \log p_\theta({x | z}) + \log p_\theta({z}) - \log {q_\phi(z | x)} \Big ]\\
 \end{align}</div>
 <script type="math/tex; mode=display">\begin{align}
-  \mathcal L(\theta, \phi ; x) &= - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
-  &= E_{z_\phi \sim q_\phi} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
-  &= E_{z_\phi \sim q_\phi} \log \frac{p_\theta(z)p_\theta(x | z)}{q_\phi(z | x)} \\
-  &= E_{z_\phi \sim q_\phi} \Big [ \log p_\theta({x | z}) + \log p_\theta({z}) - \log {q_\phi(z | x)} \Big ]\\
+  \mathcal L(\theta, \phi ; x) &= - \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
+  &= \mathbb{E}_{z \sim q_\phi} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
+  &= \mathbb{E}_{z \sim q_\phi} \log \frac{p_\theta(z)p_\theta(x | z)}{q_\phi(z | x)} \\
+  &= \mathbb{E}_{z \sim q_\phi} \Big [ \log p_\theta({x | z}) + \log p_\theta({z}) - \log {q_\phi(z | x)} \Big ]\\
 \end{align}</script>
 </div>
 <p>2) We can also re-write 1) using entropy</p>
 <div>
 <div class="MathJax_Preview">
-E_{z_\phi \sim q_\phi} \Big [ \log p_\theta({x | z}) + \log p_\theta({z}) \Big ] H \Big [ q_\phi(z | x) \Big ] \\
+\mathbb{E}_{z \sim q_\phi} \Big [ \log p_\theta({x | z}) + \log p_\theta({z}) \Big ] H \Big [ q_\phi(z | x) \Big ] \\
 </div>
 <script type="math/tex; mode=display">
-E_{z_\phi \sim q_\phi} \Big [ \log p_\theta({x | z}) + \log p_\theta({z}) \Big ] H \Big [ q_\phi(z | x) \Big ] \\
+\mathbb{E}_{z \sim q_\phi} \Big [ \log p_\theta({x | z}) + \log p_\theta({z}) \Big ] H \Big [ q_\phi(z | x) \Big ] \\
 </script>
 </div>
 <p>3) Another re-write and we arrive at</p>
 <div>
 <div class="MathJax_Preview">
-E_{z_\phi \sim q_\phi} \Big [ \log p_\theta({x | z}) \Big ] - D_{KL}(q_\phi(z | x) || p_\theta(z))
+\mathbb{E}_{z \sim q_\phi} \Big [ \log p_\theta({x | z}) \Big ] - D_{KL}(q_\phi(z | x) || p_\theta(z))
 </div>
 <script type="math/tex; mode=display">
-E_{z_\phi \sim q_\phi} \Big [ \log p_\theta({x | z}) \Big ] - D_{KL}(q_\phi(z | x) || p_\theta(z))
+\mathbb{E}_{z \sim q_\phi} \Big [ \log p_\theta({x | z}) \Big ] - D_{KL}(q_\phi(z | x) || p_\theta(z))
 </script>
 </div>
 <div class="admonition tip">
@@ -1001,7 +1041,7 @@ E_{z_\phi \sim q_\phi} \Big [ \log p_\theta({x | z}) \Big ] - D_{KL}(q_\phi(z | 
 <p>The instructor recommends we read "sticking the landing".</p>
 </div>
 <h3 id="mean-field-variational-inference">Mean Field Variational Inference<a class="headerlink" href="#mean-field-variational-inference" title="Permanent link">&para;</a></h3>
-<p>In <a href="https://en.wikipedia.org/wiki/Variational_Bayesian_methods#Mean_field_approximation">mean field variational inference</a>, the approximate distribution <span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span> is assumed to factorize over some partition of latent variables</p>
+<p>In <a href="https://en.wikipedia.org/wiki/Variational_Bayesian_methods#Mean_field_approximation">mean field variational inference</a>, we restrict ourselves to variational families, <span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span>, that we can compute the gradient of, and assume the approximate distribution <span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span> fully factorizes to <span><span class="MathJax_Preview">q_\phi(z)</span><script type="math/tex">q_\phi(z)</script></span> (no <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>!). I.e., we approximate <span><span class="MathJax_Preview">p_\theta(z|x)</span><script type="math/tex">p_\theta(z|x)</script></span> with <span><span class="MathJax_Preview">q_\phi(z)</span><script type="math/tex">q_\phi(z)</script></span></p>
 <div>
 <div class="MathJax_Preview">
 q_\phi(z, \theta | \phi) = q_\phi(\theta | \phi_{\theta})\prod_{i=1}^Nq(z_i | \phi_i)
@@ -1010,12 +1050,46 @@ q_\phi(z, \theta | \phi) = q_\phi(\theta | \phi_{\theta})\prod_{i=1}^Nq(z_i | \p
 q_\phi(z, \theta | \phi) = q_\phi(\theta | \phi_{\theta})\prod_{i=1}^Nq(z_i | \phi_i)
 </script>
 </div>
+<p>where <span><span class="MathJax_Preview">\phi = (\phi_\theta, \phi_{1:N})</span><script type="math/tex">\phi = (\phi_\theta, \phi_{1:N})</script></span>.</p>
+<p><img alt="" src="../../img/lecture_9_3.png" /></p>
+<p>If <span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span>s are in the same family as <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>s, we can optimize via <a href="https://en.wikipedia.org/wiki/Coordinate_descent">coordinate ascent</a>.</p>
+<h4 id="traditional-variational-inference-aside">Traditional Variational Inference (ASIDE)<a class="headerlink" href="#traditional-variational-inference-aside" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Fix all other variables --&gt; optimize local</li>
+<li>Aggregate local --&gt; optimize global</li>
+<li>Repeat until KL divergence</li>
+</ol>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>I don't get this at all. The lecture had gotten pretty messy on the blackboard by this point.</p>
+<p>I think this was meant to be an aside.</p>
 </div>
-<p>If <span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span>s are in the same family as <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>s, we can optimize via coordinate ascent.</p>
-<p>we restrict ourselves to variational families, <span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span>, that we can compute the gradient of</p>
+<h4 id="optimizing-elbo">Optimizing ELBO<a class="headerlink" href="#optimizing-elbo" title="Permanent link">&para;</a></h4>
+<p>We have that</p>
+<div>
+<div class="MathJax_Preview">\begin{align}
+\mathcal L(\phi ; x) &amp;= - \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
+&amp;= \mathbb{E}_{z \sim q_\phi} \Big [ \log p_\theta({x | z}) - \log {q_\phi(z | x)} \Big ] \\
+\end{align}</div>
+<script type="math/tex; mode=display">\begin{align}
+\mathcal L(\phi ; x) &= - \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
+&= \mathbb{E}_{z \sim q_\phi} \Big [ \log p_\theta({x | z}) - \log {q_\phi(z | x)} \Big ] \\
+\end{align}</script>
+</div>
+<p>If we want to optimize this with gradient methods, we will need to compute <span><span class="MathJax_Preview">\nabla_\phi \mathcal L(\phi ; x)</span><script type="math/tex">\nabla_\phi \mathcal L(\phi ; x)</script></span>. Nowadays, we have <a href="https://en.wikipedia.org/wiki/Automatic_differentiation">automatic differentiation (AD)</a>. We can optimize with gradient methods if:</p>
+<ol>
+<li><span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span> is continuous</li>
+<li>dependence on <span><span class="MathJax_Preview">\phi</span><script type="math/tex">\phi</script></span> is exposed to AD</li>
+</ol>
+<p>If these are both true, then</p>
+<div>
+<div class="MathJax_Preview">
+\nabla_\phi \mathcal L(\phi ; x) = \nabla_\phi \mathbb{E}_{z \sim q_\phi(z | x)} \Big [ \log p_\theta(x, z) - \log q_\phi(z|x) \Big ]
+</div>
+<script type="math/tex; mode=display">
+\nabla_\phi \mathcal L(\phi ; x) = \nabla_\phi \mathbb{E}_{z \sim q_\phi(z | x)} \Big [ \log p_\theta(x, z) - \log q_\phi(z|x) \Big ]
+</script>
+</div>
+<p>but, this is difficult because we are taking the gradient of an expectation and we are trying to compute this gradient from samples. This brings us to our big idea: instead of taking the gradient <em>of an expectation</em>, we compute the gradient <em>as an expectation</em>. </p>
 <h2 id="appendix">Appendix<a class="headerlink" href="#appendix" title="Permanent link">&para;</a></h2>
 <h3 id="useful-resources">Useful Resources<a class="headerlink" href="#useful-resources" title="Permanent link">&para;</a></h3>
 <ul>
