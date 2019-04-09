@@ -1354,12 +1354,16 @@ P(z | x, y) &= \frac{P(x)P(z)P(y | x,  z)}{P(x)P(y|x)} \\
 <p><img alt="" src="../../img/lecture_3_19.png" /></p>
 <p>In other words, it is a model that satisfies the <a href="https://en.wikipedia.org/wiki/Markov_property">Markov property</a>, i.e., conditional on the present state of the system, its future and past states are independent.</p>
 <p><img alt="" src="../../img/lecture_3_20.png" /></p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>I don't really understand the difference between the two models given on the slides (and shown above). Are they both Markov chains? In the second model, the probability of an event depends not just on the previous node but on the previous node of the previous node. Jesse went over this only very briefly in lecture.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The first images depicts a <em>first</em>-order Markov chain, the second a <em>second</em>-order Markov chain.</p>
 </div>
 <h3 id="unobserved-variables">Unobserved Variables<a class="headerlink" href="#unobserved-variables" title="Permanent link">&para;</a></h3>
 <p>Certain variables in our models may be unobserved (<span><span class="MathJax_Preview">Q</span><script type="math/tex">Q</script></span> in the example given below), either some of the time or always, at training time or at test time.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Jesse suggested that all the content between <a href="#unobserved-variables">Unobserved Variables</a> and <a href="#hidden-markov-models-hmms">Hidden Markov Models (HMMs)</a> would not be tested.</p>
+</div>
 <p><img alt="" src="../../img/lecture_3_21.png" /></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>

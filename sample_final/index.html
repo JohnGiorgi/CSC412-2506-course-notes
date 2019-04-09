@@ -905,7 +905,7 @@
                 
                 
                 <h1 id="sample-final">Sample Final<a class="headerlink" href="#sample-final" title="Permanent link">&para;</a></h1>
-<p>These are question pulled from the lecture and the sample midterm, alongside questions that were written based on the study guide. These were <em>not</em> given by an instructor and are merely guesses as to what kind of questions might be on the final.</p>
+<p>These are question pulled from the lecture, assignments and the sample midterm, alongside questions that were written based on the study guide. These were <em>not</em> given by an instructor and are merely guesses as to what kind of questions might be on the final.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>See the study guide <a href="http://www.cs.toronto.edu/~jessebett/CSC412/content/Final_Topics/final_topics.pdf">here</a>.</p>
@@ -1204,10 +1204,10 @@ x_i \sim p(X_i \ | \ \text{parents of } X_i)
 <p>We want to sample a sequence of observations <span><span class="MathJax_Preview">x_1, x_2, x_3, ..., x_T</span><script type="math/tex">x_1, x_2, x_3, ..., x_T</script></span> from the model according to</p>
 <div>
 <div class="MathJax_Preview">
-x_{1:T} \sim \prod_{t=1}^T p(X_t \ | \ \text{parents of } X_t)
+x_{1:T} = \prod_{t=1}^T p(X_t \ | \ \text{parents of } X_t)
 </div>
 <script type="math/tex; mode=display">
-x_{1:T} \sim \prod_{t=1}^T p(X_t \ | \ \text{parents of } X_t)
+x_{1:T} = \prod_{t=1}^T p(X_t \ | \ \text{parents of } X_t)
 </script>
 </div>
 <p>since observations <span><span class="MathJax_Preview">x_t</span><script type="math/tex">x_t</script></span> are independent of one another. Notice that this forms a chain, with probability</p>
@@ -1222,7 +1222,7 @@ p(x_{1:T}) \sim \bigg [ \prod_{t=1}^T p(X_t | z_t) \bigg ] \bigg [ p(z_1) \prod_
 <p><em>Step-by-step</em></p>
 <ol>
 <li>Start with <span><span class="MathJax_Preview">t=1</span><script type="math/tex">t=1</script></span></li>
-<li>Sample <span><span class="MathJax_Preview">z_t</span><script type="math/tex">z_t</script></span> according to <span><span class="MathJax_Preview">z_t \sim p(z_1) \prod_{i=2}^t p(Z_i | z_{i-1})</span><script type="math/tex">z_t \sim p(z_1) \prod_{i=2}^t p(Z_i | z_{i-1})</script></span></li>
+<li>Sample <span><span class="MathJax_Preview">z_t</span><script type="math/tex">z_t</script></span> according to <span><span class="MathJax_Preview">z_t \sim p(z_1) \prod_{i=t}^{t + 1} p(Z_i | z_{i-1})</span><script type="math/tex">z_t \sim p(z_1) \prod_{i=t}^{t + 1} p(Z_i | z_{i-1})</script></span></li>
 <li>Given the sampled <span><span class="MathJax_Preview">z_t</span><script type="math/tex">z_t</script></span>, sample <span><span class="MathJax_Preview">x_t</span><script type="math/tex">x_t</script></span> according to <span><span class="MathJax_Preview">x_t \sim \ p(X_t | z_t)</span><script type="math/tex">x_t \sim \ p(X_t | z_t)</script></span></li>
 <li>Increment <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> by 1</li>
 <li>Repeat steps 2-4 until <span><span class="MathJax_Preview">t=T</span><script type="math/tex">t=T</script></span></li>
