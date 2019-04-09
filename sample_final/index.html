@@ -571,6 +571,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#question-3" title="Question 3" class="md-nav__link">
+    Question 3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question-4" title="Question 4" class="md-nav__link">
+    Question 4
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -633,7 +647,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#question-3" title="Question 3" class="md-nav__link">
+  <a href="#question-3_1" title="Question 3" class="md-nav__link">
     Question 3
   </a>
   
@@ -764,6 +778,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#question-3" title="Question 3" class="md-nav__link">
+    Question 3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question-4" title="Question 4" class="md-nav__link">
+    Question 4
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -826,7 +854,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#question-3" title="Question 3" class="md-nav__link">
+  <a href="#question-3_1" title="Question 3" class="md-nav__link">
     Question 3
   </a>
   
@@ -1049,6 +1077,90 @@ f(\theta_c; \alpha, \beta) = f(\theta_c; 2, 2) = \frac{1}{B(2, 2)}\theta_c^{2 - 
 </div>
 <h2 id="week-3-directed-graphical-models">Week 3: Directed Graphical Models<a class="headerlink" href="#week-3-directed-graphical-models" title="Permanent link">&para;</a></h2>
 <h3 id="question-1_2">Question 1<a class="headerlink" href="#question-1_2" title="Permanent link">&para;</a></h3>
+<p>When we condition on <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>, are <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> and <span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span> independent?</p>
+<p>(a)</p>
+<p><img alt="" src="../img/lecture_3_5.png" /></p>
+<p>(b)</p>
+<p><img alt="" src="../img/lecture_3_6.png" /></p>
+<p>(c)</p>
+<p><img alt="" src="../img/lecture_3_7.png" /></p>
+<p><strong>ANSWER</strong></p>
+<p>(a)</p>
+<p>From the graph, we get</p>
+<div>
+<div class="MathJax_Preview">P(x, y, z) = P(x)P(y|x)P(z|y)</div>
+<script type="math/tex; mode=display">P(x, y, z) = P(x)P(y|x)P(z|y)</script>
+</div>
+<p>which implies</p>
+<div>
+<div class="MathJax_Preview">\begin{align}
+P(z | x, y) &amp;= \frac{P(x, y, z)}{P(x, y)} \\
+&amp;= \frac{P(x)P(y|x)P(z|y)}{P(x)P(y|x)} \\
+&amp;= P(z | y) \\
+\end{align}</div>
+<script type="math/tex; mode=display">\begin{align}
+P(z | x, y) &= \frac{P(x, y, z)}{P(x, y)} \\
+&= \frac{P(x)P(y|x)P(z|y)}{P(x)P(y|x)} \\
+&= P(z | y) \\
+\end{align}</script>
+</div>
+<p><span><span class="MathJax_Preview">\therefore</span><script type="math/tex">\therefore</script></span> <span><span class="MathJax_Preview">P(z | x, y) = P(z | y)</span><script type="math/tex">P(z | x, y) = P(z | y)</script></span> and so by <span><span class="MathJax_Preview">\star\star</span><script type="math/tex">\star\star</script></span>, <span><span class="MathJax_Preview">x \bot z | y</span><script type="math/tex">x \bot z | y</script></span>.</p>
+<p>(b)</p>
+<p>From the graph, we get</p>
+<div>
+<div class="MathJax_Preview">P(x, y, z) = P(y)P(x|y)P(z|y)</div>
+<script type="math/tex; mode=display">P(x, y, z) = P(y)P(x|y)P(z|y)</script>
+</div>
+<p>which implies</p>
+<div>
+<div class="MathJax_Preview">\begin{align}
+P(x, z | y) &amp;= \frac{P(x, y, z)}{P(y)} \\
+&amp;= \frac{P(y)P(x|y)P(z|y)}{P(y)} \\
+&amp;= P(x|y)P(z|y) \\
+\end{align}</div>
+<script type="math/tex; mode=display">\begin{align}
+P(x, z | y) &= \frac{P(x, y, z)}{P(y)} \\
+&= \frac{P(y)P(x|y)P(z|y)}{P(y)} \\
+&= P(x|y)P(z|y) \\
+\end{align}</script>
+</div>
+<p><span><span class="MathJax_Preview">\therefore</span><script type="math/tex">\therefore</script></span> <span><span class="MathJax_Preview">P(x, z| y) = P(x|y)P(z|y)</span><script type="math/tex">P(x, z| y) = P(x|y)P(z|y)</script></span> and so by <span><span class="MathJax_Preview">\star</span><script type="math/tex">\star</script></span>, <span><span class="MathJax_Preview">x \bot z | y</span><script type="math/tex">x \bot z | y</script></span>.</p>
+<p>(c)</p>
+<p>From the graph, we get</p>
+<div>
+<div class="MathJax_Preview">P(x, y, z) = P(x)P(z)P(y|x, z)</div>
+<script type="math/tex; mode=display">P(x, y, z) = P(x)P(z)P(y|x, z)</script>
+</div>
+<p>which implies</p>
+<div>
+<div class="MathJax_Preview">\begin{align}
+P(z | x, y) &amp;= \frac{P(x)P(z)P(y | x,  z)}{P(x)P(y|x)} \\
+&amp;= \frac{P(z)P(y | x,  z)}{P(y|x)}  \\
+&amp;\not = P(z|y) \\
+\end{align}</div>
+<script type="math/tex; mode=display">\begin{align}
+P(z | x, y) &= \frac{P(x)P(z)P(y | x,  z)}{P(x)P(y|x)} \\
+&= \frac{P(z)P(y | x,  z)}{P(y|x)}  \\
+&\not = P(z|y) \\
+\end{align}</script>
+</div>
+<p><span><span class="MathJax_Preview">\therefore</span><script type="math/tex">\therefore</script></span> <span><span class="MathJax_Preview">P(z | x, y) \not = P(z|y)</span><script type="math/tex">P(z | x, y) \not = P(z|y)</script></span> and so by <span><span class="MathJax_Preview">\star\star</span><script type="math/tex">\star\star</script></span>, <span><span class="MathJax_Preview">x \not \bot z | y</span><script type="math/tex">x \not \bot z | y</script></span>.</p>
+<p>In fact, <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> and <span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span> are <em>marginally independent</em>, but given <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span> they are <em>conditionally dependent</em>. This important effect is called explaining away (<a href="https://en.wikipedia.org/wiki/Berkson%27s_paradox">Berkson’s paradox</a>).</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Imaging flipping two coins independently, represented by events <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> and <span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span>. Furthermore, let <span><span class="MathJax_Preview">y=1</span><script type="math/tex">y=1</script></span> if the coins come up the same and <span><span class="MathJax_Preview">y=0</span><script type="math/tex">y=0</script></span> if they come up differently. Clearly, <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> and <span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span> are independent, but if I tell you <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>, they become coupled!</p>
+</div>
+<h3 id="question-2">Question 2<a class="headerlink" href="#question-2" title="Permanent link">&para;</a></h3>
+<p>(a) In the following graph, is <span><span class="MathJax_Preview">x_1 \bot x_6 | \{x_2, x_3\}</span><script type="math/tex">x_1 \bot x_6 | \{x_2, x_3\}</script></span>?</p>
+<p><img alt="" src="../img/lecture_3_12.png" /></p>
+<p>(b) In the following graph, is <span><span class="MathJax_Preview">x_2 \bot x_3 | \{x_1, x_6\}</span><script type="math/tex">x_2 \bot x_3 | \{x_1, x_6\}</script></span>?</p>
+<p><img alt="" src="../img/lecture_3_14.png" /></p>
+<p><strong>ANSWER</strong></p>
+<p>(a) Yes, by the Bayes Balls algorithm.</p>
+<p><img alt="" src="../img/lecture_3_13.png" /></p>
+<p>(b) No, by the Bayes Balls algorithm.</p>
+<p><img alt="" src="../img/lecture_3_15.png" /></p>
+<h3 id="question-3">Question 3<a class="headerlink" href="#question-3" title="Permanent link">&para;</a></h3>
 <p>Consider the following directed graphical model:</p>
 <p><img alt="" src="../img/sample_midterm_1.png" /></p>
 <p>(a) List all variables that are independent of <span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span> given evidence on <span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span></p>
@@ -1075,7 +1187,7 @@ p(A, ..., I) = p(A | B, C)P(B | D)P(C | E, F)P(D | G)P(E | G)P(F | H)P(G)P(H)P(I
 \therefore \text{number of possible configurations} = k^9
 </script>
 </div>
-<h3 id="question-2">Question 2<a class="headerlink" href="#question-2" title="Permanent link">&para;</a></h3>
+<h3 id="question-4">Question 4<a class="headerlink" href="#question-4" title="Permanent link">&para;</a></h3>
 <p>Consider the Hidden Markov Model</p>
 <p><img alt="" src="../img/sample_midterm_4.png" /></p>
 <p>(a) Assume you are able to sample from these conditional distributions, i.e.</p>
@@ -1280,7 +1392,7 @@ p(x_3 = A | z_1 = S) = p(x_3 = A | z_3 = H)p(z_3 = H | z_1 = S) + p(x_3 = A | z_
 = 0.515
 </script>
 </div>
-<h3 id="question-3">Question 3<a class="headerlink" href="#question-3" title="Permanent link">&para;</a></h3>
+<h3 id="question-3_1">Question 3<a class="headerlink" href="#question-3_1" title="Permanent link">&para;</a></h3>
 <p><strong>ANSWER</strong></p>
 <p>a) The size of the maximum factor is 3.
 b) The size of the maximum clique is 3.

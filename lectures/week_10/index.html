@@ -505,6 +505,26 @@
     Optimizing ELBO
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#score-gradient" title="Score Gradient" class="md-nav__link">
+    Score Gradient
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pathwise-gradient" title="Pathwise Gradient" class="md-nav__link">
+    Pathwise Gradient
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -777,6 +797,26 @@
   <a href="#optimizing-elbo" title="Optimizing ELBO" class="md-nav__link">
     Optimizing ELBO
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#score-gradient" title="Score Gradient" class="md-nav__link">
+    Score Gradient
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pathwise-gradient" title="Pathwise Gradient" class="md-nav__link">
+    Pathwise Gradient
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1089,7 +1129,50 @@ q_\phi(z, \theta | \phi) = q_\phi(\theta | \phi_{\theta})\prod_{i=1}^Nq(z_i | \p
 \nabla_\phi \mathcal L(\phi ; x) = \nabla_\phi \mathbb{E}_{z \sim q_\phi(z | x)} \Big [ \log p_\theta(x, z) - \log q_\phi(z|x) \Big ]
 </script>
 </div>
-<p>but, this is difficult because we are taking the gradient of an expectation and we are trying to compute this gradient from samples. This brings us to our big idea: instead of taking the gradient <em>of an expectation</em>, we compute the gradient <em>as an expectation</em>. </p>
+<p>but, this is difficult because we are taking the gradient of an expectation and we are trying to compute this gradient from samples. This brings us to our big idea: instead of taking the gradient <em>of an expectation</em>, we compute the gradient <em>as an expectation</em>.</p>
+<h5 id="score-gradient">Score Gradient<a class="headerlink" href="#score-gradient" title="Permanent link">&para;</a></h5>
+<p>Also called the likelihood ratio, or REINFORCE, was independently developed in 1990, 1992, 2013, and 2014 (twice). It is given by</p>
+<div>
+<div class="MathJax_Preview">
+\nabla_\phi \mathbb{E}_{z \sim q_\phi(z)} f(z) = \nabla_\phi \int f(z) q_\phi (z) dz
+</div>
+<script type="math/tex; mode=display">
+\nabla_\phi \mathbb{E}_{z \sim q_\phi(z)} f(z) = \nabla_\phi \int f(z) q_\phi (z) dz
+</script>
+</div>
+<p>if we assume that <span><span class="MathJax_Preview">q_\phi(z)</span><script type="math/tex">q_\phi(z)</script></span> is a continous function of <span><span class="MathJax_Preview">\phi</span><script type="math/tex">\phi</script></span>, then</p>
+<div>
+<div class="MathJax_Preview">\begin{align}
+&amp;= \int \nabla_\phi f(z) q_\phi(z) dz \\
+&amp;= \int f(z) \nabla_\phi q_\phi (z) dz
+\end{align}</div>
+<script type="math/tex; mode=display">\begin{align}
+&= \int \nabla_\phi f(z) q_\phi(z) dz \\
+&= \int f(z) \nabla_\phi q_\phi (z) dz
+\end{align}</script>
+</div>
+<p>using the <a href="http://blog.shakirm.com/2015/11/machine-learning-trick-of-the-day-5-log-derivative-trick/">log-derivative trick</a> <span><span class="MathJax_Preview">\big ( \nabla_\phi \log q_\phi = \frac{\nabla_\phi q_\phi}{q_\phi} \big )</span><script type="math/tex">\big ( \nabla_\phi \log q_\phi = \frac{\nabla_\phi q_\phi}{q_\phi} \big )</script></span>:</p>
+<div>
+<div class="MathJax_Preview">\begin{align}
+&amp;= \int f(z) q_\phi(z | x ) \nabla_\phi \big [ \log q_\phi(z | x ) \big ] dz \\
+&amp;= \mathbb{E}_{z \sim q_\phi(z)} \Big [ f(z) \nabla_\phi \big [ \log q_\phi(z | x ) \big ] \Big ] \\
+\end{align}</div>
+<script type="math/tex; mode=display">\begin{align}
+&= \int f(z) q_\phi(z | x ) \nabla_\phi \big [ \log q_\phi(z | x ) \big ] dz \\
+&= \mathbb{E}_{z \sim q_\phi(z)} \Big [ f(z) \nabla_\phi \big [ \log q_\phi(z | x ) \big ] \Big ] \\
+\end{align}</script>
+</div>
+<p>where <span><span class="MathJax_Preview">q_\phi(z | x )</span><script type="math/tex">q_\phi(z | x )</script></span> is the score function. Finally, we have</p>
+<div>
+<div class="MathJax_Preview">
+\nabla_\phi \mathcal L(\phi ; x) = \mathbb{E}_{z \sim q_\phi(z)} \Big [ \big( \log p_\theta(x, z) - \log q_\phi(z | x) \big) \nabla_\phi \big [ \log q_\phi(z | x ) \big ] \Big ]
+</div>
+<script type="math/tex; mode=display">
+\nabla_\phi \mathcal L(\phi ; x) = \mathbb{E}_{z \sim q_\phi(z)} \Big [ \big( \log p_\theta(x, z) - \log q_\phi(z | x) \big) \nabla_\phi \big [ \log q_\phi(z | x ) \big ] \Big ]
+</script>
+</div>
+<p>which is <em>unbiased</em>, but <em>high variance</em>.</p>
+<h5 id="pathwise-gradient">Pathwise Gradient<a class="headerlink" href="#pathwise-gradient" title="Permanent link">&para;</a></h5>
 <h2 id="appendix">Appendix<a class="headerlink" href="#appendix" title="Permanent link">&para;</a></h2>
 <h3 id="useful-resources">Useful Resources<a class="headerlink" href="#useful-resources" title="Permanent link">&para;</a></h3>
 <ul>
