@@ -910,10 +910,10 @@ p(x) = \frac{\tilde p(x)}{Z}
 <p><strong>Problem 2</strong>: To estimate expectations of functions, <span><span class="MathJax_Preview">\phi(x)</span><script type="math/tex">\phi(x)</script></span>, under this distribution, <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span></p>
 <div>
 <div class="MathJax_Preview">
-\Phi = \mathbb E_{x \sim p(x)}[\phi(x)] = \int \phi(x)p(x)dx
+\Phi = \underset{x \sim p(x)}{\operatorname{\mathbb E}} [\phi(x)] = \int \phi(x)p(x)dx
 </div>
 <script type="math/tex; mode=display">
-\Phi = \mathbb E_{x \sim p(x)}[\phi(x)] = \int \phi(x)p(x)dx
+\Phi = \underset{x \sim p(x)}{\operatorname{\mathbb E}} [\phi(x)] = \int \phi(x)p(x)dx
 </script>
 </div>
 <div class="admonition warning">
@@ -924,23 +924,23 @@ p(x) = \frac{\tilde p(x)}{Z}
 <p>Simple examples of functions <span><span class="MathJax_Preview">\phi(x)</span><script type="math/tex">\phi(x)</script></span> whose expectations we might be interested in include the first and second moments of quantities that we wish to predict, from which we can compute means and variances; for example if some quantity <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> depends on <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>, we can find the mean and variance of <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> under <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span> by finding the expectations of the functions <span><span class="MathJax_Preview">\phi_1(x) = t(x)</span><script type="math/tex">\phi_1(x) = t(x)</script></span> and <span><span class="MathJax_Preview">\phi_2(x) = (t(x))^2</span><script type="math/tex">\phi_2(x) = (t(x))^2</script></span></p>
 <div>
 <div class="MathJax_Preview">
-\phi_1(x) = t(x) \Rightarrow \Phi_1 = \mathbb E_{x \sim p(x)}[\phi_1(x)] \Rightarrow \text{mean}(t) = \Phi_1 \\
-\phi_2(x) = (t(x))^2 \Rightarrow \Phi_2 = \mathbb E_{x \sim p(x)}[\phi_2(x)] \Rightarrow \text{var}(t) = \Phi_2 - (\Phi_1)^2 \\
+\phi_1(x) = t(x) \Rightarrow \Phi_1 = \underset{x \sim p(x)}{\operatorname{\mathbb E}} [\phi_1(x)] \Rightarrow \text{mean}(t) = \Phi_1 \\
+\phi_2(x) = (t(x))^2 \Rightarrow \Phi_2 = \underset{x \sim p(x)}{\operatorname{\mathbb E}} [\phi_2(x)] \Rightarrow \text{var}(t) = \Phi_2 - (\Phi_1)^2 \\
 </div>
 <script type="math/tex; mode=display">
-\phi_1(x) = t(x) \Rightarrow \Phi_1 = \mathbb E_{x \sim p(x)}[\phi_1(x)] \Rightarrow \text{mean}(t) = \Phi_1 \\
-\phi_2(x) = (t(x))^2 \Rightarrow \Phi_2 = \mathbb E_{x \sim p(x)}[\phi_2(x)] \Rightarrow \text{var}(t) = \Phi_2 - (\Phi_1)^2 \\
+\phi_1(x) = t(x) \Rightarrow \Phi_1 = \underset{x \sim p(x)}{\operatorname{\mathbb E}} [\phi_1(x)] \Rightarrow \text{mean}(t) = \Phi_1 \\
+\phi_2(x) = (t(x))^2 \Rightarrow \Phi_2 = \underset{x \sim p(x)}{\operatorname{\mathbb E}} [\phi_2(x)] \Rightarrow \text{var}(t) = \Phi_2 - (\Phi_1)^2 \\
 </script>
 </div>
 <h3 id="simple-monte-carlo">Simple Monte Carlo<a class="headerlink" href="#simple-monte-carlo" title="Permanent link">&para;</a></h3>
-<p>We will concentrate on the first problem (sampling), because if we have solved it, then we can solve the second problem by using the random samples <span><span class="MathJax_Preview">\{x^{(r)}\}^R_{r=1}</span><script type="math/tex">\{x^{(r)}\}^R_{r=1}</script></span> to give an estimator.</p>
-<p><em>def</em>. <strong>Simple Monte Carlo</strong>: Given <span><span class="MathJax_Preview">\{x^{(r)}\}^R_{r=1} \sim p(x)</span><script type="math/tex">\{x^{(r)}\}^R_{r=1} \sim p(x)</script></span> we estimate the expectation <span><span class="MathJax_Preview">\mathbb E_{x \sim p(x)}[\phi(x)]</span><script type="math/tex">\mathbb E_{x \sim p(x)}[\phi(x)]</script></span> to be the estimator <span><span class="MathJax_Preview">\hat \Phi</span><script type="math/tex">\hat \Phi</script></span></p>
+<p>We will concentrate on the first problem (sampling), because if we have solved it, then we can solve the second problem by using the random samples <span><span class="MathJax_Preview">\{x^{(r)}\}^R_{r=1}</span><script type="math/tex">\{x^{(r)}\}^R_{r=1}</script></span> to give an estimator. This brings us to <strong>simple Monte Carlo</strong>:</p>
+<p><em>def</em>. <strong>Simple Monte Carlo</strong>: Given <span><span class="MathJax_Preview">\{x^{(r)}\}^R_{r=1} \sim p(x)</span><script type="math/tex">\{x^{(r)}\}^R_{r=1} \sim p(x)</script></span> we estimate the expectation <span><span class="MathJax_Preview">\underset{x \sim p(x)}{\operatorname{\mathbb E}} [\phi(x)]</span><script type="math/tex">\underset{x \sim p(x)}{\operatorname{\mathbb E}} [\phi(x)]</script></span> to be the estimator <span><span class="MathJax_Preview">\hat \Phi</span><script type="math/tex">\hat \Phi</script></span></p>
 <div>
 <div class="MathJax_Preview">
-\Phi = \mathbb E_{x \sim p(x)}[\phi(x)] \approx \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) = \hat \Phi
+\Phi = \underset{x \sim p(x)}{\operatorname{\mathbb E}} [\phi(x)] \approx \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) = \hat \Phi
 </div>
 <script type="math/tex; mode=display">
-\Phi = \mathbb E_{x \sim p(x)}[\phi(x)] \approx \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) = \hat \Phi
+\Phi = \underset{x \sim p(x)}{\operatorname{\mathbb E}} [\phi(x)] \approx \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) = \hat \Phi
 </script>
 </div>
 <h4 id="properties-of-mc">Properties of MC<a class="headerlink" href="#properties-of-mc" title="Permanent link">&para;</a></h4>
@@ -950,15 +950,15 @@ p(x) = \frac{\tilde p(x)}{Z}
 <div class="MathJax_Preview">
 \mathbb E [\hat \Phi]_{x \sim p(\{x^{(r)}\}^R_{r=1})} = \mathbb E \bigg [ \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \bigg ] \\
 = \frac{1}{R} \sum_{r=1}^R \mathbb E \big [ \phi(x^{(r)}) \big ]  \\
-= \frac{1}{R} \sum_{r=1}^R \mathbb E_{x \sim p(x)} \big [ \phi(x) \big ] \\
-= \frac{R}{R} \mathbb E_{x \sim p(x)} \big [ \phi(x) \big ] \\
+= \frac{1}{R} \sum_{r=1}^R \underset{x \sim p(x)}{\operatorname{\mathbb E}}  \big [ \phi(x) \big ] \\
+= \frac{R}{R} \underset{x \sim p(x)}{\operatorname{\mathbb E}}  \big [ \phi(x) \big ] \\
 = \Phi \quad \square
 </div>
 <script type="math/tex; mode=display">
 \mathbb E [\hat \Phi]_{x \sim p(\{x^{(r)}\}^R_{r=1})} = \mathbb E \bigg [ \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \bigg ] \\
 = \frac{1}{R} \sum_{r=1}^R \mathbb E \big [ \phi(x^{(r)}) \big ]  \\
-= \frac{1}{R} \sum_{r=1}^R \mathbb E_{x \sim p(x)} \big [ \phi(x) \big ] \\
-= \frac{R}{R} \mathbb E_{x \sim p(x)} \big [ \phi(x) \big ] \\
+= \frac{1}{R} \sum_{r=1}^R \underset{x \sim p(x)}{\operatorname{\mathbb E}}  \big [ \phi(x) \big ] \\
+= \frac{R}{R} \underset{x \sim p(x)}{\operatorname{\mathbb E}}  \big [ \phi(x) \big ] \\
 = \Phi \quad \square
 </script>
 </div>
@@ -1108,10 +1108,10 @@ q(x) = \frac{\tilde q(x)}{Z_q}
 <p>If these points were samples from <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span> then we could estimate <span><span class="MathJax_Preview">\Phi</span><script type="math/tex">\Phi</script></span> by</p>
 <div>
 <div class="MathJax_Preview">
-\Phi = \mathbb E_{x \sim p(x)}[\phi(x)] \approx \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) = \hat \Phi
+\Phi = \underset{x \sim p(x)}{\operatorname{\mathbb E}} [\phi(x)] \approx \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) = \hat \Phi
 </div>
 <script type="math/tex; mode=display">
-\Phi = \mathbb E_{x \sim p(x)}[\phi(x)] \approx \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) = \hat \Phi
+\Phi = \underset{x \sim p(x)}{\operatorname{\mathbb E}} [\phi(x)] \approx \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) = \hat \Phi
 </script>
 </div>
 <p>But when we generate samples from <span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span>, values of <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> where <span><span class="MathJax_Preview">q(x)</span><script type="math/tex">q(x)</script></span> is greater than <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span> will be <em>over-represented</em> in this estimator, and points where <span><span class="MathJax_Preview">q(x)</span><script type="math/tex">q(x)</script></span> is less than <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span> will be <em>under-represented</em>. To take into account the fact that we have sampled from the wrong distribution, we introduce <em>weights</em>.</p>

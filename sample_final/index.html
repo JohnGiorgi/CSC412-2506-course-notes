@@ -1485,40 +1485,30 @@ p(X) \propto \psi_{X_1, X_2}(X_1, X_2)\psi_{X_1, X_3}(X_1, X_3)\psi_{X_2, X_4}(X
 <p>(a) Show that this estimator is unbiased.</p>
 <p>(b) Show that, as the number of samples of <span><span class="MathJax_Preview">R</span><script type="math/tex">R</script></span> increases, the variance of <span><span class="MathJax_Preview">\hat \Phi</span><script type="math/tex">\hat \Phi</script></span> will decrease proportional to <span><span class="MathJax_Preview">\frac{1}{R}</span><script type="math/tex">\frac{1}{R}</script></span>.</p>
 <p><strong>ANSWER</strong></p>
-<p>(a)</p>
+<p>(a) To show that <span><span class="MathJax_Preview">\hat \Phi</span><script type="math/tex">\hat \Phi</script></span> is an unbiased estimator of <span><span class="MathJax_Preview">\Phi</span><script type="math/tex">\Phi</script></span> we must show that for random samples <span><span class="MathJax_Preview">\{x^{(r)}\}^R_{r=1}</span><script type="math/tex">\{x^{(r)}\}^R_{r=1}</script></span> generated from <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span>, the expectation of <span><span class="MathJax_Preview">\hat \Phi</span><script type="math/tex">\hat \Phi</script></span> is <span><span class="MathJax_Preview">\Phi</span><script type="math/tex">\Phi</script></span>:</p>
 <div>
 <div class="MathJax_Preview">
 \mathbb E [\hat \Phi]_{x \sim p(\{x^{(r)}\}^R_{r=1})} = \mathbb E \bigg [ \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \bigg ] \\
 = \frac{1}{R} \sum_{r=1}^R \mathbb E \big [ \phi(x^{(r)}) \big ]  \\
-= \frac{1}{R} \sum_{r=1}^R \mathbb E_{x \sim p(x)} \big [ \phi(x) \big ] \\
-= \frac{R}{R} \mathbb E_{x \sim p(x)} \big [ \phi(x) \big ] \\
+= \frac{1}{R} \sum_{r=1}^R \underset{x \sim p(x)}{\operatorname{\mathbb E}}  \big [ \phi(x) \big ] \\
+= \frac{R}{R} \underset{x \sim p(x)}{\operatorname{\mathbb E}}  \big [ \phi(x) \big ] \\
 = \Phi \quad \square
 </div>
 <script type="math/tex; mode=display">
 \mathbb E [\hat \Phi]_{x \sim p(\{x^{(r)}\}^R_{r=1})} = \mathbb E \bigg [ \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \bigg ] \\
 = \frac{1}{R} \sum_{r=1}^R \mathbb E \big [ \phi(x^{(r)}) \big ]  \\
-= \frac{1}{R} \sum_{r=1}^R \mathbb E_{x \sim p(x)} \big [ \phi(x) \big ] \\
-= \frac{R}{R} \mathbb E_{x \sim p(x)} \big [ \phi(x) \big ] \\
+= \frac{1}{R} \sum_{r=1}^R \underset{x \sim p(x)}{\operatorname{\mathbb E}}  \big [ \phi(x) \big ] \\
+= \frac{R}{R} \underset{x \sim p(x)}{\operatorname{\mathbb E}}  \big [ \phi(x) \big ] \\
 = \Phi \quad \square
 </script>
 </div>
 <p>(b)</p>
-<div>
-<div class="MathJax_Preview">
-\text{var}[\hat \Phi] = \text{var} \bigg [ \frac{1}{R}\sum^R_{r=1}\phi(x^{(r)}) \bigg ] \\
-= \frac{1}{R^2} \text{var} \bigg [\sum^R_{r=1}\phi(x^{(r)}) \bigg ]\\
-= \frac{1}{R^2} \sum^R_{r=1} \text{var} \bigg [\phi(x^{(r)}) \bigg ] \\
-= \frac{R}{R^2} \text{var} [\phi(x) ] \\
+<p>\text{var}[\hat \Phi] = \text{var} \bigg [ \frac{1}{R}\sum^R_{r=1}\phi(x^{(r)}) \bigg ] \
+= \frac{1}{R^2} \text{var} \bigg [\sum^R_{r=1}\phi(x^{(r)}) \bigg ]\
+= \frac{1}{R^2} \sum^R_{r=1} \text{var} \bigg [\phi(x^{(r)}) \bigg ] \
+= \frac{R}{R^2} \text{var} [\phi(x) ] \
 = \frac{1}{R} \text{var} [\phi(x) ] \quad \square
-</div>
-<script type="math/tex; mode=display">
-\text{var}[\hat \Phi] = \text{var} \bigg [ \frac{1}{R}\sum^R_{r=1}\phi(x^{(r)}) \bigg ] \\
-= \frac{1}{R^2} \text{var} \bigg [\sum^R_{r=1}\phi(x^{(r)}) \bigg ]\\
-= \frac{1}{R^2} \sum^R_{r=1} \text{var} \bigg [\phi(x^{(r)}) \bigg ] \\
-= \frac{R}{R^2} \text{var} [\phi(x) ] \\
-= \frac{1}{R} \text{var} [\phi(x) ] \quad \square
-</script>
-</div>
+]</p>
 <h2 id="week-9-hidden-markov-models">Week 9: Hidden Markov Models<a class="headerlink" href="#week-9-hidden-markov-models" title="Permanent link">&para;</a></h2>
 <h3 id="question-1_6">Question 1<a class="headerlink" href="#question-1_6" title="Permanent link">&para;</a></h3>
 <p>Say we have the following simple chain</p>
