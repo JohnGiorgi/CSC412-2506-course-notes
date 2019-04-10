@@ -32,7 +32,7 @@ For discrete variables, _each node_ stores a [conditional probability table](htt
 ![](../img/lecture_3_4.png)
 
 !!! example
-    The variables in the above model can take on \(2^{6}\) possible configurations.
+    The DAGM above has \(k^n = 2^{6}\) possible configurations.
 
 ### Are DAGMs always useful?
 

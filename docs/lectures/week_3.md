@@ -117,7 +117,7 @@ Now Suppose each is \(x_i\) is a binary random variable. Our assumptions on cond
 
 ![](../img/lecture_3_4.png)
 
-where the model now has only \(2^1 + 4(2^2) + 2^3 = 26\) possible configurations
+~~where the model now has only \(2^1 + 4(2^2) + 2^3 = 26\) possible configurations~~ I don't think this is correct.
 
 #### Missing Edges
 
@@ -225,7 +225,7 @@ P(z | x, y) &= \frac{P(x)P(z)P(y | x,  z)}{P(x)P(y|x)} \\
 
 \(\therefore\) \(P(z | x, y) \not = P(z|y)\) and so by \(\star\star\), \(x \not \bot z | y\).
 
-In fact, \(x\) and \(z\) are _marginally independent_, but given \(y\) they are _conditionally independent_. This important effect is called explaining away ([Berkson’s paradox](https://en.wikipedia.org/wiki/Berkson%27s_paradox)).
+In fact, \(x\) and \(z\) are _marginally independent_, but given \(y\) they are _conditionally dependent_. This important effect is called explaining away ([Berkson’s paradox](https://en.wikipedia.org/wiki/Berkson%27s_paradox)).
 
 !!! example
     Imaging flipping two coins independently, represented by events \(x\) and \(z\). Furthermore, let \(y=1\) if the coins come up the same and \(y=0\) if they come up differently. Clearly, \(x\) and \(z\) are independent, but if I tell you \(y\), they become coupled!
@@ -313,12 +313,15 @@ In other words, it is a model that satisfies the [Markov property](https://en.wi
 
 ![](../img/lecture_3_20.png)
 
-!!! warning
-    I don't really understand the difference between the two models given on the slides (and shown above). Are they both Markov chains? In the second model, the probability of an event depends not just on the previous node but on the previous node of the previous node. Jesse went over this only very briefly in lecture.
+!!! note
+    The first images depicts a _first_-order Markov chain, the second a _second_-order Markov chain.
 
 ### Unobserved Variables
 
 Certain variables in our models may be unobserved (\(Q\) in the example given below), either some of the time or always, at training time or at test time.
+
+!!! warning
+    Jesse suggested that all the content between [Unobserved Variables](#unobserved-variables) and [Hidden Markov Models (HMMs)](#hidden-markov-models-hmms) would not be tested.
 
 ![](../img/lecture_3_21.png)
 

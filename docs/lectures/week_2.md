@@ -97,8 +97,8 @@ __2. We observe all random variables in the domain on each observation (i.e. com
 
 Lets take an example with [discrete random variables](https://en.wikipedia.org/wiki/Random_variable#Discrete_random_variable).
 
-\\[ T: \text{Temperature} \; ; \; t = \text{"hot" or "cold"} \\]
-\\[ W: \text{Weather} \; ; \; w = \text{"sunny" or "raining"} \\]
+\\[ T: \text{Temperature} \; ; \; h = \text{"hot" or } c = \text{"cold"} \\]
+\\[ W: \text{Weather} \; ; \; s = \text{"sunny" or } r = \text{"raining"} \\]
 
 We know that
 
@@ -117,9 +117,9 @@ We could create a parameterized, probabilistic model, \(P(T, W)\) over the state
 \\[P(T | \theta_T) \ ; \  \theta_T = \begin{bmatrix} 0.4 \\\ 0.6 \end{bmatrix}\\]
 \\[P(W | \theta_W) \ ;\  \theta_W = \begin{bmatrix} 0.7 \\\ 0.3 \end{bmatrix}\\]
 
-Notice that \(\theta_T\) and \(\theta_W\) _are_ the probability distributions of our random variables. Our parameters _define the probability of the data and explicitly and store it in a vector_.
+Notice that \(\theta_T\) and \(\theta_W\) _are_ the probability distributions of our random variables. Our parameters _define the probability of the data explicitly and store it in a vector_.
 
-We can represent the joint distribution \(P(T, W)\), _our model_ as:
+We can represent the joint distribution \(P(T, W)\), _our model_, as:
 
 <center>
 
@@ -156,7 +156,7 @@ we could also ask questions about _conditional_ probabilities, like
 
 #### Why did we do this?
 
-The whole point of the above example was to show that from a probabilistic model, which itself is just a joint distribution represented as a matrix (or tensor), we can compute both the marginal and conditional probabilities. This will allow us to compute probabilities, generate data and perform inference.
+The whole point of the above example was to show that from a probabilistic model, which itself is just a joint distribution represented as a matrix (or tensor), we can compute both the _marginal_ and _conditional_ probabilities. This will allow us to compute probabilities, generate data and perform inference.
 
 #### Joint Dimensionality
 

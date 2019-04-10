@@ -1,4 +1,4 @@
-# Week 8:  Sampling and Monte Carlo Methods
+# Week 8: Sampling and Monte Carlo Methods
 
 ### Assigned Reading
 

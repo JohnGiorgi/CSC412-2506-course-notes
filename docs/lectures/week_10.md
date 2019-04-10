@@ -58,7 +58,7 @@ We compute \(D_{KL}\) as follows:
 
 \begin{align}
   D_{KL}(q_\phi(z | x) || p_\theta(z | x)) &= \int q_\phi(z | x) \log \frac{q_\phi(z | x)}{p_\theta(z | x)}dz \\
-  &= E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)}
+  &= \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)}
 \end{align}
 
 ##### Properties of the KL Divergence
@@ -85,9 +85,9 @@ but the computation of \(D_{KL}(q_\phi || p_\theta)\) is intractable (as discuss
 To circumvent this issue of intractability, we will derive the [**evidence lower bound (ELBO)**](https://en.wikipedia.org/wiki/Evidence_lower_bound), and show that maximizing the ELBO \(\Rightarrow\) minimizing \(D_{KL}(q_\phi || p_\theta)\).
 
 \begin{align}
-  D_{KL}(q_\phi (z | x) || p_\theta (z | x)) &= E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)} \\
-  &= E_{z_\phi \sim q_\phi} \Bigg [ \log \Bigg ( q_\phi(z | x) \cdot \frac{p_\theta(x)}{p_\theta(z, x)} \Bigg ) \Bigg ] \\
-  &= E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z, x)}  + E_{z_\phi \sim q_\phi} \log p_\theta(x) \\
+  D_{KL}(q_\phi (z | x) || p_\theta (z | x)) &= \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)} \\
+  &= \mathbb{E}_{z \sim q_\phi} \Bigg [ \log \Bigg ( q_\phi(z | x) \cdot \frac{p_\theta(x)}{p_\theta(z, x)} \Bigg ) \Bigg ] \\
+  &= \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z, x)}  + \mathbb{E}_{z \sim q_\phi} \log p_\theta(x) \\
   &= -\mathcal L(\theta, \phi ; x)  + \log p_\theta(x) \\
 \end{align}
 
@@ -126,9 +126,9 @@ Given that \(\log\) is a concave function, we have
 \begin{align}
 \log p(x) &= \log \int p_\theta(x, z)dz \\
 &= \log \int p_\theta(x, z) \frac{q_\phi(z | x)}{q_\phi(z | x)} dz \\
-&= \log E_{z_\phi \sim q_\phi} \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
-\Rightarrow  \log E_{z_\phi \sim q_\phi} \frac{p_\theta(x, z)}{q_\phi(z | x)} & \ge E_{z_\phi \sim q_\phi} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\  
-&= - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
+&= \log \mathbb{E}_{z \sim q_\phi} \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
+\Rightarrow  \log \mathbb{E}_{z \sim q_\phi} \frac{p_\theta(x, z)}{q_\phi(z | x)} & \ge \mathbb{E}_{z \sim q_\phi} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\  
+&= - \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
 &= \mathcal L(\theta, \phi ; x)
 \end{align}
 
@@ -137,28 +137,28 @@ Given that \(\log\) is a concave function, we have
 We have that
 
 \[
-\mathcal L(\theta, \phi ; x) = \text{ELBO} = - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)}
+\mathcal L(\theta, \phi ; x) = \text{ELBO} = - \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)}
 \]
 
 1) The most general interpretation of the ELBO is given by
 
 \begin{align}
-  \mathcal L(\theta, \phi ; x) &= - E_{z_\phi \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
-  &= E_{z_\phi \sim q_\phi} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
-  &= E_{z_\phi \sim q_\phi} \log \frac{p_\theta(z)p_\theta(x | z)}{q_\phi(z | x)} \\
-  &= E_{z_\phi \sim q_\phi} \Big [ \log p_\theta({x | z}) + \log p_\theta({z}) - \log {q_\phi(z | x)} \Big ]\\
+  \mathcal L(\theta, \phi ; x) &= - \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
+  &= \mathbb{E}_{z \sim q_\phi} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
+  &= \mathbb{E}_{z \sim q_\phi} \log \frac{p_\theta(z)p_\theta(x | z)}{q_\phi(z | x)} \\
+  &= \mathbb{E}_{z \sim q_\phi} \Big [ \log p_\theta({x | z}) + \log p_\theta({z}) - \log {q_\phi(z | x)} \Big ]\\
 \end{align}
 
 2) We can also re-write 1) using entropy
 
 \[
-E_{z_\phi \sim q_\phi} \Big [ \log p_\theta({x | z}) + \log p_\theta({z}) \Big ] H \Big [ q_\phi(z | x) \Big ] \\
+\mathbb{E}_{z \sim q_\phi} \Big [ \log p_\theta({x | z}) + \log p_\theta({z}) \Big ] H \Big [ q_\phi(z | x) \Big ] \\
 \]
 
 3) Another re-write and we arrive at
 
 \[
-E_{z_\phi \sim q_\phi} \Big [ \log p_\theta({x | z}) \Big ] - D_{KL}(q_\phi(z | x) || p_\theta(z))
+\mathbb{E}_{z \sim q_\phi} \Big [ \log p_\theta({x | z}) \Big ] - D_{KL}(q_\phi(z | x) || p_\theta(z))
 \]
 
 !!! tip
@@ -171,18 +171,80 @@ This frames the ELBO as a tradeoff. The first term can be thought of as a "recon
 
 ### Mean Field Variational Inference
 
-In [mean field variational inference](https://en.wikipedia.org/wiki/Variational_Bayesian_methods#Mean_field_approximation), the approximate distribution \(q\) is assumed to factorize over some partition of latent variables
+In [mean field variational inference](https://en.wikipedia.org/wiki/Variational_Bayesian_methods#Mean_field_approximation), we restrict ourselves to variational families, \(q\), that we can compute the gradient of, and assume the approximate distribution \(q\) fully factorizes to \(q_\phi(z)\) (no \(x\)!). I.e., we approximate \(p_\theta(z|x)\) with \(q_\phi(z)\)
 
 \[
 q_\phi(z, \theta | \phi) = q_\phi(\theta | \phi_{\theta})\prod_{i=1}^Nq(z_i | \phi_i)
 \]
 
+where \(\phi = (\phi_\theta, \phi_{1:N})\).
+
+![](../img/lecture_9_3.png)
+
+If \(q\)s are in the same family as \(p\)s, we can optimize via [coordinate ascent](https://en.wikipedia.org/wiki/Coordinate_descent).
+
+#### Traditional Variational Inference (ASIDE)
+
+1. Fix all other variables --> optimize local
+2. Aggregate local --> optimize global
+3. Repeat until KL divergence
+
 !!! warning
-    I don't get this at all. The lecture had gotten pretty messy on the blackboard by this point.
+    I think this was meant to be an aside.
 
-If \(q\)s are in the same family as \(p\)s, we can optimize via coordinate ascent.
+#### Optimizing ELBO
 
-we restrict ourselves to variational families, \(q\), that we can compute the gradient of
+We have that
+
+\begin{align}
+\mathcal L(\phi ; x) &= - \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
+&= \mathbb{E}_{z \sim q_\phi} \Big [ \log p_\theta({x | z}) - \log {q_\phi(z | x)} \Big ] \\
+\end{align}
+
+If we want to optimize this with gradient methods, we will need to compute \(\nabla_\phi \mathcal L(\phi ; x)\). Nowadays, we have [automatic differentiation (AD)](https://en.wikipedia.org/wiki/Automatic_differentiation). We can optimize with gradient methods if:
+
+1. \(z\) is continuous
+2. dependence on \(\phi\) is exposed to AD
+
+If these are both true, then
+
+\[
+\nabla_\phi \mathcal L(\phi ; x) = \nabla_\phi \mathbb{E}_{z \sim q_\phi(z | x)} \Big [ \log p_\theta(x, z) - \log q_\phi(z|x) \Big ]
+\]
+
+but, this is difficult because we are taking the gradient of an expectation and we are trying to compute this gradient from samples. This brings us to our big idea: instead of taking the gradient _of an expectation_, we compute the gradient _as an expectation_.
+
+##### Score Gradient
+
+Also called the likelihood ratio, or REINFORCE, was independently developed in 1990, 1992, 2013, and 2014 (twice). It is given by
+
+\[
+\nabla_\phi \mathbb{E}_{z \sim q_\phi(z)} f(z) = \nabla_\phi \int f(z) q_\phi (z) dz
+\]
+
+if we assume that \(q_\phi(z)\) is a continous function of \(\phi\), then
+
+\begin{align}
+&= \int \nabla_\phi f(z) q_\phi(z) dz \\
+&= \int f(z) \nabla_\phi q_\phi (z) dz
+\end{align}
+
+using the [log-derivative trick](http://blog.shakirm.com/2015/11/machine-learning-trick-of-the-day-5-log-derivative-trick/) \(\big ( \nabla_\phi \log q_\phi = \frac{\nabla_\phi q_\phi}{q_\phi} \big )\):
+
+\begin{align}
+&= \int f(z) q_\phi(z | x ) \nabla_\phi \big [ \log q_\phi(z | x ) \big ] dz \\
+&= \mathbb{E}_{z \sim q_\phi(z)} \Big [ f(z) \nabla_\phi \big [ \log q_\phi(z | x ) \big ] \Big ] \\
+\end{align}
+
+where \(q_\phi(z | x )\) is the score function. Finally, we have
+
+\[
+\nabla_\phi \mathcal L(\phi ; x) = \mathbb{E}_{z \sim q_\phi(z)} \Big [ \big( \log p_\theta(x, z) - \log q_\phi(z | x) \big) \nabla_\phi \big [ \log q_\phi(z | x ) \big ] \Big ]
+\]
+
+which is _unbiased_, but _high variance_.
+
+##### Pathwise Gradient
 
 ## Appendix
 
