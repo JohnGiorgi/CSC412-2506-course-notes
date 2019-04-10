@@ -766,7 +766,7 @@ p(X_E) = \sum_{X_F, X_R}p(X_F, X_E, X_R)
 </div>
 <p>However, naively marginalizing over all unobserved variables requires a number of computations exponential in the number of random variables, <span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span>, in our model.</p>
 <h3 id="variable-elimination">Variable elimination<a class="headerlink" href="#variable-elimination" title="Permanent link">&para;</a></h3>
-<p><a href="https://en.wikipedia.org/wiki/Variable_elimination">Variable elimination</a> is a simple and general exact inference algorithm in <em>any</em> probabilistic graphical models.</p>
+<p><a href="https://en.wikipedia.org/wiki/Variable_elimination">Variable elimination</a> is a simple and general exact inference algorithm in <em>any</em> probabilistic graphical model.</p>
 <p>The running time will depend on the <em>graph structure</em> of the model, <em>but</em>, by using <a href="https://en.wikipedia.org/wiki/Dynamic_programming">dynamic programming</a> we can avoid enumerating all assignments.</p>
 <h4 id="simple-example-chain">Simple Example: Chain<a class="headerlink" href="#simple-example-chain" title="Permanent link">&para;</a></h4>
 <p>Lets start with the example of a simple chain</p>
@@ -789,16 +789,16 @@ X_F = \{D\}, \ X_E = \{\}, \ X_R = \{A, B, C\}
 </div>
 <p>and</p>
 <div>
-<div class="MathJax_Preview">
-P(D) = \sum_{X_R}X_F, X_R \\
-= \sum_{A, B, C}p(A, B, C, D) \\
-= \sum_C \sum_B \sum_A p(A)p(B | A) p(C | B) p(D | C)
-</div>
-<script type="math/tex; mode=display">
-P(D) = \sum_{X_R}X_F, X_R \\
-= \sum_{A, B, C}p(A, B, C, D) \\
-= \sum_C \sum_B \sum_A p(A)p(B | A) p(C | B) p(D | C)
-</script>
+<div class="MathJax_Preview">\begin{align}
+P(X_F) &amp;= \sum_{X_R} p(X_F, X_R) \\
+\Rightarrow P(D) &amp;= \sum_{A, B, C}p(A, B, C, D) \\
+&amp; = \sum_C \sum_B \sum_A p(A)p(B | A) p(C | B) p(D | C)
+\end{align}</div>
+<script type="math/tex; mode=display">\begin{align}
+P(X_F) &= \sum_{X_R} p(X_F, X_R) \\
+\Rightarrow P(D) &= \sum_{A, B, C}p(A, B, C, D) \\
+& = \sum_C \sum_B \sum_A p(A)p(B | A) p(C | B) p(D | C)
+\end{align}</script>
 </div>
 <p>clearly, this is exponential in the number of variables (<span><span class="MathJax_Preview">\mathcal O(k^n)</span><script type="math/tex">\mathcal O(k^n)</script></span>). But, reordering the joint distribution</p>
 <div>
@@ -845,12 +845,16 @@ P(D) = \sum_C p(D | C) \sum_b p(C | B) \sum_A p(A)p(B | A) \\
 </div>
 <p>and</p>
 <div>
-<div class="MathJax_Preview">
-p(x_1 | \bar x_6) = \frac{p(x_1, \bar x_6)}{p(\bar x_6)} =  \frac{p(x_1, \bar x_6)}{\sum_{x}p(x, \bar x_6)}
-</div>
-<script type="math/tex; mode=display">
-p(x_1 | \bar x_6) = \frac{p(x_1, \bar x_6)}{p(\bar x_6)} =  \frac{p(x_1, \bar x_6)}{\sum_{x}p(x, \bar x_6)}
-</script>
+<div class="MathJax_Preview">\begin{align}
+p(X_F | X_E) &amp;= \frac{\sum_{X_R} p(X_F, X_E, X_R)}{\sum_{X_F, X_R} p(X_F, X_E, X_R)} \\
+\Rightarrow p(x_1 | \bar x_6) &amp;= \frac{p(x_1, \bar x_6)}{p(\bar x_6)} \\
+&amp;=  \frac{p(x_1, \bar x_6)}{\sum_{x \in {X_F, X_R}}p(x, \bar x_6)} \\
+\end{align}</div>
+<script type="math/tex; mode=display">\begin{align}
+p(X_F | X_E) &= \frac{\sum_{X_R} p(X_F, X_E, X_R)}{\sum_{X_F, X_R} p(X_F, X_E, X_R)} \\
+\Rightarrow p(x_1 | \bar x_6) &= \frac{p(x_1, \bar x_6)}{p(\bar x_6)} \\
+&=  \frac{p(x_1, \bar x_6)}{\sum_{x \in {X_F, X_R}}p(x, \bar x_6)} \\
+\end{align}</script>
 </div>
 <p>to compute <span><span class="MathJax_Preview">p(x_1, \bar x_6)</span><script type="math/tex">p(x_1, \bar x_6)</script></span>, we use variable elimination</p>
 <div>
@@ -879,24 +883,24 @@ p(x_1, \bar x_6) = p(x_1) \sum_{x_2} \sum_{x_3} \sum_{x_4} \sum_{x_5} p(x_2 | x_
 <p>We want an algorithm to compute <span><span class="MathJax_Preview">P(Y)</span><script type="math/tex">P(Y)</script></span> for <em>directed</em> and <em>undirected</em> models. This can be reduced to the following <strong>sum-product</strong> inference task</p>
 <div>
 <div class="MathJax_Preview">
-\tau(Y) = \sum_z \prod_{\phi \in \Phi} \phi(z_{Scope[\phi] \cap Z}, y_{Scope[\phi] \cap Y)} \quad \forall Y
+\tau(Y) = \sum_z \prod_{\psi \in \Psi} \psi(z_{Scope[\psi] \cap Z}, y_{Scope[\psi] \cap Y}) \quad \forall Y
 </div>
 <script type="math/tex; mode=display">
-\tau(Y) = \sum_z \prod_{\phi \in \Phi} \phi(z_{Scope[\phi] \cap Z}, y_{Scope[\phi] \cap Y)} \quad \forall Y
+\tau(Y) = \sum_z \prod_{\psi \in \Psi} \psi(z_{Scope[\psi] \cap Z}, y_{Scope[\psi] \cap Y}) \quad \forall Y
 </script>
 </div>
-<p>where <span><span class="MathJax_Preview">\Phi</span><script type="math/tex">\Phi</script></span> is a set of potentials or factors.</p>
-<p>For <strong>directed models</strong>, <span><span class="MathJax_Preview">\Phi</span><script type="math/tex">\Phi</script></span> is given by the conditional probability distributions for all variables</p>
+<p>where <span><span class="MathJax_Preview">\Psi</span><script type="math/tex">\Psi</script></span> is a set of potentials or factors.</p>
+<p>For <strong>directed models</strong>, <span><span class="MathJax_Preview">\Psi</span><script type="math/tex">\Psi</script></span> is given by the conditional probability distributions for all variables</p>
 <div>
 <div class="MathJax_Preview">
-\Phi = \{\phi_{x_i}\}^N_{i=1} = \{p(x_i | x_{\pi_i})\}^N_{i=1}
+\Psi = \{\psi_{x_i}\}^N_{i=1} = \{p(x_i | x_{\pi_i})\}^N_{i=1}
 </div>
 <script type="math/tex; mode=display">
-\Phi = \{\phi_{x_i}\}^N_{i=1} = \{p(x_i | x_{\pi_i})\}^N_{i=1}
+\Psi = \{\psi_{x_i}\}^N_{i=1} = \{p(x_i | x_{\pi_i})\}^N_{i=1}
 </script>
 </div>
 <p>where the sum is over the set <span><span class="MathJax_Preview">Z = X - X_F</span><script type="math/tex">Z = X - X_F</script></span>.</p>
-<p>For <strong>undirected models</strong>, <span><span class="MathJax_Preview">\Phi</span><script type="math/tex">\Phi</script></span> is given by the set of potentials. Because the sum product returns unnormalized <span><span class="MathJax_Preview">\Phi</span><script type="math/tex">\Phi</script></span> distributions, we must normalize by <span><span class="MathJax_Preview">\sum_Y\tau(y)</span><script type="math/tex">\sum_Y\tau(y)</script></span>.</p>
+<p>For <strong>undirected models</strong>, <span><span class="MathJax_Preview">\Psi</span><script type="math/tex">\Psi</script></span> is given by the set of potentials. Because the sum product returns unnormalized <span><span class="MathJax_Preview">\Phi</span><script type="math/tex">\Phi</script></span> distributions, we must normalize by <span><span class="MathJax_Preview">\sum_Y\tau(y)</span><script type="math/tex">\sum_Y\tau(y)</script></span>.</p>
 <h4 id="example-directed-graph">Example: Directed Graph<a class="headerlink" href="#example-directed-graph" title="Permanent link">&para;</a></h4>
 <p>Take the following directed graph as example</p>
 <p><img alt="" src="../../img/lecture_5_1.png" /></p>
