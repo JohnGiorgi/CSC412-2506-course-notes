@@ -111,7 +111,7 @@ __ANSWER__
 We want to sample a sequence of observations \(x_1, x_2, x_3, ..., x_T\) from the model according to
 
 \[
-x_{1:T} \sim \prod_{t=1}^T p(X_t \ | \ \text{parents of } X_t)
+x_{1:T} = \prod_{t=1}^T p(X_t \ | \ \text{parents of } X_t)
 \]
 
 since observations \(x_t\) are independent of one another. Notice that this forms a chain, with probability
@@ -123,7 +123,7 @@ p(x_{1:T}) \sim \bigg [ \prod_{t=1}^T p(X_t | z_t) \bigg ] \bigg [ p(z_1) \prod_
 _Step-by-step_
 
 1. Start with \(t=1\)
-2. Sample \(z_t\) according to \(z_t \sim p(z_1) \prod_{i=2}^t p(Z_i | z_{i-1})\)
+2. Sample \(z_t\) according to \(z_t \sim p(z_1) \prod_{i=t}^{t + 1} p(Z_i | z_{i-1})\)
 3. Given the sampled \(z_t\), sample \(x_t\) according to \(x_t \sim \ p(X_t | z_t)\)
 4. Increment \(t\) by 1
 5. Repeat steps 2-4 until \(t=T\)
