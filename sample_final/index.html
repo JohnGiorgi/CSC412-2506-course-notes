@@ -591,15 +591,28 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#week-4" title="Week 4" class="md-nav__link">
-    Week 4
+  <a href="#week-4-undirected-graphical-models" title="Week 4: Undirected Graphical Models" class="md-nav__link">
+    Week 4: Undirected Graphical Models
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#question-1_3" title="Question 1" class="md-nav__link">
+    Question 1
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#week-5" title="Week 5" class="md-nav__link">
-    Week 5
+  <a href="#week-5-exact-inference" title="Week 5: Exact Inference" class="md-nav__link">
+    Week 5: Exact Inference
   </a>
   
 </li>
@@ -620,7 +633,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#question-1_3" title="Question 1" class="md-nav__link">
+  <a href="#question-1_4" title="Question 1" class="md-nav__link">
     Question 1
   </a>
   
@@ -640,7 +653,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#question-1_4" title="Question 1" class="md-nav__link">
+  <a href="#question-1_5" title="Question 1" class="md-nav__link">
     Question 1
   </a>
   
@@ -667,7 +680,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#question-1_5" title="Question 1" class="md-nav__link">
+  <a href="#question-1_6" title="Question 1" class="md-nav__link">
     Question 1
   </a>
   
@@ -798,15 +811,28 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#week-4" title="Week 4" class="md-nav__link">
-    Week 4
+  <a href="#week-4-undirected-graphical-models" title="Week 4: Undirected Graphical Models" class="md-nav__link">
+    Week 4: Undirected Graphical Models
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#question-1_3" title="Question 1" class="md-nav__link">
+    Question 1
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#week-5" title="Week 5" class="md-nav__link">
-    Week 5
+  <a href="#week-5-exact-inference" title="Week 5: Exact Inference" class="md-nav__link">
+    Week 5: Exact Inference
   </a>
   
 </li>
@@ -827,7 +853,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#question-1_3" title="Question 1" class="md-nav__link">
+  <a href="#question-1_4" title="Question 1" class="md-nav__link">
     Question 1
   </a>
   
@@ -847,7 +873,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#question-1_4" title="Question 1" class="md-nav__link">
+  <a href="#question-1_5" title="Question 1" class="md-nav__link">
     Question 1
   </a>
   
@@ -874,7 +900,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#question-1_5" title="Question 1" class="md-nav__link">
+  <a href="#question-1_6" title="Question 1" class="md-nav__link">
     Question 1
   </a>
   
@@ -1227,11 +1253,43 @@ p(x_{1:T}) \sim \bigg [ \prod_{t=1}^T p(X_t | z_t) \bigg ] \bigg [ p(z_1) \prod_
 <li>Increment <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> by 1</li>
 <li>Repeat steps 2-4 until <span><span class="MathJax_Preview">t=T</span><script type="math/tex">t=T</script></span></li>
 </ol>
-<h2 id="week-4">Week 4<a class="headerlink" href="#week-4" title="Permanent link">&para;</a></h2>
-<h2 id="week-5">Week 5<a class="headerlink" href="#week-5" title="Permanent link">&para;</a></h2>
+<h2 id="week-4-undirected-graphical-models">Week 4: Undirected Graphical Models<a class="headerlink" href="#week-4-undirected-graphical-models" title="Permanent link">&para;</a></h2>
+<h3 id="question-1_3">Question 1<a class="headerlink" href="#question-1_3" title="Permanent link">&para;</a></h3>
+<p>Given the following UGM:</p>
+<p><img alt="" src="../img/lecture_4_4.png" /></p>
+<p>(a) State the Global, Local and Pairwise Markov properties.</p>
+<p>(b) Use each to give an example of two sets of conditionally independent nodes in the graph.</p>
+<p><strong>ANSWER</strong></p>
+<p>(a)</p>
+<p><em>def</em>. <strong>Global Markov Property</strong> (G): <span><span class="MathJax_Preview">X_A \bot X_B | X_C</span><script type="math/tex">X_A \bot X_B | X_C</script></span> iff <span><span class="MathJax_Preview">X_C</span><script type="math/tex">X_C</script></span> separates <span><span class="MathJax_Preview">X_A</span><script type="math/tex">X_A</script></span> from <span><span class="MathJax_Preview">X_B</span><script type="math/tex">X_B</script></span></p>
+<p><em>def</em>. <strong>Local Markov Property (Markov Blanket)</strong> (L): The set of nodes that renders a node <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> conditionally independent of all the other nodes in the graph</p>
+<div>
+<div class="MathJax_Preview">
+t \bot \mathcal V \setminus cl(t) | mb(t)
+</div>
+<script type="math/tex; mode=display">
+t \bot \mathcal V \setminus cl(t) | mb(t)
+</script>
+</div>
+<p><em>def</em>. <strong>Pairwise (Markov) Property</strong> (P): The set of nodes that renders two nodes, <span><span class="MathJax_Preview">s</span><script type="math/tex">s</script></span> and <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>, conditionally independent of each other.</p>
+<div>
+<div class="MathJax_Preview">
+s \bot t | \mathcal V \setminus \{s, t\} \Leftrightarrow G_{st} = 0
+</div>
+<script type="math/tex; mode=display">
+s \bot t | \mathcal V \setminus \{s, t\} \Leftrightarrow G_{st} = 0
+</script>
+</div>
+<p>(b)</p>
+<ul>
+<li>Global: <span><span class="MathJax_Preview">\{1, 2\} \bot \{6, 7\} | \{3, 4, 5\}</span><script type="math/tex">\{1, 2\} \bot \{6, 7\} | \{3, 4, 5\}</script></span></li>
+<li>Local: <span><span class="MathJax_Preview">1 \bot \text{rest} | \{2, 3\}</span><script type="math/tex">1 \bot \text{rest} | \{2, 3\}</script></span></li>
+<li>Pairwise: <span><span class="MathJax_Preview">1 \bot 7 | \text{rest}</span><script type="math/tex">1 \bot 7 | \text{rest}</script></span></li>
+</ul>
+<h2 id="week-5-exact-inference">Week 5: Exact Inference<a class="headerlink" href="#week-5-exact-inference" title="Permanent link">&para;</a></h2>
 <h2 id="week-6">Week 6<a class="headerlink" href="#week-6" title="Permanent link">&para;</a></h2>
 <h2 id="week-8-sampling-and-monte-carlo-methods">Week 8: Sampling and Monte Carlo Methods<a class="headerlink" href="#week-8-sampling-and-monte-carlo-methods" title="Permanent link">&para;</a></h2>
-<h3 id="question-1_3">Question 1<a class="headerlink" href="#question-1_3" title="Permanent link">&para;</a></h3>
+<h3 id="question-1_4">Question 1<a class="headerlink" href="#question-1_4" title="Permanent link">&para;</a></h3>
 <p>Given some data <span><span class="MathJax_Preview">\{x^{(r)}\}^R_{r=1} \sim p(x)</span><script type="math/tex">\{x^{(r)}\}^R_{r=1} \sim p(x)</script></span>, the simple Monte Carlo estimator is</p>
 <div>
 <div class="MathJax_Preview">
@@ -1279,7 +1337,7 @@ p(x_{1:T}) \sim \bigg [ \prod_{t=1}^T p(X_t | z_t) \bigg ] \bigg [ p(z_1) \prod_
 </script>
 </div>
 <h2 id="week-9-hidden-markov-models">Week 9: Hidden Markov Models<a class="headerlink" href="#week-9-hidden-markov-models" title="Permanent link">&para;</a></h2>
-<h3 id="question-1_4">Question 1<a class="headerlink" href="#question-1_4" title="Permanent link">&para;</a></h3>
+<h3 id="question-1_5">Question 1<a class="headerlink" href="#question-1_5" title="Permanent link">&para;</a></h3>
 <p>Say we have the following simple chain</p>
 <p><img alt="" src="../img/lecture_8_3.png" /></p>
 <p>where</p>
@@ -1399,7 +1457,7 @@ b) The size of the maximum clique is 3.
 c) The size of the maximum factor is 4.
 d) The size of the maximum clique is 4.</p>
 <h2 id="week-10-stochastic-variational-inference-automatic-differentiation-variation-inference-sad-vi">Week 10: Stochastic Variational Inference / Automatic Differentiation Variation Inference (SAD VI)<a class="headerlink" href="#week-10-stochastic-variational-inference-automatic-differentiation-variation-inference-sad-vi" title="Permanent link">&para;</a></h2>
-<h3 id="question-1_5">Question 1<a class="headerlink" href="#question-1_5" title="Permanent link">&para;</a></h3>
+<h3 id="question-1_6">Question 1<a class="headerlink" href="#question-1_6" title="Permanent link">&para;</a></h3>
 <p>Starting from the Kullback–Leibler divergence (<span><span class="MathJax_Preview">D_{KL}</span><script type="math/tex">D_{KL}</script></span>), derive the Evidence Lower Bound (ELBO) for a true distribution <span><span class="MathJax_Preview">p_\theta (z | x)</span><script type="math/tex">p_\theta (z | x)</script></span> and approximate distribution <span><span class="MathJax_Preview">q_\phi(z|x)</span><script type="math/tex">q_\phi(z|x)</script></span> and show that maximizing the ELBO is equivalent to minimizing <span><span class="MathJax_Preview">D_{KL}(q_\phi (z | x) || p_\theta (z | x))</span><script type="math/tex">D_{KL}(q_\phi (z | x) || p_\theta (z | x))</script></span>.</p>
 <p><strong>ANSWER</strong></p>
 <div>
