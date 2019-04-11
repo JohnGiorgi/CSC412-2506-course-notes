@@ -13,7 +13,7 @@
 
 ## Posterior Inference for Latent Variable Models
 
-Imagine we had the following latent variable model
+Imagine we had the following [latent variable model](https://en.wikipedia.org/wiki/Latent_variable_model)
 
 ![](../img/lecture_9_1.png)
 
@@ -58,7 +58,7 @@ We compute \(D_{KL}\) as follows:
 
 \begin{align}
   D_{KL}(q_\phi(z | x) || p_\theta(z | x)) &= \int q_\phi(z | x) \log \frac{q_\phi(z | x)}{p_\theta(z | x)}dz \\
-  &= \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)}
+  &= \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{q_\phi(z | x)}{p_\theta(z | x)}
 \end{align}
 
 ##### Properties of the KL Divergence
@@ -85,9 +85,9 @@ but the computation of \(D_{KL}(q_\phi || p_\theta)\) is intractable (as discuss
 To circumvent this issue of intractability, we will derive the [**evidence lower bound (ELBO)**](https://en.wikipedia.org/wiki/Evidence_lower_bound), and show that maximizing the ELBO \(\Rightarrow\) minimizing \(D_{KL}(q_\phi || p_\theta)\).
 
 \begin{align}
-  D_{KL}(q_\phi (z | x) || p_\theta (z | x)) &= \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)} \\
-  &= \mathbb{E}_{z \sim q_\phi} \Bigg [ \log \Bigg ( q_\phi(z | x) \cdot \frac{p_\theta(x)}{p_\theta(z, x)} \Bigg ) \Bigg ] \\
-  &= \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z, x)}  + \mathbb{E}_{z \sim q_\phi} \log p_\theta(x) \\
+  D_{KL}(q_\phi (z | x) || p_\theta (z | x)) &= \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{q_\phi(z | x)}{p_\theta(z | x)} \\
+  &= \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \Bigg [ \log \Bigg ( q_\phi(z | x) \cdot \frac{p_\theta(x)}{p_\theta(z, x)} \Bigg ) \Bigg ] \\
+  &= \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{q_\phi(z | x)}{p_\theta(z, x)}  + \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log p_\theta(x) \\
   &= -\mathcal L(\theta, \phi ; x)  + \log p_\theta(x) \\
 \end{align}
 
@@ -126,9 +126,9 @@ Given that \(\log\) is a concave function, we have
 \begin{align}
 \log p(x) &= \log \int p_\theta(x, z)dz \\
 &= \log \int p_\theta(x, z) \frac{q_\phi(z | x)}{q_\phi(z | x)} dz \\
-&= \log \mathbb{E}_{z \sim q_\phi} \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
-\Rightarrow  \log \mathbb{E}_{z \sim q_\phi} \frac{p_\theta(x, z)}{q_\phi(z | x)} & \ge \mathbb{E}_{z \sim q_\phi} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\  
-&= - \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
+&= \log \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
+\Rightarrow  \log \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \frac{p_\theta(x, z)}{q_\phi(z | x)} & \ge \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\  
+&= - \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
 &= \mathcal L(\theta, \phi ; x)
 \end{align}
 
@@ -137,28 +137,28 @@ Given that \(\log\) is a concave function, we have
 We have that
 
 \[
-\mathcal L(\theta, \phi ; x) = \text{ELBO} = - \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)}
+\mathcal L(\theta, \phi ; x) = \text{ELBO} = - \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{q_\phi(z | x)}{p_\theta(x, z)}
 \]
 
 1) The most general interpretation of the ELBO is given by
 
 \begin{align}
-  \mathcal L(\theta, \phi ; x) &= - \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
-  &= \mathbb{E}_{z \sim q_\phi} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
-  &= \mathbb{E}_{z \sim q_\phi} \log \frac{p_\theta(z)p_\theta(x | z)}{q_\phi(z | x)} \\
-  &= \mathbb{E}_{z \sim q_\phi} \Big [ \log p_\theta({x | z}) + \log p_\theta({z}) - \log {q_\phi(z | x)} \Big ]\\
+  \mathcal L(\theta, \phi ; x) &= - \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
+  &= \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
+  &= \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{p_\theta(z)p_\theta(x | z)}{q_\phi(z | x)} \\
+  &= \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \Big [ \log p_\theta({x | z}) + \log p_\theta({z}) - \log {q_\phi(z | x)} \Big ]\\
 \end{align}
 
 2) We can also re-write 1) using entropy
 
 \[
-\mathbb{E}_{z \sim q_\phi} \Big [ \log p_\theta({x | z}) + \log p_\theta({z}) \Big ] H \Big [ q_\phi(z | x) \Big ] \\
+\underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \Big [ \log p_\theta({x | z}) + \log p_\theta({z}) \Big ] \mathbb{H} \Big [ q_\phi(z | x) \Big ] \\
 \]
 
 3) Another re-write and we arrive at
 
 \[
-\mathbb{E}_{z \sim q_\phi} \Big [ \log p_\theta({x | z}) \Big ] - D_{KL}(q_\phi(z | x) || p_\theta(z))
+\underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \Big [ \log p_\theta({x | z}) \Big ] - D_{KL}(q_\phi(z | x) || p_\theta(z))
 \]
 
 !!! tip
@@ -197,8 +197,8 @@ If \(q\)s are in the same family as \(p\)s, we can optimize via [coordinate asce
 We have that
 
 \begin{align}
-\mathcal L(\phi ; x) &= - \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
-&= \mathbb{E}_{z \sim q_\phi} \Big [ \log p_\theta({x | z}) - \log {q_\phi(z | x)} \Big ] \\
+\mathcal L(\phi ; x) &= - \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
+&= \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \Big [ \log p_\theta({x | z}) - \log {q_\phi(z | x)} \Big ] \\
 \end{align}
 
 If we want to optimize this with gradient methods, we will need to compute \(\nabla_\phi \mathcal L(\phi ; x)\). Nowadays, we have [automatic differentiation (AD)](https://en.wikipedia.org/wiki/Automatic_differentiation). We can optimize with gradient methods if:

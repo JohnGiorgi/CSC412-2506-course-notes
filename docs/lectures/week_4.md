@@ -103,7 +103,7 @@ G \Rightarrow L \Rightarrow P \Rightarrow G \quad p(x) > 0
 
 - Global: \(\{X_1, X_2\} \bot \{X_{15}, X_{20}\} | \{X_3, X_6, X_7\}\)
 - Local: \(1 \bot \text{rest} | \{X_2, X_6\}\)
-- Pairwise: \(1 \bot 7 | \text{rest}\), \(1 \bot 20 | \text{rest}\)
+- Pairwise: \(1 \bot 20 | \text{rest}\)
 
 ### Not all UGMs can be represented as DGMs
 

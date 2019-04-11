@@ -50,7 +50,7 @@ p(x_{1:T}) = \prod_{t=1}^T p(x_t | x_{t-1})
 A useful distinction to make at this point is between stationary and non-stationary distributions that generate our data
 
 - **Stationary distribution**: the distribution generating the data does not change through time
-- **Non-stationary distribution**: the distribution generating the data if a function of time
+- **Non-stationary distribution**: the distribution generating the data is a function of time
 
 We are only going to consider the case of a stationary distribution (because it greatly simplifies the math). In this case, we use the same distribution at every timestep, sometimes called a [homogenous Markov chain](https://en.wikipedia.org/wiki/Markov_chain#Variations). Therefore,
 
@@ -83,8 +83,8 @@ How does the order of temporal dependence affect the number of parameters in our
 Assume \(x\) is a discrete random variable with \(k\) states. How many parameters are needed to parameterize
 
 - \(x_t\): \(k-1\), as the last state is implicit.
-- _first-order chain_: \(k(k-1)\), as we need \(k\) number of parameters of each parameter of \(x_t\)
-- \(m\)_-order chain_: \(k^m(k-1)\), as we need \(k^m\) number of parameters of each parameter of \(x_t\)
+- _first-order chain_: \(k(k-1)\), as we need \(k\) number of parameters for each parameter of \(x_t\)
+- \(m\)_-order chain_: \(k^m(k-1)\), as we need \(k^m\) number of parameters for each parameter of \(x_t\)
 
 !!! tip
     He hinted that this would be useful for assignment 2. Seems like it might be the answer to question 4a.
@@ -230,11 +230,11 @@ p(z_t | x_{1:T}) \propto p(z_t, x_{1:T}) \\
 
 #### Forward Recursion
 
-\[
-p(z_t, x_{1:t}) = \sum^k_{z_{t-1} = 1}p(z_{t-1}, z_t, x_{1:t}) \\
-= \sum^k_{z_{t-1} = 1} p(x_t | z_{t-1}, z_t, x_{1:t-1})p(z_t | z_{t-1}, x_{1:t-1})p(z_{t-1}, x_{1:t-1}) \\
-= \alpha_t(z_t) = p(x_t | z_t) \sum^k_{z_{t-1} = 1} p(z_t | z_{t-1}) \alpha_{t-1}(z_{t-1})\\
-\]
+\begin{align}
+p(z_t, x_{1:t}) &= \sum^k_{z_{t-1} = 1}p(z_{t-1}, z_t, x_{1:t}) \\
+&= \sum^k_{z_{t-1} = 1} p(x_t | z_{t-1}, z_t, x_{1:t-1})p(z_t | z_{t-1}, x_{1:t-1})p(z_{t-1}, x_{1:t-1}) \\
+&\Rightarrow \alpha_t(z_t) = p(x_t | z_t) \sum^k_{z_{t-1} = 1} p(z_t | z_{t-1}) \alpha_{t-1}(z_{t-1})\\
+\end{align}
 
 Notice that our forward recursion contains our emission, \(p(x_t | z_t)\) and transition, \(p(z_t | z_{t-1})\) probabilities. If we recurse all the way down to \(\alpha_1(z_1)\), we get
 
@@ -249,11 +249,10 @@ the initial probability times the emission probability of the first observed sta
 \begin{align}
 p(x_{t+1:T} | z_t) &= \sum_{z_{t+1}}^k p(z_{t+1}, x_{t+1:T} | z_t) \\
 &= \sum_{z_{t+1}}^k p(x_{t+2:T} | z_{t+1}, z_t, x_{t+1})p(x_{t+1} | z_{t+1}, z_t)p(z_{t+1} | z_t) \\
-&= \sum_{z_{t+1}}^k p(x_{t+2:T} | z_{t+1})p(x_{t+1} | z_{t+1})p(z_{t+1} | z_t) \\
-&= \sum_{z_{t+1}}^k \beta_{t+1}(z_t) \varepsilon_{t+1} T_{t \rightarrow t+1}\ \\
+&\Rightarrow \beta_t(z_t) = \sum_{z_{t+1}}^k p(x_{t+2:T} | z_{t+1})p(x_{t+1} | z_{t+1})p(z_{t+1} | z_t) \\
 \end{align}
 
-Notice that our backward recursion contains our emission, \(p(x_{t+1} | z_{t+1})\) and transition, \(pp(z_{t+1} | z_t)\) probabilities. If we recurse all the way down to \(\beta_1(z_1)\), we get
+Notice that our backward recursion contains our emission, \(p(x_{t+1} | z_{t+1})\) and transition, \(p(z_{t+1} | z_t)\) probabilities. If we recurse all the way down to \(\beta_1(z_1)\), we get
 
 \[
 \beta_1(z_1) = p(x_{3:T} | z_{2})p(x_{2} | z_{2})p(z_{2} | z_1) \\
@@ -262,4 +261,4 @@ Notice that our backward recursion contains our emission, \(p(x_{t+1} | z_{t+1})
 ### Viterbi Algorithm
 
 !!! error
-    Need to finish this, it was rushed into the last 5 minutes of lecture so my notes are poor. Use textbook/lecture slides to fill in the details.
+    This will not be on the exam, so I won't bother cleaning up my notes and putting them here!

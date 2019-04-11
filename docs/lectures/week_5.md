@@ -41,7 +41,7 @@ However, naively marginalizing over all unobserved variables requires a number o
 
 ### Variable elimination
 
-[Variable elimination](https://en.wikipedia.org/wiki/Variable_elimination) is a simple and general exact inference algorithm in _any_ probabilistic graphical models.
+[Variable elimination](https://en.wikipedia.org/wiki/Variable_elimination) is a simple and general exact inference algorithm in _any_ probabilistic graphical model.
 
 The running time will depend on the _graph structure_ of the model, _but_, by using [dynamic programming](https://en.wikipedia.org/wiki/Dynamic_programming) we can avoid enumerating all assignments.
 
@@ -61,11 +61,11 @@ X_F = \{D\}, \ X_E = \{\}, \ X_R = \{A, B, C\}
 
 and
 
-\[
-P(D) = \sum_{X_R}X_F, X_R \\
-= \sum_{A, B, C}p(A, B, C, D) \\
-= \sum_C \sum_B \sum_A p(A)p(B | A) p(C | B) p(D | C)
-\]
+\begin{align}
+P(X_F) &= \sum_{X_R} p(X_F, X_R) \\
+\Rightarrow P(D) &= \sum_{A, B, C}p(A, B, C, D) \\
+& = \sum_C \sum_B \sum_A p(A)p(B | A) p(C | B) p(D | C)
+\end{align}
 
 clearly, this is exponential in the number of variables (\(\mathcal O(k^n)\)). But, reordering the joint distribution
 
@@ -103,10 +103,11 @@ What is \(p(x_1 | \bar x_6)\)? We have
 
 and
 
-\[
-p(x_1 | \bar x_6) = \frac{p(x_1, \bar x_6)}{p(\bar x_6)} =  \frac{p(x_1, \bar x_6)}{\sum_{x}p(x, \bar x_6)}
-\]
-
+\begin{align}
+p(X_F | X_E) &= \frac{\sum_{X_R} p(X_F, X_E, X_R)}{\sum_{X_F, X_R} p(X_F, X_E, X_R)} \\
+\Rightarrow p(x_1 | \bar x_6) &= \frac{p(x_1, \bar x_6)}{p(\bar x_6)} \\
+&=  \frac{p(x_1, \bar x_6)}{\sum_{x \in {X_F, X_R}}p(x, \bar x_6)} \\
+\end{align}
 
 
 to compute \(p(x_1, \bar x_6)\), we use variable elimination
@@ -130,20 +131,20 @@ A worst case analysis says that computing the joint distribution is NP-hard. In 
 We want an algorithm to compute \(P(Y)\) for _directed_ and _undirected_ models. This can be reduced to the following **sum-product** inference task
 
 \[
-\tau(Y) = \sum_z \prod_{\phi \in \Phi} \phi(z_{Scope[\phi] \cap Z}, y_{Scope[\phi] \cap Y)} \quad \forall Y
+\tau(Y) = \sum_z \prod_{\psi \in \Psi} \psi(z_{Scope[\psi] \cap Z}, y_{Scope[\psi] \cap Y}) \quad \forall Y
 \]
 
-where \(\Phi\) is a set of potentials or factors.
+where \(\Psi\) is a set of potentials or factors.
 
-For __directed models__, \(\Phi\) is given by the conditional probability distributions for all variables
+For __directed models__, \(\Psi\) is given by the conditional probability distributions for all variables
 
 \[
-\Phi = \{\phi_{x_i}\}^N_{i=1} = \{p(x_i | x_{\pi_i})\}^N_{i=1}
+\Psi = \{\psi_{x_i}\}^N_{i=1} = \{p(x_i | x_{\pi_i})\}^N_{i=1}
 \]
 
 where the sum is over the set \(Z = X - X_F\).
 
-For __undirected models__, \(\Phi\) is given by the set of potentials. Because the sum product returns unnormalized \(\Phi\) distributions, we must normalize by \(\sum_Y\tau(y)\).
+For __undirected models__, \(\Psi\) is given by the set of potentials. Because the sum product returns unnormalized \(\Phi\) distributions, we must normalize by \(\sum_Y\tau(y)\).
 
 #### Example: Directed Graph
 

@@ -33,8 +33,9 @@ __Problem 1__: To generate samples \(\{x^{(r)}\}^R_{r=1}\) from a given probabil
 
 __Problem 2__: To estimate expectations of functions, \(\phi(x)\), under this distribution, \(p(x)\)
 
+
 \[
-\Phi = \mathbb E_{x \sim p(x)}[\phi(x)] = \int \phi(x)p(x)dx
+\Phi = \underset{x \sim p(x)}{\operatorname{\mathbb E}} [\phi(x)] = \int \phi(x)p(x)dx
 \]
 
 !!! warning
@@ -45,18 +46,18 @@ __Problem 2__: To estimate expectations of functions, \(\phi(x)\), under this di
 Simple examples of functions \(\phi(x)\) whose expectations we might be interested in include the first and second moments of quantities that we wish to predict, from which we can compute means and variances; for example if some quantity \(t\) depends on \(x\), we can find the mean and variance of \(t\) under \(p(x)\) by finding the expectations of the functions \(\phi_1(x) = t(x)\) and \(\phi_2(x) = (t(x))^2\)
 
 \[
-\phi_1(x) = t(x) \Rightarrow \Phi_1 = \mathbb E_{x \sim p(x)}[\phi_1(x)] \Rightarrow \text{mean}(t) = \Phi_1 \\
-\phi_2(x) = (t(x))^2 \Rightarrow \Phi_2 = \mathbb E_{x \sim p(x)}[\phi_2(x)] \Rightarrow \text{var}(t) = \Phi_2 - (\Phi_1)^2 \\
+\phi_1(x) = t(x) \Rightarrow \Phi_1 = \underset{x \sim p(x)}{\operatorname{\mathbb E}} [\phi_1(x)] \Rightarrow \text{mean}(t) = \Phi_1 \\
+\phi_2(x) = (t(x))^2 \Rightarrow \Phi_2 = \underset{x \sim p(x)}{\operatorname{\mathbb E}} [\phi_2(x)] \Rightarrow \text{var}(t) = \Phi_2 - (\Phi_1)^2 \\
 \]
 
 ### Simple Monte Carlo
 
-We will concentrate on the first problem (sampling), because if we have solved it, then we can solve the second problem by using the random samples \(\{x^{(r)}\}^R_{r=1}\) to give an estimator.
+We will concentrate on the first problem (sampling), because if we have solved it, then we can solve the second problem by using the random samples \(\{x^{(r)}\}^R_{r=1}\) to give an estimator. This brings us to __simple Monte Carlo__:
 
-_def_. **Simple Monte Carlo**: Given \(\{x^{(r)}\}^R_{r=1} \sim p(x)\) we estimate the expectation \(\mathbb E_{x \sim p(x)}[\phi(x)]\) to be the estimator \(\hat \Phi\)
+_def_. **Simple Monte Carlo**: Given \(\{x^{(r)}\}^R_{r=1} \sim p(x)\) we estimate the expectation \(\underset{x \sim p(x)}{\operatorname{\mathbb E}} [\phi(x)]\) to be the estimator \(\hat \Phi\)
 
 \[
-\Phi = \mathbb E_{x \sim p(x)}[\phi(x)] \approx \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) = \hat \Phi
+\Phi = \underset{x \sim p(x)}{\operatorname{\mathbb E}} [\phi(x)] \approx \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) = \hat \Phi
 \]
 
 #### Properties of MC
@@ -68,8 +69,8 @@ _Proof_
 \[
 \mathbb E [\hat \Phi]_{x \sim p(\{x^{(r)}\}^R_{r=1})} = \mathbb E \bigg [ \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \bigg ] \\
 = \frac{1}{R} \sum_{r=1}^R \mathbb E \big [ \phi(x^{(r)}) \big ]  \\
-= \frac{1}{R} \sum_{r=1}^R \mathbb E_{x \sim p(x)} \big [ \phi(x) \big ] \\
-= \frac{R}{R} \mathbb E_{x \sim p(x)} \big [ \phi(x) \big ] \\
+= \frac{1}{R} \sum_{r=1}^R \underset{x \sim p(x)}{\operatorname{\mathbb E}}  \big [ \phi(x) \big ] \\
+= \frac{R}{R} \underset{x \sim p(x)}{\operatorname{\mathbb E}}  \big [ \phi(x) \big ] \\
 = \Phi \quad \square
 \]
 
@@ -137,7 +138,7 @@ p_i = \frac{\tilde p_i}{Z}
 
 and could sample from the probability distribution \(\{p_i\}_{i=1}^R\) using various methods based on a source of random bits. Unfortunately, the cost of this procedure is intractable.
 
-To evaluate \(Z\), we must visit every point in the space. In figure (b) there are \(50\) uniformly spaced points in one dimension. If our system had, \(N=1000\) dimensions say, then the corresponding number of points would be \(50^{D} = 50^{1000}\). Even if each component \(x_n\) took only two discrete values, the number of evaluations of \(\tilde p\) needed to evaluate \(Z\) would take many times longer than the age of the universe.
+To evaluate \(Z\), we must visit every point in the space. In figure (b) there are \(50\) uniformly spaced points in one dimension. If our system had, \(N=1000\) dimensions say, then the corresponding number of points would be \(50^{N} = 50^{1000}\). Even if each component \(x_n\) took only two discrete values, the number of evaluations of \(\tilde p\) needed to evaluate \(Z\) would take many times longer than the age of the universe.
 
 !!! tip
     **TL;DR** The cost of this lattice discretization method of sampling from \(p(x)\) is exponential in the dimension of our data (e.g. \(D^N\) where \(D\) is the number of data points and \(N\) their dimension).
@@ -201,8 +202,10 @@ In importance sampling, we generate \(R\) samples from \(q(x)\)
 If these points were samples from \(p(x)\) then we could estimate \(\Phi\) by
 
 \[
-\Phi = \mathbb E_{x \sim p(x)}[\phi(x)] \approx \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) = \hat \Phi
+\Phi = \underset{x \sim p(x)}{\operatorname{\mathbb E}} [\phi(x)] \approx \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) = \hat \Phi
 \]
+
+That is, we could use a [simple Monte Carlo estimator](#simple-monte-carlo).
 
 But when we generate samples from \(q\), values of \(x\) where \(q(x)\) is greater than \(p(x)\) will be _over-represented_ in this estimator, and points where \(q(x)\) is less than \(p(x)\) will be _under-represented_. To take into account the fact that we have sampled from the wrong distribution, we introduce _weights_.
 
@@ -220,13 +223,13 @@ Finally, we rewrite our estimator under \(q\)
 
 however, the estimator as written still relies on \(p(x)\), we want an estimator that relies on \(\tilde p(x)\)
 
-\[
-= \frac{Z_q}{Z_p}\int \phi(x) \cdot \frac{\tilde p(x)}{\tilde q(x)} \cdot q(x) dx \\
-\approx \frac{Z_q}{Z_p} \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot \tilde w_r \\
-= \frac{\frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot  \tilde w_r}{\frac{1}{R}\sum_{r=1}^R \tilde w_r} \\
-= \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot  w_r \\
-= \hat \Phi_{iw}
-\]
+\begin{align}
+&= \frac{Z_q}{Z_p} \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot \frac{\tilde p(x^{(r)})}{\tilde q(x^{(r)})} \\
+&= \frac{Z_q}{Z_p} \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot \tilde w_r \\
+&= \frac{\frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot  \tilde w_r}{\frac{1}{R}\sum_{r=1}^R \tilde w_r} \\
+&= \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot  w_r \\
+&= \hat \Phi_{iw}
+\end{align}
 
 !!! warning
     I don't know where the \(q(x)\) went from line 1 to 2?
@@ -238,7 +241,7 @@ where \(\frac{Z_p}{Z_q} = \frac{1}{R}\sum_{r=1}^R \tilde w_r\), \(w_r = \frac{\t
 
 ### Rejection Sampling
 
-In [**rejection sampling**](https://en.wikipedia.org/wiki/Rejection_sampling) we assume again a one-dimensional density \(p(x) = \tilde p(x)/Z\) that is too complicated a function for us to be able to sample from it directly. We assume that we have a simpler _proposal density_ \(q(x)\) which we can evaluate (within a multiplicative factor \(Z_q\), as before), and from which we can generate samples. We further assume that we know the value of a constant \(c\) such that
+In [**rejection sampling**](https://en.wikipedia.org/wiki/Rejection_sampling) we assume again a one-dimensional density \(p(x) = \tilde p(x)/Z\) that is too complicated a function for us to be able to sample from it directly. We assume that we have a simpler __proposal density__ \(q(x)\) which we can evaluate (within a multiplicative factor \(Z_q\), as before), and from which we can generate samples. We further assume that we know the value of a constant \(c\) such that
 
 \[
 c \tilde q(x) > \tilde p(x) \quad \forall x
@@ -269,11 +272,10 @@ In a high-dimensional problem it is very likely that the requirement that \(c \t
 In general \(c\) grows exponentially with the dimensionality \(N\), so the acceptance rate is expected to be exponentially small in \(N\)
 
 \[
-\text{acceptance rate} = \frac{\text{area under } \tilde p}{\text{area under } \tilde q} = \frac{1}{Z}
+\text{acceptance rate} = \frac{\text{area under } \tilde p}{\text{area under } c\tilde q} = \frac{1}{Z}
 \]
 
 ### Metropolis-Hastings method
-
 
 Importance sampling and rejection sampling work well only if the proposal density \(q(x)\) is similar to \(p(x)\). In high dimensions, it is hard to find one such \(q\).
 
@@ -301,7 +303,7 @@ a = \frac{\tilde p(x')q(x^{(t)} | x')}{\tilde p(x^{(t)}) q(x' | x^{(t)})}
 
 Metropolis–Hastings converges to \(p(x)\) for any \(q(x' | x^{(t)}) \ge 0 \quad \forall x', x^{(t)}\) as \(t \rightarrow \infty\). That is, our list of samples converges towards the true distribution \(\{x^{(r)}\}_{r=1}^R \rightarrow p(x) \).
 
-There are however, no guarantees on convergence. The Metropolis method is an example of a Markov chain Monte Carlo method (abbreviated MCMC). In contrast to rejection sampling, where the accepted points \(\{x^{(t)}\}\) are independent samples from the desired distribution, Markov chain Monte Carlo methods involve a Markov process in which a sequence of states \(\{x^{(t)}\}\) is generated, each sample \(x^{(t)}\) having a probability distribution that depends on the previous value, \(x^{(t-1)}\). Since successive samples are dependent, the Markov chain may have to be run for a considerable time in order to generate samples that are effectively independent samples from \(p\).
+There are however, no guarantees on convergence. The Metropolis method is an example of a [Markov chain Monte Carlo method](https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo) (abbreviated MCMC). In contrast to rejection sampling, where the accepted points \(\{x^{(t)}\}\) are independent samples from the desired distribution, Markov chain Monte Carlo methods involve a Markov process in which a sequence of states \(\{x^{(t)}\}\) is generated, each sample \(x^{(t)}\) having a probability distribution that depends on the previous value, \(x^{(t-1)}\). Since successive samples are dependent, the Markov chain may have to be run for a considerable time in order to generate samples that are effectively independent samples from \(p\).
 
 Just as it was difficult to estimate the variance of an importance sampling estimator, so it is difficult to assess whether a Markov chain Monte Carlo method has ‘converged’, and to quantify how long one has to wait to obtain samples that are effectively independent samples from \(p\).
 
