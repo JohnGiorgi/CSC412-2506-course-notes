@@ -304,13 +304,17 @@ _Step-by-step_
 
 ### Question 1
 
-Given the following UGM:
+(a) State the Global, Local and Pairwise Markov properties used to determine conditional independence in a undirected graphical model.
+
+(b) Given the following UGMs:
 
 ![](./img/lecture_4_4.png)
 
-(a) State the Global, Local and Pairwise Markov properties.
+use each to Markov property to give an example of two sets of conditionally independent nodes in the graph.
 
-(b) Use each to give an example of two sets of conditionally independent nodes in the graph.
+(c) Do the same for the following UGM:
+
+![](./img/lecture_4_3.png)
 
 __ANSWER__
 
@@ -336,7 +340,132 @@ s \bot t | \mathcal V \setminus \{s, t\} \Leftrightarrow G_{st} = 0
 - Local: \(1 \bot \text{rest} | \{2, 3\}\)
 - Pairwise: \(1 \bot 7 | \text{rest}\)
 
+(c)
+
+- Global: \(\{X_1, X_2\} \bot \{X_{15}, X_{20}\} | \{X_3, X_6, X_7\}\)
+- Local: \(1 \bot \text{rest} | \{X_2, X_6\}\)
+- Pairwise: \(1 \bot 20 | \text{rest}\)
+
+### Question 2
+
+Given the following graph:
+
+![](./img/lecture_4_4.png)
+
+(a) What is a _maximal_ clique? State one example from the graph.
+
+(b) What is a _maximum_ clique? State on example from the graph.
+
+__ANSWER__
+
+(a)
+
+_def_. A [**maximal clique**](https://en.wikipedia.org/wiki/Clique_(graph_theory)#Definitions) is a clique that cannot be extended by including one more adjacent vertex.
+
+_def_. A [**maximum clique**](https://en.wikipedia.org/wiki/Clique_(graph_theory)#Definitions) is a clique of the _largest possible size_ in a given graph.
+
+(b)
+
+A _maximal clique_ is show in blue, while a _maximum clique_ is shown in green.
+
+![](./img/lecture_4_7.png)
+
+### Question 3
+
+Given the following graph:
+
+![](./img/lecture_4_4.png)
+
+(a) Write down the factorized joint distribution that this graphical model represents
+
+__ANSWER__
+
+(a)
+
+\[
+p(x) \propto \psi_{1, 2, 3}(x_1, x_2, x_3) \psi_{2, 3, 5}(x_2, x_3, x_5) \psi_{2, 4, 5}(x_2, x_4, x_5) \psi_{3, 5, 6}(x_3, x_5, x_6) \psi_{4, 5, 6, 7}(x_4, x_5, x_6, x_7)
+\]
+
+### Question 4
+
+Compare and contrast directed vs undirected graphical models
+
+<center>
+
+|     | DGMs | UGMs |
+| --- | ---- | ---- |
+|     |      |      |
+
+</center>
+
 ## Week 5: Exact Inference
+
+### Question 1
+
+Given the graph
+
+![](./img/sample_midterm_3.png)
+
+(a) Suppose we want to compute the partition function (\(Z(\theta)\), see [here](../lectures/week_4/#parameterization-of-an-ugm)) using the elimination ordering \(\prec= (1, 2, 3, 4, 5, 6)\). If we use the [variable elimination algorithm](../lectures/week_5/#variable-elimination), we will create new intermediate factors. What is the largest intermediate factor?
+
+__ANSWER__
+
+a) The size of the maximum factor is 3.
+
+The set of potentials given by the graph is
+
+\[
+\Psi = \{\psi_{X_1, X_2}(X_1, X_2), \psi_{X_1, X_3}(X_1, X_3), \psi_{X_2, X_4}(X_2, X_4), \psi_{X_3, X_4}(X_3, X_4), \psi_{X_4, X_5}(X_4, X_5), \psi_{X_5, X_6}(X_5, X_6) \}
+\]
+
+and the joint probability is therefore
+
+\[
+p(X) \propto \psi_{X_1, X_2}(X_1, X_2)\psi_{X_1, X_3}(X_1, X_3)\psi_{X_2, X_4}(X_2, X_4)\psi_{X_3, X_4}(X_3, X_4)\psi_{X_4, X_5}(X_4, X_5)\psi_{X_5, X_6}(X_5, X_6)
+\]
+
+finally, the partition function with elimination ordering \(\prec= (1, 2, 3, 4, 5, 6)\) is given by
+
+\begin{align}
+\tau(X) &= \sum_z \prod_{\psi \in \Psi} \psi(z_{Scope[\psi] \cap Z}, x_{Scope[\psi] \cap X}) \\
+&= \sum_{x_6}\sum_{x_5}\sum_{x_4}\sum_{x_3}\sum_{x_2}\sum_{x_1} \psi_{X_1, X_2}(X_1, X_2)\psi_{X_1, X_3}(X_1, X_3)\psi_{X_2, X_4}(X_2, X_4)\psi_{X_3, X_4}(X_3, X_4)\psi_{X_4, X_5}(X_4, X_5)\psi_{X_5, X_6}(X_5, X_6)
+\end{align}
+
+Carrying out the elimination, (not shown here), we get intermediate factors
+
+\[
+\{\tau_1(x_2, x_3), \tau_2(x_3, x_4), \tau_3(x_4), \tau_4(x_5), \tau_5(x_6)\}
+\]
+
+\(\therefore\) the maximum factor is of size 3.
+
+b) The only edge that does not already exist is the edge between \(X_2\) and \(X_3\) (added by intermediate factor \(\tau_1(x_2, x_3)\)). The largest maximal clique is now of size 3 (\(\{x_2, x_3, x_4\}\)).
+
+(c)
+
+The partition function with elimination ordering \(\prec= (4, 1, 2, 3, 5, 6)\) is given by
+
+\begin{align}
+\tau(X) &= \sum_z \prod_{\psi \in \Psi} \psi(z_{Scope[\psi] \cap Z}, x_{Scope[\psi] \cap X}) \\
+&= \sum_{x_6}\sum_{x_5}\sum_{x_3}\sum_{x_2}\sum_{x_1}\sum_{x_4} \psi_{X_1, X_2}(X_1, X_2)\psi_{X_1, X_3}(X_1, X_3)\psi_{X_2, X_4}(X_2, X_4)\psi_{X_3, X_4}(X_3, X_4)\psi_{X_4, X_5}(X_4, X_5)\psi_{X_5, X_6}(X_5, X_6)
+\end{align}
+
+Carrying out the elimination, (not shown here), we get intermediate factors
+
+\[
+\{\tau_1(x_2, x_3, x_5), \tau_2(x_2, x_3, x_5), \tau_3(x_3, x_5), \tau_4(x_5), \tau_5(x_6)\}
+\]
+
+\(\therefore\) the maximum factor is of size 4.
+
+d) The added edges are between
+
+- \(X_2\) and \(X_3\) (added by intermediate factors \(\tau_1(x_2, x_3, x_5)\) / \(\tau_2(x_2, x_3, x_5)\))
+- \(X_2\) and \(X_5\) (added by intermediate factors \(\tau_1(x_2, x_3, x_5)\) / \(\tau_2(x_2, x_3, x_5)\))
+- \(X_3\) and \(X_5\) (added by intermediate factors \(\tau_1(x_2, x_3, x_5)\) , \(\tau_2(x_2, x_3, x_5)\), \(\tau_3(x_3, x_5)\))
+
+The largest maximal clique is now of size 4 (\(\{x_2, x_3, x_4, x_5\}\)).
+
 ## Week 6
 ## Week 8: Sampling and Monte Carlo Methods
 
@@ -354,13 +483,13 @@ Given some data \(\{x^{(r)}\}^R_{r=1} \sim p(x)\), the simple Monte Carlo estima
 
 __ANSWER__
 
-(a)
+(a) To show that \(\hat \Phi\) is an unbiased estimator of \(\Phi\) we must show that for random samples \(\{x^{(r)}\}^R_{r=1}\) generated from \(p(x)\), the expectation of \(\hat \Phi\) is \(\Phi\):
 
 \[
 \mathbb E [\hat \Phi]_{x \sim p(\{x^{(r)}\}^R_{r=1})} = \mathbb E \bigg [ \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \bigg ] \\
 = \frac{1}{R} \sum_{r=1}^R \mathbb E \big [ \phi(x^{(r)}) \big ]  \\
-= \frac{1}{R} \sum_{r=1}^R \mathbb E_{x \sim p(x)} \big [ \phi(x) \big ] \\
-= \frac{R}{R} \mathbb E_{x \sim p(x)} \big [ \phi(x) \big ] \\
+= \frac{1}{R} \sum_{r=1}^R \underset{x \sim p(x)}{\operatorname{\mathbb E}}  \big [ \phi(x) \big ] \\
+= \frac{R}{R} \underset{x \sim p(x)}{\operatorname{\mathbb E}}  \big [ \phi(x) \big ] \\
 = \Phi \quad \square
 \]
 
@@ -374,9 +503,50 @@ __ANSWER__
 = \frac{1}{R} \text{var} [\phi(x) ] \quad \square
 \]
 
+### Question 2
+
+Starting from \(\Phi = \int \phi(x)p(x)dx\), derive the importance weighted estimator \(\hat \Phi_{iw}\) given
+
+\[
+\tilde w_r = \frac{\tilde p(x^{(r)})}{\tilde q(x^{(r)})}
+\]
+
+__ANSWER__
+
+\begin{align}
+\Phi &= \int \phi(x)p(x)dx \\
+&= \int \phi(x) \cdot \frac{p(x)}{q(x)} \cdot q(x)dx \\
+&\approx \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)})\frac{p(x^{(r)})}{q(x^{(r)})} \\
+&= \frac{Z_q}{Z_p} \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot \frac{\tilde p(x^{(r)})}{\tilde q(x^{(r)})} \\
+&= \frac{Z_q}{Z_p} \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot \tilde w_r \\
+&= \frac{\frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot  \tilde w_r}{\frac{1}{R}\sum_{r=1}^R \tilde w_r} \\
+&= \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot  w_r \\
+&= \hat \Phi_{iw}
+\end{align}
+
+where \(\frac{Z_p}{Z_q} = \frac{1}{R}\sum_{r=1}^R \tilde w_r\), \(w_r = \frac{\tilde w_r}{\sum_{r=1}^R \tilde w_r}\) and \(\hat \Phi_{iw}\) is our importance weighted estimator.
+
 ## Week 9: Hidden Markov Models
 
 ### Question 1
+
+Assume \(x\) is a discrete random variable with \(k\) states. How many parameters are needed to parameterize
+
+(a) \(x_t\)?
+
+(b) A _first-order_ Markov chain?
+
+(c) An \(m\)_-ordered_ Markov chain?
+
+__ANSWER__
+
+(a) \(k-1\), as the last state is implicit.
+
+(b) \(k(k-1)\), as we need \(k\) number of parameters for each parameter of \(x_t\)
+
+(c) \(k^m(k-1)\), as we need \(k^m\) number of parameters for each parameter of \(x_t\)
+
+### Question 2
 
 Say we have the following simple chain
 
@@ -441,15 +611,6 @@ p(x_3 = A | z_1 = S) = p(x_3 = A | z_3 = H)p(z_3 = H | z_1 = S) + p(x_3 = A | z_
 = 0.515
 \]
 
-### Question 3
-
-__ANSWER__
-
-a) The size of the maximum factor is 3.
-b) The size of the maximum clique is 3.
-c) The size of the maximum factor is 4.
-d) The size of the maximum clique is 4.
-
 ## Week 10: Stochastic Variational Inference / Automatic Differentiation Variation Inference (SAD VI)
 
 ### Question 1
@@ -479,3 +640,29 @@ because \(D_{KL}(q_\phi (z | x) || p_\theta (z | x)) \ge 0\)
 \]
 
 \(\therefore\) maximizing the ELBO \(\Rightarrow\) minimizing \(D_{KL}(q_\phi (z | x) || p_\theta (z | x))\).
+
+## Week 12
+
+### Question 1
+
+Compare and contrast _explicit_ vs. _implicit_ density models.
+
+__ANSWER__
+
+**Explicit density models** define an explicit density function \(p_{model}\theta(x ; \theta)\). For these models, maximization of the likelihood function is straightforward: we simply plug the models definition of the density function into the expression for likelihood and follow the gradient uphill.
+
+e.g. for the i.i.d case:
+
+\[
+\hat \theta_{MLE} = \underset{\theta}{\operatorname{argmax}} \sum \log P_{model} (x^{(i)} ; \theta)
+\]
+
+which is equivalent to the minimizing the KL divergence between \(P_{data}(x)\) and \(P_{model}(x ; \theta)\)
+
+\[
+\underset{\theta}{\operatorname{argmin}} D_{KL}(P_{data}(x) || P_{model}(x ; \theta))
+\]
+
+when \(p_{model}\theta(x ; \theta)\) is intractable, we use variational (e.g. VAEs) or MCMC approximations to compute the likelihood.
+
+In contrast, __implicit density models__ are trained without explicitly defining a density function. The way we interact \(P_{model}\) is through samples. An example is a General Adversarial Network (GAN).
