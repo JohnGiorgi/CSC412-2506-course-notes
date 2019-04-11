@@ -545,8 +545,29 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#heuristic-non-saturating-game" title="Heuristic, Non-saturating Game" class="md-nav__link">
+    Heuristic, Non-saturating Game
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maximum-likelihood-game" title="Maximum Likelihood Game" class="md-nav__link">
+    Maximum Likelihood Game
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary" title="Summary" class="md-nav__link">
+    Summary
+  </a>
   
 </li>
         
@@ -781,8 +802,29 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#heuristic-non-saturating-game" title="Heuristic, Non-saturating Game" class="md-nav__link">
+    Heuristic, Non-saturating Game
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maximum-likelihood-game" title="Maximum Likelihood Game" class="md-nav__link">
+    Maximum Likelihood Game
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary" title="Summary" class="md-nav__link">
+    Summary
+  </a>
   
 </li>
         
@@ -1086,6 +1128,57 @@ V(\theta^{(D)}, \theta^{(G)}) = -J^{(D)}(\theta^{(D)}, \theta^{(G)})
 <ul>
 <li><span><span class="MathJax_Preview">D_{\theta_D}(G_{\theta_G}(z)) \rightarrow 1</span><script type="math/tex">D_{\theta_D}(G_{\theta_G}(z)) \rightarrow 1</script></span></li>
 </ul>
+<h4 id="heuristic-non-saturating-game">Heuristic, Non-saturating Game<a class="headerlink" href="#heuristic-non-saturating-game" title="Permanent link">&para;</a></h4>
+<p>The cost used for the generator in the minimax game, <span><span class="MathJax_Preview">J(^{(G)}) = -J^{(D)}</span><script type="math/tex">J(^{(G)}) = -J^{(D)}</script></span> is useful for theoretical analysis, but does not perform especially well in practice.</p>
+<p><img alt="" src="../../img/lecture_12_5.png" /></p>
+<p>In the minimax game, the discriminator <em>minimizes</em> a cross-entropy, but the generator <em>maximizes</em> the same cross-entropy. This is unfortunate for the generator, because when the discriminator successfully rejects generator samples with high confidence, e.g. <span><span class="MathJax_Preview">D(G(z)) = 0</span><script type="math/tex">D(G(z)) = 0</script></span>, the generator’s gradient vanishes (the cost function becomes flat!). This is known as the <em>saturation problem</em>.</p>
+<p>To solve this problem, we introduce the non-saturating game, in which we continue to use cross-entropy minimization for the generator, but instead of flipping the sign on the discriminator’s cost to obtain a cost for the generator, we flip the target used to construct the cross-entropy cost</p>
+<div>
+<div class="MathJax_Preview">
+J^{(G)} = -\underset{z \sim p(z)}{\operatorname{\mathbb E}} \log(D(G(z)))
+</div>
+<script type="math/tex; mode=display">
+J^{(G)} = -\underset{z \sim p(z)}{\operatorname{\mathbb E}} \log(D(G(z)))
+</script>
+</div>
+<p>This leads to a strong gradient signal at <span><span class="MathJax_Preview">D(G(z)) = 0</span><script type="math/tex">D(G(z)) = 0</script></span>.</p>
+<p><img alt="" src="../../img/lecture_12_6.png" /></p>
+<p>In the minimax game, the generator minimizes the log-probability of the discriminator being correct. In this game, the generator maximizes the log- probability of the discriminator being mistaken.</p>
+<h4 id="maximum-likelihood-game">Maximum Likelihood Game<a class="headerlink" href="#maximum-likelihood-game" title="Permanent link">&para;</a></h4>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Skipped for now to save time, not mentioned on the <a href="http://www.cs.toronto.edu/~jessebett/CSC412/content/Final_Topics/final_topics.pdf">Study Guide</a>.</p>
+</div>
+<h3 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h3>
+<p>In summary,</p>
+<p><center></p>
+<table>
+<thead>
+<tr>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Generate samples in parallel</td>
+<td>No good method of evaluating</td>
+</tr>
+<tr>
+<td>No Markov Chains needed for sampling</td>
+<td>Failings of supervised learning (underfitting /overfitting)</td>
+</tr>
+<tr>
+<td>No variational bound</td>
+<td>Hard to train</td>
+</tr>
+<tr>
+<td>Subjectively better samples</td>
+<td>Mode collapse (samples are very similar)</td>
+</tr>
+</tbody>
+</table>
+<p></center></p>
                 
                   
                 
