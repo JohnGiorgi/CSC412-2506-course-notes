@@ -673,6 +673,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#question-2_2" title="Question 2" class="md-nav__link">
+    Question 2
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -689,6 +696,13 @@
           <li class="md-nav__item">
   <a href="#question-1_6" title="Question 1" class="md-nav__link">
     Question 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question-2_3" title="Question 2" class="md-nav__link">
+    Question 2
   </a>
   
 </li>
@@ -920,6 +934,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#question-2_2" title="Question 2" class="md-nav__link">
+    Question 2
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -936,6 +957,13 @@
           <li class="md-nav__item">
   <a href="#question-1_6" title="Question 1" class="md-nav__link">
     Question 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question-2_3" title="Question 2" class="md-nav__link">
+    Question 2
   </a>
   
 </li>
@@ -1509,8 +1537,51 @@ p(X) \propto \psi_{X_1, X_2}(X_1, X_2)\psi_{X_1, X_3}(X_1, X_3)\psi_{X_2, X_4}(X
 = \frac{R}{R^2} \text{var} [\phi(x) ] \
 = \frac{1}{R} \text{var} [\phi(x) ] \quad \square
 ]</p>
+<h3 id="question-2_2">Question 2<a class="headerlink" href="#question-2_2" title="Permanent link">&para;</a></h3>
+<p>Starting from <span><span class="MathJax_Preview">\Phi = \int \phi(x)p(x)dx</span><script type="math/tex">\Phi = \int \phi(x)p(x)dx</script></span>, derive the importance weighted estimator <span><span class="MathJax_Preview">\hat \Phi_{iw}</span><script type="math/tex">\hat \Phi_{iw}</script></span> given</p>
+<div>
+<div class="MathJax_Preview">
+\tilde w_r = \frac{\tilde p(x^{(r)})}{\tilde q(x^{(r)})}
+</div>
+<script type="math/tex; mode=display">
+\tilde w_r = \frac{\tilde p(x^{(r)})}{\tilde q(x^{(r)})}
+</script>
+</div>
+<p><strong>ANSWER</strong></p>
+<div>
+<div class="MathJax_Preview">\begin{align}
+\Phi &amp;= \int \phi(x)p(x)dx \\
+&amp;= \int \phi(x) \cdot \frac{p(x)}{q(x)} \cdot q(x)dx \\
+&amp;\approx \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)})\frac{p(x^{(r)})}{q(x^{(r)})} \\
+&amp;= \frac{Z_q}{Z_p} \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot \frac{\tilde p(x^{(r)})}{\tilde q(x^{(r)})} \\
+&amp;= \frac{Z_q}{Z_p} \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot \tilde w_r \\
+&amp;= \frac{\frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot  \tilde w_r}{\frac{1}{R}\sum_{r=1}^R \tilde w_r} \\
+&amp;= \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot  w_r \\
+&amp;= \hat \Phi_{iw}
+\end{align}</div>
+<script type="math/tex; mode=display">\begin{align}
+\Phi &= \int \phi(x)p(x)dx \\
+&= \int \phi(x) \cdot \frac{p(x)}{q(x)} \cdot q(x)dx \\
+&\approx \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)})\frac{p(x^{(r)})}{q(x^{(r)})} \\
+&= \frac{Z_q}{Z_p} \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot \frac{\tilde p(x^{(r)})}{\tilde q(x^{(r)})} \\
+&= \frac{Z_q}{Z_p} \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot \tilde w_r \\
+&= \frac{\frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot  \tilde w_r}{\frac{1}{R}\sum_{r=1}^R \tilde w_r} \\
+&= \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot  w_r \\
+&= \hat \Phi_{iw}
+\end{align}</script>
+</div>
+<p>where <span><span class="MathJax_Preview">\frac{Z_p}{Z_q} = \frac{1}{R}\sum_{r=1}^R \tilde w_r</span><script type="math/tex">\frac{Z_p}{Z_q} = \frac{1}{R}\sum_{r=1}^R \tilde w_r</script></span>, <span><span class="MathJax_Preview">w_r = \frac{\tilde w_r}{\sum_{r=1}^R \tilde w_r}</span><script type="math/tex">w_r = \frac{\tilde w_r}{\sum_{r=1}^R \tilde w_r}</script></span> and <span><span class="MathJax_Preview">\hat \Phi_{iw}</span><script type="math/tex">\hat \Phi_{iw}</script></span> is our importance weighted estimator.</p>
 <h2 id="week-9-hidden-markov-models">Week 9: Hidden Markov Models<a class="headerlink" href="#week-9-hidden-markov-models" title="Permanent link">&para;</a></h2>
 <h3 id="question-1_6">Question 1<a class="headerlink" href="#question-1_6" title="Permanent link">&para;</a></h3>
+<p>Assume <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> is a discrete random variable with <span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span> states. How many parameters are needed to parameterize</p>
+<p>(a) <span><span class="MathJax_Preview">x_t</span><script type="math/tex">x_t</script></span>?</p>
+<p>(b) A <em>first-order</em> Markov chain?</p>
+<p>(c) An <span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span><em>-ordered</em> Markov chain?</p>
+<p><strong>ANSWER</strong></p>
+<p>(a) <span><span class="MathJax_Preview">k-1</span><script type="math/tex">k-1</script></span>, as the last state is implicit.</p>
+<p>(b) <span><span class="MathJax_Preview">k(k-1)</span><script type="math/tex">k(k-1)</script></span>, as we need <span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span> number of parameters for each parameter of <span><span class="MathJax_Preview">x_t</span><script type="math/tex">x_t</script></span></p>
+<p>(c) <span><span class="MathJax_Preview">k^m(k-1)</span><script type="math/tex">k^m(k-1)</script></span>, as we need <span><span class="MathJax_Preview">k^m</span><script type="math/tex">k^m</script></span> number of parameters for each parameter of <span><span class="MathJax_Preview">x_t</span><script type="math/tex">x_t</script></span></p>
+<h3 id="question-2_3">Question 2<a class="headerlink" href="#question-2_3" title="Permanent link">&para;</a></h3>
 <p>Say we have the following simple chain</p>
 <p><img alt="" src="../img/lecture_8_3.png" /></p>
 <p>where</p>

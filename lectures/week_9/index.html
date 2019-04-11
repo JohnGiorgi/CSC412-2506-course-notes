@@ -846,7 +846,7 @@ p(x_{1:T}) = \prod_{t=1}^T p(x_t | x_{t-1})
 <p>A useful distinction to make at this point is between stationary and non-stationary distributions that generate our data</p>
 <ul>
 <li><strong>Stationary distribution</strong>: the distribution generating the data does not change through time</li>
-<li><strong>Non-stationary distribution</strong>: the distribution generating the data if a function of time</li>
+<li><strong>Non-stationary distribution</strong>: the distribution generating the data is a function of time</li>
 </ul>
 <p>We are only going to consider the case of a stationary distribution (because it greatly simplifies the math). In this case, we use the same distribution at every timestep, sometimes called a <a href="https://en.wikipedia.org/wiki/Markov_chain#Variations">homogenous Markov chain</a>. Therefore,</p>
 <div>
@@ -883,8 +883,8 @@ p(x_t | x_{1:t-1}) = p(x_t | x_{t-m:t-1})
 <p>Assume <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> is a discrete random variable with <span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span> states. How many parameters are needed to parameterize</p>
 <ul>
 <li><span><span class="MathJax_Preview">x_t</span><script type="math/tex">x_t</script></span>: <span><span class="MathJax_Preview">k-1</span><script type="math/tex">k-1</script></span>, as the last state is implicit.</li>
-<li><em>first-order chain</em>: <span><span class="MathJax_Preview">k(k-1)</span><script type="math/tex">k(k-1)</script></span>, as we need <span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span> number of parameters of each parameter of <span><span class="MathJax_Preview">x_t</span><script type="math/tex">x_t</script></span></li>
-<li><span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span><em>-order chain</em>: <span><span class="MathJax_Preview">k^m(k-1)</span><script type="math/tex">k^m(k-1)</script></span>, as we need <span><span class="MathJax_Preview">k^m</span><script type="math/tex">k^m</script></span> number of parameters of each parameter of <span><span class="MathJax_Preview">x_t</span><script type="math/tex">x_t</script></span></li>
+<li><em>first-order chain</em>: <span><span class="MathJax_Preview">k(k-1)</span><script type="math/tex">k(k-1)</script></span>, as we need <span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span> number of parameters for each parameter of <span><span class="MathJax_Preview">x_t</span><script type="math/tex">x_t</script></span></li>
+<li><span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span><em>-order chain</em>: <span><span class="MathJax_Preview">k^m(k-1)</span><script type="math/tex">k^m(k-1)</script></span>, as we need <span><span class="MathJax_Preview">k^m</span><script type="math/tex">k^m</script></span> number of parameters for each parameter of <span><span class="MathJax_Preview">x_t</span><script type="math/tex">x_t</script></span></li>
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -1124,7 +1124,7 @@ p(x_{t+1:T} | z_t) &= \sum_{z_{t+1}}^k p(z_{t+1}, x_{t+1:T} | z_t) \\
 <h3 id="viterbi-algorithm">Viterbi Algorithm<a class="headerlink" href="#viterbi-algorithm" title="Permanent link">&para;</a></h3>
 <div class="admonition error">
 <p class="admonition-title">Error</p>
-<p>Need to finish this, it was rushed into the last 5 minutes of lecture so my notes are poor. Use textbook/lecture slides to fill in the details.</p>
+<p>This will not be on the exam, so I won't bother cleaning up my notes and putting them here!</p>
 </div>
                 
                   

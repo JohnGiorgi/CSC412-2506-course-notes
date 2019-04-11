@@ -1040,7 +1040,7 @@ p_i = \frac{\tilde p_i}{Z}
 </script>
 </div>
 <p>and could sample from the probability distribution <span><span class="MathJax_Preview">\{p_i\}_{i=1}^R</span><script type="math/tex">\{p_i\}_{i=1}^R</script></span> using various methods based on a source of random bits. Unfortunately, the cost of this procedure is intractable.</p>
-<p>To evaluate <span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>, we must visit every point in the space. In figure (b) there are <span><span class="MathJax_Preview">50</span><script type="math/tex">50</script></span> uniformly spaced points in one dimension. If our system had, <span><span class="MathJax_Preview">N=1000</span><script type="math/tex">N=1000</script></span> dimensions say, then the corresponding number of points would be <span><span class="MathJax_Preview">50^{D} = 50^{1000}</span><script type="math/tex">50^{D} = 50^{1000}</script></span>. Even if each component <span><span class="MathJax_Preview">x_n</span><script type="math/tex">x_n</script></span> took only two discrete values, the number of evaluations of <span><span class="MathJax_Preview">\tilde p</span><script type="math/tex">\tilde p</script></span> needed to evaluate <span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span> would take many times longer than the age of the universe.</p>
+<p>To evaluate <span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>, we must visit every point in the space. In figure (b) there are <span><span class="MathJax_Preview">50</span><script type="math/tex">50</script></span> uniformly spaced points in one dimension. If our system had, <span><span class="MathJax_Preview">N=1000</span><script type="math/tex">N=1000</script></span> dimensions say, then the corresponding number of points would be <span><span class="MathJax_Preview">50^{N} = 50^{1000}</span><script type="math/tex">50^{N} = 50^{1000}</script></span>. Even if each component <span><span class="MathJax_Preview">x_n</span><script type="math/tex">x_n</script></span> took only two discrete values, the number of evaluations of <span><span class="MathJax_Preview">\tilde p</span><script type="math/tex">\tilde p</script></span> needed to evaluate <span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span> would take many times longer than the age of the universe.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p><strong>TL;DR</strong> The cost of this lattice discretization method of sampling from <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span> is exponential in the dimension of our data (e.g. <span><span class="MathJax_Preview">D^N</span><script type="math/tex">D^N</script></span> where <span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span> is the number of data points and <span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span> their dimension).</p>
@@ -1114,6 +1114,7 @@ q(x) = \frac{\tilde q(x)}{Z_q}
 \Phi = \underset{x \sim p(x)}{\operatorname{\mathbb E}} [\phi(x)] \approx \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) = \hat \Phi
 </script>
 </div>
+<p>That is, we could use a <a href="#simple-monte-carlo">simple Monte Carlo estimator</a>.</p>
 <p>But when we generate samples from <span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span>, values of <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> where <span><span class="MathJax_Preview">q(x)</span><script type="math/tex">q(x)</script></span> is greater than <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span> will be <em>over-represented</em> in this estimator, and points where <span><span class="MathJax_Preview">q(x)</span><script type="math/tex">q(x)</script></span> is less than <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span> will be <em>under-represented</em>. To take into account the fact that we have sampled from the wrong distribution, we introduce <em>weights</em>.</p>
 <div>
 <div class="MathJax_Preview">
@@ -1138,20 +1139,20 @@ q(x) = \frac{\tilde q(x)}{Z_q}
 </div>
 <p>however, the estimator as written still relies on <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span>, we want an estimator that relies on <span><span class="MathJax_Preview">\tilde p(x)</span><script type="math/tex">\tilde p(x)</script></span></p>
 <div>
-<div class="MathJax_Preview">
-= \frac{Z_q}{Z_p}\int \phi(x) \cdot \frac{\tilde p(x)}{\tilde q(x)} \cdot q(x) dx \\
-\approx \frac{Z_q}{Z_p} \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot \tilde w_r \\
-= \frac{\frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot  \tilde w_r}{\frac{1}{R}\sum_{r=1}^R \tilde w_r} \\
-= \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot  w_r \\
-= \hat \Phi_{iw}
-</div>
-<script type="math/tex; mode=display">
-= \frac{Z_q}{Z_p}\int \phi(x) \cdot \frac{\tilde p(x)}{\tilde q(x)} \cdot q(x) dx \\
-\approx \frac{Z_q}{Z_p} \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot \tilde w_r \\
-= \frac{\frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot  \tilde w_r}{\frac{1}{R}\sum_{r=1}^R \tilde w_r} \\
-= \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot  w_r \\
-= \hat \Phi_{iw}
-</script>
+<div class="MathJax_Preview">\begin{align}
+&amp;= \frac{Z_q}{Z_p} \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot \frac{\tilde p(x^{(r)})}{\tilde q(x^{(r)})} \\
+&amp;= \frac{Z_q}{Z_p} \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot \tilde w_r \\
+&amp;= \frac{\frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot  \tilde w_r}{\frac{1}{R}\sum_{r=1}^R \tilde w_r} \\
+&amp;= \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot  w_r \\
+&amp;= \hat \Phi_{iw}
+\end{align}</div>
+<script type="math/tex; mode=display">\begin{align}
+&= \frac{Z_q}{Z_p} \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot \frac{\tilde p(x^{(r)})}{\tilde q(x^{(r)})} \\
+&= \frac{Z_q}{Z_p} \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot \tilde w_r \\
+&= \frac{\frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot  \tilde w_r}{\frac{1}{R}\sum_{r=1}^R \tilde w_r} \\
+&= \frac{1}{R}\sum_{r=1}^R \phi(x^{(r)}) \cdot  w_r \\
+&= \hat \Phi_{iw}
+\end{align}</script>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -1163,7 +1164,7 @@ q(x) = \frac{\tilde q(x)}{Z_q}
 <p><span><span class="MathJax_Preview">\hat \Phi_{iw}</span><script type="math/tex">\hat \Phi_{iw}</script></span> is biased, by consistent.</p>
 </div>
 <h3 id="rejection-sampling">Rejection Sampling<a class="headerlink" href="#rejection-sampling" title="Permanent link">&para;</a></h3>
-<p>In <a href="https://en.wikipedia.org/wiki/Rejection_sampling"><strong>rejection sampling</strong></a> we assume again a one-dimensional density <span><span class="MathJax_Preview">p(x) = \tilde p(x)/Z</span><script type="math/tex">p(x) = \tilde p(x)/Z</script></span> that is too complicated a function for us to be able to sample from it directly. We assume that we have a simpler <em>proposal density</em> <span><span class="MathJax_Preview">q(x)</span><script type="math/tex">q(x)</script></span> which we can evaluate (within a multiplicative factor <span><span class="MathJax_Preview">Z_q</span><script type="math/tex">Z_q</script></span>, as before), and from which we can generate samples. We further assume that we know the value of a constant <span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span> such that</p>
+<p>In <a href="https://en.wikipedia.org/wiki/Rejection_sampling"><strong>rejection sampling</strong></a> we assume again a one-dimensional density <span><span class="MathJax_Preview">p(x) = \tilde p(x)/Z</span><script type="math/tex">p(x) = \tilde p(x)/Z</script></span> that is too complicated a function for us to be able to sample from it directly. We assume that we have a simpler <strong>proposal density</strong> <span><span class="MathJax_Preview">q(x)</span><script type="math/tex">q(x)</script></span> which we can evaluate (within a multiplicative factor <span><span class="MathJax_Preview">Z_q</span><script type="math/tex">Z_q</script></span>, as before), and from which we can generate samples. We further assume that we know the value of a constant <span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span> such that</p>
 <div>
 <div class="MathJax_Preview">
 c \tilde q(x) &gt; \tilde p(x) \quad \forall x
@@ -1197,10 +1198,10 @@ c \tilde q(x) > \tilde p(x) \quad \forall x
 <p>In general <span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span> grows exponentially with the dimensionality <span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span>, so the acceptance rate is expected to be exponentially small in <span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span></p>
 <div>
 <div class="MathJax_Preview">
-\text{acceptance rate} = \frac{\text{area under } \tilde p}{\text{area under } \tilde q} = \frac{1}{Z}
+\text{acceptance rate} = \frac{\text{area under } \tilde p}{\text{area under } c\tilde q} = \frac{1}{Z}
 </div>
 <script type="math/tex; mode=display">
-\text{acceptance rate} = \frac{\text{area under } \tilde p}{\text{area under } \tilde q} = \frac{1}{Z}
+\text{acceptance rate} = \frac{\text{area under } \tilde p}{\text{area under } c\tilde q} = \frac{1}{Z}
 </script>
 </div>
 <h3 id="metropolis-hastings-method">Metropolis-Hastings method<a class="headerlink" href="#metropolis-hastings-method" title="Permanent link">&para;</a></h3>
@@ -1232,7 +1233,7 @@ a = \frac{\tilde p(x')q(x^{(t)} | x')}{\tilde p(x^{(t)}) q(x' | x^{(t)})}
 <p>Note the difference from rejection sampling: in rejection sampling, rejected points are discarded and have no influence on the list of samples <span><span class="MathJax_Preview">\{x^{(r)}\}</span><script type="math/tex">\{x^{(r)}\}</script></span> that we collected. Here, a rejection causes the current state to be written again onto the list.</p>
 </div>
 <p>Metropolis–Hastings converges to <span><span class="MathJax_Preview">p(x)</span><script type="math/tex">p(x)</script></span> for any <span><span class="MathJax_Preview">q(x' | x^{(t)}) \ge 0 \quad \forall x', x^{(t)}</span><script type="math/tex">q(x' | x^{(t)}) \ge 0 \quad \forall x', x^{(t)}</script></span> as <span><span class="MathJax_Preview">t \rightarrow \infty</span><script type="math/tex">t \rightarrow \infty</script></span>. That is, our list of samples converges towards the true distribution <span><span class="MathJax_Preview">\{x^{(r)}\}_{r=1}^R \rightarrow p(x) </span><script type="math/tex">\{x^{(r)}\}_{r=1}^R \rightarrow p(x) </script></span>.</p>
-<p>There are however, no guarantees on convergence. The Metropolis method is an example of a Markov chain Monte Carlo method (abbreviated MCMC). In contrast to rejection sampling, where the accepted points <span><span class="MathJax_Preview">\{x^{(t)}\}</span><script type="math/tex">\{x^{(t)}\}</script></span> are independent samples from the desired distribution, Markov chain Monte Carlo methods involve a Markov process in which a sequence of states <span><span class="MathJax_Preview">\{x^{(t)}\}</span><script type="math/tex">\{x^{(t)}\}</script></span> is generated, each sample <span><span class="MathJax_Preview">x^{(t)}</span><script type="math/tex">x^{(t)}</script></span> having a probability distribution that depends on the previous value, <span><span class="MathJax_Preview">x^{(t-1)}</span><script type="math/tex">x^{(t-1)}</script></span>. Since successive samples are dependent, the Markov chain may have to be run for a considerable time in order to generate samples that are effectively independent samples from <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>.</p>
+<p>There are however, no guarantees on convergence. The Metropolis method is an example of a <a href="https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo">Markov chain Monte Carlo method</a> (abbreviated MCMC). In contrast to rejection sampling, where the accepted points <span><span class="MathJax_Preview">\{x^{(t)}\}</span><script type="math/tex">\{x^{(t)}\}</script></span> are independent samples from the desired distribution, Markov chain Monte Carlo methods involve a Markov process in which a sequence of states <span><span class="MathJax_Preview">\{x^{(t)}\}</span><script type="math/tex">\{x^{(t)}\}</script></span> is generated, each sample <span><span class="MathJax_Preview">x^{(t)}</span><script type="math/tex">x^{(t)}</script></span> having a probability distribution that depends on the previous value, <span><span class="MathJax_Preview">x^{(t-1)}</span><script type="math/tex">x^{(t-1)}</script></span>. Since successive samples are dependent, the Markov chain may have to be run for a considerable time in order to generate samples that are effectively independent samples from <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>.</p>
 <p>Just as it was difficult to estimate the variance of an importance sampling estimator, so it is difficult to assess whether a Markov chain Monte Carlo method has ‘converged’, and to quantify how long one has to wait to obtain samples that are effectively independent samples from <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>.</p>
 <h2 id="appendix">Appendix<a class="headerlink" href="#appendix" title="Permanent link">&para;</a></h2>
 <h3 id="useful-resources">Useful Resources<a class="headerlink" href="#useful-resources" title="Permanent link">&para;</a></h3>
