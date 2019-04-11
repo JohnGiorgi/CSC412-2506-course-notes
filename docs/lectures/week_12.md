@@ -122,7 +122,7 @@ The goal of generative models, in short, is to produce samples similar to \(P_{d
 
 ## Implicit Density Models
 
-In implicit density models, we do not define \(P_{model}(x, \theta)\) explicitly. Instead, we interact with \(P_{model}\) through samples.
+In implicit density models, we do not define \(P_{model}(x; \theta)\) explicitly. Instead, we interact with \(P_{model}\) through samples.
 
 A taxonomic tree of generative models is shown below:
 
@@ -131,9 +131,9 @@ A taxonomic tree of generative models is shown below:
 !!! cite
     [NIPS 2016 Tutorial: Generative Adversarial Networks; Goodfellow (2016)](https://arxiv.org/pdf/1701.00160.pdf).
 
-_But how do we train it?_ No density means _no likelihood evaluation_.
+_But how do we train it?_ No density means _no likelihood evaluation_. We will look at a specific instance of implicit density models known as Generative Adversarial Networks.
 
-### General Adversarial Network (GAN) Approach
+## General Adversarial Network (GAN) Approach
 
 In the general adversarial approach, we _do not_ have likelihoods, only samples. The idea is based on an adversarial game and pulls heavily from [game theory](https://en.wikipedia.org/wiki/Game_theory).
 
@@ -142,7 +142,165 @@ The basic idea of GANs is to set up a game between two players:
 - One of them is called the **generator** (\(G_{\theta_G}\)). The generator creates samples that are intended to come from the same distribution as the training data.
 - The other player is the **discriminator** (\(D_{\theta_D}\)). The discriminator examines samples to determine whether they are real or fake.
 
-The discriminator learns using traditional supervised learning techniques, dividing inputs into two classes (real or fake). The generator is trained to fool the discriminator. Both are almost always modeled as neural networks (and are therefore differentiable w.r.t their outputs)
+The discriminator learns using traditional supervised learning techniques, dividing inputs into two classes (real or fake). The generator is trained to fool the discriminator. Both are almost always modeled as neural networks (and are therefore differentiable w.r.t their outputs). Once training is complete, _we throw away the discriminator_.
 
 !!! tip
     We can think of the generator as being like a counterfeiter, trying to make fake money, and the discriminator as being like police, trying to allow legitimate money and catch counterfeit money. To succeed in this game, the counterfeiter must learn to make money that is indistinguishable from genuine money, and the generator network must learn to create samples that are drawn from the same distribution as the training data.
+
+Formally, GANs are structured as a probabilistic model containing latent variables \(z\) and observed variable \(x\)
+
+![](../img/lecture_12_3.png)
+
+!!! cite
+    [NIPS 2016 Tutorial: Generative Adversarial Networks; Goodfellow (2016)](https://arxiv.org/pdf/1701.00160.pdf).
+
+to sample from the model:
+
+- first sample \(z \sim p(z)\) ; where \(p(z)\) is some prior distribution
+- then \(x = G(z) \sim P_{model}\)
+
+notice that we _never explicitly define a distribution_ \(P_{model}(x; \theta)\). Contrast this with VAEs, where to sample from the model:
+
+- first sample \(z \sim q_\phi(z | x)\) for some input \(x\)
+- then using the encoder, compute \(\theta = f(z)\)
+- finally, using the decoder, sample \(x \sim p_\theta(x | z)\)
+
+notice that we _explicitly define a distribution_ (\(p_\theta(x | z)\)) and sample from it.
+
+### Adversarial Game, the Specifics
+
+In the adversarial game, both players have cost functions that are defined in terms of both players’ parameters
+
+- The **discriminator** wishes to minimize \(J^{(D)}(\theta_D, \theta_G)\) and must do so while controlling only \(\theta_D\).
+- The **generator** wishes to minimize \(J^{(G)}(\theta_D, \theta_G)\) and must do so while controlling only \(\theta_G\).
+
+Because each player’s cost depends on the other player’s parameters, but each player cannot control the other player’s parameters, this scenario is most straightforward to describe as a game rather than as an optimization problem
+
+#### Training Procedure
+
+The training process consists of simultaneous [SGD](https://en.wikipedia.org/wiki/Stochastic_gradient_descent). On each step, two minibatches are sampled: a minibatch of \(x\) values from the dataset and a minibatch of \(z\) values drawn from the model’s prior over latent variables, e.g.,
+
+1. \(x \sim P_{data}\)
+2. \(z \sim p(z) \Rightarrow x \sim P_{G(z)}\)
+
+
+Then two gradient steps are made simultaneously: one updating \(\theta_D\) to reduce \(J^{(D)}\) and one updating \(\theta_G\) to reduce \(J^{(G)}\).
+
+### Cost Functions
+
+Several different cost functions may be used within the GANs framework. All of the different games designed for GANs so far use the same cost for the discriminator, \(J^{(D)}\). They differ only in terms of the cost used for the generator, \(J^{(G)}\).
+
+#### The Discriminator’s Cost
+
+The cost used for the discriminator is (almost) always:
+
+\[
+J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim P_{data}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
+\]
+
+This is just the standard cross-entropy cost that is minimized when training a standard binary classifier with a sigmoid output. The only difference is that the classifier is trained on two mini-batches of data; one coming from the dataset, where the label is 1 for all examples, and one coming from the generator, where the label is 0 for all examples.
+
+##### Optimal Discriminator Strategy
+
+Our goal is to minimize
+
+\[
+J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim P_{data}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
+\]
+
+in function space, specifying \(D(x)\) directly. We begin by assuming that both \(P_{data}\) and \(P_{model}\) are nonzero everywhere.
+
+!!! note
+    If we do not make this assumption, then some points are never visited during training, and have undefined behavior.
+
+![](../img/lecture_12_4.png)
+
+To minimize \(J^{(D)}\) with respect to \(D\), we can write down the functional
+derivatives with respect to a single entry \(D^{(x)}\), and set them equal to zero:
+
+\[
+\frac{\delta}{\delta D(x)}J^{(D)} = 0
+\]
+
+By solving this equation, we obtain
+
+\[
+D^\star(x)  = \frac{P_{data}(x)}{P_{data}(x) + P_{model}(x)}
+\]
+
+The discriminator (dashed blue line) estimates the ratio between the data density (black dots) and the sum of the data and model densities. Wherever the output of the discriminator is large, the model density is too low, and wherever the output of the discriminator is small, the model density is too high. Estimating this ratio is the key approximation mechanism used by GANs
+
+!!! note
+    We can't actually compute \(D^\star(x)\) directly but it illustrates how the discriminator achieves optimal behavior.
+
+##### Optimal Generator Strategy
+
+So far we have specified the cost function for only the discriminator. A complete specification of the game requires that we specify a cost function also for the generator.
+
+The simplest version of the game is a **zero-sum game**, in which the sum of all player’s costs is always zero. In this version of the game,
+
+\[
+J(^{(G)}) = -J^{(D)}
+\]
+
+Because \(J^{(G)}\) is tied directly to \(J^{(D)}\), we can summarize the entire game
+with a value function specifying the discriminator’s payoff:
+
+\[
+V(\theta^{(D)}, \theta^{(G)}) = -J^{(D)}(\theta^{(D)}, \theta^{(G)})
+\]
+
+Zero-sum games are also called **minimax** games because their solution involves minimization in an outer loop and maximization in an inner loop:
+
+\[
+\theta^{(G)\star} = \underset{\theta^{(G)}}{\operatorname{argmin}} \underset{\theta^{(D)}}{\operatorname{argmax}} V(\theta^{(D)}, \theta^{(G)})
+\]
+
+Where we want to maximize \(\theta_D\) such that
+
+- \(D_{\theta_D}(x) = 1\)
+- \(D_{\theta_D}(G(z)) = 0\)
+
+and minimize \(\theta_G\) such that
+
+- \(D_{\theta_D}(G_{\theta_G}(z)) \rightarrow 1\)
+
+#### Heuristic, Non-saturating Game
+
+The cost used for the generator in the minimax game, \(J(^{(G)}) = -J^{(D)}\) is useful for theoretical analysis, but does not perform especially well in practice.
+
+![](../img/lecture_12_5.png)
+
+In the minimax game, the discriminator _minimizes_ a cross-entropy, but the generator _maximizes_ the same cross-entropy. This is unfortunate for the generator, because when the discriminator successfully rejects generator samples with high confidence, e.g. \(D(G(z)) = 0\), the generator’s gradient vanishes (the cost function becomes flat!). This is known as the _saturation problem_.
+
+To solve this problem, we introduce the non-saturating game, in which we continue to use cross-entropy minimization for the generator, but instead of flipping the sign on the discriminator’s cost to obtain a cost for the generator, we flip the target used to construct the cross-entropy cost
+
+\[
+J^{(G)} = -\underset{z \sim p(z)}{\operatorname{\mathbb E}} \log(D(G(z)))
+\]
+
+This leads to a strong gradient signal at \(D(G(z)) = 0\).
+
+![](../img/lecture_12_6.png)
+
+In the minimax game, the generator minimizes the log-probability of the discriminator being correct. In this game, the generator maximizes the log- probability of the discriminator being mistaken.
+
+#### Maximum Likelihood Game
+
+!!! warning
+    Skipped for now to save time, not mentioned on the [Study Guide](http://www.cs.toronto.edu/~jessebett/CSC412/content/Final_Topics/final_topics.pdf).
+
+### Summary
+
+In summary,
+
+<center>
+
+| Pros                                 | Cons                                                        |
+| ------------------------------------ | ----------------------------------------------------------- |
+| Generate samples in parallel         | No good method of evaluating                                |
+| No Markov Chains needed for sampling | Failings of supervised learning (underfitting /overfitting) |
+| No variational bound                 | Hard to train                                               |
+| Subjectively better samples          | Mode collapse (samples are very similar)                    |
+
+</center>
