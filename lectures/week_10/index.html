@@ -889,7 +889,7 @@
 <li>Stochastic optimization</li>
 </ul>
 <h2 id="posterior-inference-for-latent-variable-models">Posterior Inference for Latent Variable Models<a class="headerlink" href="#posterior-inference-for-latent-variable-models" title="Permanent link">&para;</a></h2>
-<p>Imagine we had the following latent variable model</p>
+<p>Imagine we had the following <a href="https://en.wikipedia.org/wiki/Latent_variable_model">latent variable model</a></p>
 <p><img alt="" src="../../img/lecture_9_1.png" /></p>
 <p>which represents the probabilistic model <span><span class="MathJax_Preview">p(x, z ; \theta)</span><script type="math/tex">p(x, z ; \theta)</script></span> where</p>
 <ul>
@@ -928,11 +928,11 @@ p(z, \theta | x) = \frac{p(x | z, \theta)}{p(x)} = \frac{p(x | z, \theta)}{\int\
 <div>
 <div class="MathJax_Preview">\begin{align}
   D_{KL}(q_\phi(z | x) || p_\theta(z | x)) &amp;= \int q_\phi(z | x) \log \frac{q_\phi(z | x)}{p_\theta(z | x)}dz \\
-  &amp;= \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)}
+  &amp;= \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{q_\phi(z | x)}{p_\theta(z | x)}
 \end{align}</div>
 <script type="math/tex; mode=display">\begin{align}
   D_{KL}(q_\phi(z | x) || p_\theta(z | x)) &= \int q_\phi(z | x) \log \frac{q_\phi(z | x)}{p_\theta(z | x)}dz \\
-  &= \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)}
+  &= \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{q_\phi(z | x)}{p_\theta(z | x)}
 \end{align}</script>
 </div>
 <h5 id="properties-of-the-kl-divergence">Properties of the KL Divergence<a class="headerlink" href="#properties-of-the-kl-divergence" title="Permanent link">&para;</a></h5>
@@ -960,15 +960,15 @@ q_\phi \approx p_\theta \Rightarrow D_{KL}(q_\phi || p_\theta) = 0
 <p>To circumvent this issue of intractability, we will derive the <a href="https://en.wikipedia.org/wiki/Evidence_lower_bound"><strong>evidence lower bound (ELBO)</strong></a>, and show that maximizing the ELBO <span><span class="MathJax_Preview">\Rightarrow</span><script type="math/tex">\Rightarrow</script></span> minimizing <span><span class="MathJax_Preview">D_{KL}(q_\phi || p_\theta)</span><script type="math/tex">D_{KL}(q_\phi || p_\theta)</script></span>.</p>
 <div>
 <div class="MathJax_Preview">\begin{align}
-  D_{KL}(q_\phi (z | x) || p_\theta (z | x)) &amp;= \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)} \\
-  &amp;= \mathbb{E}_{z \sim q_\phi} \Bigg [ \log \Bigg ( q_\phi(z | x) \cdot \frac{p_\theta(x)}{p_\theta(z, x)} \Bigg ) \Bigg ] \\
-  &amp;= \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z, x)}  + \mathbb{E}_{z \sim q_\phi} \log p_\theta(x) \\
+  D_{KL}(q_\phi (z | x) || p_\theta (z | x)) &amp;= \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{q_\phi(z | x)}{p_\theta(z | x)} \\
+  &amp;= \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \Bigg [ \log \Bigg ( q_\phi(z | x) \cdot \frac{p_\theta(x)}{p_\theta(z, x)} \Bigg ) \Bigg ] \\
+  &amp;= \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{q_\phi(z | x)}{p_\theta(z, x)}  + \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log p_\theta(x) \\
   &amp;= -\mathcal L(\theta, \phi ; x)  + \log p_\theta(x) \\
 \end{align}</div>
 <script type="math/tex; mode=display">\begin{align}
-  D_{KL}(q_\phi (z | x) || p_\theta (z | x)) &= \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z | x)} \\
-  &= \mathbb{E}_{z \sim q_\phi} \Bigg [ \log \Bigg ( q_\phi(z | x) \cdot \frac{p_\theta(x)}{p_\theta(z, x)} \Bigg ) \Bigg ] \\
-  &= \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(z, x)}  + \mathbb{E}_{z \sim q_\phi} \log p_\theta(x) \\
+  D_{KL}(q_\phi (z | x) || p_\theta (z | x)) &= \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{q_\phi(z | x)}{p_\theta(z | x)} \\
+  &= \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \Bigg [ \log \Bigg ( q_\phi(z | x) \cdot \frac{p_\theta(x)}{p_\theta(z, x)} \Bigg ) \Bigg ] \\
+  &= \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{q_\phi(z | x)}{p_\theta(z, x)}  + \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log p_\theta(x) \\
   &= -\mathcal L(\theta, \phi ; x)  + \log p_\theta(x) \\
 \end{align}</script>
 </div>
@@ -1014,17 +1014,17 @@ f(E[X]) \le E[f(x)]
 <div class="MathJax_Preview">\begin{align}
 \log p(x) &amp;= \log \int p_\theta(x, z)dz \\
 &amp;= \log \int p_\theta(x, z) \frac{q_\phi(z | x)}{q_\phi(z | x)} dz \\
-&amp;= \log \mathbb{E}_{z \sim q_\phi} \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
-\Rightarrow  \log \mathbb{E}_{z \sim q_\phi} \frac{p_\theta(x, z)}{q_\phi(z | x)} &amp; \ge \mathbb{E}_{z \sim q_\phi} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\  
-&amp;= - \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
+&amp;= \log \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
+\Rightarrow  \log \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \frac{p_\theta(x, z)}{q_\phi(z | x)} &amp; \ge \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\  
+&amp;= - \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
 &amp;= \mathcal L(\theta, \phi ; x)
 \end{align}</div>
 <script type="math/tex; mode=display">\begin{align}
 \log p(x) &= \log \int p_\theta(x, z)dz \\
 &= \log \int p_\theta(x, z) \frac{q_\phi(z | x)}{q_\phi(z | x)} dz \\
-&= \log \mathbb{E}_{z \sim q_\phi} \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
-\Rightarrow  \log \mathbb{E}_{z \sim q_\phi} \frac{p_\theta(x, z)}{q_\phi(z | x)} & \ge \mathbb{E}_{z \sim q_\phi} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\  
-&= - \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
+&= \log \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
+\Rightarrow  \log \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \frac{p_\theta(x, z)}{q_\phi(z | x)} & \ge \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\  
+&= - \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
 &= \mathcal L(\theta, \phi ; x)
 \end{align}</script>
 </div>
@@ -1032,43 +1032,43 @@ f(E[X]) \le E[f(x)]
 <p>We have that</p>
 <div>
 <div class="MathJax_Preview">
-\mathcal L(\theta, \phi ; x) = \text{ELBO} = - \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)}
+\mathcal L(\theta, \phi ; x) = \text{ELBO} = - \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{q_\phi(z | x)}{p_\theta(x, z)}
 </div>
 <script type="math/tex; mode=display">
-\mathcal L(\theta, \phi ; x) = \text{ELBO} = - \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)}
+\mathcal L(\theta, \phi ; x) = \text{ELBO} = - \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{q_\phi(z | x)}{p_\theta(x, z)}
 </script>
 </div>
 <p>1) The most general interpretation of the ELBO is given by</p>
 <div>
 <div class="MathJax_Preview">\begin{align}
-  \mathcal L(\theta, \phi ; x) &amp;= - \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
-  &amp;= \mathbb{E}_{z \sim q_\phi} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
-  &amp;= \mathbb{E}_{z \sim q_\phi} \log \frac{p_\theta(z)p_\theta(x | z)}{q_\phi(z | x)} \\
-  &amp;= \mathbb{E}_{z \sim q_\phi} \Big [ \log p_\theta({x | z}) + \log p_\theta({z}) - \log {q_\phi(z | x)} \Big ]\\
+  \mathcal L(\theta, \phi ; x) &amp;= - \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
+  &amp;= \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
+  &amp;= \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{p_\theta(z)p_\theta(x | z)}{q_\phi(z | x)} \\
+  &amp;= \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \Big [ \log p_\theta({x | z}) + \log p_\theta({z}) - \log {q_\phi(z | x)} \Big ]\\
 \end{align}</div>
 <script type="math/tex; mode=display">\begin{align}
-  \mathcal L(\theta, \phi ; x) &= - \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
-  &= \mathbb{E}_{z \sim q_\phi} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
-  &= \mathbb{E}_{z \sim q_\phi} \log \frac{p_\theta(z)p_\theta(x | z)}{q_\phi(z | x)} \\
-  &= \mathbb{E}_{z \sim q_\phi} \Big [ \log p_\theta({x | z}) + \log p_\theta({z}) - \log {q_\phi(z | x)} \Big ]\\
+  \mathcal L(\theta, \phi ; x) &= - \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
+  &= \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{p_\theta(x, z)}{q_\phi(z | x)} \\
+  &= \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{p_\theta(z)p_\theta(x | z)}{q_\phi(z | x)} \\
+  &= \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \Big [ \log p_\theta({x | z}) + \log p_\theta({z}) - \log {q_\phi(z | x)} \Big ]\\
 \end{align}</script>
 </div>
 <p>2) We can also re-write 1) using entropy</p>
 <div>
 <div class="MathJax_Preview">
-\mathbb{E}_{z \sim q_\phi} \Big [ \log p_\theta({x | z}) + \log p_\theta({z}) \Big ] H \Big [ q_\phi(z | x) \Big ] \\
+\underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \Big [ \log p_\theta({x | z}) + \log p_\theta({z}) \Big ] H \Big [ q_\phi(z | x) \Big ] \\
 </div>
 <script type="math/tex; mode=display">
-\mathbb{E}_{z \sim q_\phi} \Big [ \log p_\theta({x | z}) + \log p_\theta({z}) \Big ] H \Big [ q_\phi(z | x) \Big ] \\
+\underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \Big [ \log p_\theta({x | z}) + \log p_\theta({z}) \Big ] H \Big [ q_\phi(z | x) \Big ] \\
 </script>
 </div>
 <p>3) Another re-write and we arrive at</p>
 <div>
 <div class="MathJax_Preview">
-\mathbb{E}_{z \sim q_\phi} \Big [ \log p_\theta({x | z}) \Big ] - D_{KL}(q_\phi(z | x) || p_\theta(z))
+\underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \Big [ \log p_\theta({x | z}) \Big ] - D_{KL}(q_\phi(z | x) || p_\theta(z))
 </div>
 <script type="math/tex; mode=display">
-\mathbb{E}_{z \sim q_\phi} \Big [ \log p_\theta({x | z}) \Big ] - D_{KL}(q_\phi(z | x) || p_\theta(z))
+\underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \Big [ \log p_\theta({x | z}) \Big ] - D_{KL}(q_\phi(z | x) || p_\theta(z))
 </script>
 </div>
 <div class="admonition tip">
@@ -1107,12 +1107,12 @@ q_\phi(z, \theta | \phi) = q_\phi(\theta | \phi_{\theta})\prod_{i=1}^Nq(z_i | \p
 <p>We have that</p>
 <div>
 <div class="MathJax_Preview">\begin{align}
-\mathcal L(\phi ; x) &amp;= - \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
-&amp;= \mathbb{E}_{z \sim q_\phi} \Big [ \log p_\theta({x | z}) - \log {q_\phi(z | x)} \Big ] \\
+\mathcal L(\phi ; x) &amp;= - \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
+&amp;= \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \Big [ \log p_\theta({x | z}) - \log {q_\phi(z | x)} \Big ] \\
 \end{align}</div>
 <script type="math/tex; mode=display">\begin{align}
-\mathcal L(\phi ; x) &= - \mathbb{E}_{z \sim q_\phi} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
-&= \mathbb{E}_{z \sim q_\phi} \Big [ \log p_\theta({x | z}) - \log {q_\phi(z | x)} \Big ] \\
+\mathcal L(\phi ; x) &= - \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \log \frac{q_\phi(z | x)}{p_\theta(x, z)} \\
+&= \underset{z \sim q_\phi}{\operatorname{\mathbb{E}}} \Big [ \log p_\theta({x | z}) - \log {q_\phi(z | x)} \Big ] \\
 \end{align}</script>
 </div>
 <p>If we want to optimize this with gradient methods, we will need to compute <span><span class="MathJax_Preview">\nabla_\phi \mathcal L(\phi ; x)</span><script type="math/tex">\nabla_\phi \mathcal L(\phi ; x)</script></span>. Nowadays, we have <a href="https://en.wikipedia.org/wiki/Automatic_differentiation">automatic differentiation (AD)</a>. We can optimize with gradient methods if:</p>

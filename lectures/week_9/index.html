@@ -1076,16 +1076,16 @@ p(z_t | x_{1:T}) \propto p(z_t, x_{1:T}) \\
 </div>
 <h4 id="forward-recursion">Forward Recursion<a class="headerlink" href="#forward-recursion" title="Permanent link">&para;</a></h4>
 <div>
-<div class="MathJax_Preview">
-p(z_t, x_{1:t}) = \sum^k_{z_{t-1} = 1}p(z_{t-1}, z_t, x_{1:t}) \\
-= \sum^k_{z_{t-1} = 1} p(x_t | z_{t-1}, z_t, x_{1:t-1})p(z_t | z_{t-1}, x_{1:t-1})p(z_{t-1}, x_{1:t-1}) \\
-= \alpha_t(z_t) = p(x_t | z_t) \sum^k_{z_{t-1} = 1} p(z_t | z_{t-1}) \alpha_{t-1}(z_{t-1})\\
-</div>
-<script type="math/tex; mode=display">
-p(z_t, x_{1:t}) = \sum^k_{z_{t-1} = 1}p(z_{t-1}, z_t, x_{1:t}) \\
-= \sum^k_{z_{t-1} = 1} p(x_t | z_{t-1}, z_t, x_{1:t-1})p(z_t | z_{t-1}, x_{1:t-1})p(z_{t-1}, x_{1:t-1}) \\
-= \alpha_t(z_t) = p(x_t | z_t) \sum^k_{z_{t-1} = 1} p(z_t | z_{t-1}) \alpha_{t-1}(z_{t-1})\\
-</script>
+<div class="MathJax_Preview">\begin{align}
+p(z_t, x_{1:t}) &amp;= \sum^k_{z_{t-1} = 1}p(z_{t-1}, z_t, x_{1:t}) \\
+&amp;= \sum^k_{z_{t-1} = 1} p(x_t | z_{t-1}, z_t, x_{1:t-1})p(z_t | z_{t-1}, x_{1:t-1})p(z_{t-1}, x_{1:t-1}) \\
+&amp;\Rightarrow \alpha_t(z_t) = p(x_t | z_t) \sum^k_{z_{t-1} = 1} p(z_t | z_{t-1}) \alpha_{t-1}(z_{t-1})\\
+\end{align}</div>
+<script type="math/tex; mode=display">\begin{align}
+p(z_t, x_{1:t}) &= \sum^k_{z_{t-1} = 1}p(z_{t-1}, z_t, x_{1:t}) \\
+&= \sum^k_{z_{t-1} = 1} p(x_t | z_{t-1}, z_t, x_{1:t-1})p(z_t | z_{t-1}, x_{1:t-1})p(z_{t-1}, x_{1:t-1}) \\
+&\Rightarrow \alpha_t(z_t) = p(x_t | z_t) \sum^k_{z_{t-1} = 1} p(z_t | z_{t-1}) \alpha_{t-1}(z_{t-1})\\
+\end{align}</script>
 </div>
 <p>Notice that our forward recursion contains our emission, <span><span class="MathJax_Preview">p(x_t | z_t)</span><script type="math/tex">p(x_t | z_t)</script></span> and transition, <span><span class="MathJax_Preview">p(z_t | z_{t-1})</span><script type="math/tex">p(z_t | z_{t-1})</script></span> probabilities. If we recurse all the way down to <span><span class="MathJax_Preview">\alpha_1(z_1)</span><script type="math/tex">\alpha_1(z_1)</script></span>, we get</p>
 <div>
@@ -1102,17 +1102,15 @@ p(z_t, x_{1:t}) = \sum^k_{z_{t-1} = 1}p(z_{t-1}, z_t, x_{1:t}) \\
 <div class="MathJax_Preview">\begin{align}
 p(x_{t+1:T} | z_t) &amp;= \sum_{z_{t+1}}^k p(z_{t+1}, x_{t+1:T} | z_t) \\
 &amp;= \sum_{z_{t+1}}^k p(x_{t+2:T} | z_{t+1}, z_t, x_{t+1})p(x_{t+1} | z_{t+1}, z_t)p(z_{t+1} | z_t) \\
-&amp;= \sum_{z_{t+1}}^k p(x_{t+2:T} | z_{t+1})p(x_{t+1} | z_{t+1})p(z_{t+1} | z_t) \\
-&amp;= \sum_{z_{t+1}}^k \beta_{t+1}(z_t) \varepsilon_{t+1} T_{t \rightarrow t+1}\ \\
+&amp;\Rightarrow \beta_t(z_t) = \sum_{z_{t+1}}^k p(x_{t+2:T} | z_{t+1})p(x_{t+1} | z_{t+1})p(z_{t+1} | z_t) \\
 \end{align}</div>
 <script type="math/tex; mode=display">\begin{align}
 p(x_{t+1:T} | z_t) &= \sum_{z_{t+1}}^k p(z_{t+1}, x_{t+1:T} | z_t) \\
 &= \sum_{z_{t+1}}^k p(x_{t+2:T} | z_{t+1}, z_t, x_{t+1})p(x_{t+1} | z_{t+1}, z_t)p(z_{t+1} | z_t) \\
-&= \sum_{z_{t+1}}^k p(x_{t+2:T} | z_{t+1})p(x_{t+1} | z_{t+1})p(z_{t+1} | z_t) \\
-&= \sum_{z_{t+1}}^k \beta_{t+1}(z_t) \varepsilon_{t+1} T_{t \rightarrow t+1}\ \\
+&\Rightarrow \beta_t(z_t) = \sum_{z_{t+1}}^k p(x_{t+2:T} | z_{t+1})p(x_{t+1} | z_{t+1})p(z_{t+1} | z_t) \\
 \end{align}</script>
 </div>
-<p>Notice that our backward recursion contains our emission, <span><span class="MathJax_Preview">p(x_{t+1} | z_{t+1})</span><script type="math/tex">p(x_{t+1} | z_{t+1})</script></span> and transition, <span><span class="MathJax_Preview">pp(z_{t+1} | z_t)</span><script type="math/tex">pp(z_{t+1} | z_t)</script></span> probabilities. If we recurse all the way down to <span><span class="MathJax_Preview">\beta_1(z_1)</span><script type="math/tex">\beta_1(z_1)</script></span>, we get</p>
+<p>Notice that our backward recursion contains our emission, <span><span class="MathJax_Preview">p(x_{t+1} | z_{t+1})</span><script type="math/tex">p(x_{t+1} | z_{t+1})</script></span> and transition, <span><span class="MathJax_Preview">p(z_{t+1} | z_t)</span><script type="math/tex">p(z_{t+1} | z_t)</script></span> probabilities. If we recurse all the way down to <span><span class="MathJax_Preview">\beta_1(z_1)</span><script type="math/tex">\beta_1(z_1)</script></span>, we get</p>
 <div>
 <div class="MathJax_Preview">
 \beta_1(z_1) = p(x_{3:T} | z_{2})p(x_{2} | z_{2})p(z_{2} | z_1) \\
