@@ -480,13 +480,73 @@
     Implicit Density Models
   </a>
   
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#general-adversarial-network-gan-approach" title="General Adversarial Network (GAN) Approach" class="md-nav__link">
+    General Adversarial Network (GAN) Approach
+  </a>
+  
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#general-adversarial-network-gan-approach" title="General Adversarial Network (GAN) Approach" class="md-nav__link">
-    General Adversarial Network (GAN) Approach
+  <a href="#adversarial-game-the-specifics" title="Adversarial Game, the Specifics" class="md-nav__link">
+    Adversarial Game, the Specifics
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#training-procedure" title="Training Procedure" class="md-nav__link">
+    Training Procedure
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cost-functions" title="Cost Functions" class="md-nav__link">
+    Cost Functions
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-discriminators-cost" title="The Discriminator’s Cost" class="md-nav__link">
+    The Discriminator’s Cost
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#optimal-discriminator-strategy" title="Optimal Discriminator Strategy" class="md-nav__link">
+    Optimal Discriminator Strategy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optimal-generator-strategy" title="Optimal Generator Strategy" class="md-nav__link">
+    Optimal Generator Strategy
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -656,13 +716,73 @@
     Implicit Density Models
   </a>
   
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#general-adversarial-network-gan-approach" title="General Adversarial Network (GAN) Approach" class="md-nav__link">
+    General Adversarial Network (GAN) Approach
+  </a>
+  
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#general-adversarial-network-gan-approach" title="General Adversarial Network (GAN) Approach" class="md-nav__link">
-    General Adversarial Network (GAN) Approach
+  <a href="#adversarial-game-the-specifics" title="Adversarial Game, the Specifics" class="md-nav__link">
+    Adversarial Game, the Specifics
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#training-procedure" title="Training Procedure" class="md-nav__link">
+    Training Procedure
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cost-functions" title="Cost Functions" class="md-nav__link">
+    Cost Functions
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-discriminators-cost" title="The Discriminator’s Cost" class="md-nav__link">
+    The Discriminator’s Cost
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#optimal-discriminator-strategy" title="Optimal Discriminator Strategy" class="md-nav__link">
+    Optimal Discriminator Strategy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optimal-generator-strategy" title="Optimal Generator Strategy" class="md-nav__link">
+    Optimal Generator Strategy
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -822,26 +942,150 @@ x \sim p_\theta(x | z)
 <p>Everything up until this point was considered review. Everything that follows is new content.</p>
 </div>
 <h2 id="implicit-density-models">Implicit Density Models<a class="headerlink" href="#implicit-density-models" title="Permanent link">&para;</a></h2>
-<p>In implicit density models, we do not define <span><span class="MathJax_Preview">P_{model}(x, \theta)</span><script type="math/tex">P_{model}(x, \theta)</script></span> explicitly. Instead, we interact with <span><span class="MathJax_Preview">P_{model}</span><script type="math/tex">P_{model}</script></span> through samples.</p>
+<p>In implicit density models, we do not define <span><span class="MathJax_Preview">P_{model}(x; \theta)</span><script type="math/tex">P_{model}(x; \theta)</script></span> explicitly. Instead, we interact with <span><span class="MathJax_Preview">P_{model}</span><script type="math/tex">P_{model}</script></span> through samples.</p>
 <p>A taxonomic tree of generative models is shown below:</p>
 <p><img alt="" src="../../img/lecture_12_2.png" /></p>
 <div class="admonition cite">
 <p class="admonition-title">Cite</p>
 <p><a href="https://arxiv.org/pdf/1701.00160.pdf">NIPS 2016 Tutorial: Generative Adversarial Networks; Goodfellow (2016)</a>.</p>
 </div>
-<p><em>But how do we train it?</em> No density means <em>no likelihood evaluation</em>.</p>
-<h3 id="general-adversarial-network-gan-approach">General Adversarial Network (GAN) Approach<a class="headerlink" href="#general-adversarial-network-gan-approach" title="Permanent link">&para;</a></h3>
+<p><em>But how do we train it?</em> No density means <em>no likelihood evaluation</em>. We will look at a specific instance of implicit density models known as Generative Adversarial Networks.</p>
+<h2 id="general-adversarial-network-gan-approach">General Adversarial Network (GAN) Approach<a class="headerlink" href="#general-adversarial-network-gan-approach" title="Permanent link">&para;</a></h2>
 <p>In the general adversarial approach, we <em>do not</em> have likelihoods, only samples. The idea is based on an adversarial game and pulls heavily from <a href="https://en.wikipedia.org/wiki/Game_theory">game theory</a>.</p>
 <p>The basic idea of GANs is to set up a game between two players:</p>
 <ul>
 <li>One of them is called the <strong>generator</strong> (<span><span class="MathJax_Preview">G_{\theta_G}</span><script type="math/tex">G_{\theta_G}</script></span>). The generator creates samples that are intended to come from the same distribution as the training data.</li>
 <li>The other player is the <strong>discriminator</strong> (<span><span class="MathJax_Preview">D_{\theta_D}</span><script type="math/tex">D_{\theta_D}</script></span>). The discriminator examines samples to determine whether they are real or fake.</li>
 </ul>
-<p>The discriminator learns using traditional supervised learning techniques, dividing inputs into two classes (real or fake). The generator is trained to fool the discriminator. Both are almost always modeled as neural networks (and are therefore differentiable w.r.t their outputs)</p>
+<p>The discriminator learns using traditional supervised learning techniques, dividing inputs into two classes (real or fake). The generator is trained to fool the discriminator. Both are almost always modeled as neural networks (and are therefore differentiable w.r.t their outputs). Once training is complete, <em>we throw away the discriminator</em>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>We can think of the generator as being like a counterfeiter, trying to make fake money, and the discriminator as being like police, trying to allow legitimate money and catch counterfeit money. To succeed in this game, the counterfeiter must learn to make money that is indistinguishable from genuine money, and the generator network must learn to create samples that are drawn from the same distribution as the training data.</p>
 </div>
+<p>Formally, GANs are structured as a probabilistic model containing latent variables <span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span> and observed variable <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span></p>
+<p><img alt="" src="../../img/lecture_12_3.png" /></p>
+<div class="admonition cite">
+<p class="admonition-title">Cite</p>
+<p><a href="https://arxiv.org/pdf/1701.00160.pdf">NIPS 2016 Tutorial: Generative Adversarial Networks; Goodfellow (2016)</a>.</p>
+</div>
+<p>to sample from the model:</p>
+<ul>
+<li>first sample <span><span class="MathJax_Preview">z \sim p(z)</span><script type="math/tex">z \sim p(z)</script></span> ; where <span><span class="MathJax_Preview">p(z)</span><script type="math/tex">p(z)</script></span> is some prior distribution</li>
+<li>then <span><span class="MathJax_Preview">x = G(z) \sim P_{model}</span><script type="math/tex">x = G(z) \sim P_{model}</script></span></li>
+</ul>
+<p>notice that we <em>never explicitly define a distribution</em> <span><span class="MathJax_Preview">P_{model}(x; \theta)</span><script type="math/tex">P_{model}(x; \theta)</script></span>. Contrast this with VAEs, where to sample from the model:</p>
+<ul>
+<li>first sample <span><span class="MathJax_Preview">z \sim q_\phi(z | x)</span><script type="math/tex">z \sim q_\phi(z | x)</script></span> for some input <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span></li>
+<li>then using the encoder, compute <span><span class="MathJax_Preview">\theta = f(z)</span><script type="math/tex">\theta = f(z)</script></span></li>
+<li>finally, using the decoder, sample <span><span class="MathJax_Preview">x \sim p_\theta(x | z)</span><script type="math/tex">x \sim p_\theta(x | z)</script></span></li>
+</ul>
+<p>notice that we <em>explicitly define a distribution</em> (<span><span class="MathJax_Preview">p_\theta(x | z)</span><script type="math/tex">p_\theta(x | z)</script></span>) and sample from it.</p>
+<h3 id="adversarial-game-the-specifics">Adversarial Game, the Specifics<a class="headerlink" href="#adversarial-game-the-specifics" title="Permanent link">&para;</a></h3>
+<p>In the adversarial game, both players have cost functions that are defined in terms of both players’ parameters</p>
+<ul>
+<li>The <strong>discriminator</strong> wishes to minimize <span><span class="MathJax_Preview">J^{(D)}(\theta_D, \theta_G)</span><script type="math/tex">J^{(D)}(\theta_D, \theta_G)</script></span> and must do so while controlling only <span><span class="MathJax_Preview">\theta_D</span><script type="math/tex">\theta_D</script></span>.</li>
+<li>The <strong>generator</strong> wishes to minimize <span><span class="MathJax_Preview">J^{(G)}(\theta_D, \theta_G)</span><script type="math/tex">J^{(G)}(\theta_D, \theta_G)</script></span> and must do so while controlling only <span><span class="MathJax_Preview">\theta_G</span><script type="math/tex">\theta_G</script></span>.</li>
+</ul>
+<p>Because each player’s cost depends on the other player’s parameters, but each player cannot control the other player’s parameters, this scenario is most straightforward to describe as a game rather than as an optimization problem</p>
+<h4 id="training-procedure">Training Procedure<a class="headerlink" href="#training-procedure" title="Permanent link">&para;</a></h4>
+<p>The training process consists of simultaneous <a href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent">SGD</a>. On each step, two minibatches are sampled: a minibatch of <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> values from the dataset and a minibatch of <span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span> values drawn from the model’s prior over latent variables, e.g.,</p>
+<ol>
+<li><span><span class="MathJax_Preview">x \sim P_{data}</span><script type="math/tex">x \sim P_{data}</script></span></li>
+<li><span><span class="MathJax_Preview">z \sim p(z) \Rightarrow x \sim P_{G(z)}</span><script type="math/tex">z \sim p(z) \Rightarrow x \sim P_{G(z)}</script></span></li>
+</ol>
+<p>Then two gradient steps are made simultaneously: one updating <span><span class="MathJax_Preview">\theta_D</span><script type="math/tex">\theta_D</script></span> to reduce <span><span class="MathJax_Preview">J^{(D)}</span><script type="math/tex">J^{(D)}</script></span> and one updating <span><span class="MathJax_Preview">\theta_G</span><script type="math/tex">\theta_G</script></span> to reduce <span><span class="MathJax_Preview">J^{(G)}</span><script type="math/tex">J^{(G)}</script></span>.</p>
+<h3 id="cost-functions">Cost Functions<a class="headerlink" href="#cost-functions" title="Permanent link">&para;</a></h3>
+<p>Several different cost functions may be used within the GANs framework. All of the different games designed for GANs so far use the same cost for the discriminator, <span><span class="MathJax_Preview">J^{(D)}</span><script type="math/tex">J^{(D)}</script></span>. They differ only in terms of the cost used for the generator, <span><span class="MathJax_Preview">J^{(G)}</span><script type="math/tex">J^{(G)}</script></span>.</p>
+<h4 id="the-discriminators-cost">The Discriminator’s Cost<a class="headerlink" href="#the-discriminators-cost" title="Permanent link">&para;</a></h4>
+<p>The cost used for the discriminator is (almost) always:</p>
+<div>
+<div class="MathJax_Preview">
+J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim P_{data}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
+</div>
+<script type="math/tex; mode=display">
+J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim P_{data}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
+</script>
+</div>
+<p>This is just the standard cross-entropy cost that is minimized when training a standard binary classifier with a sigmoid output. The only difference is that the classifier is trained on two mini-batches of data; one coming from the dataset, where the label is 1 for all examples, and one coming from the generator, where the label is 0 for all examples.</p>
+<h5 id="optimal-discriminator-strategy">Optimal Discriminator Strategy<a class="headerlink" href="#optimal-discriminator-strategy" title="Permanent link">&para;</a></h5>
+<p>Our goal is to minimize</p>
+<div>
+<div class="MathJax_Preview">
+J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim P_{data}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
+</div>
+<script type="math/tex; mode=display">
+J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim P_{data}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
+</script>
+</div>
+<p>in function space, specifying <span><span class="MathJax_Preview">D(x)</span><script type="math/tex">D(x)</script></span> directly. We begin by assuming that both <span><span class="MathJax_Preview">P_{data}</span><script type="math/tex">P_{data}</script></span> and <span><span class="MathJax_Preview">P_{model}</span><script type="math/tex">P_{model}</script></span> are nonzero everywhere.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If we do not make this assumption, then some points are never visited during training, and have undefined behavior.</p>
+</div>
+<p><img alt="" src="../../img/lecture_12_4.png" /></p>
+<p>To minimize <span><span class="MathJax_Preview">J^{(D)}</span><script type="math/tex">J^{(D)}</script></span> with respect to <span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>, we can write down the functional
+derivatives with respect to a single entry <span><span class="MathJax_Preview">D^{(x)}</span><script type="math/tex">D^{(x)}</script></span>, and set them equal to zero:</p>
+<div>
+<div class="MathJax_Preview">
+\frac{\delta}{\delta D(x)}J^{(D)} = 0
+</div>
+<script type="math/tex; mode=display">
+\frac{\delta}{\delta D(x)}J^{(D)} = 0
+</script>
+</div>
+<p>By solving this equation, we obtain</p>
+<div>
+<div class="MathJax_Preview">
+D^\star(x)  = \frac{P_{data}(x)}{P_{data}(x) + P_{model}(x)}
+</div>
+<script type="math/tex; mode=display">
+D^\star(x)  = \frac{P_{data}(x)}{P_{data}(x) + P_{model}(x)}
+</script>
+</div>
+<p>The discriminator (dashed blue line) estimates the ratio between the data density (black dots) and the sum of the data and model densities. Wherever the output of the discriminator is large, the model density is too low, and wherever the output of the discriminator is small, the model density is too high. Estimating this ratio is the key approximation mechanism used by GANs</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We can't actually compute <span><span class="MathJax_Preview">D^\star(x)</span><script type="math/tex">D^\star(x)</script></span> directly but it illustrates how the discriminator achieves optimal behavior.</p>
+</div>
+<h5 id="optimal-generator-strategy">Optimal Generator Strategy<a class="headerlink" href="#optimal-generator-strategy" title="Permanent link">&para;</a></h5>
+<p>So far we have specified the cost function for only the discriminator. A complete specification of the game requires that we specify a cost function also for the generator.</p>
+<p>The simplest version of the game is a <strong>zero-sum game</strong>, in which the sum of all player’s costs is always zero. In this version of the game,</p>
+<div>
+<div class="MathJax_Preview">
+J(^{(G)}) = -J^{(D)}
+</div>
+<script type="math/tex; mode=display">
+J(^{(G)}) = -J^{(D)}
+</script>
+</div>
+<p>Because <span><span class="MathJax_Preview">J^{(G)}</span><script type="math/tex">J^{(G)}</script></span> is tied directly to <span><span class="MathJax_Preview">J^{(D)}</span><script type="math/tex">J^{(D)}</script></span>, we can summarize the entire game
+with a value function specifying the discriminator’s payoff:</p>
+<div>
+<div class="MathJax_Preview">
+V(\theta^{(D)}, \theta^{(G)}) = -J^{(D)}(\theta^{(D)}, \theta^{(G)})
+</div>
+<script type="math/tex; mode=display">
+V(\theta^{(D)}, \theta^{(G)}) = -J^{(D)}(\theta^{(D)}, \theta^{(G)})
+</script>
+</div>
+<p>Zero-sum games are also called <strong>minimax</strong> games because their solution involves minimization in an outer loop and maximization in an inner loop:</p>
+<div>
+<div class="MathJax_Preview">
+\theta^{(G)\star} = \underset{\theta^{(G)}}{\operatorname{argmin}} \underset{\theta^{(D)}}{\operatorname{argmax}} V(\theta^{(D)}, \theta^{(G)})
+</div>
+<script type="math/tex; mode=display">
+\theta^{(G)\star} = \underset{\theta^{(G)}}{\operatorname{argmin}} \underset{\theta^{(D)}}{\operatorname{argmax}} V(\theta^{(D)}, \theta^{(G)})
+</script>
+</div>
+<p>Where we want to maximize <span><span class="MathJax_Preview">\theta_D</span><script type="math/tex">\theta_D</script></span> such that</p>
+<ul>
+<li><span><span class="MathJax_Preview">D_{\theta_D}(x) = 1</span><script type="math/tex">D_{\theta_D}(x) = 1</script></span></li>
+<li><span><span class="MathJax_Preview">D_{\theta_D}(G(z)) = 0</span><script type="math/tex">D_{\theta_D}(G(z)) = 0</script></span></li>
+</ul>
+<p>and minimize <span><span class="MathJax_Preview">\theta_G</span><script type="math/tex">\theta_G</script></span> such that</p>
+<ul>
+<li><span><span class="MathJax_Preview">D_{\theta_D}(G_{\theta_G}(z)) \rightarrow 1</span><script type="math/tex">D_{\theta_D}(G_{\theta_G}(z)) \rightarrow 1</script></span></li>
+</ul>
                 
                   
                 
