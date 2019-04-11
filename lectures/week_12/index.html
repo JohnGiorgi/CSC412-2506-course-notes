@@ -717,8 +717,10 @@
 </script>
 </div>
 <p>should look like samples from our data. The density <span><span class="MathJax_Preview">P_{model}</span><script type="math/tex">P_{model}</script></span> can be</p>
-<p>1) explicitly defined
-2) approximated by random sampling from our model.</p>
+<ol>
+<li>explicitly defined</li>
+<li>approximated by random sampling from our model.</li>
+</ol>
 <p>So far, we have only looked at models of the first type, sometimes referred to as <strong>explicit density models</strong>.</p>
 <p>As an example of the simplest possible model of the second type, sometimes referred to as <strong>implicit density models</strong>, imagine we had a sampler:</p>
 <div>
@@ -776,7 +778,7 @@ x \sim p_\theta(x | z)
 <p>Maximum likelihood estimate is <a href="../week_2/#maximum-likelihood-estimation">how we have trained all the generative models we have seen thus far</a>.</p>
 <p>The basic idea is to:</p>
 <ol>
-<li>Define a model which provides an estimate of a probability distribution parameterized by parameters <span><span class="MathJax_Preview">theta</span><script type="math/tex">theta</script></span></li>
+<li>Define a model which provides an estimate of a probability distribution parameterized by parameters <span><span class="MathJax_Preview">\theta</span><script type="math/tex">\theta</script></span></li>
 <li>Define a likelihood function that represents the probability of our data and train our parameters to maximize this likelihood</li>
 </ol>
 <p>e.g. for the i.i.d case:</p>
@@ -790,7 +792,7 @@ x \sim p_\theta(x | z)
 \Rightarrow \hat \theta_{MLE} = \underset{\theta}{\operatorname{argmax}} \sum \log P_{model} (x^{(i)} ; \theta)
 </script>
 </div>
-<p>which is equivalent to the minimizing the KL divergence between <span><span class="MathJax_Preview">P_{data}(x)</span><script type="math/tex">P_{data}(x)</script></span> and <span><span class="MathJax_Preview">P_{model}(x ; \theta)</span><script type="math/tex">P_{model}(x ; \theta)</script></span></p>
+<p>which is equivalent to the minimizing the <span><span class="MathJax_Preview">D_{KL}</span><script type="math/tex">D_{KL}</script></span> between <span><span class="MathJax_Preview">P_{data}(x)</span><script type="math/tex">P_{data}(x)</script></span> and <span><span class="MathJax_Preview">P_{model}(x ; \theta)</span><script type="math/tex">P_{model}(x ; \theta)</script></span></p>
 <div>
 <div class="MathJax_Preview">
 \underset{\theta}{\operatorname{argmin}} D_{KL}(P_{data}(x) || P_{model}(x ; \theta))
@@ -799,9 +801,14 @@ x \sim p_\theta(x | z)
 \underset{\theta}{\operatorname{argmin}} D_{KL}(P_{data}(x) || P_{model}(x ; \theta))
 </script>
 </div>
-<p>If we were able to do this precisely, and if <span><span class="MathJax_Preview">P_{data}</span><script type="math/tex">P_{data}</script></span> lies within the family of distributions <span><span class="MathJax_Preview">P_{model}(x ; \theta)</span><script type="math/tex">P_{model}(x ; \theta)</script></span>, then the model would recover <span><span class="MathJax_Preview">P_{data}</span><script type="math/tex">P_{data}</script></span> exactly. In practice, we do not have access to <span><span class="MathJax_Preview">P_{data}</span><script type="math/tex">P_{data}</script></span> itself, but only to a training set consisting of <span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span> samples from <span><span class="MathJax_Preview">P_{data}</span><script type="math/tex">P_{data}</script></span>. We uses these to define <span><span class="MathJax_Preview">\hat P_{data}</span><script type="math/tex">\hat P_{data}</script></span>, an empirical distribution that places mass only on exactly those <span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span> points, approximating <span><span class="MathJax_Preview">P_{data}</span><script type="math/tex">P_{data}</script></span>. Minimizing the KL divergence between <span><span class="MathJax_Preview">\hat P_{data}</span><script type="math/tex">\hat P_{data}</script></span> and <span><span class="MathJax_Preview">P_{model}</span><script type="math/tex">P_{model}</script></span> is exactly equivalent to maximizing the log-likelihood of the training set.</p>
+<p>If we were able to do this precisely, and if <span><span class="MathJax_Preview">P_{data}</span><script type="math/tex">P_{data}</script></span> lies within the family of distributions <span><span class="MathJax_Preview">P_{model}(x ; \theta)</span><script type="math/tex">P_{model}(x ; \theta)</script></span>, then the model would recover <span><span class="MathJax_Preview">P_{data}</span><script type="math/tex">P_{data}</script></span> exactly. In practice, we do not have access to <span><span class="MathJax_Preview">P_{data}</span><script type="math/tex">P_{data}</script></span> itself, but only to a training set consisting of <span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span> samples from <span><span class="MathJax_Preview">P_{data}</span><script type="math/tex">P_{data}</script></span>. We uses these to define <span><span class="MathJax_Preview">\hat P_{data}</span><script type="math/tex">\hat P_{data}</script></span>, an empirical distribution that places mass only on exactly those <span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span> points, approximating <span><span class="MathJax_Preview">P_{data}</span><script type="math/tex">P_{data}</script></span>. Minimizing the <span><span class="MathJax_Preview">D_{KL}</span><script type="math/tex">D_{KL}</script></span> between <span><span class="MathJax_Preview">\hat P_{data}</span><script type="math/tex">\hat P_{data}</script></span> and <span><span class="MathJax_Preview">P_{model}</span><script type="math/tex">P_{model}</script></span> is exactly equivalent to maximizing the log-likelihood of the training set.</p>
 <h3 id="explicit-density-models">Explicit Density Models<a class="headerlink" href="#explicit-density-models" title="Permanent link">&para;</a></h3>
-<p>In explicit density models (i.e., the models we are discussing and have been discussing the entire course) we define an explicit density function <span><span class="MathJax_Preview">p_{model}\theta(x ; \theta)</span><script type="math/tex">p_{model}\theta(x ; \theta)</script></span> density directly (i.e. the <a href="../week_11/#the-specifics">decoder of a VAE outputs <span><span class="MathJax_Preview">\theta_i</span><script type="math/tex">\theta_i</script></span>'s, not <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span>'s</a>). The is crucial to training <span><span class="MathJax_Preview">\log p_\theta(x|z)</span><script type="math/tex">\log p_\theta(x|z)</script></span>.</p>
+<p>In explicit density models (i.e., the models we are discussing and have been discussing the entire course) define an explicit density function <span><span class="MathJax_Preview">P_{model}(x ; \theta)</span><script type="math/tex">P_{model}(x ; \theta)</script></span>. For these models, maximization of the likelihood function is straightforward: we simply plug the models definition of the density function into the expression for likelihood and follow the gradient uphill.</p>
+<p>The main difficulty present in explicit density models is designing a model that can capture all of the complexity of the data to be generated while still maintaining computational tractability.</p>
+<ol>
+<li>careful construction of models whose structure guarantees their tractability</li>
+<li>models that admit tractable approximations to the likelihood and its gradients</li>
+</ol>
 <p><em>Tractable</em> examples include:</p>
 <ul>
 <li>Fully Visible Belief Nets (96, 98)</li>
@@ -816,10 +823,25 @@ x \sim p_\theta(x | z)
 </div>
 <h2 id="implicit-density-models">Implicit Density Models<a class="headerlink" href="#implicit-density-models" title="Permanent link">&para;</a></h2>
 <p>In implicit density models, we do not define <span><span class="MathJax_Preview">P_{model}(x, \theta)</span><script type="math/tex">P_{model}(x, \theta)</script></span> explicitly. Instead, we interact with <span><span class="MathJax_Preview">P_{model}</span><script type="math/tex">P_{model}</script></span> through samples.</p>
+<p>A taxonomic tree of generative models is shown below:</p>
+<p><img alt="" src="../../img/lecture_12_2.png" /></p>
+<div class="admonition cite">
+<p class="admonition-title">Cite</p>
+<p><a href="https://arxiv.org/pdf/1701.00160.pdf">NIPS 2016 Tutorial: Generative Adversarial Networks; Goodfellow (2016)</a>.</p>
+</div>
 <p><em>But how do we train it?</em> No density means <em>no likelihood evaluation</em>.</p>
 <h3 id="general-adversarial-network-gan-approach">General Adversarial Network (GAN) Approach<a class="headerlink" href="#general-adversarial-network-gan-approach" title="Permanent link">&para;</a></h3>
 <p>In the general adversarial approach, we <em>do not</em> have likelihoods, only samples. The idea is based on an adversarial game and pulls heavily from <a href="https://en.wikipedia.org/wiki/Game_theory">game theory</a>.</p>
-<p>The setup is a 2 player game</p>
+<p>The basic idea of GANs is to set up a game between two players:</p>
+<ul>
+<li>One of them is called the <strong>generator</strong> (<span><span class="MathJax_Preview">G_{\theta_G}</span><script type="math/tex">G_{\theta_G}</script></span>). The generator creates samples that are intended to come from the same distribution as the training data.</li>
+<li>The other player is the <strong>discriminator</strong> (<span><span class="MathJax_Preview">D_{\theta_D}</span><script type="math/tex">D_{\theta_D}</script></span>). The discriminator examines samples to determine whether they are real or fake.</li>
+</ul>
+<p>The discriminator learns using traditional supervised learning techniques, dividing inputs into two classes (real or fake). The generator is trained to fool the discriminator. Both are almost always modeled as neural networks (and are therefore differentiable w.r.t their outputs)</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>We can think of the generator as being like a counterfeiter, trying to make fake money, and the discriminator as being like police, trying to allow legitimate money and catch counterfeit money. To succeed in this game, the counterfeiter must learn to make money that is indistinguishable from genuine money, and the generator network must learn to create samples that are drawn from the same distribution as the training data.</p>
+</div>
                 
                   
                 

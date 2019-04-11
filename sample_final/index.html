@@ -1786,6 +1786,28 @@ p(x_3 = A | z_1 = S) = p(x_3 = A | z_3 = H)p(z_3 = H | z_1 = S) + p(x_3 = A | z_
 <h2 id="week-12">Week 12<a class="headerlink" href="#week-12" title="Permanent link">&para;</a></h2>
 <h3 id="question-1_8">Question 1<a class="headerlink" href="#question-1_8" title="Permanent link">&para;</a></h3>
 <p>Compare and contrast <em>explicit</em> vs. <em>implicit</em> density models.</p>
+<p><strong>ANSWER</strong></p>
+<p><strong>Explicit density models</strong> define an explicit density function <span><span class="MathJax_Preview">p_{model}\theta(x ; \theta)</span><script type="math/tex">p_{model}\theta(x ; \theta)</script></span>. For these models, maximization of the likelihood function is straightforward: we simply plug the models definition of the density function into the expression for likelihood and follow the gradient uphill.</p>
+<p>e.g. for the i.i.d case:</p>
+<div>
+<div class="MathJax_Preview">
+\hat \theta_{MLE} = \underset{\theta}{\operatorname{argmax}} \sum \log P_{model} (x^{(i)} ; \theta)
+</div>
+<script type="math/tex; mode=display">
+\hat \theta_{MLE} = \underset{\theta}{\operatorname{argmax}} \sum \log P_{model} (x^{(i)} ; \theta)
+</script>
+</div>
+<p>which is equivalent to the minimizing the KL divergence between <span><span class="MathJax_Preview">P_{data}(x)</span><script type="math/tex">P_{data}(x)</script></span> and <span><span class="MathJax_Preview">P_{model}(x ; \theta)</span><script type="math/tex">P_{model}(x ; \theta)</script></span></p>
+<div>
+<div class="MathJax_Preview">
+\underset{\theta}{\operatorname{argmin}} D_{KL}(P_{data}(x) || P_{model}(x ; \theta))
+</div>
+<script type="math/tex; mode=display">
+\underset{\theta}{\operatorname{argmin}} D_{KL}(P_{data}(x) || P_{model}(x ; \theta))
+</script>
+</div>
+<p>when <span><span class="MathJax_Preview">p_{model}\theta(x ; \theta)</span><script type="math/tex">p_{model}\theta(x ; \theta)</script></span> is intractable, we use variational (e.g. VAEs) or MCMC approximations to compute the likelihood.</p>
+<p>In contrast, <strong>implicit density models</strong> are trained without explicitly defining a density function. The way we interact <span><span class="MathJax_Preview">P_{model}</span><script type="math/tex">P_{model}</script></span> is through samples. An example is a General Adversarial Network (GAN).</p>
                 
                   
                 
