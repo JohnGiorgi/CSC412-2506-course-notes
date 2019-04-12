@@ -98,7 +98,7 @@ _continuous space_ or _continuous time_.
 
 ## Hidden Markov Models
 
-[**Hidden Markov models (HMMs)**](https://duckduckgo.com/?q=hidden+markov+models&t=ffab&ia=web), make another restrictive assumption: the state of our variables is _fully observed_.
+[**Markov chains**], make another restrictive assumption: the state of our variables is _fully observed_. Hence, we introduce Hidden Markov Models (https://duckduckgo.com/?q=hidden+markov+models&t=ffab&ia=web)
 
 HMMs hide the temporal dependence by keeping it in the _unobserved_ state. No assumptions on the temporal dependence of observations is made. For each observation \(x_t\), we associate a corresponding unobserved hidden/latent variable \(z_t\)
 
