@@ -1821,10 +1821,10 @@ p(x_3 = A | z_1 = S) = p(x_3 = A | z_3 = H)p(z_3 = H | z_1 = S) + p(x_3 = A | z_
 <p>which is equivalent to the minimizing the KL divergence between <span><span class="MathJax_Preview">p_{model}(x)</span><script type="math/tex">p_{model}(x)</script></span> and <span><span class="MathJax_Preview">p_{model}(x ; \theta)</span><script type="math/tex">p_{model}(x ; \theta)</script></span></p>
 <div>
 <div class="MathJax_Preview">
-\underset{\theta}{\operatorname{argmin}} D_{KL}(p_{model}(x) || p_{model}(x ; \theta))
+\underset{\theta}{\operatorname{argmin}} D_{KL}(p_{data}(x) || p_{model}(x ; \theta))
 </div>
 <script type="math/tex; mode=display">
-\underset{\theta}{\operatorname{argmin}} D_{KL}(p_{model}(x) || p_{model}(x ; \theta))
+\underset{\theta}{\operatorname{argmin}} D_{KL}(p_{data}(x) || p_{model}(x ; \theta))
 </script>
 </div>
 <p>when <span><span class="MathJax_Preview">p_{model}\theta(x ; \theta)</span><script type="math/tex">p_{model}\theta(x ; \theta)</script></span> is intractable, we use variational (e.g. VAEs) or MCMC approximations to compute the likelihood.</p>
@@ -1833,10 +1833,10 @@ p(x_3 = A | z_1 = S) = p(x_3 = A | z_3 = H)p(z_3 = H | z_1 = S) + p(x_3 = A | z_
 <p>The goal of the discriminator is to minimize</p>
 <div>
 <div class="MathJax_Preview">
-J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim p_{model}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
+J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim p_{data}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
 </div>
 <script type="math/tex; mode=display">
-J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim p_{model}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
+J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim p_{data}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
 </script>
 </div>
 <p>with respect to <span><span class="MathJax_Preview">\theta_D</span><script type="math/tex">\theta_D</script></span>. Imagine that the discriminator can be optimized in function space, so the value of <span><span class="MathJax_Preview">D(x)</span><script type="math/tex">D(x)</script></span> is specified independently for every value of x.</p>
@@ -1844,7 +1844,7 @@ J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim p_{model}}[\log D(x)] - \mathbb
 <p>(b) What assumptions need to be made to obtain this result?</p>
 <p><strong>ANSWER</strong></p>
 <p>(b)</p>
-<p>We begin by assuming that both <span><span class="MathJax_Preview">p_{model}</span><script type="math/tex">p_{model}</script></span> and <span><span class="MathJax_Preview">p_{model}</span><script type="math/tex">p_{model}</script></span> are nonzero everywhere.</p>
+<p>We begin by assuming that both <span><span class="MathJax_Preview">p_{data}</span><script type="math/tex">p_{data}</script></span> and <span><span class="MathJax_Preview">p_{model}</span><script type="math/tex">p_{model}</script></span> are nonzero everywhere.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If we do not make this assumption, then some points are never visited during training, and have undefined behavior.</p>
@@ -1863,10 +1863,10 @@ derivatives with respect to a single entry <span><span class="MathJax_Preview">D
 <p>By solving this equation, we obtain</p>
 <div>
 <div class="MathJax_Preview">
-D^\star(x)  = \frac{p_{model}(x)}{p_{model}(x) + p_{model}(x)}
+D^\star(x)  = \frac{p_{data}(x)}{p_{data}(x) + p_{model}(x)}
 </div>
 <script type="math/tex; mode=display">
-D^\star(x)  = \frac{p_{model}(x)}{p_{model}(x) + p_{model}(x)}
+D^\star(x)  = \frac{p_{data}(x)}{p_{data}(x) + p_{model}(x)}
 </script>
 </div>
 <p>Estimating this ratio is the key approximation mechanism used by GANs.</p>
