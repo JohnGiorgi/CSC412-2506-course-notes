@@ -1440,7 +1440,7 @@ p(x) \propto \psi_{1, 2, 3}(x_1, x_2, x_3) \psi_{2, 3, 5}(x_2, x_3, x_5) \psi_{2
 </script>
 </div>
 <h3 id="question-3_1">Question 3<a class="headerlink" href="#question-3_1" title="Permanent link">&para;</a></h3>
-<p>Compare and contrast directed vs undirected graphical models</p>
+<p>Compare and contrast directed vs undirected graphical models:</p>
 <p><center></p>
 <table>
 <thead>
@@ -1452,9 +1452,29 @@ p(x) \propto \psi_{1, 2, 3}(x_1, x_2, x_3) \psi_{2, 3, 5}(x_2, x_3, x_5) \psi_{2
 </thead>
 <tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
+<td>Represented by</td>
+<td>Directed graph</td>
+<td>Undirected Graphs</td>
+</tr>
+<tr>
+<td>Nodes specify</td>
+<td>Random variables</td>
+<td>Random variables</td>
+</tr>
+<tr>
+<td>Edges specify</td>
+<td>Conditional dependence between variables</td>
+<td>Probabilistic interactions</td>
+</tr>
+<tr>
+<td>Graph factorizes according to</td>
+<td>Local conditional probabilities</td>
+<td>Product of potential functions (or factors), one for each maximal clique</td>
+</tr>
+<tr>
+<td>Parameterized by</td>
+<td>Conditional probability tables (if random variables are discrete)</td>
+<td>Tables of non-negative, relative affinities (if random variables are discrete)</td>
 </tr>
 </tbody>
 </table>
