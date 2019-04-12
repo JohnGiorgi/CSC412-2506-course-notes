@@ -619,13 +619,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#question-4_1" title="Question 4" class="md-nav__link">
-    Question 4
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -907,13 +900,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#question-4_1" title="Question 4" class="md-nav__link">
-    Question 4
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1188,7 +1174,7 @@ Note that we need <span><span class="MathJax_Preview">\sum_{i=0}^9 \pi_{i} = 1</
 </script>
 </div>
 <p>therefore, the MLE for the class-conditional pixel means <span><span class="MathJax_Preview">\theta</span><script type="math/tex">\theta</script></span> of class <span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span>, <span><span class="MathJax_Preview">\hat \theta_c</span><script type="math/tex">\hat \theta_c</script></span>, is given by the number of examples of class <span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span> where <span><span class="MathJax_Preview">d=1</span><script type="math/tex">d=1</script></span> divided by the total number of examples of class <span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span>, as expected.</p>
-<p>(b) The posterior probability of our class-conditional pixel means, <span><span class="MathJax_Preview">\theta</span><script type="math/tex">\theta</script></span> for class <span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span> is given by</p>
+<p>(b) The prior probability of our class-conditional pixel means, <span><span class="MathJax_Preview">\theta</span><script type="math/tex">\theta</script></span> for class <span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span> is given by</p>
 <div>
 <div class="MathJax_Preview">
 f(\theta_c; \alpha, \beta) = f(\theta_c; 2, 2) = \frac{1}{B(2, 2)}\theta_c^{2 - 1}(1-\theta_c)^{2-1} = \theta_c(1-\theta_c)
@@ -1197,7 +1183,7 @@ f(\theta_c; \alpha, \beta) = f(\theta_c; 2, 2) = \frac{1}{B(2, 2)}\theta_c^{2 - 
 f(\theta_c; \alpha, \beta) = f(\theta_c; 2, 2) = \frac{1}{B(2, 2)}\theta_c^{2 - 1}(1-\theta_c)^{2-1} = \theta_c(1-\theta_c)
 </script>
 </div>
-<p>\noindent where we have ignored the Beta normalizing constant. The MAP estimate of the class-conditional pixel means <span><span class="MathJax_Preview">\theta</span><script type="math/tex">\theta</script></span> for class <span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span> is given by</p>
+<p>where we have ignored the Beta normalizing constant. The MAP estimate of the class-conditional pixel means <span><span class="MathJax_Preview">\theta</span><script type="math/tex">\theta</script></span> for class <span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span> is given by</p>
 <div>
 <div class="MathJax_Preview">
 \hat \theta_c = \operatorname*{argmax}_{\theta_c} \Bigg [ \theta_c(1-\theta_c) \prod_{i=1}^N \prod_{d=1}^{784} \theta^{x_d^{(i)}}_{cd}(1 - \theta_{cd})^{(1-x_d^{(i)})} \Bigg ]
@@ -1366,10 +1352,10 @@ x_i \sim p(X_i \ | \ \text{parents of } X_i)
 <p>We want to sample a sequence of observations <span><span class="MathJax_Preview">x_1, x_2, x_3, ..., x_T</span><script type="math/tex">x_1, x_2, x_3, ..., x_T</script></span> from the model according to</p>
 <div>
 <div class="MathJax_Preview">
-x_{1:T} = \prod_{t=1}^T p(X_t \ | \ \text{parents of } X_t)
+x_{1:T} \sim \prod_{t=1}^T p(X_t \ | \ \text{parents of } X_t)
 </div>
 <script type="math/tex; mode=display">
-x_{1:T} = \prod_{t=1}^T p(X_t \ | \ \text{parents of } X_t)
+x_{1:T} \sim \prod_{t=1}^T p(X_t \ | \ \text{parents of } X_t)
 </script>
 </div>
 <p>since observations <span><span class="MathJax_Preview">x_t</span><script type="math/tex">x_t</script></span> are independent of one another. Notice that this forms a chain, with probability</p>
@@ -1384,7 +1370,7 @@ p(x_{1:T}) \sim \bigg [ \prod_{t=1}^T p(X_t | z_t) \bigg ] \bigg [ p(z_1) \prod_
 <p><em>Step-by-step</em></p>
 <ol>
 <li>Start with <span><span class="MathJax_Preview">t=1</span><script type="math/tex">t=1</script></span></li>
-<li>Sample <span><span class="MathJax_Preview">z_t</span><script type="math/tex">z_t</script></span> according to <span><span class="MathJax_Preview">z_t \sim p(z_1) \prod_{i=t}^{t + 1} p(Z_i | z_{i-1})</span><script type="math/tex">z_t \sim p(z_1) \prod_{i=t}^{t + 1} p(Z_i | z_{i-1})</script></span></li>
+<li>Sample <span><span class="MathJax_Preview">z_t</span><script type="math/tex">z_t</script></span> according to <span><span class="MathJax_Preview">z_t \sim p(z_1) \prod_{i=2}^{t} p(Z_i | z_{i-1})</span><script type="math/tex">z_t \sim p(z_1) \prod_{i=2}^{t} p(Z_i | z_{i-1})</script></span></li>
 <li>Given the sampled <span><span class="MathJax_Preview">z_t</span><script type="math/tex">z_t</script></span>, sample <span><span class="MathJax_Preview">x_t</span><script type="math/tex">x_t</script></span> according to <span><span class="MathJax_Preview">x_t \sim \ p(X_t | z_t)</span><script type="math/tex">x_t \sim \ p(X_t | z_t)</script></span></li>
 <li>Increment <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> by 1</li>
 <li>Repeat steps 2-4 until <span><span class="MathJax_Preview">t=T</span><script type="math/tex">t=T</script></span></li>
@@ -1392,11 +1378,12 @@ p(x_{1:T}) \sim \bigg [ \prod_{t=1}^T p(X_t | z_t) \bigg ] \bigg [ p(z_1) \prod_
 <h2 id="week-4-undirected-graphical-models">Week 4: Undirected Graphical Models<a class="headerlink" href="#week-4-undirected-graphical-models" title="Permanent link">&para;</a></h2>
 <h3 id="question-1_3">Question 1<a class="headerlink" href="#question-1_3" title="Permanent link">&para;</a></h3>
 <p>(a) State the Global, Local and Pairwise Markov properties used to determine conditional independence in a undirected graphical model.</p>
-<p>(b) Given the following UGMs:</p>
+<p>Given the following UGMs:</p>
+<p>(b)</p>
 <p><img alt="" src="../img/lecture_4_4.png" /></p>
-<p>use each to Markov property to give an example of two sets of conditionally independent nodes in the graph.</p>
-<p>(c) Do the same for the following UGM:</p>
+<p>(c)</p>
 <p><img alt="" src="../img/lecture_4_3.png" /></p>
+<p>use each to Markov property to give an example of two sets of conditionally independent nodes in the graph.</p>
 <p><strong>ANSWER</strong></p>
 <p>(a)</p>
 <p><em>def</em>. <strong>Global Markov Property</strong> (G): <span><span class="MathJax_Preview">X_A \bot X_B | X_C</span><script type="math/tex">X_A \bot X_B | X_C</script></span> iff <span><span class="MathJax_Preview">X_C</span><script type="math/tex">X_C</script></span> separates <span><span class="MathJax_Preview">X_A</span><script type="math/tex">X_A</script></span> from <span><span class="MathJax_Preview">X_B</span><script type="math/tex">X_B</script></span></p>
@@ -1435,6 +1422,7 @@ s \bot t | \mathcal V \setminus \{s, t\} \Leftrightarrow G_{st} = 0
 <p><img alt="" src="../img/lecture_4_4.png" /></p>
 <p>(a) What is a <em>maximal</em> clique? State one example from the graph.</p>
 <p>(b) What is a <em>maximum</em> clique? State on example from the graph.</p>
+<p>(c) Write down the factorized joint distribution that this graphical model represents</p>
 <p><strong>ANSWER</strong></p>
 <p>(a)</p>
 <p><em>def</em>. A <a href="https://en.wikipedia.org/wiki/Clique_(graph_theory)#Definitions"><strong>maximal clique</strong></a> is a clique that cannot be extended by including one more adjacent vertex.</p>
@@ -1442,12 +1430,7 @@ s \bot t | \mathcal V \setminus \{s, t\} \Leftrightarrow G_{st} = 0
 <p>(b)</p>
 <p>A <em>maximal clique</em> is show in blue, while a <em>maximum clique</em> is shown in green.</p>
 <p><img alt="" src="../img/lecture_4_7.png" /></p>
-<h3 id="question-3_1">Question 3<a class="headerlink" href="#question-3_1" title="Permanent link">&para;</a></h3>
-<p>Given the following graph:</p>
-<p><img alt="" src="../img/lecture_4_4.png" /></p>
-<p>(a) Write down the factorized joint distribution that this graphical model represents</p>
-<p><strong>ANSWER</strong></p>
-<p>(a)</p>
+<p>(c)</p>
 <div>
 <div class="MathJax_Preview">
 p(x) \propto \psi_{1, 2, 3}(x_1, x_2, x_3) \psi_{2, 3, 5}(x_2, x_3, x_5) \psi_{2, 4, 5}(x_2, x_4, x_5) \psi_{3, 5, 6}(x_3, x_5, x_6) \psi_{4, 5, 6, 7}(x_4, x_5, x_6, x_7)
@@ -1456,7 +1439,7 @@ p(x) \propto \psi_{1, 2, 3}(x_1, x_2, x_3) \psi_{2, 3, 5}(x_2, x_3, x_5) \psi_{2
 p(x) \propto \psi_{1, 2, 3}(x_1, x_2, x_3) \psi_{2, 3, 5}(x_2, x_3, x_5) \psi_{2, 4, 5}(x_2, x_4, x_5) \psi_{3, 5, 6}(x_3, x_5, x_6) \psi_{4, 5, 6, 7}(x_4, x_5, x_6, x_7)
 </script>
 </div>
-<h3 id="question-4_1">Question 4<a class="headerlink" href="#question-4_1" title="Permanent link">&para;</a></h3>
+<h3 id="question-3_1">Question 3<a class="headerlink" href="#question-3_1" title="Permanent link">&para;</a></h3>
 <p>Compare and contrast directed vs undirected graphical models</p>
 <p><center></p>
 <table>
@@ -1801,42 +1784,43 @@ p(x_3 = A | z_1 = S) = p(x_3 = A | z_3 = H)p(z_3 = H | z_1 = S) + p(x_3 = A | z_
 <h3 id="question-1_8">Question 1<a class="headerlink" href="#question-1_8" title="Permanent link">&para;</a></h3>
 <p>Compare and contrast <em>explicit</em> vs. <em>implicit</em> density models.</p>
 <p><strong>ANSWER</strong></p>
-<p><strong>Explicit density models</strong> define an explicit density function <span><span class="MathJax_Preview">p_{model}\theta(x ; \theta)</span><script type="math/tex">p_{model}\theta(x ; \theta)</script></span>. For these models, maximization of the likelihood function is straightforward: we simply plug the models definition of the density function into the expression for likelihood and follow the gradient uphill.</p>
+<p><strong>Explicit density models</strong> define an explicit density function <span><span class="MathJax_Preview">p_{model}(x ; \theta)</span><script type="math/tex">p_{model}(x ; \theta)</script></span> which is used to train the model, typically via maximum likelihood estimation. For these models, maximization of the likelihood function is straightforward: we simply plug the models definition of the density function into the expression for likelihood and follow the gradient uphill.</p>
 <p>e.g. for the i.i.d case:</p>
 <div>
 <div class="MathJax_Preview">
-\hat \theta_{MLE} = \underset{\theta}{\operatorname{argmax}} \sum \log P_{model} (x^{(i)} ; \theta)
+\hat \theta_{MLE} = \underset{\theta}{\operatorname{argmax}} \sum \log p_{model} (x^{(i)} ; \theta)
 </div>
 <script type="math/tex; mode=display">
-\hat \theta_{MLE} = \underset{\theta}{\operatorname{argmax}} \sum \log P_{model} (x^{(i)} ; \theta)
+\hat \theta_{MLE} = \underset{\theta}{\operatorname{argmax}} \sum \log p_{model} (x^{(i)} ; \theta)
 </script>
 </div>
-<p>which is equivalent to the minimizing the KL divergence between <span><span class="MathJax_Preview">P_{data}(x)</span><script type="math/tex">P_{data}(x)</script></span> and <span><span class="MathJax_Preview">P_{model}(x ; \theta)</span><script type="math/tex">P_{model}(x ; \theta)</script></span></p>
+<p>which is equivalent to the minimizing the KL divergence between <span><span class="MathJax_Preview">p_{model}(x)</span><script type="math/tex">p_{model}(x)</script></span> and <span><span class="MathJax_Preview">p_{model}(x ; \theta)</span><script type="math/tex">p_{model}(x ; \theta)</script></span></p>
 <div>
 <div class="MathJax_Preview">
-\underset{\theta}{\operatorname{argmin}} D_{KL}(P_{data}(x) || P_{model}(x ; \theta))
+\underset{\theta}{\operatorname{argmin}} D_{KL}(p_{model}(x) || p_{model}(x ; \theta))
 </div>
 <script type="math/tex; mode=display">
-\underset{\theta}{\operatorname{argmin}} D_{KL}(P_{data}(x) || P_{model}(x ; \theta))
+\underset{\theta}{\operatorname{argmin}} D_{KL}(p_{model}(x) || p_{model}(x ; \theta))
 </script>
 </div>
 <p>when <span><span class="MathJax_Preview">p_{model}\theta(x ; \theta)</span><script type="math/tex">p_{model}\theta(x ; \theta)</script></span> is intractable, we use variational (e.g. VAEs) or MCMC approximations to compute the likelihood.</p>
-<p>In contrast, <strong>implicit density models</strong> are trained without explicitly defining a density function. The way we interact <span><span class="MathJax_Preview">P_{model}</span><script type="math/tex">P_{model}</script></span> is through samples. An example is a General Adversarial Network (GAN).</p>
+<p>In contrast, <strong>implicit density models</strong> are trained without explicitly defining a density function. The way we interact with <span><span class="MathJax_Preview">p_{model}</span><script type="math/tex">p_{model}</script></span> is through samples. An example a General Adversarial Networks (GANs).</p>
 <h3 id="question-2_4">Question 2<a class="headerlink" href="#question-2_4" title="Permanent link">&para;</a></h3>
 <p>The goal of the discriminator is to minimize</p>
 <div>
 <div class="MathJax_Preview">
-J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim P_{data}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
+J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim p_{model}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
 </div>
 <script type="math/tex; mode=display">
-J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim P_{data}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
+J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim p_{model}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
 </script>
 </div>
 <p>with respect to <span><span class="MathJax_Preview">\theta_D</span><script type="math/tex">\theta_D</script></span>. Imagine that the discriminator can be optimized in function space, so the value of <span><span class="MathJax_Preview">D(x)</span><script type="math/tex">D(x)</script></span> is specified independently for every value of x.</p>
 <p>(a) What is the optimal strategy for D?</p>
 <p>(b) What assumptions need to be made to obtain this result?</p>
 <p><strong>ANSWER</strong></p>
-<p>We begin by assuming that both <span><span class="MathJax_Preview">P_{data}</span><script type="math/tex">P_{data}</script></span> and <span><span class="MathJax_Preview">P_model</span><script type="math/tex">P_model</script></span> are nonzero everywhere ((b)).</p>
+<p>(b)</p>
+<p>We begin by assuming that both <span><span class="MathJax_Preview">p_{model}</span><script type="math/tex">p_{model}</script></span> and <span><span class="MathJax_Preview">p_{model}</span><script type="math/tex">p_{model}</script></span> are nonzero everywhere.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If we do not make this assumption, then some points are never visited during training, and have undefined behavior.</p>
@@ -1855,13 +1839,13 @@ derivatives with respect to a single entry <span><span class="MathJax_Preview">D
 <p>By solving this equation, we obtain</p>
 <div>
 <div class="MathJax_Preview">
-D^\star(x)  = \frac{P_{data}(x)}{P_{data}(x) + P_{model}(x)}
+D^\star(x)  = \frac{p_{model}(x)}{p_{model}(x) + p_{model}(x)}
 </div>
 <script type="math/tex; mode=display">
-D^\star(x)  = \frac{P_{data}(x)}{P_{data}(x) + P_{model}(x)}
+D^\star(x)  = \frac{p_{model}(x)}{p_{model}(x) + p_{model}(x)}
 </script>
 </div>
-<p>Estimating this ratio is the key approximation mechanism used by GANs</p>
+<p>Estimating this ratio is the key approximation mechanism used by GANs.</p>
                 
                   
                 

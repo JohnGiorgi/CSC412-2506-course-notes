@@ -105,7 +105,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#week-12-general-adversarial-networks-gans" tabindex="1" class="md-skip">
+      <a href="#week-12-generative-adversarial-networks-gans" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -483,8 +483,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#general-adversarial-network-gan-approach" title="General Adversarial Network (GAN) Approach" class="md-nav__link">
-    General Adversarial Network (GAN) Approach
+  <a href="#generative-adversarial-network-gan-approach" title="Generative Adversarial Network (GAN) Approach" class="md-nav__link">
+    Generative Adversarial Network (GAN) Approach
   </a>
   
     <nav class="md-nav">
@@ -740,8 +740,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#general-adversarial-network-gan-approach" title="General Adversarial Network (GAN) Approach" class="md-nav__link">
-    General Adversarial Network (GAN) Approach
+  <a href="#generative-adversarial-network-gan-approach" title="Generative Adversarial Network (GAN) Approach" class="md-nav__link">
+    Generative Adversarial Network (GAN) Approach
   </a>
   
     <nav class="md-nav">
@@ -852,7 +852,7 @@
                   <a href="https://github.com/JohnGiorgi/CSC412-2506-course-notes/edit/master/docs/lectures/week_12.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="week-12-general-adversarial-networks-gans">Week 12: General Adversarial Networks (GANs)<a class="headerlink" href="#week-12-general-adversarial-networks-gans" title="Permanent link">&para;</a></h1>
+                <h1 id="week-12-generative-adversarial-networks-gans">Week 12: Generative Adversarial Networks (GANs)<a class="headerlink" href="#week-12-generative-adversarial-networks-gans" title="Permanent link">&para;</a></h1>
 <h3 id="assigned-reading">Assigned Reading<a class="headerlink" href="#assigned-reading" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://arxiv.org/pdf/1701.00160.pdf">NIPS 2016 Tutorial: Generative Adversarial Networks; Goodfellow (2016)</a></li>
@@ -863,25 +863,25 @@
 <p>Generative models make the assumption that your data was generated from some distribution</p>
 <div>
 <div class="MathJax_Preview">
-\{x_i\}_{i=1}^N \sim P_{data}
+\{x_i\}_{i=1}^N \sim p_{data}
 </div>
 <script type="math/tex; mode=display">
-\{x_i\}_{i=1}^N \sim P_{data}
+\{x_i\}_{i=1}^N \sim p_{data}
 </script>
 </div>
-<p>This is the distribution we will attempt to learn. More specifically, we want to learn a model, <span><span class="MathJax_Preview">P_{model}</span><script type="math/tex">P_{model}</script></span>, that represents an estimate of <span><span class="MathJax_Preview">P_{data}</span><script type="math/tex">P_{data}</script></span>. If we have done our job correctly, then samples from our model</p>
+<p>This is the distribution we will attempt to learn. More specifically, we want to learn a model, <span><span class="MathJax_Preview">p_{model}</span><script type="math/tex">p_{model}</script></span>, that represents an estimate of <span><span class="MathJax_Preview">p_{data}</span><script type="math/tex">p_{data}</script></span>. If we have done our job correctly, then samples from our model</p>
 <div>
 <div class="MathJax_Preview">
-\tilde x_i \sim P_{model}
+\tilde x_i \sim p_{model}
 </div>
 <script type="math/tex; mode=display">
-\tilde x_i \sim P_{model}
+\tilde x_i \sim p_{model}
 </script>
 </div>
-<p>should look like samples from our data. The density <span><span class="MathJax_Preview">P_{model}</span><script type="math/tex">P_{model}</script></span> can be</p>
+<p>should look like samples from our data. The density <span><span class="MathJax_Preview">p_{model}</span><script type="math/tex">p_{model}</script></span> can be</p>
 <ol>
 <li>explicitly defined</li>
-<li>approximated by random sampling from our model.</li>
+<li>approximated by random sampling from our model</li>
 </ol>
 <p>So far, we have only looked at models of the first type, sometimes referred to as <strong>explicit density models</strong>.</p>
 <p>As an example of the simplest possible model of the second type, sometimes referred to as <strong>implicit density models</strong>, imagine we had a sampler:</p>
@@ -946,26 +946,26 @@ x \sim p_\theta(x | z)
 <p>e.g. for the i.i.d case:</p>
 <div>
 <div class="MathJax_Preview">
-\prod_{i=1}^N P_{model} (x^{(i)}, \theta) \\
-\Rightarrow \hat \theta_{MLE} = \underset{\theta}{\operatorname{argmax}} \sum \log P_{model} (x^{(i)} ; \theta)
+\prod_{i=1}^N p_{model} (x^{(i)} ; \theta) \\
+\Rightarrow \hat \theta_{MLE} = \underset{\theta}{\operatorname{argmax}} \sum \log p_{model} (x^{(i)} ; \theta)
 </div>
 <script type="math/tex; mode=display">
-\prod_{i=1}^N P_{model} (x^{(i)}, \theta) \\
-\Rightarrow \hat \theta_{MLE} = \underset{\theta}{\operatorname{argmax}} \sum \log P_{model} (x^{(i)} ; \theta)
+\prod_{i=1}^N p_{model} (x^{(i)} ; \theta) \\
+\Rightarrow \hat \theta_{MLE} = \underset{\theta}{\operatorname{argmax}} \sum \log p_{model} (x^{(i)} ; \theta)
 </script>
 </div>
-<p>which is equivalent to the minimizing the <span><span class="MathJax_Preview">D_{KL}</span><script type="math/tex">D_{KL}</script></span> between <span><span class="MathJax_Preview">P_{data}(x)</span><script type="math/tex">P_{data}(x)</script></span> and <span><span class="MathJax_Preview">P_{model}(x ; \theta)</span><script type="math/tex">P_{model}(x ; \theta)</script></span></p>
+<p>which is equivalent to the minimizing the <span><span class="MathJax_Preview">D_{KL}</span><script type="math/tex">D_{KL}</script></span> between <span><span class="MathJax_Preview">p_{data}(x)</span><script type="math/tex">p_{data}(x)</script></span> and <span><span class="MathJax_Preview">p_{model}(x ; \theta)</span><script type="math/tex">p_{model}(x ; \theta)</script></span></p>
 <div>
 <div class="MathJax_Preview">
-\underset{\theta}{\operatorname{argmin}} D_{KL}(P_{data}(x) || P_{model}(x ; \theta))
+\underset{\theta}{\operatorname{argmin}} D_{KL}(p_{data}(x) || p_{model}(x ; \theta))
 </div>
 <script type="math/tex; mode=display">
-\underset{\theta}{\operatorname{argmin}} D_{KL}(P_{data}(x) || P_{model}(x ; \theta))
+\underset{\theta}{\operatorname{argmin}} D_{KL}(p_{data}(x) || p_{model}(x ; \theta))
 </script>
 </div>
-<p>If we were able to do this precisely, and if <span><span class="MathJax_Preview">P_{data}</span><script type="math/tex">P_{data}</script></span> lies within the family of distributions <span><span class="MathJax_Preview">P_{model}(x ; \theta)</span><script type="math/tex">P_{model}(x ; \theta)</script></span>, then the model would recover <span><span class="MathJax_Preview">P_{data}</span><script type="math/tex">P_{data}</script></span> exactly. In practice, we do not have access to <span><span class="MathJax_Preview">P_{data}</span><script type="math/tex">P_{data}</script></span> itself, but only to a training set consisting of <span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span> samples from <span><span class="MathJax_Preview">P_{data}</span><script type="math/tex">P_{data}</script></span>. We uses these to define <span><span class="MathJax_Preview">\hat P_{data}</span><script type="math/tex">\hat P_{data}</script></span>, an empirical distribution that places mass only on exactly those <span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span> points, approximating <span><span class="MathJax_Preview">P_{data}</span><script type="math/tex">P_{data}</script></span>. Minimizing the <span><span class="MathJax_Preview">D_{KL}</span><script type="math/tex">D_{KL}</script></span> between <span><span class="MathJax_Preview">\hat P_{data}</span><script type="math/tex">\hat P_{data}</script></span> and <span><span class="MathJax_Preview">P_{model}</span><script type="math/tex">P_{model}</script></span> is exactly equivalent to maximizing the log-likelihood of the training set.</p>
+<p>If we were able to do this precisely, and if <span><span class="MathJax_Preview">p_{data}</span><script type="math/tex">p_{data}</script></span> lies within the family of distributions <span><span class="MathJax_Preview">p_{model}(x ; \theta)</span><script type="math/tex">p_{model}(x ; \theta)</script></span>, then the model would recover <span><span class="MathJax_Preview">p_{data}</span><script type="math/tex">p_{data}</script></span> exactly. In practice, we do not have access to <span><span class="MathJax_Preview">p_{data}</span><script type="math/tex">p_{data}</script></span> itself, but only to a training set consisting of <span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span> samples from <span><span class="MathJax_Preview">p_{data}</span><script type="math/tex">p_{data}</script></span>. We uses these to define <span><span class="MathJax_Preview">\hat p_{data}</span><script type="math/tex">\hat p_{data}</script></span>, an empirical distribution that places mass only on exactly those <span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span> points, approximating <span><span class="MathJax_Preview">p_{data}</span><script type="math/tex">p_{data}</script></span>. Minimizing the <span><span class="MathJax_Preview">D_{KL}</span><script type="math/tex">D_{KL}</script></span> between <span><span class="MathJax_Preview">\hat p_{data}</span><script type="math/tex">\hat p_{data}</script></span> and <span><span class="MathJax_Preview">p_{model}</span><script type="math/tex">p_{model}</script></span> is exactly equivalent to maximizing the log-likelihood of the training set.</p>
 <h3 id="explicit-density-models">Explicit Density Models<a class="headerlink" href="#explicit-density-models" title="Permanent link">&para;</a></h3>
-<p>In explicit density models (i.e., the models we are discussing and have been discussing the entire course) define an explicit density function <span><span class="MathJax_Preview">P_{model}(x ; \theta)</span><script type="math/tex">P_{model}(x ; \theta)</script></span>. For these models, maximization of the likelihood function is straightforward: we simply plug the models definition of the density function into the expression for likelihood and follow the gradient uphill.</p>
+<p>Explicit density models (i.e., the models we are discussing and have been discussing the entire course) define an explicit density function <span><span class="MathJax_Preview">p_{model}(x ; \theta)</span><script type="math/tex">p_{model}(x ; \theta)</script></span> which is used to train the model, typically via maximum likelihood estimation. For these models, maximization of the likelihood function is straightforward: we simply plug the models definition of the density function into the expression for likelihood and follow the gradient uphill.</p>
 <p>The main difficulty present in explicit density models is designing a model that can capture all of the complexity of the data to be generated while still maintaining computational tractability.</p>
 <ol>
 <li>careful construction of models whose structure guarantees their tractability</li>
@@ -976,15 +976,15 @@ x \sim p_\theta(x | z)
 <li>Fully Visible Belief Nets (96, 98)</li>
 <li>WaveNet (2016)</li>
 </ul>
-<p>In the <em>intractable</em> case, we use variational (e.g. <a href="../week_11/#variational-autoencoders-vaes">VAEs</a>) or <a href="../week_8/#metropolis-hastings-method">MCMC approximations</a> to get at <span><span class="MathJax_Preview">\log p_\theta(x)</span><script type="math/tex">\log p_\theta(x)</script></span>.</p>
+<p>In the <em>intractable</em> case, we use variational (e.g. <a href="../week_11/#variational-autoencoders-vaes">VAEs</a>) or <a href="../week_8/#metropolis-hastings-method">MCMC approximations</a> to get at <span><span class="MathJax_Preview">p_{model}(x ; \theta)</span><script type="math/tex">p_{model}(x ; \theta)</script></span>.</p>
 <h3 id="generative-model-goal">Generative Model Goal<a class="headerlink" href="#generative-model-goal" title="Permanent link">&para;</a></h3>
-<p>The goal of generative models, in short, is to produce samples similar to <span><span class="MathJax_Preview">P_{data}</span><script type="math/tex">P_{data}</script></span>. But do we really need maximum likelihood estimations to achieve our goals?</p>
+<p>The goal of generative models, in short, is to produce samples similar to <span><span class="MathJax_Preview">p_{data}</span><script type="math/tex">p_{data}</script></span>. But do we really need maximum likelihood estimations to achieve our goals?</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>Everything up until this point was considered review. Everything that follows is new content.</p>
 </div>
 <h2 id="implicit-density-models">Implicit Density Models<a class="headerlink" href="#implicit-density-models" title="Permanent link">&para;</a></h2>
-<p>In implicit density models, we do not define <span><span class="MathJax_Preview">P_{model}(x; \theta)</span><script type="math/tex">P_{model}(x; \theta)</script></span> explicitly. Instead, we interact with <span><span class="MathJax_Preview">P_{model}</span><script type="math/tex">P_{model}</script></span> through samples.</p>
+<p>In contrast, <strong>implicit density models</strong> are trained without explicitly defining a density function. The way we interact with <span><span class="MathJax_Preview">p_{model}</span><script type="math/tex">p_{model}</script></span> is through samples.</p>
 <p>A taxonomic tree of generative models is shown below:</p>
 <p><img alt="" src="../../img/lecture_12_2.png" /></p>
 <div class="admonition cite">
@@ -992,8 +992,8 @@ x \sim p_\theta(x | z)
 <p><a href="https://arxiv.org/pdf/1701.00160.pdf">NIPS 2016 Tutorial: Generative Adversarial Networks; Goodfellow (2016)</a>.</p>
 </div>
 <p><em>But how do we train it?</em> No density means <em>no likelihood evaluation</em>. We will look at a specific instance of implicit density models known as Generative Adversarial Networks.</p>
-<h2 id="general-adversarial-network-gan-approach">General Adversarial Network (GAN) Approach<a class="headerlink" href="#general-adversarial-network-gan-approach" title="Permanent link">&para;</a></h2>
-<p>In the general adversarial approach, we <em>do not</em> have likelihoods, only samples. The idea is based on an adversarial game and pulls heavily from <a href="https://en.wikipedia.org/wiki/Game_theory">game theory</a>.</p>
+<h2 id="generative-adversarial-network-gan-approach">Generative Adversarial Network (GAN) Approach<a class="headerlink" href="#generative-adversarial-network-gan-approach" title="Permanent link">&para;</a></h2>
+<p>In the generative adversarial approach, we <em>do not</em> have likelihoods, only samples. The idea is based on an adversarial game and pulls heavily from <a href="https://en.wikipedia.org/wiki/Game_theory">game theory</a>.</p>
 <p>The basic idea of GANs is to set up a game between two players:</p>
 <ul>
 <li>One of them is called the <strong>generator</strong> (<span><span class="MathJax_Preview">G_{\theta_G}</span><script type="math/tex">G_{\theta_G}</script></span>). The generator creates samples that are intended to come from the same distribution as the training data.</li>
@@ -1013,9 +1013,9 @@ x \sim p_\theta(x | z)
 <p>to sample from the model:</p>
 <ul>
 <li>first sample <span><span class="MathJax_Preview">z \sim p(z)</span><script type="math/tex">z \sim p(z)</script></span> ; where <span><span class="MathJax_Preview">p(z)</span><script type="math/tex">p(z)</script></span> is some prior distribution</li>
-<li>then <span><span class="MathJax_Preview">x = G(z) \sim P_{model}</span><script type="math/tex">x = G(z) \sim P_{model}</script></span></li>
+<li>then <span><span class="MathJax_Preview">x = G(z) \sim p_{model}</span><script type="math/tex">x = G(z) \sim p_{model}</script></span></li>
 </ul>
-<p>notice that we <em>never explicitly define a distribution</em> <span><span class="MathJax_Preview">P_{model}(x; \theta)</span><script type="math/tex">P_{model}(x; \theta)</script></span>. Contrast this with VAEs, where to sample from the model:</p>
+<p>notice that we <em>never explicitly define a distribution</em> <span><span class="MathJax_Preview">p_{model}(x; \theta)</span><script type="math/tex">p_{model}(x; \theta)</script></span>. Contrast this with VAEs, where to sample from the model:</p>
 <ul>
 <li>first sample <span><span class="MathJax_Preview">z \sim q_\phi(z | x)</span><script type="math/tex">z \sim q_\phi(z | x)</script></span> for some input <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span></li>
 <li>then using the encoder, compute <span><span class="MathJax_Preview">\theta = f(z)</span><script type="math/tex">\theta = f(z)</script></span></li>
@@ -1032,7 +1032,7 @@ x \sim p_\theta(x | z)
 <h4 id="training-procedure">Training Procedure<a class="headerlink" href="#training-procedure" title="Permanent link">&para;</a></h4>
 <p>The training process consists of simultaneous <a href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent">SGD</a>. On each step, two minibatches are sampled: a minibatch of <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> values from the dataset and a minibatch of <span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span> values drawn from the model’s prior over latent variables, e.g.,</p>
 <ol>
-<li><span><span class="MathJax_Preview">x \sim P_{data}</span><script type="math/tex">x \sim P_{data}</script></span></li>
+<li><span><span class="MathJax_Preview">x \sim p_{data}</span><script type="math/tex">x \sim p_{data}</script></span></li>
 <li><span><span class="MathJax_Preview">z \sim p(z) \Rightarrow x \sim P_{G(z)}</span><script type="math/tex">z \sim p(z) \Rightarrow x \sim P_{G(z)}</script></span></li>
 </ol>
 <p>Then two gradient steps are made simultaneously: one updating <span><span class="MathJax_Preview">\theta_D</span><script type="math/tex">\theta_D</script></span> to reduce <span><span class="MathJax_Preview">J^{(D)}</span><script type="math/tex">J^{(D)}</script></span> and one updating <span><span class="MathJax_Preview">\theta_G</span><script type="math/tex">\theta_G</script></span> to reduce <span><span class="MathJax_Preview">J^{(G)}</span><script type="math/tex">J^{(G)}</script></span>.</p>
@@ -1042,10 +1042,10 @@ x \sim p_\theta(x | z)
 <p>The cost used for the discriminator is (almost) always:</p>
 <div>
 <div class="MathJax_Preview">
-J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim P_{data}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
+J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim p_{data}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
 </div>
 <script type="math/tex; mode=display">
-J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim P_{data}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
+J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim p_{data}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
 </script>
 </div>
 <p>This is just the standard cross-entropy cost that is minimized when training a standard binary classifier with a sigmoid output. The only difference is that the classifier is trained on two mini-batches of data; one coming from the dataset, where the label is 1 for all examples, and one coming from the generator, where the label is 0 for all examples.</p>
@@ -1053,13 +1053,13 @@ J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim P_{data}}[\log D(x)] - \mathbb 
 <p>Our goal is to minimize</p>
 <div>
 <div class="MathJax_Preview">
-J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim P_{data}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
+J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim p_{data}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
 </div>
 <script type="math/tex; mode=display">
-J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim P_{data}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
+J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim p_{data}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
 </script>
 </div>
-<p>in function space, specifying <span><span class="MathJax_Preview">D(x)</span><script type="math/tex">D(x)</script></span> directly. We begin by assuming that both <span><span class="MathJax_Preview">P_{data}</span><script type="math/tex">P_{data}</script></span> and <span><span class="MathJax_Preview">P_{model}</span><script type="math/tex">P_{model}</script></span> are nonzero everywhere.</p>
+<p>in function space, specifying <span><span class="MathJax_Preview">D(x)</span><script type="math/tex">D(x)</script></span> directly. We begin by assuming that both <span><span class="MathJax_Preview">p_{data}</span><script type="math/tex">p_{data}</script></span> and <span><span class="MathJax_Preview">p_{model}</span><script type="math/tex">p_{model}</script></span> are nonzero everywhere.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If we do not make this assumption, then some points are never visited during training, and have undefined behavior.</p>
@@ -1078,10 +1078,10 @@ derivatives with respect to a single entry <span><span class="MathJax_Preview">D
 <p>By solving this equation, we obtain</p>
 <div>
 <div class="MathJax_Preview">
-D^\star(x)  = \frac{P_{data}(x)}{P_{data}(x) + P_{model}(x)}
+D^\star(x)  = \frac{p_{data}(x)}{p_{data}(x) + p_{model}(x)}
 </div>
 <script type="math/tex; mode=display">
-D^\star(x)  = \frac{P_{data}(x)}{P_{data}(x) + P_{model}(x)}
+D^\star(x)  = \frac{p_{data}(x)}{p_{data}(x) + p_{model}(x)}
 </script>
 </div>
 <p>The discriminator (dashed blue line) estimates the ratio between the data density (black dots) and the sum of the data and model densities. Wherever the output of the discriminator is large, the model density is too low, and wherever the output of the discriminator is small, the model density is too high. Estimating this ratio is the key approximation mechanism used by GANs</p>
