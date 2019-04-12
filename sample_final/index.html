@@ -1433,14 +1433,15 @@ s \bot t | \mathcal V \setminus \{s, t\} \Leftrightarrow G_{st} = 0
 <p>(c)</p>
 <div>
 <div class="MathJax_Preview">
-p(x) \propto \psi_{1, 2, 3}(x_1, x_2, x_3) \psi_{2, 3, 5}(x_2, x_3, x_5) \psi_{2, 4, 5}(x_2, x_4, x_5) \psi_{3, 5, 6}(x_3, x_5, x_6) \psi_{4, 5, 6, 7}(x_4, x_5, x_6, x_7)
+p(x_1, ..., x_7) \propto \psi_{1, 2, 3}(x_1, x_2, x_3) \psi_{2, 3, 5}(x_2, x_3, x_5) \psi_{2, 4, 5}(x_2, x_4, x_5) \psi_{3, 5, 6}(x_3, x_5, x_6) \psi_{4, 5, 6, 7}(x_4, x_5, x_6, x_7)
 </div>
 <script type="math/tex; mode=display">
-p(x) \propto \psi_{1, 2, 3}(x_1, x_2, x_3) \psi_{2, 3, 5}(x_2, x_3, x_5) \psi_{2, 4, 5}(x_2, x_4, x_5) \psi_{3, 5, 6}(x_3, x_5, x_6) \psi_{4, 5, 6, 7}(x_4, x_5, x_6, x_7)
+p(x_1, ..., x_7) \propto \psi_{1, 2, 3}(x_1, x_2, x_3) \psi_{2, 3, 5}(x_2, x_3, x_5) \psi_{2, 4, 5}(x_2, x_4, x_5) \psi_{3, 5, 6}(x_3, x_5, x_6) \psi_{4, 5, 6, 7}(x_4, x_5, x_6, x_7)
 </script>
 </div>
 <h3 id="question-3_1">Question 3<a class="headerlink" href="#question-3_1" title="Permanent link">&para;</a></h3>
 <p>Compare and contrast directed vs undirected graphical models:</p>
+<p><strong>ANSWER</strong></p>
 <p><center></p>
 <table>
 <thead>
@@ -1469,7 +1470,7 @@ p(x) \propto \psi_{1, 2, 3}(x_1, x_2, x_3) \psi_{2, 3, 5}(x_2, x_3, x_5) \psi_{2
 <tr>
 <td>Graph factorizes according to</td>
 <td>Local conditional probabilities</td>
-<td>Product of potential functions (or factors), one for each maximal clique</td>
+<td>Potential functions (or factors), one per maximal clique</td>
 </tr>
 <tr>
 <td>Parameterized by</td>
@@ -1484,6 +1485,9 @@ p(x) \propto \psi_{1, 2, 3}(x_1, x_2, x_3) \psi_{2, 3, 5}(x_2, x_3, x_5) \psi_{2
 <p>Given the graph</p>
 <p><img alt="" src="../img/sample_midterm_3.png" /></p>
 <p>(a) Suppose we want to compute the partition function (<span><span class="MathJax_Preview">Z(\theta)</span><script type="math/tex">Z(\theta)</script></span>, see <a href="../lectures/week_4/#parameterization-of-an-ugm">here</a>) using the elimination ordering <span><span class="MathJax_Preview">\prec= (1, 2, 3, 4, 5, 6)</span><script type="math/tex">\prec= (1, 2, 3, 4, 5, 6)</script></span>. If we use the <a href="../lectures/week_5/#variable-elimination">variable elimination algorithm</a>, we will create new intermediate factors. What is the largest intermediate factor?</p>
+<p>(b) Add an edge to the original MRF between every pair of variables that end up in the same factor (These are called fill in edges.) Draw the resulting MRF. What is the size of the largest maximal clique in this graph?</p>
+<p>(c) Now consider elimination ordering <span><span class="MathJax_Preview">\prec= (4, 1, 2, 3, 5, 6)</span><script type="math/tex">\prec= (4, 1, 2, 3, 5, 6)</script></span>. If we use the <a href="../lectures/week_5/#variable-elimination">variable elimination algorithm</a>, we will create new intermediate factors. What is the largest intermediate factor?</p>
+<p>(d) Add an edge to the original MRF between every pair of variables that end up in the same factor (These are called fill in edges.) Draw the resulting MRF. What is the size of the largest maximal clique in this graph?</p>
 <p><strong>ANSWER</strong></p>
 <p>a) The size of the maximum factor is 3.</p>
 <p>The set of potentials given by the graph is</p>
@@ -1498,10 +1502,10 @@ p(x) \propto \psi_{1, 2, 3}(x_1, x_2, x_3) \psi_{2, 3, 5}(x_2, x_3, x_5) \psi_{2
 <p>and the joint probability is therefore</p>
 <div>
 <div class="MathJax_Preview">
-p(X) \propto \psi_{X_1, X_2}(X_1, X_2)\psi_{X_1, X_3}(X_1, X_3)\psi_{X_2, X_4}(X_2, X_4)\psi_{X_3, X_4}(X_3, X_4)\psi_{X_4, X_5}(X_4, X_5)\psi_{X_5, X_6}(X_5, X_6)
+p(X_1, ..., X_6) \propto \psi_{X_1, X_2}(X_1, X_2)\psi_{X_1, X_3}(X_1, X_3)\psi_{X_2, X_4}(X_2, X_4)\psi_{X_3, X_4}(X_3, X_4)\psi_{X_4, X_5}(X_4, X_5)\psi_{X_5, X_6}(X_5, X_6)
 </div>
 <script type="math/tex; mode=display">
-p(X) \propto \psi_{X_1, X_2}(X_1, X_2)\psi_{X_1, X_3}(X_1, X_3)\psi_{X_2, X_4}(X_2, X_4)\psi_{X_3, X_4}(X_3, X_4)\psi_{X_4, X_5}(X_4, X_5)\psi_{X_5, X_6}(X_5, X_6)
+p(X_1, ..., X_6) \propto \psi_{X_1, X_2}(X_1, X_2)\psi_{X_1, X_3}(X_1, X_3)\psi_{X_2, X_4}(X_2, X_4)\psi_{X_3, X_4}(X_3, X_4)\psi_{X_4, X_5}(X_4, X_5)\psi_{X_5, X_6}(X_5, X_6)
 </script>
 </div>
 <p>finally, the partition function with elimination ordering <span><span class="MathJax_Preview">\prec= (1, 2, 3, 4, 5, 6)</span><script type="math/tex">\prec= (1, 2, 3, 4, 5, 6)</script></span> is given by</p>
