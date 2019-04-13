@@ -472,9 +472,46 @@ d) The added edges are between
 
 The largest maximal clique is now of size 4 (\(\{x_2, x_3, x_4, x_5\}\)).
 
-## Week 6
+## Week 6: Variational Inference
 
 ### Question 1
+
+For the given tree
+
+![](./img/lecture_6_1.png)
+
+Compute \(p(x_1)\), with \(x_1\) as root.
+
+__ANSWER__
+
+First, pass messages from leafs to \(r\)
+
+\begin{align}
+  m_{5 \rightarrow 1}(x_1) &= \sum_{x_5} \phi_5(x_5)\phi_{15}(x_1, x_5) \\
+  m_{3 \rightarrow 2}(x_2) &= \sum_{x_3} \phi_3(x_3)\phi_{23}(x_2, x_3) \\
+  m_{4 \rightarrow 2}(x_2) &= \sum_{x_4} \phi_4(x_4)\phi_{24}(x_2, x_4) \\
+  m_{2 \rightarrow 1}(x_1) &= \sum_{x_1} \phi_2(x_2)\phi_{12}(x_1, x_2)m_{3 \rightarrow 2}(x_2)m_{4 \rightarrow 2}(x_2)
+\end{align}
+
+Finally, compute
+
+\[
+p(x_1) \propto \phi_1(x_1)m_{2 \rightarrow 1}(x_1)m_{5 \rightarrow 1}(x_1)
+\]
+
+Note that
+
+\[
+p(x_1) = \frac{1}{Z}\phi_1(x_1)m_{2 \rightarrow 1}(x_1)m_{5 \rightarrow 1}(x_1)
+\]
+
+where
+
+\[
+Z = \sum_{x_1} p(x_1)
+\]
+
+### Question 2
 
 Imagine that we have two distributions: the true distribution \(P(x)\), and the approximate distribution \(Q(x)\). Say further that we are trying to minimize the KL-Divergence between the true and approximate distribution.
 
