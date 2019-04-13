@@ -1631,8 +1631,10 @@ p(X_1, ..., X_6) \propto \psi_{X_1, X_2}(X_1, X_2)\psi_{X_1, X_3}(X_1, X_3)\psi_
 <h3 id="question-1_5">Question 1<a class="headerlink" href="#question-1_5" title="Permanent link">&para;</a></h3>
 <p>For the given tree</p>
 <p><img alt="" src="../img/lecture_6_1.png" /></p>
-<p>Compute <span><span class="MathJax_Preview">p(x_1)</span><script type="math/tex">p(x_1)</script></span>, with <span><span class="MathJax_Preview">x_1</span><script type="math/tex">x_1</script></span> as root.</p>
+<p>(a) Compute <span><span class="MathJax_Preview">p(x_1)</span><script type="math/tex">p(x_1)</script></span>, with <span><span class="MathJax_Preview">x_1</span><script type="math/tex">x_1</script></span> as root.</p>
+<p>(b) Assume each node can take on 1 on <span><span class="MathJax_Preview">K</span><script type="math/tex">K</script></span> discrete states. What is the runtime of this algorithm?</p>
 <p><strong>ANSWER</strong></p>
+<p>(a)</p>
 <p>First, pass messages from leafs to <span><span class="MathJax_Preview">r</span><script type="math/tex">r</script></span></p>
 <div>
 <div class="MathJax_Preview">\begin{align}
@@ -1675,6 +1677,18 @@ Z = \sum_{x_1} p(x_1)
 Z = \sum_{x_1} p(x_1)
 </script>
 </div>
+<p>To compute <span><span class="MathJax_Preview">p(x_i) \ \forall_i</span><script type="math/tex">p(x_i) \ \forall_i</script></span> we would need to pass messages from the root to the leafs and compute</p>
+<div>
+<div class="MathJax_Preview">
+p(x_i) \propto \phi(x_i) \prod_{j \in N(i)} m_{j \rightarrow i} (x_i), \ \forall_i.
+</div>
+<script type="math/tex; mode=display">
+p(x_i) \propto \phi(x_i) \prod_{j \in N(i)} m_{j \rightarrow i} (x_i), \ \forall_i.
+</script>
+</div>
+<p>(b)</p>
+<p>Because we made only a single pass, runtime is that of variable elimination, i.e. <span><span class="MathJax_Preview">\mathcal O(nk^2) = O(5k^2)</span><script type="math/tex">\mathcal O(nk^2) = O(5k^2)</script></span> where <span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span> is our number of nodes and <span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span> is the number of discrete states of each node.</p>
+<p>If we were to compute <span><span class="MathJax_Preview">p(x_i) \ \forall_i</span><script type="math/tex">p(x_i) \ \forall_i</script></span>, the runtime would be 2 times the runtime of variable elimination, i.e. <span><span class="MathJax_Preview">\mathcal O(nk^2) = O(5k^2)</span><script type="math/tex">\mathcal O(nk^2) = O(5k^2)</script></span>.</p>
 <h3 id="question-2_2">Question 2<a class="headerlink" href="#question-2_2" title="Permanent link">&para;</a></h3>
 <p>Imagine that we have two distributions: the true distribution <span><span class="MathJax_Preview">P(x)</span><script type="math/tex">P(x)</script></span>, and the approximate distribution <span><span class="MathJax_Preview">Q(x)</span><script type="math/tex">Q(x)</script></span>. Say further that we are trying to minimize the KL-Divergence between the true and approximate distribution.</p>
 <p>Explain the difference between the <em>forward</em></p>

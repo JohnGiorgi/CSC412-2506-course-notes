@@ -667,7 +667,7 @@ m_{j \rightarrow i}(x_i) = \sum_{x_j}\phi_j(x_j)\phi_{ij}(x_i, x_j)\prod_{k \in 
 </script>
 </div>
 <p><img alt="" src="../../img/lecture_6_2.png" /></p>
-<p>where each message <span><span class="MathJax_Preview">m_{j \rightarrow i}(x_i)</span><script type="math/tex">m_{j \rightarrow i}(x_i)</script></span> is a vector with one value for each state of <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span>. In order to compute <span><span class="MathJax_Preview">m_j \rightarrow m_i</span><script type="math/tex">m_j \rightarrow m_i</script></span>, we must have already computed <span><span class="MathJax_Preview">m_k \rightarrow j(x_j)</span><script type="math/tex">m_k \rightarrow j(x_j)</script></span> for <span><span class="MathJax_Preview">k \in \mathcal N(j) \not = i</span><script type="math/tex">k \in \mathcal N(j) \not = i</script></span>. Therefore, we need a <em>specific ordering</em> of the messages.</p>
+<p>where each message <span><span class="MathJax_Preview">m_{j \rightarrow i}(x_i)</span><script type="math/tex">m_{j \rightarrow i}(x_i)</script></span> is a vector with one value for each state of <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span>. In order to compute <span><span class="MathJax_Preview">m_j \rightarrow i</span><script type="math/tex">m_j \rightarrow i</script></span>, we must have already computed <span><span class="MathJax_Preview">m_k \rightarrow j(x_j)</span><script type="math/tex">m_k \rightarrow j(x_j)</script></span> for <span><span class="MathJax_Preview">k \in N(j) \not = i</span><script type="math/tex">k \in N(j) \not = i</script></span>. Therefore, we need a <em>specific ordering</em> of the messages.</p>
 <h4 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h4>
 <p>Suppose we want to compute <span><span class="MathJax_Preview">p(x_1)</span><script type="math/tex">p(x_1)</script></span> on the graph given above. Choosing an ordering is equivalent to choosing a root. Lets choose <span><span class="MathJax_Preview">x_1</span><script type="math/tex">x_1</script></span> to be the root. Then</p>
 <div>
@@ -719,12 +719,13 @@ Z = \sum_{x_1}p(x_1)
 </ol>
 <div>
 <div class="MathJax_Preview">
-p(x_i) \propto \phi_i(x_i) \prod_{j \in \mathcal N(i)} m_{j \rightarrow i}(x_i), \ \forall_i 
+p(x_i) \propto \phi_i(x_i) \prod_{j \in N(i)} m_{j \rightarrow i}(x_i), \ \forall_i
 </div>
 <script type="math/tex; mode=display">
-p(x_i) \propto \phi_i(x_i) \prod_{j \in \mathcal N(i)} m_{j \rightarrow i}(x_i), \ \forall_i 
+p(x_i) \propto \phi_i(x_i) \prod_{j \in N(i)} m_{j \rightarrow i}(x_i), \ \forall_i
 </script>
 </div>
+<p>The runtime is 2 times the cost of VE (one for each pass), i.e. <span><span class="MathJax_Preview">\mathcal O(nk^2)</span><script type="math/tex">\mathcal O(nk^2)</script></span> for <span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span> nodes and <span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span> states per node.</p>
                 
                   
                 
