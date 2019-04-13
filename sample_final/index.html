@@ -649,6 +649,19 @@
     Week 6
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#question-1_5" title="Question 1" class="md-nav__link">
+    Question 1
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -660,7 +673,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#question-1_5" title="Question 1" class="md-nav__link">
+  <a href="#question-1_6" title="Question 1" class="md-nav__link">
     Question 1
   </a>
   
@@ -687,7 +700,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#question-1_6" title="Question 1" class="md-nav__link">
+  <a href="#question-1_7" title="Question 1" class="md-nav__link">
     Question 1
   </a>
   
@@ -714,7 +727,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#question-1_7" title="Question 1" class="md-nav__link">
+  <a href="#question-1_8" title="Question 1" class="md-nav__link">
     Question 1
   </a>
   
@@ -734,7 +747,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#question-1_8" title="Question 1" class="md-nav__link">
+  <a href="#question-1_9" title="Question 1" class="md-nav__link">
     Question 1
   </a>
   
@@ -944,6 +957,19 @@
     Week 6
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#question-1_5" title="Question 1" class="md-nav__link">
+    Question 1
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -955,7 +981,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#question-1_5" title="Question 1" class="md-nav__link">
+  <a href="#question-1_6" title="Question 1" class="md-nav__link">
     Question 1
   </a>
   
@@ -982,7 +1008,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#question-1_6" title="Question 1" class="md-nav__link">
+  <a href="#question-1_7" title="Question 1" class="md-nav__link">
     Question 1
   </a>
   
@@ -1009,7 +1035,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#question-1_7" title="Question 1" class="md-nav__link">
+  <a href="#question-1_8" title="Question 1" class="md-nav__link">
     Question 1
   </a>
   
@@ -1029,7 +1055,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#question-1_8" title="Question 1" class="md-nav__link">
+  <a href="#question-1_9" title="Question 1" class="md-nav__link">
     Question 1
   </a>
   
@@ -1588,8 +1614,58 @@ p(X_1, ..., X_6) \propto \psi_{X_1, X_2}(X_1, X_2)\psi_{X_1, X_3}(X_1, X_3)\psi_
 </ul>
 <p>The largest maximal clique is now of size 4 (<span><span class="MathJax_Preview">\{x_2, x_3, x_4, x_5\}</span><script type="math/tex">\{x_2, x_3, x_4, x_5\}</script></span>).</p>
 <h2 id="week-6">Week 6<a class="headerlink" href="#week-6" title="Permanent link">&para;</a></h2>
-<h2 id="week-8-sampling-and-monte-carlo-methods">Week 8: Sampling and Monte Carlo Methods<a class="headerlink" href="#week-8-sampling-and-monte-carlo-methods" title="Permanent link">&para;</a></h2>
 <h3 id="question-1_5">Question 1<a class="headerlink" href="#question-1_5" title="Permanent link">&para;</a></h3>
+<p>Imagine that we have two distributions: the true distribution <span><span class="MathJax_Preview">P(x)</span><script type="math/tex">P(x)</script></span>, and the approximate distribution <span><span class="MathJax_Preview">Q(x)</span><script type="math/tex">Q(x)</script></span>. Say further that we are trying to minimize the KL-Divergence between the true and approximate distribution.</p>
+<p>Explain the difference between the <em>forward</em></p>
+<div>
+<div class="MathJax_Preview">
+D_{KL}(P(X) || Q(X)) = \int P(x) \log \frac{P(x)}{Q(x)}
+</div>
+<script type="math/tex; mode=display">
+D_{KL}(P(X) || Q(X)) = \int P(x) \log \frac{P(x)}{Q(x)}
+</script>
+</div>
+<p>and <em>reverse</em></p>
+<div>
+<div class="MathJax_Preview">
+D_{KL}(Q(X) || P(X)) = \int Q(x) \log \frac{Q(x)}{P(x)}
+</div>
+<script type="math/tex; mode=display">
+D_{KL}(Q(X) || P(X)) = \int Q(x) \log \frac{Q(x)}{P(x)}
+</script>
+</div>
+<p>KL-Divergence for these two distributions.</p>
+<p><strong>ANSWER</strong></p>
+<p>In the <strong>forward KL-Divergence</strong>, the difference between two distributions <span><span class="MathJax_Preview">P(X)</span><script type="math/tex">P(X)</script></span> and <span><span class="MathJax_Preview">Q(x)</span><script type="math/tex">Q(x)</script></span> is weighted by <span><span class="MathJax_Preview">P(x)</span><script type="math/tex">P(x)</script></span></p>
+<div>
+<div class="MathJax_Preview">
+D_{KL}(P(X) || Q(X)) = \int P(x) \log \frac{P(x)}{Q(x)}
+</div>
+<script type="math/tex; mode=display">
+D_{KL}(P(X) || Q(X)) = \int P(x) \log \frac{P(x)}{Q(x)}
+</script>
+</div>
+<p>The optimization procedure only penalizes a difference in density between <span><span class="MathJax_Preview">P(x)</span><script type="math/tex">P(x)</script></span> and <span><span class="MathJax_Preview">Q(x)</span><script type="math/tex">Q(x)</script></span> for regions where <span><span class="MathJax_Preview">P(x) &gt; 0</span><script type="math/tex">P(x) > 0</script></span>. A difference in density between <span><span class="MathJax_Preview">Q(x)</span><script type="math/tex">Q(x)</script></span> and <span><span class="MathJax_Preview">P(x)</span><script type="math/tex">P(x)</script></span> do not contribute to the KL-Divergence when <span><span class="MathJax_Preview">P(x) = 0</span><script type="math/tex">P(x) = 0</script></span>.</p>
+<p><img alt="" src="../img/sample_midterm_5.png" /></p>
+<p>For this reason, the forward KL-Divergence is referred to as <em>zero-avoiding</em> as it is avoiding <span><span class="MathJax_Preview">Q(x) = 0</span><script type="math/tex">Q(x) = 0</script></span> whenever <span><span class="MathJax_Preview">P(x) &gt; 0</span><script type="math/tex">P(x) > 0</script></span>.</p>
+<p>In the <strong>backward KL-Divergence</strong>, the difference between two distributions <span><span class="MathJax_Preview">P(X)</span><script type="math/tex">P(X)</script></span> and <span><span class="MathJax_Preview">Q(x)</span><script type="math/tex">Q(x)</script></span> is weighted by <span><span class="MathJax_Preview">Q(x)</span><script type="math/tex">Q(x)</script></span></p>
+<div>
+<div class="MathJax_Preview">
+D_{KL}(Q(X) || P(X)) = \int Q(x) \log \frac{Q(x)}{P(x)}
+</div>
+<script type="math/tex; mode=display">
+D_{KL}(Q(X) || P(X)) = \int Q(x) \log \frac{Q(x)}{P(x)}
+</script>
+</div>
+<p>The optimization procedure only penalizes a difference in density between <span><span class="MathJax_Preview">P(x)</span><script type="math/tex">P(x)</script></span> and <span><span class="MathJax_Preview">Q(x)</span><script type="math/tex">Q(x)</script></span> for regions where <span><span class="MathJax_Preview">Q(x) &gt; 0</span><script type="math/tex">Q(x) > 0</script></span>. A difference in density between <span><span class="MathJax_Preview">Q(x)</span><script type="math/tex">Q(x)</script></span> and <span><span class="MathJax_Preview">P(x)</span><script type="math/tex">P(x)</script></span> does not contribute to the KL-Divergence when <span><span class="MathJax_Preview">Q(x) = 0</span><script type="math/tex">Q(x) = 0</script></span>.</p>
+<p><img alt="" src="../img/sample_midterm_6.png" /></p>
+<p>For this reason, the forward KL-Divergence is referred to as <em>zero-forcing</em> as it forces <span><span class="MathJax_Preview">Q(x)</span><script type="math/tex">Q(x)</script></span> to be 0 on some areas, even if <span><span class="MathJax_Preview">P(x)&gt;0</span><script type="math/tex">P(x)>0</script></span>.</p>
+<div class="admonition cite">
+<p class="admonition-title">Cite</p>
+<p>Image came from <a href="https://wiseodd.github.io/techblog/2016/12/21/forward-reverse-kl/">this</a> blog.</p>
+</div>
+<h2 id="week-8-sampling-and-monte-carlo-methods">Week 8: Sampling and Monte Carlo Methods<a class="headerlink" href="#week-8-sampling-and-monte-carlo-methods" title="Permanent link">&para;</a></h2>
+<h3 id="question-1_6">Question 1<a class="headerlink" href="#question-1_6" title="Permanent link">&para;</a></h3>
 <p>Given some data <span><span class="MathJax_Preview">\{x^{(r)}\}^R_{r=1} \sim p(x)</span><script type="math/tex">\{x^{(r)}\}^R_{r=1} \sim p(x)</script></span>, the simple Monte Carlo estimator is</p>
 <div>
 <div class="MathJax_Preview">
@@ -1671,7 +1747,7 @@ p(X_1, ..., X_6) \propto \psi_{X_1, X_2}(X_1, X_2)\psi_{X_1, X_3}(X_1, X_3)\psi_
 </div>
 <p>where <span><span class="MathJax_Preview">\frac{Z_p}{Z_q} = \frac{1}{R}\sum_{r=1}^R \tilde w_r</span><script type="math/tex">\frac{Z_p}{Z_q} = \frac{1}{R}\sum_{r=1}^R \tilde w_r</script></span>, <span><span class="MathJax_Preview">w_r = \frac{\tilde w_r}{\sum_{r=1}^R \tilde w_r}</span><script type="math/tex">w_r = \frac{\tilde w_r}{\sum_{r=1}^R \tilde w_r}</script></span> and <span><span class="MathJax_Preview">\hat \Phi_{iw}</span><script type="math/tex">\hat \Phi_{iw}</script></span> is our importance weighted estimator.</p>
 <h2 id="week-9-hidden-markov-models">Week 9: Hidden Markov Models<a class="headerlink" href="#week-9-hidden-markov-models" title="Permanent link">&para;</a></h2>
-<h3 id="question-1_6">Question 1<a class="headerlink" href="#question-1_6" title="Permanent link">&para;</a></h3>
+<h3 id="question-1_7">Question 1<a class="headerlink" href="#question-1_7" title="Permanent link">&para;</a></h3>
 <p>Assume <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> is a discrete random variable with <span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span> states. How many parameters are needed to parameterize</p>
 <p>(a) <span><span class="MathJax_Preview">x_t</span><script type="math/tex">x_t</script></span>?</p>
 <p>(b) A <em>first-order</em> Markov chain?</p>
@@ -1794,7 +1870,7 @@ p(x_3 = A | z_1 = S) = p(x_3 = A | z_3 = H)p(z_3 = H | z_1 = S) + p(x_3 = A | z_
 </script>
 </div>
 <h2 id="week-10-stochastic-variational-inference-automatic-differentiation-variation-inference-sad-vi">Week 10: Stochastic Variational Inference / Automatic Differentiation Variation Inference (SAD VI)<a class="headerlink" href="#week-10-stochastic-variational-inference-automatic-differentiation-variation-inference-sad-vi" title="Permanent link">&para;</a></h2>
-<h3 id="question-1_7">Question 1<a class="headerlink" href="#question-1_7" title="Permanent link">&para;</a></h3>
+<h3 id="question-1_8">Question 1<a class="headerlink" href="#question-1_8" title="Permanent link">&para;</a></h3>
 <p>Starting from the Kullback–Leibler divergence (<span><span class="MathJax_Preview">D_{KL}</span><script type="math/tex">D_{KL}</script></span>), derive the Evidence Lower Bound (ELBO) for a true distribution <span><span class="MathJax_Preview">p_\theta (z | x)</span><script type="math/tex">p_\theta (z | x)</script></span> and approximate distribution <span><span class="MathJax_Preview">q_\phi(z|x)</span><script type="math/tex">q_\phi(z|x)</script></span> and show that maximizing the ELBO is equivalent to minimizing <span><span class="MathJax_Preview">D_{KL}(q_\phi (z | x) || p_\theta (z | x))</span><script type="math/tex">D_{KL}(q_\phi (z | x) || p_\theta (z | x))</script></span>.</p>
 <p><strong>ANSWER</strong></p>
 <div>
@@ -1833,7 +1909,7 @@ p(x_3 = A | z_1 = S) = p(x_3 = A | z_3 = H)p(z_3 = H | z_1 = S) + p(x_3 = A | z_
 </div>
 <p><span><span class="MathJax_Preview">\therefore</span><script type="math/tex">\therefore</script></span> maximizing the ELBO <span><span class="MathJax_Preview">\Rightarrow</span><script type="math/tex">\Rightarrow</script></span> minimizing <span><span class="MathJax_Preview">D_{KL}(q_\phi (z | x) || p_\theta (z | x))</span><script type="math/tex">D_{KL}(q_\phi (z | x) || p_\theta (z | x))</script></span>.</p>
 <h2 id="week-12-generative-adversarial-networks-gans">Week 12: Generative Adversarial Networks (GANs)<a class="headerlink" href="#week-12-generative-adversarial-networks-gans" title="Permanent link">&para;</a></h2>
-<h3 id="question-1_8">Question 1<a class="headerlink" href="#question-1_8" title="Permanent link">&para;</a></h3>
+<h3 id="question-1_9">Question 1<a class="headerlink" href="#question-1_9" title="Permanent link">&para;</a></h3>
 <p>Compare and contrast <em>explicit</em> vs. <em>implicit</em> density models.</p>
 <p><strong>ANSWER</strong></p>
 <p><strong>Explicit density models</strong> define an explicit density function <span><span class="MathJax_Preview">p_{model}(x ; \theta)</span><script type="math/tex">p_{model}(x ; \theta)</script></span> which is used to train the model, typically via maximum likelihood estimation. For these models, maximization of the likelihood function is straightforward: we simply plug the models definition of the density function into the expression for likelihood and follow the gradient uphill.</p>
