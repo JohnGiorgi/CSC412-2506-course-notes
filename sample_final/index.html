@@ -645,8 +645,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#week-6" title="Week 6" class="md-nav__link">
-    Week 6
+  <a href="#week-6-variational-inference" title="Week 6: Variational Inference" class="md-nav__link">
+    Week 6: Variational Inference
   </a>
   
     <nav class="md-nav">
@@ -655,6 +655,13 @@
           <li class="md-nav__item">
   <a href="#question-1_5" title="Question 1" class="md-nav__link">
     Question 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question-2_2" title="Question 2" class="md-nav__link">
+    Question 2
   </a>
   
 </li>
@@ -680,7 +687,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#question-2_2" title="Question 2" class="md-nav__link">
+  <a href="#question-2_3" title="Question 2" class="md-nav__link">
     Question 2
   </a>
   
@@ -707,7 +714,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#question-2_3" title="Question 2" class="md-nav__link">
+  <a href="#question-2_4" title="Question 2" class="md-nav__link">
     Question 2
   </a>
   
@@ -754,7 +761,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#question-2_4" title="Question 2" class="md-nav__link">
+  <a href="#question-2_5" title="Question 2" class="md-nav__link">
     Question 2
   </a>
   
@@ -953,8 +960,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#week-6" title="Week 6" class="md-nav__link">
-    Week 6
+  <a href="#week-6-variational-inference" title="Week 6: Variational Inference" class="md-nav__link">
+    Week 6: Variational Inference
   </a>
   
     <nav class="md-nav">
@@ -963,6 +970,13 @@
           <li class="md-nav__item">
   <a href="#question-1_5" title="Question 1" class="md-nav__link">
     Question 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question-2_2" title="Question 2" class="md-nav__link">
+    Question 2
   </a>
   
 </li>
@@ -988,7 +1002,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#question-2_2" title="Question 2" class="md-nav__link">
+  <a href="#question-2_3" title="Question 2" class="md-nav__link">
     Question 2
   </a>
   
@@ -1015,7 +1029,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#question-2_3" title="Question 2" class="md-nav__link">
+  <a href="#question-2_4" title="Question 2" class="md-nav__link">
     Question 2
   </a>
   
@@ -1062,7 +1076,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#question-2_4" title="Question 2" class="md-nav__link">
+  <a href="#question-2_5" title="Question 2" class="md-nav__link">
     Question 2
   </a>
   
@@ -1613,8 +1627,55 @@ p(X_1, ..., X_6) \propto \psi_{X_1, X_2}(X_1, X_2)\psi_{X_1, X_3}(X_1, X_3)\psi_
 <li><span><span class="MathJax_Preview">X_3</span><script type="math/tex">X_3</script></span> and <span><span class="MathJax_Preview">X_5</span><script type="math/tex">X_5</script></span> (added by intermediate factors <span><span class="MathJax_Preview">\tau_1(x_2, x_3, x_5)</span><script type="math/tex">\tau_1(x_2, x_3, x_5)</script></span> , <span><span class="MathJax_Preview">\tau_2(x_2, x_3, x_5)</span><script type="math/tex">\tau_2(x_2, x_3, x_5)</script></span>, <span><span class="MathJax_Preview">\tau_3(x_3, x_5)</span><script type="math/tex">\tau_3(x_3, x_5)</script></span>)</li>
 </ul>
 <p>The largest maximal clique is now of size 4 (<span><span class="MathJax_Preview">\{x_2, x_3, x_4, x_5\}</span><script type="math/tex">\{x_2, x_3, x_4, x_5\}</script></span>).</p>
-<h2 id="week-6">Week 6<a class="headerlink" href="#week-6" title="Permanent link">&para;</a></h2>
+<h2 id="week-6-variational-inference">Week 6: Variational Inference<a class="headerlink" href="#week-6-variational-inference" title="Permanent link">&para;</a></h2>
 <h3 id="question-1_5">Question 1<a class="headerlink" href="#question-1_5" title="Permanent link">&para;</a></h3>
+<p>For the given tree</p>
+<p><img alt="" src="../img/lecture_6_1.png" /></p>
+<p>Compute <span><span class="MathJax_Preview">p(x_1)</span><script type="math/tex">p(x_1)</script></span>, with <span><span class="MathJax_Preview">x_1</span><script type="math/tex">x_1</script></span> as root.</p>
+<p><strong>ANSWER</strong></p>
+<p>First, pass messages from leafs to <span><span class="MathJax_Preview">r</span><script type="math/tex">r</script></span></p>
+<div>
+<div class="MathJax_Preview">\begin{align}
+  m_{5 \rightarrow 1}(x_1) &amp;= \sum_{x_5} \phi_5(x_5)\phi_{15}(x_1, x_5) \\
+  m_{3 \rightarrow 2}(x_2) &amp;= \sum_{x_3} \phi_3(x_3)\phi_{23}(x_2, x_3) \\
+  m_{4 \rightarrow 2}(x_2) &amp;= \sum_{x_4} \phi_4(x_4)\phi_{24}(x_2, x_4) \\
+  m_{2 \rightarrow 1}(x_1) &amp;= \sum_{x_1} \phi_2(x_2)\phi_{12}(x_1, x_2)m_{3 \rightarrow 2}(x_2)m_{4 \rightarrow 2}(x_2)
+\end{align}</div>
+<script type="math/tex; mode=display">\begin{align}
+  m_{5 \rightarrow 1}(x_1) &= \sum_{x_5} \phi_5(x_5)\phi_{15}(x_1, x_5) \\
+  m_{3 \rightarrow 2}(x_2) &= \sum_{x_3} \phi_3(x_3)\phi_{23}(x_2, x_3) \\
+  m_{4 \rightarrow 2}(x_2) &= \sum_{x_4} \phi_4(x_4)\phi_{24}(x_2, x_4) \\
+  m_{2 \rightarrow 1}(x_1) &= \sum_{x_1} \phi_2(x_2)\phi_{12}(x_1, x_2)m_{3 \rightarrow 2}(x_2)m_{4 \rightarrow 2}(x_2)
+\end{align}</script>
+</div>
+<p>Finally, compute</p>
+<div>
+<div class="MathJax_Preview">
+p(x_1) \propto \phi_1(x_1)m_{2 \rightarrow 1}(x_1)m_{5 \rightarrow 1}(x_1)
+</div>
+<script type="math/tex; mode=display">
+p(x_1) \propto \phi_1(x_1)m_{2 \rightarrow 1}(x_1)m_{5 \rightarrow 1}(x_1)
+</script>
+</div>
+<p>Note that</p>
+<div>
+<div class="MathJax_Preview">
+p(x_1) = \frac{1}{Z}\phi_1(x_1)m_{2 \rightarrow 1}(x_1)m_{5 \rightarrow 1}(x_1)
+</div>
+<script type="math/tex; mode=display">
+p(x_1) = \frac{1}{Z}\phi_1(x_1)m_{2 \rightarrow 1}(x_1)m_{5 \rightarrow 1}(x_1)
+</script>
+</div>
+<p>where</p>
+<div>
+<div class="MathJax_Preview">
+Z = \sum_{x_1} p(x_1)
+</div>
+<script type="math/tex; mode=display">
+Z = \sum_{x_1} p(x_1)
+</script>
+</div>
+<h3 id="question-2_2">Question 2<a class="headerlink" href="#question-2_2" title="Permanent link">&para;</a></h3>
 <p>Imagine that we have two distributions: the true distribution <span><span class="MathJax_Preview">P(x)</span><script type="math/tex">P(x)</script></span>, and the approximate distribution <span><span class="MathJax_Preview">Q(x)</span><script type="math/tex">Q(x)</script></span>. Say further that we are trying to minimize the KL-Divergence between the true and approximate distribution.</p>
 <p>Explain the difference between the <em>forward</em></p>
 <div>
@@ -1712,7 +1773,7 @@ D_{KL}(Q(X) || P(X)) = \int Q(x) \log \frac{Q(x)}{P(x)}
 = \frac{1}{R} \text{var} [\phi(x) ] \quad \square
 </script>
 </div>
-<h3 id="question-2_2">Question 2<a class="headerlink" href="#question-2_2" title="Permanent link">&para;</a></h3>
+<h3 id="question-2_3">Question 2<a class="headerlink" href="#question-2_3" title="Permanent link">&para;</a></h3>
 <p>Starting from <span><span class="MathJax_Preview">\Phi = \int \phi(x)p(x)dx</span><script type="math/tex">\Phi = \int \phi(x)p(x)dx</script></span>, derive the importance weighted estimator <span><span class="MathJax_Preview">\hat \Phi_{iw}</span><script type="math/tex">\hat \Phi_{iw}</script></span> given</p>
 <div>
 <div class="MathJax_Preview">
@@ -1756,7 +1817,7 @@ D_{KL}(Q(X) || P(X)) = \int Q(x) \log \frac{Q(x)}{P(x)}
 <p>(a) <span><span class="MathJax_Preview">k-1</span><script type="math/tex">k-1</script></span>, as the last state is implicit.</p>
 <p>(b) <span><span class="MathJax_Preview">k(k-1)</span><script type="math/tex">k(k-1)</script></span>, as we need <span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span> number of parameters for each parameter of <span><span class="MathJax_Preview">x_t</span><script type="math/tex">x_t</script></span></p>
 <p>(c) <span><span class="MathJax_Preview">k^m(k-1)</span><script type="math/tex">k^m(k-1)</script></span>, as we need <span><span class="MathJax_Preview">k^m</span><script type="math/tex">k^m</script></span> number of parameters for each parameter of <span><span class="MathJax_Preview">x_t</span><script type="math/tex">x_t</script></span></p>
-<h3 id="question-2_3">Question 2<a class="headerlink" href="#question-2_3" title="Permanent link">&para;</a></h3>
+<h3 id="question-2_4">Question 2<a class="headerlink" href="#question-2_4" title="Permanent link">&para;</a></h3>
 <p>Say we have the following simple chain</p>
 <p><img alt="" src="../img/lecture_8_3.png" /></p>
 <p>where</p>
@@ -1933,7 +1994,7 @@ p(x_3 = A | z_1 = S) = p(x_3 = A | z_3 = H)p(z_3 = H | z_1 = S) + p(x_3 = A | z_
 </div>
 <p>when <span><span class="MathJax_Preview">p_{model}\theta(x ; \theta)</span><script type="math/tex">p_{model}\theta(x ; \theta)</script></span> is intractable, we use variational (e.g. VAEs) or MCMC approximations to compute the likelihood.</p>
 <p>In contrast, <strong>implicit density models</strong> are trained without explicitly defining a density function. The way we interact with <span><span class="MathJax_Preview">p_{model}</span><script type="math/tex">p_{model}</script></span> is through samples. An example a General Adversarial Networks (GANs).</p>
-<h3 id="question-2_4">Question 2<a class="headerlink" href="#question-2_4" title="Permanent link">&para;</a></h3>
+<h3 id="question-2_5">Question 2<a class="headerlink" href="#question-2_5" title="Permanent link">&para;</a></h3>
 <p>The goal of the discriminator is to minimize</p>
 <div>
 <div class="MathJax_Preview">
