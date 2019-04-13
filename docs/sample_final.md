@@ -109,13 +109,13 @@ Rearranging, we get
 
 therefore, the MLE for the class-conditional pixel means \(\theta\) of class \(c\), \(\hat \theta_c\), is given by the number of examples of class \(c\) where \(d=1\) divided by the total number of examples of class \(c\), as expected.
 
-(b) The posterior probability of our class-conditional pixel means, \(\theta\) for class \(c\) is given by
+(b) The prior probability of our class-conditional pixel means, \(\theta\) for class \(c\) is given by
 
 \[
 f(\theta_c; \alpha, \beta) = f(\theta_c; 2, 2) = \frac{1}{B(2, 2)}\theta_c^{2 - 1}(1-\theta_c)^{2-1} = \theta_c(1-\theta_c)
 \]
 
-\noindent where we have ignored the Beta normalizing constant. The MAP estimate of the class-conditional pixel means \(\theta\) for class \(c\) is given by
+where we have ignored the Beta normalizing constant. The MAP estimate of the class-conditional pixel means \(\theta\) for class \(c\) is given by
 
 \[
 \hat \theta_c = \operatorname*{argmax}_{\theta_c} \Bigg [ \theta_c(1-\theta_c) \prod_{i=1}^N \prod_{d=1}^{784} \theta^{x_d^{(i)}}_{cd}(1 - \theta_{cd})^{(1-x_d^{(i)})} \Bigg ]
@@ -283,7 +283,7 @@ __ANSWER__
 We want to sample a sequence of observations \(x_1, x_2, x_3, ..., x_T\) from the model according to
 
 \[
-x_{1:T} = \prod_{t=1}^T p(X_t \ | \ \text{parents of } X_t)
+x_{1:T} \sim \prod_{t=1}^T p(X_t \ | \ \text{parents of } X_t)
 \]
 
 since observations \(x_t\) are independent of one another. Notice that this forms a chain, with probability
@@ -295,7 +295,7 @@ p(x_{1:T}) \sim \bigg [ \prod_{t=1}^T p(X_t | z_t) \bigg ] \bigg [ p(z_1) \prod_
 _Step-by-step_
 
 1. Start with \(t=1\)
-2. Sample \(z_t\) according to \(z_t \sim p(z_1) \prod_{i=t}^{t + 1} p(Z_i | z_{i-1})\)
+2. Sample \(z_t\) according to \(z_t \sim p(z_1) \prod_{i=2}^{t} p(Z_i | z_{i-1})\)
 3. Given the sampled \(z_t\), sample \(x_t\) according to \(x_t \sim \ p(X_t | z_t)\)
 4. Increment \(t\) by 1
 5. Repeat steps 2-4 until \(t=T\)
@@ -306,15 +306,17 @@ _Step-by-step_
 
 (a) State the Global, Local and Pairwise Markov properties used to determine conditional independence in a undirected graphical model.
 
-(b) Given the following UGMs:
+Given the following UGMs:
+
+(b)
 
 ![](./img/lecture_4_4.png)
 
-use each to Markov property to give an example of two sets of conditionally independent nodes in the graph.
-
-(c) Do the same for the following UGM:
+(c)
 
 ![](./img/lecture_4_3.png)
+
+use each to Markov property to give an example of two sets of conditionally independent nodes in the graph.
 
 __ANSWER__
 
@@ -356,6 +358,8 @@ Given the following graph:
 
 (b) What is a _maximum_ clique? State on example from the graph.
 
+(c) Write down the factorized joint distribution that this graphical model represents
+
 __ANSWER__
 
 (a)
@@ -370,31 +374,27 @@ A _maximal clique_ is show in blue, while a _maximum clique_ is shown in green.
 
 ![](./img/lecture_4_7.png)
 
+(c)
+
+\[
+p(x_1, ..., x_7) \propto \psi_{1, 2, 3}(x_1, x_2, x_3) \psi_{2, 3, 5}(x_2, x_3, x_5) \psi_{2, 4, 5}(x_2, x_4, x_5) \psi_{3, 5, 6}(x_3, x_5, x_6) \psi_{4, 5, 6, 7}(x_4, x_5, x_6, x_7)
+\]
+
 ### Question 3
 
-Given the following graph:
-
-![](./img/lecture_4_4.png)
-
-(a) Write down the factorized joint distribution that this graphical model represents
+Compare and contrast directed vs undirected graphical models:
 
 __ANSWER__
 
-(a)
-
-\[
-p(x) \propto \psi_{1, 2, 3}(x_1, x_2, x_3) \psi_{2, 3, 5}(x_2, x_3, x_5) \psi_{2, 4, 5}(x_2, x_4, x_5) \psi_{3, 5, 6}(x_3, x_5, x_6) \psi_{4, 5, 6, 7}(x_4, x_5, x_6, x_7)
-\]
-
-### Question 4
-
-Compare and contrast directed vs undirected graphical models
-
 <center>
 
-|     | DGMs | UGMs |
-| --- | ---- | ---- |
-|     |      |      |
+|                               | DGMs                                                              | UGMs                                                                           |
+| ----------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| Represented by                | Directed graph                                                    | Undirected Graphs                                                              |
+| Nodes specify                 | Random variables                                                  | Random variables                                                               |
+| Edges specify                 | Conditional dependence between variables                          | Probabilistic interactions                                                     |
+| Graph factorizes according to | Local conditional probabilities                                   | Potential functions (or factors), one per maximal clique       |
+| Parameterized by              | Conditional probability tables (if random variables are discrete) | Tables of non-negative, relative affinities (if random variables are discrete) |
 
 </center>
 
@@ -407,6 +407,12 @@ Given the graph
 ![](./img/sample_midterm_3.png)
 
 (a) Suppose we want to compute the partition function (\(Z(\theta)\), see [here](../lectures/week_4/#parameterization-of-an-ugm)) using the elimination ordering \(\prec= (1, 2, 3, 4, 5, 6)\). If we use the [variable elimination algorithm](../lectures/week_5/#variable-elimination), we will create new intermediate factors. What is the largest intermediate factor?
+
+(b) Add an edge to the original MRF between every pair of variables that end up in the same factor (These are called fill in edges.) Draw the resulting MRF. What is the size of the largest maximal clique in this graph?
+
+(c) Now consider elimination ordering \(\prec= (4, 1, 2, 3, 5, 6)\). If we use the [variable elimination algorithm](../lectures/week_5/#variable-elimination), we will create new intermediate factors. What is the largest intermediate factor?
+
+(d) Add an edge to the original MRF between every pair of variables that end up in the same factor (These are called fill in edges.) Draw the resulting MRF. What is the size of the largest maximal clique in this graph?
 
 __ANSWER__
 
@@ -421,7 +427,7 @@ The set of potentials given by the graph is
 and the joint probability is therefore
 
 \[
-p(X) \propto \psi_{X_1, X_2}(X_1, X_2)\psi_{X_1, X_3}(X_1, X_3)\psi_{X_2, X_4}(X_2, X_4)\psi_{X_3, X_4}(X_3, X_4)\psi_{X_4, X_5}(X_4, X_5)\psi_{X_5, X_6}(X_5, X_6)
+p(X_1, ..., X_6) \propto \psi_{X_1, X_2}(X_1, X_2)\psi_{X_1, X_3}(X_1, X_3)\psi_{X_2, X_4}(X_2, X_4)\psi_{X_3, X_4}(X_3, X_4)\psi_{X_4, X_5}(X_4, X_5)\psi_{X_5, X_6}(X_5, X_6)
 \]
 
 finally, the partition function with elimination ordering \(\prec= (1, 2, 3, 4, 5, 6)\) is given by
@@ -467,6 +473,54 @@ d) The added edges are between
 The largest maximal clique is now of size 4 (\(\{x_2, x_3, x_4, x_5\}\)).
 
 ## Week 6
+
+### Question 1
+
+Imagine that we have two distributions: the true distribution \(P(x)\), and the approximate distribution \(Q(x)\). Say further that we are trying to minimize the KL-Divergence between the true and approximate distribution.
+
+Explain the difference between the _forward_
+
+\[
+D_{KL}(P(X) || Q(X)) = \int P(x) \log \frac{P(x)}{Q(x)}
+\]
+
+and _reverse_
+
+\[
+D_{KL}(Q(X) || P(X)) = \int Q(x) \log \frac{Q(x)}{P(x)}
+\]
+
+ KL-Divergence for these two distributions.
+
+__ANSWER__
+
+In the **forward KL-Divergence**, the difference between two distributions \(P(X)\) and \(Q(x)\) is weighted by \(P(x)\)
+
+\[
+D_{KL}(P(X) || Q(X)) = \int P(x) \log \frac{P(x)}{Q(x)}
+\]
+
+The optimization procedure only penalizes a difference in density between \(P(x)\) and \(Q(x)\) for regions where \(P(x) > 0\). A difference in density between \(Q(x)\) and \(P(x)\) do not contribute to the KL-Divergence when \(P(x) = 0\).
+
+![](./img/sample_midterm_5.png)
+
+For this reason, the forward KL-Divergence is referred to as _zero-avoiding_ as it is avoiding \(Q(x) = 0\) whenever \(P(x) > 0\).
+
+In the **backward KL-Divergence**, the difference between two distributions \(P(X)\) and \(Q(x)\) is weighted by \(Q(x)\)
+
+\[
+D_{KL}(Q(X) || P(X)) = \int Q(x) \log \frac{Q(x)}{P(x)}
+\]
+
+The optimization procedure only penalizes a difference in density between \(P(x)\) and \(Q(x)\) for regions where \(Q(x) > 0\). A difference in density between \(Q(x)\) and \(P(x)\) does not contribute to the KL-Divergence when \(Q(x) = 0\).
+
+![](./img/sample_midterm_6.png)
+
+For this reason, the forward KL-Divergence is referred to as _zero-forcing_ as it forces \(Q(x)\) to be 0 on some areas, even if \(P(x)>0\).
+
+!!! cite
+    Images came from [this](https://wiseodd.github.io/techblog/2016/12/21/forward-reverse-kl/) blog.
+
 ## Week 8: Sampling and Monte Carlo Methods
 
 ### Question 1
@@ -641,7 +695,7 @@ because \(D_{KL}(q_\phi (z | x) || p_\theta (z | x)) \ge 0\)
 
 \(\therefore\) maximizing the ELBO \(\Rightarrow\) minimizing \(D_{KL}(q_\phi (z | x) || p_\theta (z | x))\).
 
-## Week 12
+## Week 12: Generative Adversarial Networks (GANs)
 
 ### Question 1
 
@@ -649,20 +703,128 @@ Compare and contrast _explicit_ vs. _implicit_ density models.
 
 __ANSWER__
 
-**Explicit density models** define an explicit density function \(p_{model}\theta(x ; \theta)\). For these models, maximization of the likelihood function is straightforward: we simply plug the models definition of the density function into the expression for likelihood and follow the gradient uphill.
+**Explicit density models** define an explicit density function \(p_{model}(x ; \theta)\) which is used to train the model, typically via maximum likelihood estimation. For these models, maximization of the likelihood function is straightforward: we simply plug the models definition of the density function into the expression for likelihood and follow the gradient uphill.
 
 e.g. for the i.i.d case:
 
 \[
-\hat \theta_{MLE} = \underset{\theta}{\operatorname{argmax}} \sum \log P_{model} (x^{(i)} ; \theta)
+\hat \theta_{MLE} = \underset{\theta}{\operatorname{argmax}} \sum \log p_{model} (x^{(i)} ; \theta)
 \]
 
-which is equivalent to the minimizing the KL divergence between \(P_{data}(x)\) and \(P_{model}(x ; \theta)\)
+which is equivalent to the minimizing the KL divergence between \(p_{model}(x)\) and \(p_{model}(x ; \theta)\)
 
 \[
-\underset{\theta}{\operatorname{argmin}} D_{KL}(P_{data}(x) || P_{model}(x ; \theta))
+\underset{\theta}{\operatorname{argmin}} D_{KL}(p_{data}(x) || p_{model}(x ; \theta))
 \]
 
 when \(p_{model}\theta(x ; \theta)\) is intractable, we use variational (e.g. VAEs) or MCMC approximations to compute the likelihood.
 
-In contrast, __implicit density models__ are trained without explicitly defining a density function. The way we interact \(P_{model}\) is through samples. An example is a General Adversarial Network (GAN).
+In contrast, __implicit density models__ are trained without explicitly defining a density function. The way we interact with \(p_{model}\) is through samples. An example a General Adversarial Networks (GANs).
+
+### Question 2
+
+The goal of the discriminator is to minimize
+
+\[
+J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim p_{data}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
+\]
+
+with respect to \(\theta_D\). Imagine that the discriminator can be optimized in function space, so the value of \(D(x)\) is specified independently for every value of x.
+
+(a) What is the optimal strategy for the discriminator, \(D\)?
+
+(b) What assumptions need to be made to obtain this result?
+
+__ANSWER__
+
+(b)
+
+We begin by assuming that both \(p_{data}\) and \(p_{model}\) are nonzero everywhere.
+
+!!! note
+    If we do not make this assumption, then some points are never visited during training, and have undefined behavior.
+
+(a)
+
+To minimize \(J^{(D)}\) with respect to \(D\), we can write down the functional
+derivatives with respect to a single entry \(D^{(x)}\), and set them equal to zero:
+
+\[
+\frac{\delta}{\delta D(x)}J^{(D)} = 0
+\]
+
+By solving this equation, we obtain
+
+\[
+D^\star(x)  = \frac{p_{data}(x)}{p_{data}(x) + p_{model}(x)}
+\]
+
+Estimating this ratio is the key approximation mechanism used by GANs.
+
+### Question 3
+
+The goal of the generator is to minimize
+
+\[
+J^{(G)}(\theta_D, \theta_G) = -\mathbb E_{x \sim p_{data}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
+\]
+
+with respect to \(\theta_G\).
+
+What is the optimal strategy for the generator, \(G\)?
+
+__ANSWER__
+
+The optimal behavior of the generator is to _try and confuse the discriminator_. We can frame this as a **zero-sum game**, in which the sum of all player’s costs is always zero. In this version of the game,
+
+\[
+J(^{(G)}) = -J^{(D)}
+\]
+
+Because \(J^{(G)}\) is tied directly to \(J^{(D)}\), we can summarize the entire game
+with a value function specifying the discriminator’s payoff:
+
+\[
+V(\theta^{(D)}, \theta^{(G)}) = -J^{(D)}(\theta^{(D)}, \theta^{(G)})
+\]
+
+Zero-sum games are also called **minimax** games because their solution involves minimization in an outer loop and maximization in an inner loop:
+
+\[
+\theta^{(G)\star} = \underset{\theta^{(G)}}{\operatorname{argmin}} \underset{\theta^{(D)}}{\operatorname{argmax}} V(\theta^{(D)}, \theta^{(G)})
+\]
+
+Where we want to maximize \(\theta_D\) such that
+
+- \(D_{\theta_D}(x) = 1\)
+- \(D_{\theta_D}(G(z)) = 0\)
+
+and minimize \(\theta_G\) such that
+
+- \(D_{\theta_D}(G_{\theta_G}(z)) \rightarrow 1\)
+
+### Question 4
+
+The cost used for the generator in the minimax game, \(J(^{(G)}) = -J^{(D)}\) is useful for theoretical analysis, but does not perform especially well in practice.
+
+(a) Explain what the _saturating problem_ in GANs is.
+
+(b) Explain the heuristic, non-saturating game used to solve this problem.
+
+__ANSWER__
+
+(a) In the minimax game, the discriminator _minimizes_ a cross-entropy, but the generator _maximizes_ the same cross-entropy. This is unfortunate for the generator, because when the discriminator successfully rejects generator samples with high confidence, e.g. \(D(G(z)) = 0\), the generator’s gradient vanishes (the cost function becomes flat!). This is known as the _saturation problem_.
+
+![](./img/lecture_12_5.png)
+
+(b) To solve this problem, we introduce the non-saturating game, in which we continue to use cross-entropy minimization for the generator, but instead of flipping the sign on the discriminator’s cost to obtain a cost for the generator, we flip the target used to construct the cross-entropy cost
+
+\[
+J^{(G)} = -\underset{z \sim p(z)}{\operatorname{\mathbb E}} \log(D(G(z)))
+\]
+
+This leads to a strong gradient signal at \(D(G(z)) = 0\).
+
+![](./img/lecture_12_6.png)
+
+In the minimax game, the generator minimizes the log-probability of the discriminator being correct. In this game, the generator maximizes the log- probability of the discriminator being mistaken.

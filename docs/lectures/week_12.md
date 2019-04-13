@@ -1,4 +1,4 @@
-# Week 12: General Adversarial Networks (GANs)
+# Week 12: Generative Adversarial Networks (GANs)
 
 ### Assigned Reading
 
@@ -12,19 +12,19 @@ In the first half of this lecture, we will review the [generative models](https:
 Generative models make the assumption that your data was generated from some distribution
 
 \[
-\{x_i\}_{i=1}^N \sim P_{data}
+\{x_i\}_{i=1}^N \sim p_{data}
 \]
 
-This is the distribution we will attempt to learn. More specifically, we want to learn a model, \(P_{model}\), that represents an estimate of \(P_{data}\). If we have done our job correctly, then samples from our model
+This is the distribution we will attempt to learn. More specifically, we want to learn a model, \(p_{model}\), that represents an estimate of \(p_{data}\). If we have done our job correctly, then samples from our model
 
 \[
-\tilde x_i \sim P_{model}
+\tilde x_i \sim p_{model}
 \]
 
-should look like samples from our data. The density \(P_{model}\) can be
+should look like samples from our data. The density \(p_{model}\) can be
 
 1. explicitly defined
-2. approximated by random sampling from our model.
+2. approximated by random sampling from our model
 
 So far, we have only looked at models of the first type, sometimes referred to as __explicit density models__.
 
@@ -85,21 +85,21 @@ The basic idea is to:
 e.g. for the i.i.d case:
 
 \[
-\prod_{i=1}^N P_{model} (x^{(i)}, \theta) \\
-\Rightarrow \hat \theta_{MLE} = \underset{\theta}{\operatorname{argmax}} \sum \log P_{model} (x^{(i)} ; \theta)
+\prod_{i=1}^N p_{model} (x^{(i)} ; \theta) \\
+\Rightarrow \hat \theta_{MLE} = \underset{\theta}{\operatorname{argmax}} \sum \log p_{model} (x^{(i)} ; \theta)
 \]
 
-which is equivalent to the minimizing the \(D_{KL}\) between \(P_{data}(x)\) and \(P_{model}(x ; \theta)\)
+which is equivalent to the minimizing the \(D_{KL}\) between \(p_{data}(x)\) and \(p_{model}(x ; \theta)\)
 
 \[
-\underset{\theta}{\operatorname{argmin}} D_{KL}(P_{data}(x) || P_{model}(x ; \theta))
+\underset{\theta}{\operatorname{argmin}} D_{KL}(p_{data}(x) || p_{model}(x ; \theta))
 \]
 
-If we were able to do this precisely, and if \(P_{data}\) lies within the family of distributions \(P_{model}(x ; \theta)\), then the model would recover \(P_{data}\) exactly. In practice, we do not have access to \(P_{data}\) itself, but only to a training set consisting of \(m\) samples from \(P_{data}\). We uses these to define \(\hat P_{data}\), an empirical distribution that places mass only on exactly those \(m\) points, approximating \(P_{data}\). Minimizing the \(D_{KL}\) between \(\hat P_{data}\) and \(P_{model}\) is exactly equivalent to maximizing the log-likelihood of the training set.
+If we were able to do this precisely, and if \(p_{data}\) lies within the family of distributions \(p_{model}(x ; \theta)\), then the model would recover \(p_{data}\) exactly. In practice, we do not have access to \(p_{data}\) itself, but only to a training set consisting of \(m\) samples from \(p_{data}\). We uses these to define \(\hat p_{data}\), an empirical distribution that places mass only on exactly those \(m\) points, approximating \(p_{data}\). Minimizing the \(D_{KL}\) between \(\hat p_{data}\) and \(p_{model}\) is exactly equivalent to maximizing the log-likelihood of the training set.
 
 ### Explicit Density Models
 
-In explicit density models (i.e., the models we are discussing and have been discussing the entire course) define an explicit density function \(P_{model}(x ; \theta)\). For these models, maximization of the likelihood function is straightforward: we simply plug the models definition of the density function into the expression for likelihood and follow the gradient uphill.
+Explicit density models (i.e., the models we are discussing and have been discussing the entire course) define an explicit density function \(p_{model}(x ; \theta)\) which is used to train the model, typically via maximum likelihood estimation. For these models, maximization of the likelihood function is straightforward: we simply plug the models definition of the density function into the expression for likelihood and follow the gradient uphill.
 
 The main difficulty present in explicit density models is designing a model that can capture all of the complexity of the data to be generated while still maintaining computational tractability.
 
@@ -111,18 +111,18 @@ _Tractable_ examples include:
 - Fully Visible Belief Nets (96, 98)
 - WaveNet (2016)
 
-In the _intractable_ case, we use variational (e.g. [VAEs](../week_11/#variational-autoencoders-vaes)) or [MCMC approximations](../week_8/#metropolis-hastings-method) to get at \(\log p_\theta(x)\).
+In the _intractable_ case, we use variational (e.g. [VAEs](../week_11/#variational-autoencoders-vaes)) or [MCMC approximations](../week_8/#metropolis-hastings-method) to get at \(p_{model}(x ; \theta)\).
 
 ### Generative Model Goal
 
-The goal of generative models, in short, is to produce samples similar to \(P_{data}\). But do we really need maximum likelihood estimations to achieve our goals?
+The goal of generative models, in short, is to produce samples similar to \(p_{data}\). But do we really need maximum likelihood estimations to achieve our goals?
 
 !!! tip
     Everything up until this point was considered review. Everything that follows is new content.
 
 ## Implicit Density Models
 
-In implicit density models, we do not define \(P_{model}(x; \theta)\) explicitly. Instead, we interact with \(P_{model}\) through samples.
+In contrast, __implicit density models__ are trained without explicitly defining a density function. The way we interact with \(p_{model}\) is through samples.
 
 A taxonomic tree of generative models is shown below:
 
@@ -133,9 +133,9 @@ A taxonomic tree of generative models is shown below:
 
 _But how do we train it?_ No density means _no likelihood evaluation_. We will look at a specific instance of implicit density models known as Generative Adversarial Networks.
 
-## General Adversarial Network (GAN) Approach
+## Generative Adversarial Network (GAN) Approach
 
-In the general adversarial approach, we _do not_ have likelihoods, only samples. The idea is based on an adversarial game and pulls heavily from [game theory](https://en.wikipedia.org/wiki/Game_theory).
+In the generative adversarial approach, we _do not_ have likelihoods, only samples. The idea is based on an adversarial game and pulls heavily from [game theory](https://en.wikipedia.org/wiki/Game_theory).
 
 The basic idea of GANs is to set up a game between two players:
 
@@ -157,9 +157,9 @@ Formally, GANs are structured as a probabilistic model containing latent variabl
 to sample from the model:
 
 - first sample \(z \sim p(z)\) ; where \(p(z)\) is some prior distribution
-- then \(x = G(z) \sim P_{model}\)
+- then \(x = G(z) \sim p_{model}\)
 
-notice that we _never explicitly define a distribution_ \(P_{model}(x; \theta)\). Contrast this with VAEs, where to sample from the model:
+notice that we _never explicitly define a distribution_ \(p_{model}(x; \theta)\). Contrast this with VAEs, where to sample from the model:
 
 - first sample \(z \sim q_\phi(z | x)\) for some input \(x\)
 - then using the encoder, compute \(\theta = f(z)\)
@@ -180,7 +180,7 @@ Because each player’s cost depends on the other player’s parameters, but eac
 
 The training process consists of simultaneous [SGD](https://en.wikipedia.org/wiki/Stochastic_gradient_descent). On each step, two minibatches are sampled: a minibatch of \(x\) values from the dataset and a minibatch of \(z\) values drawn from the model’s prior over latent variables, e.g.,
 
-1. \(x \sim P_{data}\)
+1. \(x \sim p_{data}\)
 2. \(z \sim p(z) \Rightarrow x \sim P_{G(z)}\)
 
 
@@ -195,7 +195,7 @@ Several different cost functions may be used within the GANs framework. All of t
 The cost used for the discriminator is (almost) always:
 
 \[
-J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim P_{data}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
+J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim p_{data}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
 \]
 
 This is just the standard cross-entropy cost that is minimized when training a standard binary classifier with a sigmoid output. The only difference is that the classifier is trained on two mini-batches of data; one coming from the dataset, where the label is 1 for all examples, and one coming from the generator, where the label is 0 for all examples.
@@ -205,10 +205,10 @@ This is just the standard cross-entropy cost that is minimized when training a s
 Our goal is to minimize
 
 \[
-J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim P_{data}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
+J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim p_{data}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
 \]
 
-in function space, specifying \(D(x)\) directly. We begin by assuming that both \(P_{data}\) and \(P_{model}\) are nonzero everywhere.
+in function space, specifying \(D(x)\) directly. We begin by assuming that both \(p_{data}\) and \(p_{model}\) are nonzero everywhere.
 
 !!! note
     If we do not make this assumption, then some points are never visited during training, and have undefined behavior.
@@ -225,7 +225,7 @@ derivatives with respect to a single entry \(D^{(x)}\), and set them equal to ze
 By solving this equation, we obtain
 
 \[
-D^\star(x)  = \frac{P_{data}(x)}{P_{data}(x) + P_{model}(x)}
+D^\star(x)  = \frac{p_{data}(x)}{p_{data}(x) + p_{model}(x)}
 \]
 
 The discriminator (dashed blue line) estimates the ratio between the data density (black dots) and the sum of the data and model densities. Wherever the output of the discriminator is large, the model density is too low, and wherever the output of the discriminator is small, the model density is too high. Estimating this ratio is the key approximation mechanism used by GANs
