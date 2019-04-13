@@ -372,10 +372,9 @@
     Choosing an Elimination Ordering
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#belief-propagation" title="Belief Propagation" class="md-nav__link">
     Belief Propagation
   </a>
@@ -394,11 +393,6 @@
   <a href="#belief-propagation-algorithm" title="Belief Propagation Algorithm" class="md-nav__link">
     Belief Propagation Algorithm
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -580,10 +574,9 @@
     Choosing an Elimination Ordering
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#belief-propagation" title="Belief Propagation" class="md-nav__link">
     Belief Propagation
   </a>
@@ -602,11 +595,6 @@
   <a href="#belief-propagation-algorithm" title="Belief Propagation Algorithm" class="md-nav__link">
     Belief Propagation Algorithm
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -644,7 +632,7 @@
 <li><strong>Min-weight</strong>: the cost of a vertex is the product of weights (domain cardinality) of its neighbors.</li>
 </ul>
 <p>None of these criteria are <em>better</em> than the others. You often just have to try several.</p>
-<h3 id="belief-propagation">Belief Propagation<a class="headerlink" href="#belief-propagation" title="Permanent link">&para;</a></h3>
+<h2 id="belief-propagation">Belief Propagation<a class="headerlink" href="#belief-propagation" title="Permanent link">&para;</a></h2>
 <p>What if we want <span><span class="MathJax_Preview">p(x_i) \ \forall x_i \in X</span><script type="math/tex">p(x_i) \ \forall x_i \in X</script></span>? We could run variable elimination for each variable <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span>, but this is computationally expensive. Can we do something more efficient?</p>
 <p>Consider a tree:</p>
 <p><img alt="" src="../../img/lecture_6_1.png" /></p>
@@ -668,7 +656,7 @@ m_{j \rightarrow i}(x_i) = \sum_{x_j}\phi_j(x_j)\phi_{ij}(x_i, x_j)\prod_{k \in 
 </div>
 <p><img alt="" src="../../img/lecture_6_2.png" /></p>
 <p>where each message <span><span class="MathJax_Preview">m_{j \rightarrow i}(x_i)</span><script type="math/tex">m_{j \rightarrow i}(x_i)</script></span> is a vector with one value for each state of <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span>. In order to compute <span><span class="MathJax_Preview">m_j \rightarrow i</span><script type="math/tex">m_j \rightarrow i</script></span>, we must have already computed <span><span class="MathJax_Preview">m_k \rightarrow j(x_j)</span><script type="math/tex">m_k \rightarrow j(x_j)</script></span> for <span><span class="MathJax_Preview">k \in N(j) \not = i</span><script type="math/tex">k \in N(j) \not = i</script></span>. Therefore, we need a <em>specific ordering</em> of the messages.</p>
-<h4 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h4>
+<h3 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h3>
 <p>Suppose we want to compute <span><span class="MathJax_Preview">p(x_1)</span><script type="math/tex">p(x_1)</script></span> on the graph given above. Choosing an ordering is equivalent to choosing a root. Lets choose <span><span class="MathJax_Preview">x_1</span><script type="math/tex">x_1</script></span> to be the root. Then</p>
 <div>
 <div class="MathJax_Preview">\begin{align}
@@ -710,7 +698,7 @@ Z = \sum_{x_1}p(x_1)
 </script>
 </div>
 <p>Elimination algorithm in trees is equivalent to message passing.</p>
-<h4 id="belief-propagation-algorithm">Belief Propagation Algorithm<a class="headerlink" href="#belief-propagation-algorithm" title="Permanent link">&para;</a></h4>
+<h3 id="belief-propagation-algorithm">Belief Propagation Algorithm<a class="headerlink" href="#belief-propagation-algorithm" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Choose root <span><span class="MathJax_Preview">r</span><script type="math/tex">r</script></span> arbitrarily</li>
 <li>Pass messages from leafs to <span><span class="MathJax_Preview">r</span><script type="math/tex">r</script></span></li>
