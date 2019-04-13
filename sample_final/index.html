@@ -726,8 +726,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#week-12" title="Week 12" class="md-nav__link">
-    Week 12
+  <a href="#week-12-generative-adversarial-networks-gans" title="Week 12: Generative Adversarial Networks (GANs)" class="md-nav__link">
+    Week 12: Generative Adversarial Networks (GANs)
   </a>
   
     <nav class="md-nav">
@@ -743,6 +743,20 @@
           <li class="md-nav__item">
   <a href="#question-2_4" title="Question 2" class="md-nav__link">
     Question 2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question-3_2" title="Question 3" class="md-nav__link">
+    Question 3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question-4_1" title="Question 4" class="md-nav__link">
+    Question 4
   </a>
   
 </li>
@@ -1007,8 +1021,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#week-12" title="Week 12" class="md-nav__link">
-    Week 12
+  <a href="#week-12-generative-adversarial-networks-gans" title="Week 12: Generative Adversarial Networks (GANs)" class="md-nav__link">
+    Week 12: Generative Adversarial Networks (GANs)
   </a>
   
     <nav class="md-nav">
@@ -1024,6 +1038,20 @@
           <li class="md-nav__item">
   <a href="#question-2_4" title="Question 2" class="md-nav__link">
     Question 2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question-3_2" title="Question 3" class="md-nav__link">
+    Question 3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#question-4_1" title="Question 4" class="md-nav__link">
+    Question 4
   </a>
   
 </li>
@@ -1804,7 +1832,7 @@ p(x_3 = A | z_1 = S) = p(x_3 = A | z_3 = H)p(z_3 = H | z_1 = S) + p(x_3 = A | z_
 </script>
 </div>
 <p><span><span class="MathJax_Preview">\therefore</span><script type="math/tex">\therefore</script></span> maximizing the ELBO <span><span class="MathJax_Preview">\Rightarrow</span><script type="math/tex">\Rightarrow</script></span> minimizing <span><span class="MathJax_Preview">D_{KL}(q_\phi (z | x) || p_\theta (z | x))</span><script type="math/tex">D_{KL}(q_\phi (z | x) || p_\theta (z | x))</script></span>.</p>
-<h2 id="week-12">Week 12<a class="headerlink" href="#week-12" title="Permanent link">&para;</a></h2>
+<h2 id="week-12-generative-adversarial-networks-gans">Week 12: Generative Adversarial Networks (GANs)<a class="headerlink" href="#week-12-generative-adversarial-networks-gans" title="Permanent link">&para;</a></h2>
 <h3 id="question-1_8">Question 1<a class="headerlink" href="#question-1_8" title="Permanent link">&para;</a></h3>
 <p>Compare and contrast <em>explicit</em> vs. <em>implicit</em> density models.</p>
 <p><strong>ANSWER</strong></p>
@@ -1840,7 +1868,7 @@ J^{(D)}(\theta_D, \theta_G) = -\mathbb E_{x \sim p_{data}}[\log D(x)] - \mathbb 
 </script>
 </div>
 <p>with respect to <span><span class="MathJax_Preview">\theta_D</span><script type="math/tex">\theta_D</script></span>. Imagine that the discriminator can be optimized in function space, so the value of <span><span class="MathJax_Preview">D(x)</span><script type="math/tex">D(x)</script></span> is specified independently for every value of x.</p>
-<p>(a) What is the optimal strategy for D?</p>
+<p>(a) What is the optimal strategy for the discriminator, <span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>?</p>
 <p>(b) What assumptions need to be made to obtain this result?</p>
 <p><strong>ANSWER</strong></p>
 <p>(b)</p>
@@ -1870,6 +1898,75 @@ D^\star(x)  = \frac{p_{data}(x)}{p_{data}(x) + p_{model}(x)}
 </script>
 </div>
 <p>Estimating this ratio is the key approximation mechanism used by GANs.</p>
+<h3 id="question-3_2">Question 3<a class="headerlink" href="#question-3_2" title="Permanent link">&para;</a></h3>
+<p>The goal of the generator is to minimize</p>
+<div>
+<div class="MathJax_Preview">
+J^{(G)}(\theta_D, \theta_G) = -\mathbb E_{x \sim p_{data}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
+</div>
+<script type="math/tex; mode=display">
+J^{(G)}(\theta_D, \theta_G) = -\mathbb E_{x \sim p_{data}}[\log D(x)] - \mathbb E_{z \sim p(z)}[\log(1 - D(G(z)))]
+</script>
+</div>
+<p>with respect to <span><span class="MathJax_Preview">\theta_G</span><script type="math/tex">\theta_G</script></span>.</p>
+<p>What is the optimal strategy for the generator, <span><span class="MathJax_Preview">G</span><script type="math/tex">G</script></span>?</p>
+<p><strong>ANSWER</strong></p>
+<p>The optimal behavior of the generator is to <em>try and confuse the discriminator</em>. We can frame this as a <strong>zero-sum game</strong>, in which the sum of all player’s costs is always zero. In this version of the game,</p>
+<div>
+<div class="MathJax_Preview">
+J(^{(G)}) = -J^{(D)}
+</div>
+<script type="math/tex; mode=display">
+J(^{(G)}) = -J^{(D)}
+</script>
+</div>
+<p>Because <span><span class="MathJax_Preview">J^{(G)}</span><script type="math/tex">J^{(G)}</script></span> is tied directly to <span><span class="MathJax_Preview">J^{(D)}</span><script type="math/tex">J^{(D)}</script></span>, we can summarize the entire game
+with a value function specifying the discriminator’s payoff:</p>
+<div>
+<div class="MathJax_Preview">
+V(\theta^{(D)}, \theta^{(G)}) = -J^{(D)}(\theta^{(D)}, \theta^{(G)})
+</div>
+<script type="math/tex; mode=display">
+V(\theta^{(D)}, \theta^{(G)}) = -J^{(D)}(\theta^{(D)}, \theta^{(G)})
+</script>
+</div>
+<p>Zero-sum games are also called <strong>minimax</strong> games because their solution involves minimization in an outer loop and maximization in an inner loop:</p>
+<div>
+<div class="MathJax_Preview">
+\theta^{(G)\star} = \underset{\theta^{(G)}}{\operatorname{argmin}} \underset{\theta^{(D)}}{\operatorname{argmax}} V(\theta^{(D)}, \theta^{(G)})
+</div>
+<script type="math/tex; mode=display">
+\theta^{(G)\star} = \underset{\theta^{(G)}}{\operatorname{argmin}} \underset{\theta^{(D)}}{\operatorname{argmax}} V(\theta^{(D)}, \theta^{(G)})
+</script>
+</div>
+<p>Where we want to maximize <span><span class="MathJax_Preview">\theta_D</span><script type="math/tex">\theta_D</script></span> such that</p>
+<ul>
+<li><span><span class="MathJax_Preview">D_{\theta_D}(x) = 1</span><script type="math/tex">D_{\theta_D}(x) = 1</script></span></li>
+<li><span><span class="MathJax_Preview">D_{\theta_D}(G(z)) = 0</span><script type="math/tex">D_{\theta_D}(G(z)) = 0</script></span></li>
+</ul>
+<p>and minimize <span><span class="MathJax_Preview">\theta_G</span><script type="math/tex">\theta_G</script></span> such that</p>
+<ul>
+<li><span><span class="MathJax_Preview">D_{\theta_D}(G_{\theta_G}(z)) \rightarrow 1</span><script type="math/tex">D_{\theta_D}(G_{\theta_G}(z)) \rightarrow 1</script></span></li>
+</ul>
+<h3 id="question-4_1">Question 4<a class="headerlink" href="#question-4_1" title="Permanent link">&para;</a></h3>
+<p>The cost used for the generator in the minimax game, <span><span class="MathJax_Preview">J(^{(G)}) = -J^{(D)}</span><script type="math/tex">J(^{(G)}) = -J^{(D)}</script></span> is useful for theoretical analysis, but does not perform especially well in practice.</p>
+<p>(a) Explain what the <em>saturating problem</em> in GANs is.</p>
+<p>(b) Explain the heuristic, non-saturating game used to solve this problem.</p>
+<p><strong>ANSWER</strong></p>
+<p>(a) In the minimax game, the discriminator <em>minimizes</em> a cross-entropy, but the generator <em>maximizes</em> the same cross-entropy. This is unfortunate for the generator, because when the discriminator successfully rejects generator samples with high confidence, e.g. <span><span class="MathJax_Preview">D(G(z)) = 0</span><script type="math/tex">D(G(z)) = 0</script></span>, the generator’s gradient vanishes (the cost function becomes flat!). This is known as the <em>saturation problem</em>.</p>
+<p><img alt="" src="../img/lecture_12_5.png" /></p>
+<p>(b) To solve this problem, we introduce the non-saturating game, in which we continue to use cross-entropy minimization for the generator, but instead of flipping the sign on the discriminator’s cost to obtain a cost for the generator, we flip the target used to construct the cross-entropy cost</p>
+<div>
+<div class="MathJax_Preview">
+J^{(G)} = -\underset{z \sim p(z)}{\operatorname{\mathbb E}} \log(D(G(z)))
+</div>
+<script type="math/tex; mode=display">
+J^{(G)} = -\underset{z \sim p(z)}{\operatorname{\mathbb E}} \log(D(G(z)))
+</script>
+</div>
+<p>This leads to a strong gradient signal at <span><span class="MathJax_Preview">D(G(z)) = 0</span><script type="math/tex">D(G(z)) = 0</script></span>.</p>
+<p><img alt="" src="../img/lecture_12_6.png" /></p>
+<p>In the minimax game, the generator minimizes the log-probability of the discriminator being correct. In this game, the generator maximizes the log- probability of the discriminator being mistaken.</p>
                 
                   
                 
